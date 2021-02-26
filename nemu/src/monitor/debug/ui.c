@@ -77,7 +77,7 @@ static int cmd_help(char *args) {
 }
 
 void ui_mainloop(int is_batch_mode) {
-  printf("batch_mode_is:%d",is_batch_mode);
+  printf("batch_mode_is:%d\n",is_batch_mode);
   if (is_batch_mode) {
     cmd_c(NULL);
     return;
@@ -89,7 +89,7 @@ void ui_mainloop(int is_batch_mode) {
 
     /* extract the first token as the command */
     char *cmd = strtok(str, " ");
-    if (cmd == NULL) { continue; }
+    if (cmd == NULL) { continue;printf("continuing...\n"); }
 
     /* treat the remaining string as the arguments,
      * which may need further parsing
