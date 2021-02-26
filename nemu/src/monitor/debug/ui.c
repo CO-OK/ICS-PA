@@ -77,8 +77,8 @@ static int cmd_help(char *args) {
 }
 
 void ui_mainloop(int is_batch_mode) {
+  printf("batch_mode_is:%d",is_batch_mode);
   if (is_batch_mode) {
-    printf("666\n");
     cmd_c(NULL);
     return;
   }
