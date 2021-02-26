@@ -101,8 +101,8 @@ void ui_mainloop(int is_batch_mode) {
     }
 
 #ifdef HAS_IOE
-    extern void sdl_clear_event_queue(void);
-    sdl_clear_event_queue();
+    //extern void sdl_clear_event_queue(void);
+    //sdl_clear_event_queue();
 #endif
 
     int i;
