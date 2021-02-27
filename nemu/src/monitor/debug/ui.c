@@ -89,7 +89,7 @@ void ui_mainloop(int is_batch_mode) {
 
     /* extract the first token as the command */
     char *cmd = strtok(str, " ");
-    printf("first token is %s\n",cmd);
+    //printf("first token is %s\n",cmd);
     if (cmd == NULL) { continue;printf("continuing...\n"); }
 
     /* treat the remaining string as the arguments,
