@@ -4,7 +4,6 @@
 #include "nemu.h"
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -41,7 +40,7 @@ static int cmd_si(char * args){
 }
 static int cmd_info(char * args){
   char str[32];
-  itoa(cpu.eax,str,2);
+  ultoa(cpu.eax,str,2);
   printf("%s\n",str);
   return 0;
 }
