@@ -58,7 +58,8 @@ static int cmd_si(char * args){
 }
 static int cmd_info(char * args){
   char str[33];
-  
+  bin2dec(cpu.eax, str);
+  printf("%s\n",str);
   return 0; 
 }
 
