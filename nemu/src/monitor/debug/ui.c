@@ -38,6 +38,9 @@ static int cmd_q(char *args) {
 static int cmd_si(char * args){
   return 0;
 }
+static int cmd_info(char * args){
+  printf("%d\n",cpu.eax);
+}
 
 static int cmd_help(char *args);
 
@@ -50,6 +53,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "debug by step", cmd_si},
+  { "info", "reg state for temp", cmd_info},
   /* TODO: Add more commands */
 
 };
