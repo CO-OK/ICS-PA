@@ -39,7 +39,9 @@ static int cmd_si(char * args){
   return 0;
 }
 static int cmd_info(char * args){
-  printf("%d\n",cpu.eax);
+  char str[32];
+  itoa(cpu.eax,str,2);
+  printf("%s\n",str);
   return 0;
 }
 
