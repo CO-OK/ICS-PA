@@ -27,6 +27,24 @@ char* rl_gets() {
   return line_read;
 }
 
+void bin2dec(uint32_t value, char *str)
+{
+  for(int i=0;i<33;i++)
+  {
+    str[i]='0';
+  }
+  int val=0;
+  int left=0;
+  str[32]='\0';
+  for(int i=1;value!=0;i++)
+  {
+    val=value/2;
+    left=value%2;
+    value=val;
+    str[32-i]=(char)(left+48);
+  }
+}
+
 static int cmd_c(char *args) {
   cpu_exec(-1);
   return 0;
@@ -39,10 +57,9 @@ static int cmd_si(char * args){
   return 0;
 }
 static int cmd_info(char * args){
-  char str[32];
-  ultoa(cpu.eax,str,2);
-  printf("%s\n",str);
-  return 0;
+  char str[33];
+  
+  return 0; 
 }
 
 static int cmd_help(char *args);
