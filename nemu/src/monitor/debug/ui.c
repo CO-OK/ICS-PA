@@ -40,6 +40,7 @@ static int cmd_si(char * args){
 }
 static int cmd_info(char * args){
   printf("%d\n",cpu.eax);
+  return 0;
 }
 
 static int cmd_help(char *args);
