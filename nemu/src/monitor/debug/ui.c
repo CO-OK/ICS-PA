@@ -8,10 +8,27 @@
 #include <readline/history.h>
 
 void cpu_exec(uint64_t);
-
+int is_digit(char*arg);
+int is_digit_hex(char*arg);
+int is_digit_hex(char*arg)
+{
+  if(strlen(arg)<=2)
+    return 0;
+  if(*arg!='0'||*(arg+1)!='x')
+    return 0;
+  char *p=arg+2;
+  while(*p!='\0')
+  {
+    if(!isdigit(*arg)&&!(*p>=65&&*p<=70)&&!(*p>=97&&*p<=102))
+    {
+      return 0;
+    } 
+    p++;
+  }
+  return 1;
+}
 int is_digit(char*arg)
 {
-  char*p=arg;
   while(*arg!='\0')
   {
     if(!isdigit(*arg))
@@ -159,10 +176,11 @@ static int cmd_mem(char*args)
 {
   char * addr=strtok(args," ");
   char * len=strtok(NULL," ");
-  //for(int i=atoi(len);i>0;i--)
-   printf("%X\n",paddr_read(0x100000,1));
-   printf("%X\n",paddr_read(0x100001,1));
-   return 0;
+  if(is_digit_hex(addr))
+    printf("888\n");
+  else
+   printf("555\n");
+  return 0;
 }
 
 static int cmd_help(char *args);
