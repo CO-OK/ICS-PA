@@ -64,8 +64,10 @@ static int cmd_si(char * args){
   while(*p!='\0')
   {
     if(!isdigit(*p))
+    {
       printf("arg must be a digit\n");
       return -1;
+    } 
     p++;
   } 
   return 0;
