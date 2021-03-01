@@ -191,6 +191,7 @@ static int cmd_mem(char*args)
   {
     addr_i=(unsigned int)strtol(addr,NULL,16)+i-1;
     printf("0x%X\t0x%X\n",addr_i,paddr_read(addr_i,1));
+    
   }
   return 0;
 }
