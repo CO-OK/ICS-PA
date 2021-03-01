@@ -152,7 +152,8 @@ static int cmd_mem(char*args)
   char * addr=strtok(args," ");
   char * len=strtok(NULL," ");
   //for(int i=atoi(len);i>0;i--)
-   printf("%X\n",paddr_read(0x100000,0));
+   printf("%X\n",paddr_read(0x100000,1));
+   printf("%X\n",paddr_read(0x100001,1));
    return 0;
 }
 
