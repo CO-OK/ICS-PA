@@ -176,10 +176,17 @@ static int cmd_mem(char*args)
 {
   char * addr=strtok(args," ");
   char * len=strtok(NULL," ");
-  if(is_digit_hex(addr))
-    printf("888\n");
-  else
-   printf("555\n");
+  if(addr==NULL||len==NULL)
+  {
+    printf("arg wrong!\n usage: mem [addr] [len]\n");
+    return 0;
+  }
+  if(!is_digit_hex(addr)||is_digit(len))
+  {
+    printf("arg wrong!\naddr must be hex format.\n range must be dec format\n");
+    return 0;
+  }
+  
   return 0;
 }
 
