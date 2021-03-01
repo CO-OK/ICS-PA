@@ -71,6 +71,7 @@ static int cmd_si(char * args){
     p++;
   }
   cpu_exec(atoi(arg)); 
+  
   return 0;
 }
 static int cmd_info(char * args){
