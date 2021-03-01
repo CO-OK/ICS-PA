@@ -181,7 +181,7 @@ static int cmd_mem(char*args)
     printf("arg wrong!\n usage: mem [addr] [len]\n");
     return 0;
   }
-  if(!is_digit_hex(addr)||is_digit(len))
+  if(!is_digit_hex(addr)||!is_digit(len))
   {
     printf("arg wrong!\naddr must be hex format.\nrange must be dec format.\n");
     return 0;
