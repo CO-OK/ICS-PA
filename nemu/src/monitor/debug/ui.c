@@ -12,13 +12,13 @@ void cpu_exec(uint64_t);
 int is_digit(char*arg)
 {
   char*p=arg;
-  while(*p!='\0')
+  while(*arg!='\0')
   {
-    if(!isdigit(*p))
+    if(!isdigit(*arg))
     {
       return 0;
     } 
-    p++;
+    arg++;
   }
   return 1;
 }
