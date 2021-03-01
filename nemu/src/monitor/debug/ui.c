@@ -190,7 +190,7 @@ static int cmd_mem(char*args)
   printf("len=%s\n",len);
   for(int i=1;i<=atoi(len);i++)
   {
-    printf("0x%X\t0x%X\n",atoi(addr)+i-1,paddr_read(atoi(addr)+i-1,1));
+    printf("0x%X\t0x%X\n",strtol(addr,NULL,16)+i-1,paddr_read(atoi(addr)+i-1,1));
   }
   return 0;
 }
