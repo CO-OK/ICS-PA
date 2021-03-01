@@ -7,11 +7,15 @@
 #include <sys/types.h>
 #include <regex.h>
 int evel(int head,int tail);
+int find_domin(int head,int tail);
+bool check_parentheses(int head,int tail);
 enum {
   TK_NOTYPE = 256, 
   TK_EQ,
   TK_DIGIT,
   TK_ADD_SUB_EXPR,
+  TK_LEFT_SMALL_BRACE,
+  TK_RIGHT_SMALL_BRACE,
   /* TODO: Add more token types */
 
 };
@@ -31,11 +35,9 @@ static struct rule {
   {"\\*",'*'},          //mul
   {"/",'/'},            //div
   {"==", TK_EQ},         // equal
-  //{"[0-9]+\\+[0-9]+",TK_ADD_EXPR},//加法表达式
-  //{"[0-9]+-[0-9]+",TK_SUB_EXPR},//减法表达式
-  {"[0-9]+",TK_DIGIT},
-  //{"([0-9]+\\+[0-9]+|[0-9]+-[0-9]+)+",TK_ADD_SUB_EXPR},
-  //十进制数字
+  {"\\(",TK_LEFT_SMALL_BRACE}, //左括号
+  {"\\)",TK_RIGHT_SMALL_BRACE},//右括号
+  {"[0-9]+",TK_DIGIT},//十进制数字
   
 };
 
@@ -129,9 +131,32 @@ int evel(int head,int tail)
   {
     return -1;
   }
-  /*else if(head==tail)
+  else if(head==tail)
   {
-    if()
+    if(tokens[head].type==TK_DIGIT)
+      return tokens[head].str[0]-48;
+  }
+  else if(check_parentheses(head,tail))
+  {
+    return evel(head+1,tail-1);
+  }
+  else
+  {
+
+  }
+  return 0;
+}
+
+bool check_parentheses(int head,int tail)
+{
+  return tokens[head].type==TK_LEFT_SMALL_BRACE&&tokens[tail].type==TK_RIGHT_SMALL_BRACE;
+}
+int find_domin(int head,int tail)
+{
+  int current_domin=-1;
+  /*for(int i=head;i<=tail;i++)
+  {
+    if(tokens[i].type=='+'||tokens[i].type=='-'||tokens[i].type=='*'||tokens[i].type=='/')
   }*/
   return 0;
 }
