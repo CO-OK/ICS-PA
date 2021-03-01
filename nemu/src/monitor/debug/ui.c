@@ -176,7 +176,7 @@ static int cmd_mem(char*args)
 {
   char * addr=strtok(args," ");
   char * len=strtok(NULL," ");
-  make_token(len);
+  expr(len,NULL);
   if(addr==NULL||len==NULL)
   {
     printf("arg wrong!\n usage: mem [addr] [len]\n");
