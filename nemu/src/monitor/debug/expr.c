@@ -3,6 +3,7 @@
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
+#include <stdio.h>
 #include <sys/types.h>
 #include <regex.h>
 
@@ -89,6 +90,14 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
+        int j=0;
+        for(;j<substr_len;j++)
+        {
+          tokens[nr_token].str[j]=*(substr_start+j);
+        }
+        tokens[nr_token].str[j]='\0';
+        nr_token++;
+        printf("%s\n",tokens[nr_token].str);
         break;
       }
     }
