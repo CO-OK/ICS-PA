@@ -71,7 +71,7 @@ static int cmd_si(char * args){
     p++;
   }
   cpu_exec(atoi(arg)); 
-  
+
   return 0;
 }
 static int cmd_info(char * args){
@@ -147,6 +147,12 @@ static int cmd_info(char * args){
   return 0; 
 }
 
+static int cmd_mem(char*args)
+{
+   paddr_read(0x100000,2);
+   return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -159,6 +165,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "debug by step", cmd_si},
   { "info", "reg state for temp", cmd_info},
+  { "mem",  "memary layout", cmd_mem},
   
   /* TODO: Add more commands */
 
