@@ -62,8 +62,8 @@ static int cmd_info(char * args){
   if(arg==NULL)
   {
     //打印所有寄存器状态
-    printf("eax:%8X  ebx:%8X  ecx:%8X  edx:%8X\n",cpu.eax,cpu.ebx,cpu.ecx,cpu.edx);
-    printf("esp:%8X  ebp:%8X  esi:%8X  edi:%8X\n",cpu.esp,cpu.ebp,cpu.esi,cpu.edi);
+    printf("eax:%8X  ebx:%8X  ecx:%08X  edx:%8X\n",cpu.eax,cpu.ebx,cpu.ecx,cpu.edx);
+    printf("esp:%8X  ebp:%8X  esi:%08X  edi:%8X\n",cpu.esp,cpu.ebp,cpu.esi,cpu.edi);
     return 0;
   }
   do
