@@ -54,6 +54,7 @@ static int cmd_q(char *args) {
   return -1;
 }
 static int cmd_si(char * args){
+  exec_wrapper(true);
   return 0;
 }
 static int cmd_info(char * args){
@@ -141,6 +142,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "debug by step", cmd_si},
   { "info", "reg state for temp", cmd_info},
+  
   /* TODO: Add more commands */
 
 };
