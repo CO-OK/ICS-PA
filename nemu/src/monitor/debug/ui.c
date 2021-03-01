@@ -188,9 +188,11 @@ static int cmd_mem(char*args)
   }
   printf("addr=%s\n",addr);
   printf("len=%s\n",len);
+  int addr_i;
   for(int i=1;i<=atoi(len);i++)
   {
-    printf("0x%X\t0x%X\n",(unsigned int)strtol(addr,NULL,16)+i-1,paddr_read(atoi(addr)+i-1,1));
+    addr_i=(unsigned int)strtol(addr,NULL,16)+i-1;
+    printf("0x%X\t0x%X\n",addr_i,addr_i);
   }
   return 0;
 }
