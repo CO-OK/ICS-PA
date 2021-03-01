@@ -59,8 +59,15 @@ static int cmd_si(char * args){
 static int cmd_info(char * args){
   char str[33];
   char*arg=strtok(args," ");
+  if(arg=NULL)
+  {
+    //打印所有寄存器状态
+    printf("eax:%8X\n",cpu.eax);
+    return 0;
+  }
   do
   {
+    //打印所列出的寄存器的状态
     printf("%s\n",arg);
     arg=strtok(NULL," ");
     
