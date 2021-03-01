@@ -200,7 +200,7 @@ int find_domin(int head,int tail)
       case TK_LEFT_SMALL_BRACE:{
         int new_pos=i;
         while(tokens[new_pos].type!=TK_RIGHT_SMALL_BRACE){new_pos++;}
-        //i=new_pos+1;
+        i=new_pos+1;
         break;
       }
     }
