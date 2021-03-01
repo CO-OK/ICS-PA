@@ -6,16 +6,18 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <regex.h>
-int evel(int head,int tail);
+int eval(int head,int tail);
 int find_domin(int head,int tail);
 bool check_parentheses(int head,int tail);
 enum {
   TK_NOTYPE = 256, 
   TK_EQ,
   TK_DIGIT,
-  TK_ADD_SUB_EXPR,
   TK_LEFT_SMALL_BRACE,
   TK_RIGHT_SMALL_BRACE,
+  TK_ADD_SUB,
+  TK_MUL_DIV,
+
   /* TODO: Add more token types */
 
 };
@@ -30,10 +32,10 @@ static struct rule {
    */
 
   {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
-  {"-",'-'},            //minis
-  {"\\*",'*'},          //mul
-  {"/",'/'},            //div
+  {"\\+", TK_ADD_SUB},         // plus
+  {"-",TK_ADD_SUB},            //minis
+  {"\\*",TK_MUL_DIV},          //mul
+  {"/",TK_MUL_DIV},            //div
   {"==", TK_EQ},         // equal
   {"\\(",TK_LEFT_SMALL_BRACE}, //左括号
   {"\\)",TK_RIGHT_SMALL_BRACE},//右括号
@@ -98,7 +100,7 @@ static bool make_token(char *e) {
           tokens[nr_token].str[j]=*(substr_start+j);
         }
         tokens[nr_token].str[j]='\0';
-        
+        tokens[nr_token].type=rules[i].token_type;
         printf("%s\n",tokens[nr_token].str);
         nr_token++;
         break;
@@ -125,7 +127,7 @@ uint32_t expr(char *e, bool *success) {
 
   return 0;
 }
-int evel(int head,int tail)
+int eval(int head,int tail)
 {
   if(head>tail)
   {
@@ -138,13 +140,31 @@ int evel(int head,int tail)
   }
   else if(check_parentheses(head,tail))
   {
-    return evel(head+1,tail-1);
+    return eval(head+1,tail-1);
   }
   else
   {
-
+    int op=find_domin(head, tail);
+    int val1=eval(head,op-1);
+    int val2=eval(op+1,tail);
+    switch(tokens[op].str[0])
+    {
+      case '+':{
+        return val1+val2;
+      }
+      case '-':{
+        return val1-val2;
+      }
+      case '*':{
+        return val1*val2;
+      }
+      case '/':{
+        return val1/val2;
+      }
+      default:
+        assert(0);
+    }
   }
-  return 0;
 }
 
 bool check_parentheses(int head,int tail)
@@ -154,9 +174,32 @@ bool check_parentheses(int head,int tail)
 int find_domin(int head,int tail)
 {
   int current_domin=-1;
-  /*for(int i=head;i<=tail;i++)
+  for(int i=head;i<=tail;i++)
   {
-    if(tokens[i].type=='+'||tokens[i].type=='-'||tokens[i].type=='*'||tokens[i].type=='/')
-  }*/
-  return 0;
+    if(tokens[i].type!=TK_ADD_SUB&&tokens[i].type!=TK_MUL_DIV&&tokens[i].type!=TK_LEFT_SMALL_BRACE&&tokens[i].type!=TK_RIGHT_SMALL_BRACE)
+      continue;
+    if((tokens[i].type==TK_MUL_DIV||tokens[i].type==TK_ADD_SUB)&&current_domin==-1)
+    {
+      current_domin=i;
+      continue;
+    }
+    switch(tokens[i].type)
+    {
+      case TK_ADD_SUB:{
+        current_domin=i;
+        break;
+      }
+      case TK_MUL_DIV:{
+        current_domin=i;
+        break;
+      }
+      case TK_LEFT_SMALL_BRACE:{
+        int new_pos=i;
+        while(tokens[new_pos].type!=TK_RIGHT_SMALL_BRACE){new_pos++;}
+        i=new_pos+1;
+        break;
+      }
+    }
+  }
+  return current_domin;
 }
