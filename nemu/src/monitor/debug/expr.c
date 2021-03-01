@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <regex.h>
-
+int evel(int head,int tail);
 enum {
   TK_NOTYPE = 256, 
   TK_EQ,
@@ -34,8 +34,9 @@ static struct rule {
   {"==", TK_EQ},         // equal
   //{"[0-9]+\\+[0-9]+",TK_ADD_EXPR},//加法表达式
   //{"[0-9]+-[0-9]+",TK_SUB_EXPR},//减法表达式
+  {"[0-9]+",TK_DIGIT},
   {"([0-9]+\\+[0-9]+|[0-9]+-[0-9]+)+",9999},
-  {"[0-9]+",TK_DIGIT},    //十进制数字
+      //十进制数字
   
 };
 
@@ -121,5 +122,17 @@ uint32_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
 
+  return 0;
+}
+int evel(int head,int tail)
+{
+  if(head>tail)
+  {
+    return -1;
+  }
+  /*else if(head==tail)
+  {
+    if()
+  }*/
   return 0;
 }
