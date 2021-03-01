@@ -123,7 +123,7 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
+  printf("%d\n",eval(0,nr_token-1));
 
   return 0;
 }
@@ -165,6 +165,7 @@ int eval(int head,int tail)
         assert(0);
     }
   }
+  return -1;
 }
 
 bool check_parentheses(int head,int tail)
