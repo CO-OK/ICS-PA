@@ -54,7 +54,7 @@ static int cmd_q(char *args) {
   return -1;
 }
 static int cmd_si(char * args){
-  exec_wrapper(true);
+  exec_wrapper(false);
   return 0;
 }
 static int cmd_info(char * args){
