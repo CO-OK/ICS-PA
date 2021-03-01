@@ -30,8 +30,9 @@ static struct rule {
   {"\\*",'*'},          //mul
   {"/",'/'},            //div
   {"==", TK_EQ},         // equal
+  {"[0-9]+\\+[0-9]+",TK_ADD_EXPR},//加法表达式
   {"[0-9]+",TK_DIGIT},    //十进制数字
-  {"[0-9]+\\+[0-9]+",TK_ADD_EXPR}//加法表达式
+  
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
