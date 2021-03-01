@@ -67,13 +67,66 @@ static int cmd_info(char * args){
     printf("eip:%08X\n",cpu.eip);
     return 0;
   }
-  do
+  while(arg!=NULL)
   {
     //打印所列出的寄存器的状态
-    printf("%s\n",arg);
+    if(strcmp(arg,"eax")==0)
+    {
+      printf("eax:%08X\n",cpu.eax);
+      arg=strtok(NULL," ");
+      continue;
+    }
+    if(strcmp(arg,"ebx")==0)
+    {
+      printf("ebx:%08X\n",cpu.ebx);
+      arg=strtok(NULL," ");
+      continue;
+    }
+    if(strcmp(arg,"ecx")==0)
+    {
+      printf("ecx:%08X\n",cpu.ecx);
+      arg=strtok(NULL," ");
+      continue;
+    }
+    if(strcmp(arg,"edx")==0)
+    {
+      printf("edx:%08X\n",cpu.edx);
+      arg=strtok(NULL," ");
+      continue;
+    }
+    if(strcmp(arg,"esp")==0)
+    {
+      printf("esp:%08X\n",cpu.esp);
+      arg=strtok(NULL," ");
+      continue;
+    }
+    if(strcmp(arg,"ebp")==0)
+    {
+      printf("ebp:%08X\n",cpu.ebp);
+      arg=strtok(NULL," ");
+      continue;
+    }
+    if(strcmp(arg,"esi")==0)
+    {
+      printf("esi:%08X\n",cpu.esi);
+      arg=strtok(NULL," ");
+      continue;
+    }
+    if(strcmp(arg,"edi")==0)
+    {
+      printf("edi:%08X\n",cpu.edi);
+      arg=strtok(NULL," ");
+      continue;
+    }
+    if(strcmp(arg,"eip")==0)
+    {
+      printf("eip:%08X\n",cpu.eip);
+      arg=strtok(NULL," ");
+      continue;
+    }
+    printf("unknow arg:%s\n",arg);
     arg=strtok(NULL," ");
-    
-  }while(arg!=NULL);
+  }
   return 0; 
 }
 
