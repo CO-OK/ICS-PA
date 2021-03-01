@@ -96,8 +96,9 @@ static bool make_token(char *e) {
           tokens[nr_token].str[j]=*(substr_start+j);
         }
         tokens[nr_token].str[j]='\0';
-        nr_token++;
+        
         printf("%s\n",tokens[nr_token].str);
+        nr_token++;
         break;
       }
     }
