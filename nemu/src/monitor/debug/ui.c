@@ -57,7 +57,6 @@ static int cmd_si(char * args){
   return 0;
 }
 static int cmd_info(char * args){
-  char str[33];
   char*arg=strtok(args," ");
   if(arg==NULL)
   {
