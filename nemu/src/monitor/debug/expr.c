@@ -193,7 +193,8 @@ int find_domin(int head,int tail)
         break;
       }
       case TK_MUL_DIV:{
-        current_domin=i;
+        if(tokens[current_domin].type==TK_MUL_DIV)
+          current_domin=i;
         break;
       }
       case TK_LEFT_SMALL_BRACE:{
