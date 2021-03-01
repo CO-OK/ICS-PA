@@ -176,6 +176,7 @@ static int cmd_mem(char*args)
 {
   char * addr=strtok(args," ");
   char * len=strtok(NULL," ");
+  make_token(len);
   if(addr==NULL||len==NULL)
   {
     printf("arg wrong!\n usage: mem [addr] [len]\n");
@@ -191,7 +192,7 @@ static int cmd_mem(char*args)
   {
     addr_i=(unsigned int)strtol(addr,NULL,16)+i-1;
     printf("0x%X\t0x%X\n",addr_i,paddr_read(addr_i,1));
-    
+
   }
   return 0;
 }
