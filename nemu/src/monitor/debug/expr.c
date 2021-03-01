@@ -136,7 +136,7 @@ int eval(int head,int tail)
   else if(head==tail)
   {
     if(tokens[head].type==TK_DIGIT)
-      return tokens[head].str[0]-48;
+      return atoi(tokens[head].str);
   }
   else if(check_parentheses(head,tail))
   {
