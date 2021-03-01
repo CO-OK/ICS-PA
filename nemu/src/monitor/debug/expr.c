@@ -10,7 +10,8 @@ enum {
   TK_NOTYPE = 256, 
   TK_EQ,
   TK_DIGIT,
-  TK_ADD_EXPR
+  TK_ADD_EXPR,
+  TK_SUB_EXPR
   /* TODO: Add more token types */
 
 };
@@ -31,6 +32,7 @@ static struct rule {
   {"/",'/'},            //div
   {"==", TK_EQ},         // equal
   {"[0-9]+\\+[0-9]+",TK_ADD_EXPR},//加法表达式
+  {"[0-9]+-[0-9]+",TK_SUB_EXPR},//减法表达式
   {"[0-9]+",TK_DIGIT},    //十进制数字
   
 };
