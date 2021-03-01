@@ -189,11 +189,13 @@ static int cmd_mem(char*args)
   printf("addr=%s\n",addr);
   printf("len=%s\n",len);
   int addr_i;
-  for(int i=1;i<=atoi(len);i++)
+  printf("%X\n",paddr_read(0x100000,1));
+  printf("%X\n",paddr_read(0x100001,1));
+  /*for(int i=1;i<=atoi(len);i++)
   {
     addr_i=(unsigned int)strtol(addr,NULL,16)+i-1;
     printf("0x%X\t0x%X\n",addr_i,paddr_read(addr_i,1));
-  }
+  }*/
   return 0;
 }
 
