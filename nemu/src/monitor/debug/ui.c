@@ -2,7 +2,7 @@
 #include "monitor/expr.h"
 #include "monitor/watchpoint.h"
 #include "nemu.h"
-
+#include <ctype.h>
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -54,7 +54,20 @@ static int cmd_q(char *args) {
   return -1;
 }
 static int cmd_si(char * args){
-  cpu_exec(1);
+  char*arg=strtok(args," ");
+  if(arg==NULL)
+  {
+    cpu_exec(1);
+    return 0;
+  }
+  char*p=arg;
+  while(*p!='\0')
+  {
+    if(!isdigit(*p))
+      printf("arg must be a digit\n");
+      return -1;
+    p++;
+  } 
   return 0;
 }
 static int cmd_info(char * args){
