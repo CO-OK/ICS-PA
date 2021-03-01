@@ -66,7 +66,7 @@ static int cmd_si(char * args){
     if(!isdigit(*p))
     {
       printf("arg must be a digit\n");
-      return -1;
+      return 0;
     } 
     p++;
   } 
