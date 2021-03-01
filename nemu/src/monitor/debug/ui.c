@@ -149,7 +149,7 @@ static int cmd_info(char * args){
 
 static int cmd_mem(char*args)
 {
-   printf("%08X\n",paddr_read(0x100000,1));
+   printf("%X\n",paddr_read(0x100000,1));
    return 0;
 }
 
