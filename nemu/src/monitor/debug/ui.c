@@ -149,7 +149,7 @@ static int cmd_info(char * args){
 
 static int cmd_mem(char*args)
 {
-   paddr_read(0x100000,2);
+   paddr_write(0x100000,2,3);
    return 0;
 }
 
