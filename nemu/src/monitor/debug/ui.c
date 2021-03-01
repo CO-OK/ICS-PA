@@ -149,7 +149,10 @@ static int cmd_info(char * args){
 
 static int cmd_mem(char*args)
 {
-   printf("%X\n",paddr_read(0x100001,1));
+  char * addr=strtok(args," ");
+  char * len=strtok(NULL," ");
+  //for(int i=atoi(len);i>0;i--)
+   printf("%X\n",paddr_read(0x100000,0));
    return 0;
 }
 
