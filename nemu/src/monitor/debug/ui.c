@@ -186,6 +186,8 @@ static int cmd_mem(char*args)
     printf("arg wrong!\naddr must be hex format.\nrange must be dec format.\n");
     return 0;
   }
+  printf("addr=%s\n",addr);
+  printf("len=%s\n",len);
   for(int i=1;i<=atoi(len);i++)
   {
     printf("0x%X\t0x%X\n",atoi(addr)+i-1,paddr_read(atoi(addr)+i-1,1));
