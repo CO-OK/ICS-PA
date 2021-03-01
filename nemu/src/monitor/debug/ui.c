@@ -9,6 +9,19 @@
 
 void cpu_exec(uint64_t);
 
+int is_digit(char*arg)
+{
+  char*p=arg;
+  while(*p!='\0')
+  {
+    if(!isdigit(*p))
+    {
+      return 0;
+    } 
+    p++;
+  }
+  return 1;
+}
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
   static char *line_read = NULL;
@@ -60,15 +73,10 @@ static int cmd_si(char * args){
     cpu_exec(1);
     return 0;
   }
-  char*p=arg;
-  while(*p!='\0')
+  if(!is_digit(arg))
   {
-    if(!isdigit(*p))
-    {
-      printf("arg must be a digit\n");
-      return 0;
-    } 
-    p++;
+     printf("arg must be a digit\n");
+     return 0;
   }
   cpu_exec(atoi(arg)); 
 
