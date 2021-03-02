@@ -254,35 +254,36 @@ int get_reg_value(char*reg)
     }
     if(strcmp(arg,"ebx")==0)
     {
-
+      return cpu.ebx;
     }
     if(strcmp(arg,"ecx")==0)
     {
-
+      return cpu.ecx;
     }
     if(strcmp(arg,"edx")==0)
     {
-
+      return cpu.edx;
     }
     if(strcmp(arg,"esp")==0)
     {
-
+      return cpu.esp;
     }
     if(strcmp(arg,"ebp")==0)
     {
-
+      return cpu.ebp;
     }
     if(strcmp(arg,"esi")==0)
     {
-
+      return cpu.esi;
     }
     if(strcmp(arg,"edi")==0)
     {
-
+      return cpu.edi;
     }
     if(strcmp(arg,"eip")==0)
     {
-
+      return cpu.eip;
     }
-    printf("unknow arg:%s\n",arg);
+    printf("unknow reg:%s\n",arg);
+    return -1;
 }
