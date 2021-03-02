@@ -11,6 +11,7 @@ int eval(int head,int tail);
 int find_domin(int head,int tail);
 int hex2dec(char *str);
 int power( int x, int n );
+int get_reg_value(char*reg);
 bool check_parentheses(int head,int tail);
 enum {
   TK_NOTYPE = 256, 
@@ -46,8 +47,7 @@ static struct rule {
   {"\\)",TK_RIGHT_SMALL_BRACE},//右括号
   {"0x([0-9]|[A-F]|[a-f])+",TK_DIGIT_HEX},//十六进制数字
   {"[0-9]+",TK_DIGIT},//十进制数字
-  
-  {"\\$[a-z][a-z][a-z]",TK_REG},//寄存器
+  {"\\$[a-z]+",TK_REG},//寄存器
   
 };
 
@@ -147,6 +147,8 @@ int eval(int head,int tail)
       return atoi(tokens[head].str);
     if(tokens[head].type==TK_DIGIT_HEX)
       return hex2dec(tokens[head].str);
+    if(tokens[head].type==TK_REG)
+      return get_reg_value(tokens[head].str);
   }
   else if(check_parentheses(head,tail))
   {
@@ -242,3 +244,45 @@ int power( int x, int n )
     s*=x; 
   return s;
 } 
+
+int get_reg_value(char*reg)
+{
+    char*arg=reg+1;
+    if(strcmp(arg,"eax")==0)
+    {
+      return cpu.eax;
+    }
+    if(strcmp(arg,"ebx")==0)
+    {
+
+    }
+    if(strcmp(arg,"ecx")==0)
+    {
+
+    }
+    if(strcmp(arg,"edx")==0)
+    {
+
+    }
+    if(strcmp(arg,"esp")==0)
+    {
+
+    }
+    if(strcmp(arg,"ebp")==0)
+    {
+
+    }
+    if(strcmp(arg,"esi")==0)
+    {
+
+    }
+    if(strcmp(arg,"edi")==0)
+    {
+
+    }
+    if(strcmp(arg,"eip")==0)
+    {
+
+    }
+    printf("unknow arg:%s\n",arg);
+}
