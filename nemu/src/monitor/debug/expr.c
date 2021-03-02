@@ -6,17 +6,22 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <regex.h>
+#include <math.h>
 int eval(int head,int tail);
 int find_domin(int head,int tail);
+int hex2dec(char *str);
+int power( int x, int n );
 bool check_parentheses(int head,int tail);
 enum {
   TK_NOTYPE = 256, 
   TK_EQ,
   TK_DIGIT,
+  TK_DIGIT_HEX,
   TK_LEFT_SMALL_BRACE,
   TK_RIGHT_SMALL_BRACE,
   TK_ADD_SUB,
   TK_MUL_DIV,
+  TK_REG,
 
   /* TODO: Add more token types */
 
@@ -40,6 +45,8 @@ static struct rule {
   {"\\(",TK_LEFT_SMALL_BRACE}, //左括号
   {"\\)",TK_RIGHT_SMALL_BRACE},//右括号
   {"[0-9]+",TK_DIGIT},//十进制数字
+  {"0x([0-9]|[A-F]|[a-f])+",TK_DIGIT_HEX},//十六进制数字
+  {"\\$[a-z][a-z][a-z]",TK_REG},//寄存器
   
 };
 
@@ -137,6 +144,8 @@ int eval(int head,int tail)
   {
     if(tokens[head].type==TK_DIGIT)
       return atoi(tokens[head].str);
+    if(tokens[head].type==TK_DIGIT_HEX)
+      return hex2dec(tokens[head].str);
   }
   else if(check_parentheses(head,tail))
   {
@@ -207,3 +216,28 @@ int find_domin(int head,int tail)
   }
   return current_domin;
 }
+
+int hex2dec(char *str)
+{
+  int len=strlen(str)-2;
+  int total=0;
+  for(int i=0;i<len;i++)
+  {
+    if(str[len+1-i]>='0'&&str[len+1-i]<='9')
+      total+=(str[len+1-i]-48)*power(16,i);
+    else if(str[len+1-i]>='A'&&str[len+1-i]<='F')
+      total+=(str[len+1-i]-55)*power(16,i);
+    else if(str[len+1-i]>='a'&&str[len+1-i]<='f')
+      total+=(str[len+1-i]-87)*power(16,i);
+  }
+  return total;
+}
+
+int power( int x, int n ) 
+{ 
+  int i; 
+  int s=1; 
+  for( i=1;i<=n;i++ )
+    s*=x; 
+  return s;
+} 
