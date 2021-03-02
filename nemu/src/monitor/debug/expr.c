@@ -44,8 +44,9 @@ static struct rule {
   {"==", TK_EQ},         // equal
   {"\\(",TK_LEFT_SMALL_BRACE}, //左括号
   {"\\)",TK_RIGHT_SMALL_BRACE},//右括号
-  {"[0-9]+",TK_DIGIT},//十进制数字
   {"0x([0-9]|[A-F]|[a-f])+",TK_DIGIT_HEX},//十六进制数字
+  {"[0-9]+",TK_DIGIT},//十进制数字
+  
   {"\\$[a-z][a-z][a-z]",TK_REG},//寄存器
   
 };
