@@ -157,10 +157,10 @@ int eval(int head,int tail)
   else
   {
     int op=find_domin(head, tail);
-    printf("domain=%c\n",tokens[op].str[0]);
+    //printf("domain=%c\n",tokens[op].str[0]);
     int val1=eval(head,op-1);
     int val2=eval(op+1,tail);
-    printf("val1=%dval2=%d\n",val1,val2);
+    //printf("val1=%dval2=%d\n",val1,val2);
     switch(tokens[op].str[0])
     {
       case '+':{
