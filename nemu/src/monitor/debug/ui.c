@@ -200,7 +200,7 @@ static int cmd_mem(char*args)
   for(int i=1;i<=temp;i++)
   {
     //addr_i=(unsigned int)strtol(addr,NULL,16)+i-1;
-    printf("0x%X\t0x%X\n",addr_int+i-1,paddr_read(addr_i,1));
+    printf("0x%X\t0x%X\n",addr_int+i-1,paddr_read(addr_int+i-1,1));
 
   }
   return 0;
