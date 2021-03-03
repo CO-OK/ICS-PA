@@ -189,7 +189,7 @@ static int cmd_mem(char*args)
     return 0;
   }
   int addr_i; 
-  bool p;
+  bool p=true;
   int temp=expr(len,&p);
   if(p==false)  
     return 0;
