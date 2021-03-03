@@ -146,7 +146,11 @@ int eval(int head,int tail)
     if(tokens[head].type==TK_DIGIT)
       return atoi(tokens[head].str);
     if(tokens[head].type==TK_DIGIT_HEX)
+    {
+      int a=hex2dec(tokens[head].str);
       return hex2dec(tokens[head].str);
+    }
+      
     if(tokens[head].type==TK_REG)
       return get_reg_value(tokens[head].str);
   }
