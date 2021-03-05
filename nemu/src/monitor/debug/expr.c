@@ -120,7 +120,7 @@ static bool make_token(char *e) {
           break;
         }
         else{
-          printf("6666\n");
+          //
         }
         
       }

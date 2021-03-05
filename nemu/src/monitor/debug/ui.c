@@ -176,9 +176,9 @@ static int cmd_mem(char*args)
 {
   char * addr=strtok(args," ");
   char * len=strtok(NULL," ");
-  bool a;
-  printf("res=%d\n",expr(len,&a));
-  if(addr==NULL||len==NULL)
+  char * tmp=strtok(NULL," ");
+  
+  if(addr==NULL||len==NULL||tmp!=NULL)
   {
     printf("arg wrong!\n usage: mem [addr] [len]\n");
     return 0;
@@ -188,6 +188,8 @@ static int cmd_mem(char*args)
     printf("arg wrong!\naddr must be hex format.\nrange must be dec format.\n");
     return 0;
   }*/
+  bool a;
+  printf("res=%d\n",expr(len,&a));
   int addr_i; 
  
   bool p=true;
