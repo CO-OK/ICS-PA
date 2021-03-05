@@ -14,6 +14,7 @@ typedef struct watchpoint {
 bool wp_is_full();
 bool wp_is_empty();
 WP* new_wp();
-void free_wp(WP* wp);
+void _free_wp(WP* wp);
+void free_wp(int num);
 WP* finr_prev(WP* wp);
 #endif

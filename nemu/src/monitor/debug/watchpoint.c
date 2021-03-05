@@ -41,7 +41,7 @@ WP* finr_prev(WP* wp)
   }
   return NULL;
 }
-void free_wp(WP* wp)
+void _free_wp(WP* wp)
 {
   if(wp==head)
   {
@@ -60,7 +60,10 @@ void free_wp(WP* wp)
   wp->next=NULL;
   wp->is_busy=0;
 }
-
+void free_wp(int num)
+{
+  _free_wp(&wp_pool[num]);
+}
 bool wp_is_full()
 {
   for(int i=0;i<NR_WP;i++)
