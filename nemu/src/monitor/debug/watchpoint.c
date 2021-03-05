@@ -75,6 +75,11 @@ void _free_wp(WP* wp)
 }
 void free_wp(int num)
 {
+  if(num<=0||num>=NR_WP)
+  {
+    printf("number out of range!\n");
+    return ;
+  }
   _free_wp(&wp_pool[num]);
 }
 bool wp_is_full()

@@ -215,7 +215,7 @@ static int cmd_watch(char*args)
     WP* new_wp_point=new_wp();
     if(new_wp_point==NULL)
     {
-      printf("there is no avilable watchpoint\n");
+      printf("there is no aviliable watchpoint\n");
       return 0;
     }
     bool tmp=true;
@@ -238,6 +238,7 @@ static int cmd_watch(char*args)
     }
     else
     {
+      printf("bad expression, you must input a number\n");
       return 0;
     }
   }
