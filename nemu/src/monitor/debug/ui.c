@@ -218,7 +218,7 @@ static int cmd_watch(char*args)
       printf("there is no avilable watchpoint\n");
       return 0;
     }
-    strcpy(new_wp_point->expr,expr);
+    strcpy(new_wp_point->expr,expr_);
     printf("setup watchpoint %d\n",new_wp_point->NO);
     printf("expr:%s\n",new_wp_point->expr);
 
