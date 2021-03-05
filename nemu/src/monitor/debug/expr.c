@@ -119,6 +119,9 @@ static bool make_token(char *e) {
           nr_token++;
           break;
         }
+        else{
+          printf("6666\n");
+        }
         
       }
     }
