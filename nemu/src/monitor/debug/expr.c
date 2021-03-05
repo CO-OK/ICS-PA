@@ -226,10 +226,10 @@ uint32_t eval(int head,int tail)
     {
       int val;
       if(tokens[op+1].type==TK_DIGIT)
-        val=atoi(tokens[head].str);
+        val=atoi(tokens[op+1].str);
       if(tokens[op+1].type==TK_DIGIT_HEX)
       {
-        val=hex2dec(tokens[head].str);
+        val=hex2dec(tokens[op+1].str);
       }
       return paddr_read(val,1);
     }
