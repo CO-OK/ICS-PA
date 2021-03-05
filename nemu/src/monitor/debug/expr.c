@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <regex.h>
 #include <math.h>
+#include <stdlib.h>
 uint32_t eval(int head,int tail);
 int find_domin(int head,int tail);
 int hex2dec(char *str);
