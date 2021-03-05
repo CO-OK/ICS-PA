@@ -249,10 +249,10 @@ int find_domin(int head,int tail)
   int current_domin=-1;
   for(int i=head;i<=tail;i++)
   {
-    if(tokens[i].type!=TK_ADD_SUB&&tokens[i].type!=TK_MUL_DIV&&tokens[i].type!=TK_LEFT_SMALL_BRACE&&tokens[i].type!=TK_RIGHT_SMALL_BRACE&&\
+    if(tokens[i].type!=TK_ADD_SUB&&tokens[i].type!=TK_MUL_DIV&&tokens[i].type!=TK_LEFT_SMALL_BRACE&&tokens[i].type!=TK_RIGHT_SMALL_BRACE&&
     tokens[i].type!=TK_GREAT_LESS&&tokens[i].type!=TK_EQ&&tokens[i].type!=TK_ADDR)//不是运算符，继续
       continue;
-    if((tokens[i].type==TK_MUL_DIV||tokens[i].type==TK_ADD_SUB||tokens[i].type==TK_GREAT_LESS\
+    if((tokens[i].type==TK_MUL_DIV||tokens[i].type==TK_ADD_SUB||tokens[i].type==TK_GREAT_LESS
     ||tokens[i].type==TK_EQ||tokens[i].type==TK_ADDR)&&current_domin==-1)//第一次出现的运算符
     {
       current_domin=i;
