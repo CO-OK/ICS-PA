@@ -232,7 +232,14 @@ static int cmd_watch(char*args)
   }
   else if(option[1]=='d'&&strlen(option)==2)
   {
-
+    if(is_digit(expr_)||is_digit_hex(expr_))//是数字编号
+    {
+      free_wp(atoi(expr_));
+    }
+    else
+    {
+      return 0;
+    }
   }
   else if(option[1]=='l'&&strlen(option)==2)
   {
