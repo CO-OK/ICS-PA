@@ -115,7 +115,7 @@ static bool make_token(char *e) {
             tokens[nr_token].str[j]=*(substr_start+j);
           }
           tokens[nr_token].str[j]='\0';
-          if(rules[i].token_type==TK_MUL_DIV&&rules[i].regex[0]=='*')
+          if(rules[i].token_type==TK_MUL_DIV&&rules[i].regex[0]!='/')
           {
             if(nr_token==0||(tokens[nr_token-1].type!=TK_DIGIT_HEX&&tokens[nr_token-1].type!=TK_DIGIT&&tokens[nr_token-1].type!=TK_REG))
             {
