@@ -68,7 +68,7 @@ bool wp_is_full()
     if(wp_pool[i].is_busy==0)
       return false;
   }
-  return 1;
+  return true;
 }
 
 bool wp_is_empty()

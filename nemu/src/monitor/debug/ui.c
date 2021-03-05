@@ -198,7 +198,20 @@ static int cmd_mem(char*args)
   return 0;
 }
 
-//static int
+static int cmd_watch(char*args)
+{
+  char * option=strtok(args," ");
+  char * expr_=strtok(NULL," ");
+  char * tmp=strtok(NULL," ");
+  if(tmp!=NULL)
+  {
+    printf("arg wrong!\n usage: watch [options] [expr]\n");
+    printf("options:\n\t-a, add a watchpoint\n\t-d, delete a watch point\n\t-l, list all watchpoint\n");
+    return 0;
+  }
+  
+
+}
 
 static int cmd_help(char *args);
 
@@ -213,7 +226,7 @@ static struct {
   { "si", "debug by step", cmd_si},
   { "info", "reg state for temp", cmd_info},
   { "mem",  "memary layout", cmd_mem},
-  
+  { "watch", "setup a watch point",cmd_watch},
   /* TODO: Add more commands */
 
 };
