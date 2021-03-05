@@ -110,9 +110,26 @@ void print_wp_info()
     tmp=tmp->next;
   }
 }
-void wp_check_change_and_print()
+int wp_check_change_and_print()//查看监视点的变化并打印变化
 {
-  
+  WP*tmp=head;
+  uint32_t value;
+  bool flag=true;
+  int return_flag=0;
+  while(tmp)
+  {
+    value=expr(tmp->expr,&flag);
+    if(!flag)
+      assert(0);
+    if(value!=tmp->old_value)
+    {
+      printf("value change at watchpoint %d, %u---->%u, expr:%s\n",tmp->NO,tmp->old_value,value,tmp->expr);
+      tmp->old_value=value;
+      return_flag=1;
+    }
+    tmp=tmp->next;
+  }
+  return return_flag;
 }
 /* TODO: Implement the functionality of watchpoint */
 

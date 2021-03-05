@@ -9,7 +9,7 @@ typedef struct watchpoint {
   int is_busy;
   /* TODO: Add more members if necessary */
   char expr[32];
-
+  uint32_t old_value;
 } WP;
 bool wp_is_full();//是否满
 bool wp_is_empty();//是否空
@@ -19,5 +19,5 @@ void free_wp(int num);//删除新节点通过编号
 WP* finr_prev(WP* wp);//找到它的前一个
 void print_wp_info();//打印已生成的检测点信息
 void wp_append(WP*wp);//将生成的新节点追加在链表最后
-void wp_check_change_and_print();//检测监视点是否有变化
+int wp_check_change_and_print();//检测监视点是否有变化
 #endif

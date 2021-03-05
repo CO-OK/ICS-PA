@@ -219,13 +219,14 @@ static int cmd_watch(char*args)
       return 0;
     }
     bool tmp=true;
-    expr(expr_,&tmp);
+    uint32_t value=expr(expr_,&tmp);
     if(!tmp)
     {
       printf("bad expression\n");
       return 0;
     }
     strcpy(new_wp_point->expr,expr_);
+    new_wp_point->old_value=value;
     printf("setup watchpoint %d\n",new_wp_point->NO);
     printf("expr:%s\n",new_wp_point->expr);
 
