@@ -11,10 +11,11 @@ typedef struct watchpoint {
   char expr[32];
 
 } WP;
-bool wp_is_full();
-bool wp_is_empty();
-WP* new_wp();
-void _free_wp(WP* wp);
-void free_wp(int num);
-WP* finr_prev(WP* wp);
+bool wp_is_full();//是否满
+bool wp_is_empty();//是否空
+WP* new_wp();//获取新节点
+void _free_wp(WP* wp);//删除新节点通过wp
+void free_wp(int num);//删除新节点通过编号
+WP* finr_prev(WP* wp);//找到它的前一个
+void print_wp_info();//打印已生成的检测点信息
 #endif

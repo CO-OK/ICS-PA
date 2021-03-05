@@ -234,6 +234,10 @@ static int cmd_watch(char*args)
   {
 
   }
+  else if(option[1]=='l'&&strlen(option)==2)
+  {
+    print_wp_info();
+  }
   else
   {
     printf("bad options!\n");

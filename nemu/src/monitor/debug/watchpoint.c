@@ -83,6 +83,15 @@ bool wp_is_empty()
   }
   return true;
 }
+void print_wp_info()
+{
+  WP*tmp=head;
+  while(tmp)
+  {
+    printf("watchpoint %d, expr: %s\n",tmp->NO,tmp->expr);
+    tmp=tmp->next;
+  }
+}
 /* TODO: Implement the functionality of watchpoint */
 
 
