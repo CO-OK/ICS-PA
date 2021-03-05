@@ -37,7 +37,7 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
 
-  {" +", TK_NOTYPE},    // spaces
+  {"( )+", TK_NOTYPE},    // spaces
   {"\\+", TK_ADD_SUB},         // plus
   {"-",TK_ADD_SUB},            //minis
   {"\\*",TK_MUL_DIV},          //mul
