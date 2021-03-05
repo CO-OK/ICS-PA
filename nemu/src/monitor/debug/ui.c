@@ -203,9 +203,9 @@ static int cmd_watch(char*args)
   char * option=strtok(args," ");
   char * expr_=strtok(NULL," ");
   char * tmp=strtok(NULL," ");
-  if(tmp!=NULL)
+  if(tmp!=NULL||strlen(option)!=2)
   {
-    printf("arg wrong!\n usage: watch [options] [expr]\n");
+    printf("arg wrong!\nusage: watch [options] [expr]\n");
     printf("options:\n\t-a, add a watchpoint\n\t-d, delete a watch point\n\t-l, list all watchpoint\n");
     return 0;
   }
