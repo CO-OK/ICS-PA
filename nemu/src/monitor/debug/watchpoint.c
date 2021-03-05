@@ -19,6 +19,18 @@ void init_wp_pool() {
   head = NULL;
   free_ = wp_pool;
 }
+void wp_append(WP*wp)
+{
+  if(head==NULL)
+    head=wp;
+  else
+  {
+    WP*tmp=head;
+    while(tmp->next!=NULL)
+      tmp=tmp->next;
+    tmp->next=wp;
+  }
+}
 WP* new_wp()
 {
   for(int i=0;i<NR_WP;i++)
@@ -26,6 +38,7 @@ WP* new_wp()
     if(wp_pool[i].is_busy==0)
     {
       wp_pool[i].is_busy=1;
+      wp_append(&wp_pool[i]);
       return &wp_pool[i];
     }
       
