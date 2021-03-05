@@ -187,6 +187,7 @@ uint32_t eval(int head,int tail)
     {
       int val1=eval(head,op-1);
       int val2=eval(op+1,tail);
+      printf("val1=%d,val2=%d\n",val1,val2);
       switch(tokens[op].str[0])
       {
         case '+':{
@@ -231,6 +232,7 @@ uint32_t eval(int head,int tail)
       {
         val=hex2dec(tokens[op+1].str);
       }
+      printf("val=%d\n",val);
       return paddr_read(val,1);
     }
     
