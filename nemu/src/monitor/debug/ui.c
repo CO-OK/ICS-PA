@@ -182,7 +182,7 @@ static int cmd_mem(char*args)
     printf("arg wrong!\n usage: mem [addr] [len]\n");
     return 0;
   }
-  int addr_i; 
+  //int addr_i; 
   bool p=true;
   int addr_int=expr(addr,&p);
   if(p==false)  
