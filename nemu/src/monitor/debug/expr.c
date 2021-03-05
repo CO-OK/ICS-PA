@@ -121,6 +121,10 @@ static bool make_token(char *e) {
             {
               tokens[nr_token].type=TK_ADDR;
             }
+            else
+            {
+              tokens[nr_token].type=TK_MUL_DIV;
+            }
           }
           else
           {
