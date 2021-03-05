@@ -7,11 +7,11 @@
 #include <sys/types.h>
 #include <regex.h>
 #include <math.h>
-int eval(int head,int tail);
+uint32_t eval(int head,int tail);
 int find_domin(int head,int tail);
 int hex2dec(char *str);
 int power( int x, int n );
-int get_reg_value(char*reg);
+uint32_t get_reg_value(char*reg);
 bool check_parentheses(int head,int tail);
 enum {
   TK_NOTYPE = 256, 
@@ -146,7 +146,7 @@ uint32_t expr(char *e, bool *success) {
 
   return eval(0,nr_token-1);
 }
-int eval(int head,int tail)
+uint32_t eval(int head,int tail)
 {
   if(head>tail)
   {
@@ -163,6 +163,7 @@ int eval(int head,int tail)
     }
     if(tokens[head].type==TK_REG)
       return get_reg_value(tokens[head].str);
+    
   }
   else if(check_parentheses(head,tail))
   {
@@ -288,7 +289,7 @@ int power( int x, int n )
   return s;
 } 
 
-int get_reg_value(char*reg)
+uint32_t get_reg_value(char*reg)
 {
     char*arg=reg+1;
     if(strcmp(arg,"eax")==0)

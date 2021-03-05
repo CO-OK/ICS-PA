@@ -177,21 +177,12 @@ static int cmd_mem(char*args)
   char * addr=strtok(args," ");
   char * len=strtok(NULL," ");
   char * tmp=strtok(NULL," ");
-  
   if(addr==NULL||len==NULL||tmp!=NULL)
   {
     printf("arg wrong!\n usage: mem [addr] [len]\n");
     return 0;
   }
-  /*if(!is_digit_hex(addr)||!is_digit(len))
-  {
-    printf("arg wrong!\naddr must be hex format.\nrange must be dec format.\n");
-    return 0;
-  }*/
-  bool a;
-  printf("res=%d\n",expr(len,&a));
   int addr_i; 
- 
   bool p=true;
   int addr_int=expr(addr,&p);
   if(p==false)  
@@ -203,10 +194,11 @@ static int cmd_mem(char*args)
   {
     //addr_i=(unsigned int)strtol(addr,NULL,16)+i-1;
     printf("0x%X\t0x%X\n",addr_int+i-1,paddr_read(addr_int+i-1,1));
-
   }
   return 0;
 }
+
+//static int
 
 static int cmd_help(char *args);
 
