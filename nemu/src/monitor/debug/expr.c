@@ -225,9 +225,9 @@ uint32_t eval(int head,int tail)
     else
     {
       int val;
-      if(tokens[head].type==TK_DIGIT)
+      if(tokens[op+1].type==TK_DIGIT)
         val=atoi(tokens[head].str);
-      if(tokens[head].type==TK_DIGIT_HEX)
+      if(tokens[op+1].type==TK_DIGIT_HEX)
       {
         val=hex2dec(tokens[head].str);
       }
