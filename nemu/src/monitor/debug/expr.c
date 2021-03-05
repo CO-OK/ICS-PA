@@ -37,7 +37,7 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
 
-  
+  {"[:space:]+", TK_NOTYPE},    // spaces
   {"\\+", TK_ADD_SUB},         // plus
   {"-",TK_ADD_SUB},            //minis
   {"\\*",TK_MUL_DIV},          //mul
@@ -52,7 +52,6 @@ static struct rule {
   {"0x([0-9]|[A-F]|[a-f])+",TK_DIGIT_HEX},//十六进制数字
   {"[0-9]+",TK_DIGIT},//十进制数字
   {"\\$[a-z]+",TK_REG},//寄存器
-  {"[:space:]+", TK_NOTYPE},    // spaces
   
 };
 
