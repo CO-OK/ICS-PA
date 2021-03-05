@@ -177,6 +177,9 @@ static int cmd_mem(char*args)
   char * addr=strtok(args," ");
   char * len=strtok(NULL," ");
   char * tmp=strtok(NULL," ");
+  bool pp=true;
+  int t=expr(len,&pp);
+  printf("0x%X\n",t);
   if(addr==NULL||len==NULL||tmp!=NULL)
   {
     printf("arg wrong!\n usage: mem [addr] [len]\n");

@@ -24,6 +24,7 @@ enum {
   TK_MUL_DIV,
   TK_REG,
   TK_GREAT_LESS,//> < >= <=
+  TK_ADDR,//*取值
   /* TODO: Add more token types */
 
 };
@@ -114,7 +115,17 @@ static bool make_token(char *e) {
             tokens[nr_token].str[j]=*(substr_start+j);
           }
           tokens[nr_token].str[j]='\0';
-          tokens[nr_token].type=rules[i].token_type;
+          if(rules[i].token_type==TK_MUL_DIV&&rules[i].regex[0]=='*')
+          {
+            if(nr_token==0||(tokens[nr_token-1].type!=TK_DIGIT_HEX&&tokens[nr_token-1].type!=TK_DIGIT&&tokens[nr_token-1].type!=TK_REG))
+            {
+              tokens[nr_token].type=TK_ADDR;
+            }
+          }
+          else
+          {
+            tokens[nr_token].type=rules[i].token_type;
+          }
           //printf("%s\n",tokens[nr_token].str);
           nr_token++;
           break;
@@ -158,7 +169,7 @@ uint32_t eval(int head,int tail)
       return atoi(tokens[head].str);
     if(tokens[head].type==TK_DIGIT_HEX)
     {
-      int a=hex2dec(tokens[head].str);
+      //int a=hex2dec(tokens[head].str);
       return hex2dec(tokens[head].str);
     }
     if(tokens[head].type==TK_REG)
@@ -172,44 +183,57 @@ uint32_t eval(int head,int tail)
   else
   {
     int op=find_domin(head, tail);
-    //printf("domain=%c\n",tokens[op].str[0]);
-    int val1=eval(head,op-1);
-    int val2=eval(op+1,tail);
-    //printf("val1=%dval2=%d\n",val1,val2);
-    switch(tokens[op].str[0])
+    if(tokens[op].type!=TK_ADDR)
     {
-      case '+':{
-        return val1+val2;
+      int val1=eval(head,op-1);
+      int val2=eval(op+1,tail);
+      switch(tokens[op].str[0])
+      {
+        case '+':{
+          return val1+val2;
+        }
+        case '-':{
+          return val1-val2;
+        }
+        case '*':{
+          return val1*val2;
+        }
+        case '/':{
+          return val1/val2;
+        }
+        case '>':{
+          if(tokens[op].str[1]=='\0')
+            return val1>val2;
+          else if(tokens[op].str[1]=='=')
+            return val1>=val2;
+        }
+        case '<':{
+          if(tokens[op].str[1]=='\0')
+            return val1<val2;
+          else if(tokens[op].str[1]=='=') 
+            return val1<=val2;
+        }
+        case '=':{
+          if(tokens[op].str[1]=='=')
+            return val1==val2;
+          break;
+        }
+        default:
+          assert(0);
       }
-      case '-':{
-        return val1-val2;
-      }
-      case '*':{
-        return val1*val2;
-      }
-      case '/':{
-        return val1/val2;
-      }
-      case '>':{
-        if(tokens[op].str[1]=='\0')
-          return val1>val2;
-        else if(tokens[op].str[1]=='=')
-          return val1>=val2;
-      }
-      case '<':{
-        if(tokens[op].str[1]=='\0')
-          return val1<val2;
-        else if(tokens[op].str[1]=='=') 
-          return val1<=val2;
-      }
-      case '=':{
-        if(tokens[op].str[1]=='=')
-          return val1==val2;
-        break;
-      }
-      default:
-        assert(0);
     }
+    else
+    {
+      int val;
+      if(tokens[head].type==TK_DIGIT)
+        val=atoi(tokens[head].str);
+      if(tokens[head].type==TK_DIGIT_HEX)
+      {
+        val=hex2dec(tokens[head].str);
+      }
+      return paddr_read(val,1);
+    }
+    
   }
   return -1;
 }
@@ -224,28 +248,32 @@ int find_domin(int head,int tail)
   for(int i=head;i<=tail;i++)
   {
     if(tokens[i].type!=TK_ADD_SUB&&tokens[i].type!=TK_MUL_DIV&&tokens[i].type!=TK_LEFT_SMALL_BRACE&&tokens[i].type!=TK_RIGHT_SMALL_BRACE&&\
-    tokens[i].type!=TK_GREAT_LESS&&tokens[i].type!=TK_EQ)//不是运算符，继续
+    tokens[i].type!=TK_GREAT_LESS&&tokens[i].type!=TK_EQ&&tokens[i].type!=TK_ADDR)//不是运算符，继续
       continue;
     if((tokens[i].type==TK_MUL_DIV||tokens[i].type==TK_ADD_SUB||tokens[i].type==TK_GREAT_LESS\
-    ||tokens[i].type==TK_EQ)&&current_domin==-1)//第一次出现的运算符
+    ||tokens[i].type==TK_EQ||tokens[i].type==TK_ADDR)&&current_domin==-1)//第一次出现的运算符
     {
       current_domin=i;
       continue;
     }
     switch(tokens[i].type)
     {
+      case TK_ADDR:{
+        if(tokens[current_domin].type==TK_ADDR)
+          current_domin=i;
+      }
       case TK_MUL_DIV:{
-        if(tokens[current_domin].type==TK_MUL_DIV)
+        if(tokens[current_domin].type==TK_MUL_DIV||tokens[current_domin].type==TK_ADDR)
           current_domin=i;
         break;
       }
       case TK_ADD_SUB:{
-        if(tokens[current_domin].type==TK_MUL_DIV||tokens[current_domin].type==TK_ADD_SUB)
+        if(tokens[current_domin].type==TK_MUL_DIV||tokens[current_domin].type==TK_ADD_SUB||tokens[current_domin].type==TK_ADDR)
           current_domin=i;
         break;
       }
       case TK_GREAT_LESS:{
-        if(tokens[current_domin].type==TK_MUL_DIV||tokens[current_domin].type==TK_ADD_SUB||tokens[current_domin].type==TK_GREAT_LESS)
+        if(tokens[current_domin].type==TK_MUL_DIV||tokens[current_domin].type==TK_ADD_SUB||tokens[current_domin].type==TK_GREAT_LESS||tokens[current_domin].type==TK_ADDR)
           current_domin=i;
         break;
       }
