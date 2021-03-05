@@ -23,7 +23,7 @@ enum {
   TK_ADD_SUB,
   TK_MUL_DIV,
   TK_REG,
-  TK_GREAT_LESS,
+  TK_GREAT_LESS,//> < >= <=
   /* TODO: Add more token types */
 
 };
@@ -45,6 +45,8 @@ static struct rule {
   {"==", TK_EQ},         // equal
   {"\\(",TK_LEFT_SMALL_BRACE}, //左括号
   {"\\)",TK_RIGHT_SMALL_BRACE},//右括号
+  {">=",TK_GREAT_LESS},
+  {"<=",TK_GREAT_LESS},
   {">",TK_GREAT_LESS},              //大于号
   {"<",TK_GREAT_LESS},               //小于号
   {"0x([0-9]|[A-F]|[a-f])+",TK_DIGIT_HEX},//十六进制数字
@@ -181,10 +183,21 @@ int eval(int head,int tail)
         return val1/val2;
       }
       case '>':{
-        return val1>val2;
+        if(tokens[op].str[1]=='\0')
+          return val1>val2;
+        else if(tokens[op].str[1]=='=')
+          return val1>=val2;
       }
       case '<':{
-        return val1<val2;
+        if(tokens[op].str[1]=='\0')
+          return val1<val2;
+        else if(tokens[op].str[1]=='=') 
+          return val1<=val2;
+      }
+      case '=':{
+        if(tokens[op].str[1]=='=')
+          return val1==val2;
+        break;
       }
       default:
         assert(0);
@@ -203,23 +216,33 @@ int find_domin(int head,int tail)
   for(int i=head;i<=tail;i++)
   {
     if(tokens[i].type!=TK_ADD_SUB&&tokens[i].type!=TK_MUL_DIV&&tokens[i].type!=TK_LEFT_SMALL_BRACE&&tokens[i].type!=TK_RIGHT_SMALL_BRACE&&\
-    tokens[i].type!=TK_GREAT_LESS)
+    tokens[i].type!=TK_GREAT_LESS&&tokens[i].type!=TK_EQ)//不是运算符，继续
       continue;
-    if((tokens[i].type==TK_MUL_DIV||tokens[i].type==TK_ADD_SUB||tokens[i].type==TK_GREAT_LESS)&&current_domin==-1)
+    if((tokens[i].type==TK_MUL_DIV||tokens[i].type==TK_ADD_SUB||tokens[i].type==TK_GREAT_LESS\
+    ||tokens[i].type==TK_EQ)&&current_domin==-1)//第一次出现的运算符
     {
       current_domin=i;
       continue;
     }
     switch(tokens[i].type)
     {
+      case TK_MUL_DIV:{
+        if(tokens[current_domin].type==TK_MUL_DIV)
+          current_domin=i;
+        break;
+      }
       case TK_ADD_SUB:{
         if(tokens[current_domin].type==TK_MUL_DIV||tokens[current_domin].type==TK_ADD_SUB)
           current_domin=i;
         break;
       }
-      case TK_MUL_DIV:{
-        if(tokens[current_domin].type==TK_MUL_DIV)
+      case TK_GREAT_LESS:{
+        if(tokens[current_domin].type==TK_MUL_DIV||tokens[current_domin].type==TK_ADD_SUB||tokens[current_domin].type==TK_GREAT_LESS)
           current_domin=i;
+        break;
+      }
+      case TK_EQ:{
+        current_domin=i;
         break;
       }
       case TK_LEFT_SMALL_BRACE:{
@@ -227,9 +250,6 @@ int find_domin(int head,int tail)
         while(tokens[new_pos].type!=TK_RIGHT_SMALL_BRACE){new_pos++;}
         i=new_pos;
         break;
-      }
-      case TK_GREAT_LESS:{
-        current_domin=i;
       }
     }
   }
