@@ -218,7 +218,7 @@ static int cmd_watch(char*args)
       printf("there is no avilable watchpoint\n");
       return 0;
     }
-    bool tmp;
+    bool tmp=true;
     expr(expr_,&tmp);
     if(!tmp)
     {
