@@ -110,6 +110,10 @@ void print_wp_info()
     tmp=tmp->next;
   }
 }
+void wp_check_change_and_print()
+{
+  
+}
 /* TODO: Implement the functionality of watchpoint */
 
 

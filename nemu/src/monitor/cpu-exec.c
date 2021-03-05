@@ -29,9 +29,9 @@ void cpu_exec(uint64_t n) {
 
 #ifdef DEBUG
     /* TODO: check watchpoints here. */
-    if(!wp_is_empty())
+    if(!wp_is_empty())//有监视点存在
     {
-      //wp_check_change_and_print();
+      wp_check_change_and_print();
     }
 #endif
 
