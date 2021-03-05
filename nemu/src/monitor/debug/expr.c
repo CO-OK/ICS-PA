@@ -106,16 +106,20 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-        int j=0;
-        for(;j<substr_len;j++)
+        if(rules[i].token_type!=TK_NOTYPE)
         {
-          tokens[nr_token].str[j]=*(substr_start+j);
+          int j=0;
+          for(;j<substr_len;j++)
+          {
+            tokens[nr_token].str[j]=*(substr_start+j);
+          }
+          tokens[nr_token].str[j]='\0';
+          tokens[nr_token].type=rules[i].token_type;
+          //printf("%s\n",tokens[nr_token].str);
+          nr_token++;
+          break;
         }
-        tokens[nr_token].str[j]='\0';
-        tokens[nr_token].type=rules[i].token_type;
-        //printf("%s\n",tokens[nr_token].str);
-        nr_token++;
-        break;
+        
       }
     }
 
