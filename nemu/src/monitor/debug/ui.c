@@ -203,14 +203,38 @@ static int cmd_watch(char*args)
   char * option=strtok(args," ");
   char * expr_=strtok(NULL," ");
   char * tmp=strtok(NULL," ");
-  if(tmp!=NULL||strlen(option)!=2)
+  if(tmp!=NULL)//参数过多
   {
-    printf("arg wrong!\nusage: watch [options] [expr]\n");
+    printf("arg wrong!\n");
+    printf("usage: watch [options] [expr|num]\n");
     printf("options:\n\t-a, add a watchpoint\n\t-d, delete a watch point\n\t-l, list all watchpoint\n");
     return 0;
   }
-  
+  if(option[1]=='a'&&strlen(option)==2)
+  {
+    WP* new_wp_point=new_wp();
+    if(new_wp_point==NULL)
+    {
+      printf("there is no avilable watchpoint\n");
+      return 0;
+    }
+    strcpy(new_wp_point->expr,expr);
+    printf("setup watchpoint %d\n",new_wp_point->NO);
+    printf("expr:%s\n",new_wp_point->expr);
 
+  }
+  else if(option[1]=='d'&&strlen(option)==2)
+  {
+
+  }
+  else
+  {
+    printf("bad options!\n");
+    printf("usage: watch [options] [expr|num]\n");
+    printf("options:\n\t-a, add a watchpoint\n\t-d, delete a watch point\n\t-l, list all watchpoint\n");
+    return 0;
+  }
+  return 0;
 }
 
 static int cmd_help(char *args);

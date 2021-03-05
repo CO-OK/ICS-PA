@@ -8,7 +8,7 @@ typedef struct watchpoint {
   struct watchpoint *next;
   int is_busy;
   /* TODO: Add more members if necessary */
-
+  char expr[32];
 
 } WP;
 bool wp_is_full();
