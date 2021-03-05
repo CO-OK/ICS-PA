@@ -23,7 +23,7 @@ enum {
   TK_ADD_SUB,
   TK_MUL_DIV,
   TK_REG,
-
+  TK_GREAT_LESS,
   /* TODO: Add more token types */
 
 };
@@ -45,6 +45,8 @@ static struct rule {
   {"==", TK_EQ},         // equal
   {"\\(",TK_LEFT_SMALL_BRACE}, //左括号
   {"\\)",TK_RIGHT_SMALL_BRACE},//右括号
+  {">",TK_GREAT_LESS},              //大于号
+  {"<",TK_GREAT_LESS},               //小于号
   {"0x([0-9]|[A-F]|[a-f])+",TK_DIGIT_HEX},//十六进制数字
   {"[0-9]+",TK_DIGIT},//十进制数字
   {"\\$[a-z]+",TK_REG},//寄存器
@@ -150,7 +152,6 @@ int eval(int head,int tail)
       int a=hex2dec(tokens[head].str);
       return hex2dec(tokens[head].str);
     }
-      
     if(tokens[head].type==TK_REG)
       return get_reg_value(tokens[head].str);
   }
@@ -179,6 +180,12 @@ int eval(int head,int tail)
       case '/':{
         return val1/val2;
       }
+      case '>':{
+        return val1>val2;
+      }
+      case '<':{
+        return val1<val2;
+      }
       default:
         assert(0);
     }
@@ -195,9 +202,10 @@ int find_domin(int head,int tail)
   int current_domin=-1;
   for(int i=head;i<=tail;i++)
   {
-    if(tokens[i].type!=TK_ADD_SUB&&tokens[i].type!=TK_MUL_DIV&&tokens[i].type!=TK_LEFT_SMALL_BRACE&&tokens[i].type!=TK_RIGHT_SMALL_BRACE)
+    if(tokens[i].type!=TK_ADD_SUB&&tokens[i].type!=TK_MUL_DIV&&tokens[i].type!=TK_LEFT_SMALL_BRACE&&tokens[i].type!=TK_RIGHT_SMALL_BRACE&&\
+    tokens[i].type!=TK_GREAT_LESS)
       continue;
-    if((tokens[i].type==TK_MUL_DIV||tokens[i].type==TK_ADD_SUB)&&current_domin==-1)
+    if((tokens[i].type==TK_MUL_DIV||tokens[i].type==TK_ADD_SUB||tokens[i].type==TK_GREAT_LESS)&&current_domin==-1)
     {
       current_domin=i;
       continue;
@@ -205,7 +213,8 @@ int find_domin(int head,int tail)
     switch(tokens[i].type)
     {
       case TK_ADD_SUB:{
-        current_domin=i;
+        if(tokens[current_domin].type==TK_MUL_DIV||tokens[current_domin].type==TK_ADD_SUB)
+          current_domin=i;
         break;
       }
       case TK_MUL_DIV:{
@@ -218,6 +227,9 @@ int find_domin(int head,int tail)
         while(tokens[new_pos].type!=TK_RIGHT_SMALL_BRACE){new_pos++;}
         i=new_pos;
         break;
+      }
+      case TK_GREAT_LESS:{
+        current_domin=i;
       }
     }
   }

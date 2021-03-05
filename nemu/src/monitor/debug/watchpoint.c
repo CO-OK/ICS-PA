@@ -60,6 +60,26 @@ void free_wp(WP* wp)
   wp->next=NULL;
   wp->is_busy=0;
 }
+
+bool wp_is_full()
+{
+  for(int i=0;i<NR_WP;i++)
+  {
+    if(wp_pool[i].is_busy==0)
+      return false;
+  }
+  return 1;
+}
+
+bool wp_is_empty()
+{
+  for(int i=0;i<NR_WP;i++)
+  {
+    if(wp_pool[i].is_busy==1)
+      return false;
+  }
+  return true;
+}
 /* TODO: Implement the functionality of watchpoint */
 
 
