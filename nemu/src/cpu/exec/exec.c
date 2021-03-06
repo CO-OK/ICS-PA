@@ -229,7 +229,8 @@ void exec_wrapper(bool print_flag) {
   decoding.p += sprintf(decoding.p, "%8x:   ", cpu.eip);
 #endif
 
-  decoding.seq_eip = cpu.eip;
+  decoding.seq_eip = cpu.eip;//将当前的%eip 保存到全局译码信息 decoding 的成员 seq_eip,当代码从 exec_real()返回时,decoding.seq_eip 将会指向
+                            //下一条指令的地址
   exec_real(&decoding.seq_eip);
 
 #ifdef DEBUG
