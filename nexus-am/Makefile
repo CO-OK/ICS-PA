@@ -1,7 +1,6 @@
 include Makefile.check
 
 AM_HOME ?= $(shell pwd)
-
 all:
 	@$(MAKE) -C am
 
