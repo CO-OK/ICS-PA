@@ -9,7 +9,7 @@ make_EHelper(add) {
 make_EHelper(sub) {
   //TODO();
   printf("src1=%d\n",decoding.src.val);
-  printf("src2=%08X\n",cpu.esp);
+  printf("src2=%08X\n",decoding.src2.reg);
   print_asm_template2(sub);
 }
 
