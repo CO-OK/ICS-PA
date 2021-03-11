@@ -21,7 +21,7 @@ static inline uint32_t instr_fetch(vaddr_t *eip, int len) {
   return instr;
 }
 
-make_EHelper(call);
+//make_EHelper(call);
 
 void rtl_setcc(rtlreg_t*, uint8_t);
 
