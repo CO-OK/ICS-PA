@@ -19,11 +19,11 @@ make_EHelper(push) {
       break;
     }
     case OP_TYPE_MEM:{
-      rtl_push(decoding.src.addr);
+      rtl_push(&decoding.src.addr);
       break;
     }
     case OP_TYPE_IMM:{
-      rtl_push(decoding.src.imm);
+      rtl_push(&decoding.src.imm);
       break;
     }
   }
