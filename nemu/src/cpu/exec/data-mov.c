@@ -25,7 +25,7 @@ make_EHelper(push) {
       break;
     }
     case OP_TYPE_IMM:{
-      rtl_push(&decoding.src.imm);
+      rtl_push(&decoding.src.addr);
       printf("3\n");
       break;
     }
