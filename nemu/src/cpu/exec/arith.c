@@ -8,8 +8,19 @@ make_EHelper(add) {
 
 make_EHelper(sub) {
   //TODO();
-  printf("src1=%d\n",decoding.src.val);
-  printf("src2=%08X\n",decoding.dest.reg);
+  /*printf("src1=%d\n",decoding.src.val);
+  printf("src2=%08X\n",decoding.dest.reg);*/
+  //目前只支持reg-reg、reg-imm
+  switch(decoding.src.type)
+  {
+    case OP_TYPE_REG:{
+      reg_l(decoding.dest.reg)-=reg_l(decoding.src.reg);
+      break;
+    }
+    case OP_TYPE_IMM:{
+      reg_l(decoding.dest.reg)-=decoding.src.imm;
+    }
+  }
   print_asm_template2(sub);
 }
 
