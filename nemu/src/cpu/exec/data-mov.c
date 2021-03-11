@@ -5,7 +5,7 @@ make_EHelper(mov) {
   print_asm_template2(mov);
 }
 
-make_EHelper(push_ebp) {
+make_EHelper(push_reg) {
   
   rtl_push(&decoding.src.reg);
   print_asm_template1(push);
