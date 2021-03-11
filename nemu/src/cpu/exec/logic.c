@@ -20,7 +20,7 @@ make_EHelper(xor) {
 
 make_EHelper(or) {
   //TODO();
-  //decoding.dest
+  //80386 手册54
   if(decoding.src.type==OP_TYPE_REG)
   {
     switch (decoding.src2.type)
