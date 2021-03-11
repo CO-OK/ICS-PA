@@ -21,7 +21,7 @@ make_EHelper(xor) {
 make_EHelper(or) {
   //TODO();
   //80386 手册54
-  if(decoding.src.type==OP_TYPE_REG)
+  /*if(decoding.src.type==OP_TYPE_REG)
   {
     switch (decoding.src2.type)
     {
@@ -56,7 +56,7 @@ make_EHelper(or) {
       }
     }
     paddr_write(decoding.src.addr,32,val);
-  }
+  }*/
   
   print_asm_template2(or);
 }
