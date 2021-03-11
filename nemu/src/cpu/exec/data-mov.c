@@ -16,14 +16,17 @@ make_EHelper(push) {
     */
     case OP_TYPE_REG:{
       rtl_push(&decoding.src.reg);
+      printf("1\n");
       break;
     }
     case OP_TYPE_MEM:{
       rtl_push(&decoding.src.addr);
+      printf("2\n");
       break;
     }
     case OP_TYPE_IMM:{
       rtl_push(&decoding.src.imm);
+      printf("3\n");
       break;
     }
   }
