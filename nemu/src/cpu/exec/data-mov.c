@@ -5,32 +5,9 @@ make_EHelper(mov) {
   print_asm_template2(mov);
 }
 
-make_EHelper(push) {
-  //TODO();
-  switch (decoding.src.type)
-  {
-    /*
-      The
-      PUSH instruction operates on memory operands, immediate operands, and
-      register operands
-    */
-    case OP_TYPE_REG:{
-      rtl_push(&decoding.src.reg);
-      printf("1\n");
-      break;
-    }
-    case OP_TYPE_MEM:{
-      rtl_push(&decoding.src.addr);
-      printf("2\n");
-      break;
-    }
-    case OP_TYPE_IMM:{
-      rtl_push(&decoding.src.addr);
-      printf("3\n");
-      break;
-    }
-  }
-  //rtl_push(&decoding.src.reg);
+make_EHelper(push_ebp) {
+  
+  rtl_push(&decoding.src.reg);
   print_asm_template1(push);
 }
 
