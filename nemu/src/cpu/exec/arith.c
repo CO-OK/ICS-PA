@@ -8,7 +8,7 @@ make_EHelper(add) {
 
 make_EHelper(sub) {
   //TODO();
-
+  printf("src1=%d\n",decoding.src.val);
   print_asm_template2(sub);
 }
 
