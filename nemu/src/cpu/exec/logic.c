@@ -19,8 +19,8 @@ make_EHelper(xor) {
 }
 
 make_EHelper(or) {
-  TODO();
-
+  //TODO();
+  //decoding.dest
   print_asm_template2(or);
 }
 

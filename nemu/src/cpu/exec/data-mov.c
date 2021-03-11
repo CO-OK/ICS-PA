@@ -7,7 +7,27 @@ make_EHelper(mov) {
 
 make_EHelper(push) {
   //TODO();
-  rtl_push(&decoding.src.addr);
+  switch (decoding.src.type)
+  {
+    /*
+      The
+      PUSH instruction operates on memory operands, immediate operands, and
+      register operands
+    */
+    case OP_TYPE_REG:{
+      rtl_push(&decoding.src.reg);
+      break;
+    }
+    case OP_TYPE_MEM:{
+      rtl_push(decoding.src.addr);
+      break;
+    }
+    case OP_TYPE_IMM:{
+      rtl_push(decoding.src.imm);
+      break;
+    }
+  }
+  
   print_asm_template1(push);
 }
 
