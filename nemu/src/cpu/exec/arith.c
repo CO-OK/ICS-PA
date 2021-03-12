@@ -21,7 +21,8 @@ make_EHelper(sub) {
       break;
     }
     case OP_TYPE_IMM:{
-      result = reg_l(decoding.dest.reg)-=decoding.src.imm;
+      rtl_sub(&t2, &id_dest->val, &id_src->val);
+      printf("%08X\n",t2);
     }
   }
   //The sub instruction is used to perform a substraction. It modifies the 2 following flags: ZF (Zero Flag) and CF (Carry Flag). 
