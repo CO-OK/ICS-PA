@@ -16,13 +16,14 @@ make_EHelper(xor) {
   //TODO();
   if(decoding.dest.type==OP_TYPE_REG)
   {
-    reg_l(decoding.src.reg) |= reg_l(decoding.src2.reg);
+    reg_l(decoding.src.reg) ^= reg_l(decoding.src2.reg);
+
     printf("555\n");
   }
   else if(decoding.dest.type==OP_TYPE_MEM)
   {
     uint32_t val = paddr_read(decoding.dest.addr,32);
-    val |= reg_l(decoding.src2.reg);
+    val ^= reg_l(decoding.src2.reg);
     paddr_write(decoding.dest.addr,32,val);
     printf("666\n");
   }
