@@ -16,6 +16,7 @@ make_EHelper(sub) {
   //The sub instruction is used to perform a substraction. It modifies the 2 following flags: ZF (Zero Flag) and CF (Carry Flag). 
   //OF, SF\, ZF\, AF, PF\, and CF as described in Appendix C
   rtl_set_OF(&t0);
+  rtl_update_ZFSF(&t2, id_dest->width);
   printf("%08X\n",t0);
   print_asm_template2(sub);
 }
