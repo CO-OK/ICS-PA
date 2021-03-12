@@ -8,15 +8,15 @@
 /*
 标志寄存器
 */
-extern uint32_t eflag_cf;
-extern uint32_t eflag_pf;
-extern uint32_t eflag_af;
-extern uint32_t eflag_zf;
-extern uint32_t eflag_sf;
-extern uint32_t eflag_tf;
-extern uint32_t eflag_if;
-extern uint32_t eflag_df;
-extern uint32_t eflag_of;
+extern rtlreg_t eflag_cf;
+extern rtlreg_t eflag_pf;
+extern rtlreg_t eflag_af;
+extern rtlreg_t eflag_zf;
+extern rtlreg_t eflag_sf;
+extern rtlreg_t eflag_tf;
+extern rtlreg_t eflag_if;
+extern rtlreg_t eflag_df;
+extern rtlreg_t eflag_of;
 
 enum { R_EAX, R_ECX, R_EDX, R_EBX, R_ESP, R_EBP, R_ESI, R_EDI };
 enum { R_AX, R_CX, R_DX, R_BX, R_SP, R_BP, R_SI, R_DI };
