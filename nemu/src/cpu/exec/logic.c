@@ -16,7 +16,7 @@ make_EHelper(xor) {
   //TODO();
   if(decoding.dest.type==OP_TYPE_REG)
   {
-    reg_l(decoding.src.reg) ^= reg_l(decoding.src2.reg);
+    reg_l(decoding.dest.reg) ^= reg_l(decoding.src2.reg);
 
     printf("555\n");
   }
