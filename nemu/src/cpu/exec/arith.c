@@ -11,16 +11,51 @@ make_EHelper(sub) {
   /*printf("src1=%d\n",decoding.src.val);
   printf("src2=%08X\n",decoding.dest.reg);*/
   //目前只支持reg-reg、reg-imm
+  int c_flag=0;
+  uint32_t result;
   switch(decoding.src.type)
   {
     case OP_TYPE_REG:{
-      reg_l(decoding.dest.reg)-=reg_l(decoding.src.reg);
+      rtl_sub(&t2, &id_dest->val, &id_src->val);
       break;
     }
     case OP_TYPE_IMM:{
-      reg_l(decoding.dest.reg)-=decoding.src.imm;
+      result = reg_l(decoding.dest.reg)-=decoding.src.imm;
     }
   }
+  //The sub instruction is used to perform a substraction. It modifies the 2 following flags: ZF (Zero Flag) and CF (Carry Flag). 
+  //OF, SF\, ZF\, AF, PF\, and CF as described in Appendix C
+  /*if(reg_l(decoding.dest.reg)==0)
+  {
+    cpu.EFLAGS |= eflag_zf;
+  }
+  else
+  {
+    cpu.EFLAGS &= ~eflag_zf;
+  }
+  if((result>>31))
+  {
+    cpu.EFLAGS |= eflag_sf;
+  }
+  else
+  {
+    cpu.EFLAGS &= ~eflag_sf;
+  }
+  result = 0;
+  uint8_t temp = cpu.EFLAGS;
+  while(temp / 2 != 0)
+  {
+    result += temp % 2;
+    temp = temp / 2;
+  }
+  if(temp % 2 == 0)
+  {
+    cpu.EFLAGS |= eflag_pf;
+  }
+  else 
+  {
+    cpu.EFLAGS &= ~eflag_pf;
+  }*/
   print_asm_template2(sub);
 }
 
