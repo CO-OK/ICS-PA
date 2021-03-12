@@ -14,7 +14,18 @@ make_EHelper(and) {
 
 make_EHelper(xor) {
   //TODO();
-  printf("666\n");
+  if(decoding.dest.type==OP_TYPE_REG)
+  {
+    reg_l(decoding.dest.reg) |= reg_l(decoding.src2.reg);
+    printf("555\n");
+  }
+  else if(decoding.dest.type==OP_TYPE_MEM)
+  {
+    uint32_t val = paddr_read(decoding.dest.addr,32);
+    val |= reg_l(decoding.src2.reg);
+    paddr_write(decoding.dest.addr,32,val);
+    printf("666\n");
+  }
   print_asm_template2(xor);
 }
 
