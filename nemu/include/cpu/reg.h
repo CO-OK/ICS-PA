@@ -4,18 +4,19 @@
 #include "common.h"
 #define reg_num 9
 #define reg_len 4
+
 /*
 标志寄存器
 */
-uint32_t eflag_cf = 0b00000000000000000000000000000001;
-uint32_t eflag_pf = 0b00000000000000000000000000000100;
-uint32_t eflag_af = 0b00000000000000000000000000010000;
-uint32_t eflag_zf = 0b00000000000000000000000001000000;
-uint32_t eflag_sf = 0b00000000000000000000000010000000;
-uint32_t eflag_tf = 0b00000000000000000000000100000000;
-uint32_t eflag_if = 0b00000000000000000000001000000000;
-uint32_t eflag_df = 0b00000000000000000000010000000000;
-uint32_t eflag_of = 0b00000000000000000000100000000000;
+extern uint32_t eflag_cf;
+extern uint32_t eflag_pf;
+extern uint32_t eflag_af;
+extern uint32_t eflag_zf;
+extern uint32_t eflag_sf;
+extern uint32_t eflag_tf;
+extern uint32_t eflag_if;
+extern uint32_t eflag_df;
+extern uint32_t eflag_of;
 
 enum { R_EAX, R_ECX, R_EDX, R_EBX, R_ESP, R_EBP, R_ESI, R_EDI };
 enum { R_AX, R_CX, R_DX, R_BX, R_SP, R_BP, R_SI, R_DI };

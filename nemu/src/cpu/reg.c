@@ -8,6 +8,19 @@ const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
 const char *regsw[] = {"ax", "cx", "dx", "bx", "sp", "bp", "si", "di"};
 const char *regsb[] = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};
 
+/*
+标志寄存器
+*/
+uint32_t eflag_cf = 0b00000000000000000000000000000001;
+uint32_t eflag_pf = 0b00000000000000000000000000000100;
+uint32_t eflag_af = 0b00000000000000000000000000010000;
+uint32_t eflag_zf = 0b00000000000000000000000001000000;
+uint32_t eflag_sf = 0b00000000000000000000000010000000;
+uint32_t eflag_tf = 0b00000000000000000000000100000000;
+uint32_t eflag_if = 0b00000000000000000000001000000000;
+uint32_t eflag_df = 0b00000000000000000000010000000000;
+uint32_t eflag_of = 0b00000000000000000000100000000000;
+
 void reg_test() {
   srand(time(0));
   uint32_t sample[8];
