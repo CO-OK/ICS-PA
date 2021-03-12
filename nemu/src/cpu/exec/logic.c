@@ -14,18 +14,57 @@ make_EHelper(and) {
 
 make_EHelper(xor) {
   //TODO();
+  uint32_t result;
   if(decoding.dest.type==OP_TYPE_REG)
   {
-    reg_l(decoding.dest.reg) ^= reg_l(decoding.src2.reg);
+    result = reg_l(decoding.dest.reg) ^= reg_l(decoding.src2.reg);
   }
   else if(decoding.dest.type==OP_TYPE_MEM)
   {
     uint32_t val = paddr_read(decoding.dest.addr,32);
-    val ^= reg_l(decoding.src2.reg);
+    result = val ^= reg_l(decoding.src2.reg);
     paddr_write(decoding.dest.addr,32,val);
   }
-  //设置eflags
-  //cpu.EFLAGS|=
+  /*
+    设置eflags
+    CF = 0, OF = 0; SF, ZF, and PF as described in Appendix C; AF is undefined
+    SF Sign Flag ── Set equal to high-order bit of result (0 is positive, 1 if negative).
+    ZF Zero Flag ── Set if result is zero; cleared otherwise.
+    PF Parity Flag ── Set if low-order eight bits of result contain an even number of 1 bits; cleared otherwise.
+  */
+  cpu.EFLAGS &= ~eflag_cf;
+  cpu.EFLAGS &= ~eflag_of;
+  if((result>>31))
+  {
+    cpu.EFLAGS |= eflag_sf;
+  }
+  else
+  {
+    cpu.EFLAGS &= ~eflag_sf;
+  }
+  if(result==0)
+  {
+    cpu.EFLAGS |= eflag_zf;
+  }
+  else
+  {
+    cpu.EFLAGS &= ~eflag_zf;
+  }
+  result = 0;
+  uint8_t temp = cpu.EFLAGS;
+  while(temp / 2 != 0)
+  {
+    result += temp % 2;
+    temp = temp / 2;
+  }
+  if(temp % 2 == 0)
+  {
+    cpu.EFLAGS |= eflag_pf;
+  }
+  else 
+  {
+    cpu.EFLAGS &= ~eflag_pf;
+  }
   print_asm_template2(xor);
 }
 
