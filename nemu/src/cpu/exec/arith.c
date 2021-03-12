@@ -12,31 +12,18 @@ make_EHelper(sub) {
   printf("src2=%08X\n",decoding.dest.reg);*/
   //目前只支持reg-reg、reg-imm
   rtl_sub(&t2, &id_dest->val, &id_src->val);//t2存结果
-  reg_l(id_dest->reg) = t2;
+  operand_write(id_dest, &t2);
   //The sub instruction is used to perform a substraction. It modifies the 2 following flags: ZF (Zero Flag) and CF (Carry Flag). 
   //OF, SF\, ZF\, AF\, PF\, and CF as described in Appendix C ， nemu不管pf af
-  //rtl_set_OF(&t0);
   rtl_update_ZFSF(&t2, id_dest->width);
+  if(id_dest->val<id_src->val)
+    cpu.EFLAGS |= eflag_cf;
+  else 
+    cpu.EFLAGS &= ~eflag_cf;
   printf("%08X\n",t0);
-  
+  //rtl_setrelop(RELOP_LTU, &t3, &id_dest->val, &t2);
   print_asm_template2(sub);
-  /*
-  rtl_sub(&t2, &id_dest->val, &id_src->val);
-  rtl_setrelop(RELOP_LTU, &t3, &id_dest->val, &t2);
-  operand_write(id_dest, &t2);
-  rtl_update_ZFSF(&t2, id_dest->width);
- 
-  rtl_setrelop(RELOP_LTU, &t0, &id_dest->val, &t2);
-  rtl_or(&t0, &t3, &t0);
-  rtl_set_CF(&t0);
- 
-  rtl_xor(&t0, &id_dest->val, &id_src->val);
-  rtl_xor(&t1, &id_dest->val, &t2);
-  rtl_and(&t0, &t0, &t1);
-  rtl_msb(&t0, &t0, id_dest->width);
-  rtl_set_OF(&t0);
 
-  */
 }
 
 make_EHelper(cmp) {
