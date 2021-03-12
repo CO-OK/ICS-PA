@@ -17,6 +17,7 @@ make_EHelper(sub) {
   {
     case OP_TYPE_REG:{
       rtl_sub(&t2, &id_dest->val, &id_src->val);
+      printf("%08X\n",t2);
       break;
     }
     case OP_TYPE_IMM:{
