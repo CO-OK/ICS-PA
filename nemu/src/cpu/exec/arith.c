@@ -11,20 +11,9 @@ make_EHelper(sub) {
   /*printf("src1=%d\n",decoding.src.val);
   printf("src2=%08X\n",decoding.dest.reg);*/
   //目前只支持reg-reg、reg-imm
-  int c_flag=0;
-  uint32_t result;
-  switch(decoding.src.type)
-  {
-    case OP_TYPE_REG:{
-      rtl_sub(&t2, &id_dest->val, &id_src->val);
-      printf("%08X\n",t2);
-      break;
-    }
-    case OP_TYPE_IMM:{
-      rtl_sub(&t2, &id_dest->val, &id_src->val);
-      printf("%08X\n",t2);
-    }
-  }
+  rtl_sub(&t2, &id_dest->val, &id_src->val);
+  reg_l(id_dest->reg) = t2;
+  
   //The sub instruction is used to perform a substraction. It modifies the 2 following flags: ZF (Zero Flag) and CF (Carry Flag). 
   //OF, SF\, ZF\, AF, PF\, and CF as described in Appendix C
   /*if(reg_l(decoding.dest.reg)==0)
