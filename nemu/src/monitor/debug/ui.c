@@ -107,6 +107,8 @@ static int cmd_info(char * args){
     printf("eax:%08X  ebx:%08X  ecx:%08X  edx:%08X\n",cpu.eax,cpu.ebx,cpu.ecx,cpu.edx);
     printf("esp:%08X  ebp:%08X  esi:%08X  edi:%08X\n",cpu.esp,cpu.ebp,cpu.esi,cpu.edi);
     printf("eip:%08X\n",cpu.eip);
+    printf("eflags:%08X\t\t",cpu.EFLAGS_);
+    printf("CF:%d\tZF:%d\tSF:%d\tIF:%d\tOF:%d\n",e_CF,e_ZF,e_SF,e_IF,e_OF);
     return 0;
   }
   while(arg!=NULL)
@@ -168,7 +170,7 @@ static int cmd_info(char * args){
     }
     if(strcmp(arg,"eflags")==0)
     {
-      printf("eflags:%08X\t",cpu.EFLAGS_);
+      printf("eflags:%08X\t\t",cpu.EFLAGS_);
       printf("CF:%d\tZF:%d\tSF:%d\tIF:%d\tOF:%d\n",e_CF,e_ZF,e_SF,e_IF,e_OF);
       //printf("CF:%d\tZF:%d")
       arg=strtok(NULL," ");
