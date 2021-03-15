@@ -18,6 +18,15 @@ extern rtlreg_t eflag_IF;
 extern rtlreg_t eflag_DF;
 extern rtlreg_t eflag_OF;
 
+/*
+方便查看
+*/
+extern bool e_CF;
+extern bool e_ZF;
+extern bool e_SF;
+extern bool e_IF;
+extern bool e_OF;
+
 enum { R_EAX, R_ECX, R_EDX, R_EBX, R_ESP, R_EBP, R_ESI, R_EDI };
 enum { R_AX, R_CX, R_DX, R_BX, R_SP, R_BP, R_SI, R_DI };
 enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };
@@ -29,17 +38,6 @@ enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };
  * For more details about the register encoding scheme, see i386 manual.
  */
 
-/*
-  EFLAGS
-*/
-
-struct EFLAGS{
-  bool CF;
-  bool ZF;
-  bool SF;
-  bool IF;
-  bool OF;
-};
 
 typedef struct {
   /* Do NOT change the order of the GPRs' definitions. */
