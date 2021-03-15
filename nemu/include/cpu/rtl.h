@@ -182,14 +182,14 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
   rtlreg_t temp;
   rtl_shli(&temp,result,32 - width * 8);
-  /*if(temp==0)
+  if(temp==0)
   {
-    cpu.EFLAGS |= eflag_zf;
+    cpu.EFLAGS_ |= eflag_ZF;
   }
   else
   {
-    cpu.EFLAGS &= ~eflag_sf;
-  }*/
+    cpu.EFLAGS_ &= ~eflag_ZF;
+  }
   //TODO();
 }
 
@@ -198,14 +198,14 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   //TODO();
   rtlreg_t temp;
   rtl_msb(&temp,result,32 -width * 8);
-  /*if(temp)
+  if(temp)
   {
-    cpu.EFLAGS |= eflag_sf;
+    cpu.EFLAGS_ |= eflag_SF;
   }
   else 
   {
-    cpu.EFLAGS &= eflag_sf;
-  }*/
+    cpu.EFLAGS_ &= eflag_SF;
+  }
 }
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {
