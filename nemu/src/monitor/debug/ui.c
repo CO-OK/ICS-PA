@@ -168,7 +168,8 @@ static int cmd_info(char * args){
     }
     if(strcmp(arg,"eflags")==0)
     {
-      printf("eflags:%08X",cpu.EFLAGS_);
+      printf("eflags:%08X\t",cpu.EFLAGS_);
+      printf("CF:%d\tZF:%d\tSF:%d\tIF:%d\tOF:%d\n",e_CF,e_ZF,e_SF,e_IF,e_OF);
       //printf("CF:%d\tZF:%d")
       arg=strtok(NULL," ");
       continue;
