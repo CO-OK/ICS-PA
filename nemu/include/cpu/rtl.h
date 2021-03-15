@@ -168,8 +168,8 @@ static inline void rtl_pop(rtlreg_t* dest) {
   // esp <- esp + 4
   //TODO();
   //operand_write(&id_dest->reg,)
-  rtlreg_t temp = paddr_read(cpu.esp,32);
-  operand_write(dest,&temp);
+  *dest = paddr_read(cpu.esp,32);
+  //operand_write(dest,&temp);
   cpu.esp += 4;
 }
 
