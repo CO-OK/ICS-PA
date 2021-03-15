@@ -29,6 +29,18 @@ enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };
  * For more details about the register encoding scheme, see i386 manual.
  */
 
+/*
+  EFLAGS
+*/
+
+struct EFLAGS{
+  bool CF;
+  bool ZF;
+  bool SF;
+  bool IF;
+  bool OF;
+};
+
 typedef struct {
   /* Do NOT change the order of the GPRs' definitions. */
   /* In NEMU, rtlreg_t is exactly uint32_t. This makes RTL instructions
@@ -41,11 +53,11 @@ typedef struct {
       uint8_t _8[2];
     } gpr[8];
     struct{
-      rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi, EFLAGS;
+      rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
     };
   };
   vaddr_t eip;
-
+  struct EFLAGS eflag;
 } CPU_state;
 
 extern CPU_state cpu;

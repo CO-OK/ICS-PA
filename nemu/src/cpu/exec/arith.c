@@ -17,12 +17,6 @@ make_EHelper(sub) {
   //OF, SF\, ZF\, AF\, PF\, and CF as described in Appendix C ， nemu不管pf af
   rtl_update_ZFSF(&t2, id_dest->width);
   rtl_sltu(&t3, &id_dest->val, &t2);//t3=1 ---> val<t2 other wise val>=t2  which mean cf=1
-  if(t3)
-  {
-    cpu.EFLAGS &= ~eflag_cf;
-  }
-  else
-    cpu.EFLAGS |= eflag_cf;
   //rtl_setrelop(RELOP_LTU, &t3, &id_dest->val, &t2);
   print_asm_template2(sub);
 
