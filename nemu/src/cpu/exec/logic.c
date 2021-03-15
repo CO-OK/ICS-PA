@@ -32,7 +32,7 @@ make_EHelper(xor) {
     ZF Zero Flag ── Set if result is zero; cleared otherwise.
     PF Parity Flag ── Set if low-order eight bits of result contain an even number of 1 bits; cleared otherwise.
   */
-  TODO();
+  //TODO();
   print_asm_template2(xor);
 }
 
