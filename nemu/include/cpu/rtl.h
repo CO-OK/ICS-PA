@@ -187,7 +187,7 @@ static inline void rtl_neq0(rtlreg_t* dest, const rtlreg_t* src1) {
 static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
   //msb Most Significant Bit
-  rtl_shri(dest, src1, width*8 - 1);
+  rtl_shri(dest, src1, width * 8 - 1);
   //TODO();
 }
 
@@ -209,9 +209,9 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
   //TODO();
-  rtlreg_t temp;
-  rtl_msb(&temp,result,32 - width * 8);
-  if(temp)
+  
+  rtl_msb(&t0,result,width * 8 - 1);
+  if(t0)
   {
     rtl_set_SF(&eflag_SF);
   }

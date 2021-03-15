@@ -21,8 +21,8 @@ make_EHelper(xor_31) {
   }
   else if(id_dest->type==OP_TYPE_MEM)
   {
-    t0 = paddr_read(id_dest->addr,id_dest->width);
-    rtl_xor(&t1,&t0,&id_src->val);
+    t1 = paddr_read(id_dest->addr,id_dest->width);
+    rtl_xor(&t0,&t1,&id_src->val);
     operand_write(id_dest,&t0);
   }
   /*
@@ -32,7 +32,13 @@ make_EHelper(xor_31) {
     ZF Zero Flag ── Set if result is zero; cleared otherwise.
     PF Parity Flag ── Set if low-order eight bits of result contain an even number of 1 bits; cleared otherwise.
   */
-  //TODO();
+  //ZF SF
+  rtl_update_ZFSF(&t0,id_dest->width);
+  //PF 不管
+  //CF
+  rtl_unset_CF(&eflag_CF);
+  //OF
+  rtl_unset_OF(&eflag_OF);
   print_asm_template2(xor);
 }
 
