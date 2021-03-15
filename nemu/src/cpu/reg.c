@@ -21,6 +21,12 @@ rtlreg_t eflag_IF = 0b00000000000000000000001000000000;
 rtlreg_t eflag_DF = 0b00000000000000000000010000000000;
 rtlreg_t eflag_OF = 0b00000000000000000000100000000000;
 
+bool e_CF = false;
+bool e_ZF = false;
+bool e_SF = false;
+bool e_IF = false;
+bool e_OF = false;
+
 void reg_test() {
   srand(time(0));
   uint32_t sample[8];
