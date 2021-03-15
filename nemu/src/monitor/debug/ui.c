@@ -166,6 +166,13 @@ static int cmd_info(char * args){
       arg=strtok(NULL," ");
       continue;
     }
+    if(strcmp(arg,"eflags")==0)
+    {
+      printf("eflags:%08X",cpu.EFLAGS_);
+      //printf("CF:%d\tZF:%d")
+      arg=strtok(NULL," ");
+      continue;
+    }
     printf("unknow arg:%s\n",arg);
     arg=strtok(NULL," ");
   }
