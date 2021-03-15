@@ -123,10 +123,10 @@ static inline void rtl_sr(int r, int width, const rtlreg_t* src1) {
     \
   }
 
-make_rtl_setget_eflags(cf)
-make_rtl_setget_eflags(of)
-make_rtl_setget_eflags(zf)
-make_rtl_setget_eflags(sf)
+make_rtl_setget_eflags(CF)
+make_rtl_setget_eflags(OF)
+make_rtl_setget_eflags(ZF)
+make_rtl_setget_eflags(SF)
 
 static inline void rtl_mv(rtlreg_t* dest, const rtlreg_t *src1) {
   // dest <- src1
