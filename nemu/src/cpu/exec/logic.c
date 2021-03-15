@@ -12,18 +12,18 @@ make_EHelper(and) {
   print_asm_template2(and);
 }
 
-make_EHelper(xor) {
+make_EHelper(xor_31) {
   //TODO();
-  uint32_t result;
-  if(decoding.dest.type==OP_TYPE_REG)
+  if(id_dest->type==OP_TYPE_REG)
   {
-    result = reg_l(decoding.dest.reg) ^= reg_l(decoding.src2.reg);
+    rtl_xor(&t0,&id_dest->val,&id_src->val);
+    operand_write(id_dest,&t0);
   }
-  else if(decoding.dest.type==OP_TYPE_MEM)
+  else if(id_dest->type==OP_TYPE_MEM)
   {
-    uint32_t val = paddr_read(decoding.dest.addr,32);
-    result = val ^= reg_l(decoding.src2.reg);
-    paddr_write(decoding.dest.addr,32,val);
+    t0 = paddr_read(id_dest->addr,id_dest->width);
+    rtl_xor(&t1,&t0,&id_src->val);
+    operand_write(id_dest,&t0);
   }
   /*
     设置eflags
