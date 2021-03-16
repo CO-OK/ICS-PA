@@ -10,11 +10,12 @@ make_EHelper(sub) {
   //TODO();
   //目前只支持reg-reg、reg-imm
   rtl_sub(&t2, &id_dest->val, &id_src->val);//t2存结果
+  rtl_sltu(&t3, &id_dest->val, &t2);//t3=1 ---> val<t2 other wise val>=t2  which mean cf=1
   operand_write(id_dest, &t2);//结果写入相应寄存器
   //The sub instruction is used to perform a substraction. It modifies the 2 following flags: ZF (Zero Flag) and CF (Carry Flag). 
   //OF, SF\, ZF\, AF\, PF\, and CF as described in Appendix C ， nemu不管pf af
   rtl_update_ZFSF(&t2, id_dest->width);
-  rtl_sltu(&t3, &id_dest->val, &t2);//t3=1 ---> val<t2 other wise val>=t2  which mean cf=1
+  
   if(t3)//cf==0
     rtl_unset_CF(&eflag_CF);
   else
