@@ -26,6 +26,7 @@ make_EHelper(and) {
     printf("temp=%08X\n",temp);
     printf("result=%08X\n",temp&id_dest->val);
     id_dest->width=id_src->width;
+    printf("num=%d\n",id_dest->reg);
     operand_write(id_dest,&t0);
   }
   else if(id_dest->type==OP_TYPE_MEM)
