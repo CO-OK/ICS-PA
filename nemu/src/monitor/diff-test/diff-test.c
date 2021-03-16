@@ -88,7 +88,7 @@ void init_difftest(void) {
     }
 
     close(STDIN_FILENO);
-    execlp("qemu-system-i386", "qemu-system-i386", "-S", "-s", "-nographic", NULL);
+    execlp("qemu-system-i386", "qemu-system-i386", "-S", "-s", /*"-nographic",*/ NULL);
     //qemu-i386
     //execlp("qemu-system-x86_64", "qemu-system-x86_64", "-S", "-s", "-nographic", NULL);
     perror("exec");
