@@ -63,7 +63,7 @@ void load_addr(vaddr_t *, ModR_M *, Operand *);
 void read_ModR_M(vaddr_t *, Operand *, bool, Operand *, bool);
 
 void operand_write(Operand *, rtlreg_t *);
-
+void operand_write_with_width(Operand *op, rtlreg_t* src,int width);
 /* shared by all helper functions */
 extern DecodeInfo decoding;
 
