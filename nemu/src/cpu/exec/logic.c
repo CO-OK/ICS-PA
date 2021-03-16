@@ -9,7 +9,8 @@ make_EHelper(test) {
 make_EHelper(and) {
   //TODO();
   /*
-    注:应该是与源操作数的宽度相同
+    注:应该是与源操作数的宽度相同,在执行  and    $0xfffffff0,%esp时
+    解码后目的操作数是4位，原操作数是2位，应该需要扩展
   */
   if(id_dest->type==OP_TYPE_REG)
   {
