@@ -25,7 +25,8 @@ make_EHelper(and) {
     char temp = id_src->val;
     printf("temp=%08X\n",temp);
     printf("result=%08X\n",temp&id_dest->val);
-    operand_write_with_width(id_dest,&t0,id_src->width);
+    id_dest->width=id_src->width;
+    operand_write(id_dest,&t0);
   }
   else if(id_dest->type==OP_TYPE_MEM)
   {
