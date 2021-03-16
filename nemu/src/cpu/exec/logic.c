@@ -16,7 +16,8 @@ make_EHelper(and) {
     printf("val1=%08X\nval2=%08X\n",id_dest->val,id_src->imm);
     rtl_and(&t0,&id_dest->val,&id_src->val);
     printf("with=%d\n",id_src->width);
-    operand_write_with_width(id_dest,&t0,id_src->width);
+    id_dest->width=id_src->width;
+    operand_write_(id_dest,&t0);
   }
   else if(id_dest->type==OP_TYPE_MEM)
   {
