@@ -159,7 +159,7 @@ void difftest_step(uint32_t eip) {
   else if(r.ebx != cpu.ebx)
   {
     diff = true;
-    printf("detect diff at ebx,\tr.eflags=%08X\tcpu.ebx=%08X\n",r.ebx,cpu.ebx);
+    printf("detect diff at ebx,\tr.ebx=%08X\tcpu.ebx=%08X\n",r.ebx,cpu.ebx);
   }
   else if(r.ecx != cpu.ecx)
   {
