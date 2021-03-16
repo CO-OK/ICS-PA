@@ -30,12 +30,6 @@ make_EHelper(and) {
     rtl_and(&t0,&id_dest->val,&id_src->val);
     operand_write(id_dest,&t0);
   }
-  else if(id_dest->type==OP_TYPE_MEM)
-  {
-    t1 = paddr_read(id_dest->addr,id_dest->width);
-    rtl_and(&t0,&t1,&id_src->val);
-    operand_write(id_dest,&t0);
-  }
   /*
     update eflags
     AND, OR, and XOR clear OF and CF, leave AF undefined, and update SF, ZF,
