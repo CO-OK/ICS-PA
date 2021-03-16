@@ -45,7 +45,6 @@ make_EHelper(and) {
     rtl_and(&t0,&t1,&id_src->val);
     operand_write(id_dest,&t0);
   }
-  printf("t0=%08X\n",t0);
   /*
     update eflags
     AND, OR, and XOR clear OF and CF, leave AF undefined, and update SF, ZF,
