@@ -17,10 +17,12 @@ make_EHelper(sub) {
   rtl_update_ZFSF(&t2, id_dest->width);
   
   if(t3)//cf==0
+  {
     rtl_set_CF(&eflag_CF);
+  } 
     //rtl_unset_CF(&eflag_CF);
   else
-    rtl_set_CF(&eflag_CF);
+    rtl_unset_CF(&eflag_CF);
   /*
     OF:
     减法的OF位的设置方法为：若两个数的符号相反，而结果的符号与减数的符号相同，则OF=1，除上述情况外OF=0。OF=1说明带符号数的减法运算结果是错误的。
