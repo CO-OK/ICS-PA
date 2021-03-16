@@ -73,8 +73,9 @@ make_EHelper(movzx) {
 }
 
 make_EHelper(lea) {
-  printf("%08X",id_src->addr);
+  
   rtl_li(&t2, id_src->addr);
+  printf("%08X",t2);
   operand_write(id_dest, &t2);
   print_asm_template2(lea);
 }
