@@ -31,6 +31,7 @@ void diff_test_skip_nemu() { is_skip_nemu = true; }
     regs.esi = cpu.esi; \
     regs.edi = cpu.edi; \
     regs.eip = cpu.eip; \
+    regs.eflags = cpu.EFLAGS_;\
   } while (0)
 
 static uint8_t mbr[] = {
@@ -148,8 +149,53 @@ void difftest_step(uint32_t eip) {
   gdb_getregs(&r);
 
   // TODO: Check the registers state with QEMU.
+  if(r.eax != cpu.eax)
+  {
+    diff = true;
+    printf("detect diff at eax,\tr.eax=%08X\tcpu.eax=%08X\n",r.eax,cpu.eax);
+  }
+  else if(r.ebx != cpu.ebx)
+  {
+    diff = true;
+    printf("detect diff at ebx,\tr.eflags=%08X\tcpu.ebx=%08X\n",r.ebx,cpu.ebx);
+  }
+  else if(r.ecx != cpu.ecx)
+  {
+    diff = true;
+    printf("detect diff at ecx,\tr.ecx=%08X\tcpu.ecx=%08X\n",r.ecx,cpu.ecx);
+  }
+  else if(r.edx != cpu.edx)
+  {
+    diff = true;
+    printf("detect diff at edx,\tr.edx=%08X\tcpu.edx=%08X\n",r.edx,cpu.edx);
+  }
+  else if(r.esp != cpu.esp)
+  {
+    diff = true;
+    printf("detect diff at esp,\tr.esp=%08X\tcpu.esp=%08X\n",r.esp,cpu.esp);
+  }
+  else if(r.ebp != cpu.ebp)
+  {
+    diff = true;
+    printf("detect diff at ebp,\tr.ebp=%08X\tcpu.ebp=%08X\n",r.ebp,cpu.ebp);
+  }
+  else if(r.esi != cpu.esi)
+  {
+    diff = true;
+    printf("detect diff at esi,\tr.esi=%08X\tcpu.esi=%08X\n",r.esi,cpu.esi);
+  }
+  else if(r.edi != cpu.edi)
+  {
+    diff = true;
+    printf("detect diff at edi,\tr.edi=%08X\tcpu.edi=%08X\n",r.edi,cpu.edi);
+  }
+  else if(r.eflags != cpu.EFLAGS_)
+  {
+    diff = true;
+    printf("detect diff at eflags,\tr.eflags=%08X\tcpu.eflags=%08X\n",r.eflags,cpu.EFLAGS_);
+  }
   // Set `diff` as `true` if they are not the same.
-  TODO();
+  //TODO();
 
   if (diff) {
     nemu_state = NEMU_END;
