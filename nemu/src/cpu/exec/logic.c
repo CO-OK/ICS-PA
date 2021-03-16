@@ -10,6 +10,7 @@ make_EHelper(and) {
   //TODO();
   if(id_dest->type==OP_TYPE_REG)
   {
+    printf("1\n");
     rtl_and(&t0,&id_dest->val,&id_src->val);
     operand_write(id_dest,&t0);
   }
