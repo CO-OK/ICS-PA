@@ -1,5 +1,9 @@
 #include "cpu/exec.h"
 
+void cal_and()
+{
+
+}
 make_EHelper(test) {
   TODO();
 
@@ -9,18 +13,19 @@ make_EHelper(test) {
 make_EHelper(and) {
   //TODO();
   /*
-    注:应该是与源操作数的宽度相同,在执行  and    $0xfffffff0,%esp时
+    注:应该是与源操作数的宽度相同,在执行  and    $0xfffffff0,%esp（这个指令应该是不合理的）时
     解码后目的操作数是4位，原操作数是2位，应该需要扩展
   */
   if(id_dest->type==OP_TYPE_REG)
   {
+    
     printf("val1=%08X\nval2=%08X\n",id_dest->val,id_src->simm);
     rtl_and(&t0,&id_dest->val,&id_src->val);
     printf("with=%d\n",id_src->width);
     char temp = id_src->val;
     printf("temp=%08X\n",temp);
     printf("result=%08X\n",temp&id_dest->val);
-    operand_write(id_dest,&t0);
+    operand_write_with_width(id_dest,&t0,id_src->width);
   }
   else if(id_dest->type==OP_TYPE_MEM)
   {
