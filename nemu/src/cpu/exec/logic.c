@@ -13,16 +13,16 @@ make_EHelper(and) {
   */
   if(id_dest->type==OP_TYPE_REG)
   {
-    
+    printf("val1=%08X\nval2=%08X\n",id_dest->val,id_src->imm);
     rtl_and(&t0,&id_dest->val,&id_src->val);
-    
+    printf("with=%d\n",id_src->width);
     operand_write_with_width(id_dest,&t0,id_src->width);
   }
   else if(id_dest->type==OP_TYPE_MEM)
   {
     t1 = paddr_read(id_dest->addr,id_dest->width);
     rtl_and(&t0,&t1,&id_src->val);
-    operand_write_with_width(id_dest,&t0,id_src->width);
+    operand_write(id_dest,&t0);
   }
   printf("t0=%08X\n",t0);
   /*
