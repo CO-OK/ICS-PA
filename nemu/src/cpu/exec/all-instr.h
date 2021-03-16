@@ -12,3 +12,4 @@ make_EHelper(pop_reg);
 make_EHelper(sub);
 make_EHelper(xor_31);
 make_EHelper(ret);
+make_EHelper(lea);
