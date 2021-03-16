@@ -7,8 +7,27 @@ make_EHelper(test) {
 }
 
 make_EHelper(and) {
-  TODO();
-
+  //TODO();
+  if(id_dest->type==OP_TYPE_REG)
+  {
+    rtl_and(&t0,&id_dest->val,&id_src->val);
+    operand_write(id_dest,&t0);
+  }
+  else if(id_dest->type==OP_TYPE_MEM)
+  {
+    t1 = paddr_read(id_dest->addr,id_dest->width);
+    rtl_and(&t0,&t1,&id_src->val);
+    operand_write(id_dest,&t0);
+  }
+  /*
+    update eflags
+    AND, OR, and XOR clear OF and CF, leave AF undefined, and update SF, ZF,
+    and PF.
+  */
+  rtl_unset_OF(&eflag_OF);
+  rtl_unset_CF(&eflag_CF);
+  rtl_update_ZFSF(&t0,id_dest->width);
+  
   print_asm_template2(and);
 }
 
