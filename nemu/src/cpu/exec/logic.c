@@ -29,15 +29,6 @@ make_EHelper(and) {
     }
     rtl_and(&t0,&id_dest->val,&id_src->val);
     operand_write(id_dest,&t0);
-    /*printf("val1=%08X\nval2=%08X\n",id_dest->val,id_src->simm);
-    //rtl_and(&t0,&id_dest->val,&id_src->val);
-    printf("src_with=%d\n,dest_width=%d\n",id_src->width,id_dest->width);
-    char temp = id_src->val;
-    printf("temp=%08X\n",temp);
-    printf("result=%08X\n",temp&id_dest->val);
-    printf("num=%d\n",id_dest->reg);
-    printf("numnum=%08X\n",reg_b(id_dest->reg));
-    //operand_write(id_dest,&t0);*/
   }
   else if(id_dest->type==OP_TYPE_MEM)
   {
