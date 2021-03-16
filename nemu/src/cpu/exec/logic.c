@@ -13,7 +13,7 @@ make_EHelper(and) {
   */
   if(id_dest->type==OP_TYPE_REG)
   {
-    printf("val1=%08X\nval2=%08X\n",id_dest->val,id_src->imm);
+    printf("val1=%08X\nval2=%08X\n",id_dest->val,id_src->simm);
     rtl_and(&t0,&id_dest->val,&id_src->val);
     printf("with=%d\n",id_src->width);
     
