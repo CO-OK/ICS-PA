@@ -19,6 +19,7 @@ make_EHelper(and) {
     rtl_and(&t0,&t1,&id_src->val);
     operand_write(id_dest,&t0);
   }
+  printf("t0=%d\n",t0);
   /*
     update eflags
     AND, OR, and XOR clear OF and CF, leave AF undefined, and update SF, ZF,
@@ -27,7 +28,7 @@ make_EHelper(and) {
   rtl_unset_OF(&eflag_OF);
   rtl_unset_CF(&eflag_CF);
   rtl_update_ZFSF(&t0,id_dest->width);
-  
+
   print_asm_template2(and);
 }
 
