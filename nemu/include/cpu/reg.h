@@ -4,9 +4,9 @@
 #include "common.h"
 #define reg_num 9
 #define reg_len 4
-#define INT32_MAX 0xffffffffU
-#define INT16_MAX 0xffffU
-#define INT8_MAX 0xffU
+#define MY_INT32_MAX 0xffffffffU
+#define MY_INT16_MAX 0xffffU
+#define MY_INT8_MAX 0xffU
 /*
 标志寄存器
 */
