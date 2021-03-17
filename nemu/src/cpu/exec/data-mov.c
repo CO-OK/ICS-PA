@@ -12,7 +12,7 @@ make_EHelper(push_reg) {
 }
 
 make_EHelper(push_Ev) {
-  //printf("val=%08X\n")
+  printf("val=%08X\n",id_dest->val);
 }
 
 make_EHelper(pop_reg) {
@@ -79,7 +79,7 @@ make_EHelper(movzx) {
 make_EHelper(lea) {
   
   rtl_li(&t2, id_src->addr);
-  printf("width=%d\n",id_dest->width);
+  //printf("width=%d\n",id_dest->width);
   operand_write(id_dest, &t2);
   print_asm_template2(lea);
 }
