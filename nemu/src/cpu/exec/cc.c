@@ -2,7 +2,7 @@
 
 /* Condition Code */
 
-void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
+void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
   bool invert = subcode & 0x1;
   enum {
     CC_O, CC_NO, CC_B,  CC_NB,
@@ -16,7 +16,18 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
   switch (subcode & 0xe) {
     case CC_O:
     case CC_B:
-    case CC_E:
+    case CC_E:{
+      rtl_get_ZF(&t0);
+      if(t0)//等于0说明ZF=0
+      {
+        *dest = (char)0;
+      }
+      else
+      {
+        *dest = (char)1;
+      }
+      break;
+    }
     case CC_BE:
     case CC_S:
     case CC_L:
