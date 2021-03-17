@@ -8,3 +8,6 @@ make_EHelper(operand_size) {
   exec_real(eip);
   decoding.is_operand_size_16 = false;
 }
+make_Ehelper(xchg_b) {
+  
+}
