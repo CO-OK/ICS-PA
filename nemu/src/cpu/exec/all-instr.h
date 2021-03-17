@@ -14,5 +14,5 @@ make_EHelper(xor_31);
 make_EHelper(ret);
 make_EHelper(lea);
 make_EHelper(and);
-make_EHelper(xchg_b);
+//make_EHelper(xchg_b);
 //make_EHelper(push_Ev);
