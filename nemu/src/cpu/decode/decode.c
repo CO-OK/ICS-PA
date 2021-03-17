@@ -316,3 +316,19 @@ void operand_write_with_width(Operand *op, rtlreg_t* src,int width)
   else if (op->type == OP_TYPE_MEM) { rtl_sm(&op->addr, width, src); }
   else { assert(0); }
 }
+
+void get_mr_value(rtlreg_t* dest,Operand* op)
+{
+  if(op->type==OP_TYPE_REG)
+  {
+    *dest = reg_l(op->reg);
+  }
+  else if(op->type==OP_TYPE_MEM)
+  {
+    *dest = vaddr_read(op->addr,32);
+  }
+  else if(op->type==OP_TYPE_IMM)
+  {
+    *dest = op->imm;
+  }
+}

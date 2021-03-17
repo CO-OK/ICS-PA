@@ -5,8 +5,9 @@ make_EHelper(add) {
   //TODO();
   printf("dest_type=%d\nsrc_type=%d\n",id_dest->type,id_src->type);
   printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->addr);
+  
   /*
-    OF, SF, ZF, AF, CF, and PF as described in Appendix C
+    OF, SF, ZF, AF\, CF, and PF\ as described in Appendix C
   */
 
   print_asm_template2(add);
