@@ -5,15 +5,16 @@ make_EHelper(add) {
   //TODO();
   printf("dest_type=%d\nsrc_type=%d\n",id_dest->type,id_src->type);
   
-  
+  get_mr_value(&t0,id_dest);
+  get_mr_value(&t1,id_src);
+  rtl_add(&t2,&t1,&t0);
+  printf("t3=%08X\n",t3);
+  operand_write(id_dest,&t2);
   /*
     OF, SF, ZF, AF\, CF, and PF\ as described in Appendix C
   */
-  get_mr_value(&t0,id_dest);
-  get_mr_value(&t1,id_src);
-  rtl_add(&t3,&t1,&t0);
-  printf("t3=%08X\n",t3);
-  operand_write(id_dest,&t3);
+  //rtl_update_ZFSF(&t2);
+  
   
   print_asm_template2(add);
 }
