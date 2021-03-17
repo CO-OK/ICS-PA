@@ -6,11 +6,17 @@ make_EHelper(mov) {
 }
 
 make_EHelper(push_reg) {
-  
+  printf("reg=%08X,val=%08X,addr=%08X,imm=%08X,type=%d\n",id_dest->reg,id_dest->val,id_dest->addr,id_dest->imm,id_dest->type);
   rtl_push(&id_dest->val);
   print_asm_template1(push);
 }
 
+/*make_EHelper(push_Ev) {
+  rtl_li(&t2, id_dest->imm);
+  //printf("reg=%08X,val=%08X,addr=%08X,imm=%08X,type=%d\n",id_dest->reg,id_dest->val,id_dest->addr,id_dest->imm,id_dest->type);
+  t2 = paddr_read(id_dest->addr,32);
+  rtl_push(&t2);
+}*/
 
 make_EHelper(pop_reg) {
   //TODO();
