@@ -84,6 +84,36 @@ make_EHelper(sub) {
 
 make_EHelper(cmp) {
   //TODO();
+  /*
+    CMP (Compare) subtracts the source operand from the destination operand. It
+    updates OF, SF, ZF, AF, PF, and CF but does not alter the source and
+    destination operands. A subsequent Jcc or SETcc instruction can test the
+    appropriate flags.
+    The CF, OF, SF, ZF, AF, and PF flags are set according to the result
+  */
+  rtl_sub(&t2, &id_dest->val, &id_src->val);//t2存结果
+  rtl_sltu(&t3, &id_dest->val, &id_src->val);//t3=1 ---> val<t2 other wise val>=t2  which mean cf=1
+  rtl_update_ZFSF(&t2, id_dest->width);
+  if(t3)//cf==0
+  {
+    rtl_set_CF(&eflag_CF);
+  } 
+    //rtl_unset_CF(&eflag_CF);
+  else
+    rtl_unset_CF(&eflag_CF);
+  /*
+    OF:
+    减法的OF位的设置方法为：若两个数的符号相反，而结果的符号与减数的符号相同，则OF=1，除上述情况外OF=0。OF=1说明带符号数的减法运算结果是错误的。
+  */
+  rtl_shli(&t0,&id_dest->val,id_dest->width * 8 - 1);
+  rtl_shli(&t1,&id_src->val,id_src->width * 8 -1);
+  rtl_shli(&t3,&t2,id_src->width * 8 -1);
+  if((t0 ^ t1)&&(!(t3 ^ t1)))//两个数的符号相反，而结果的符号与减数的符号相同
+  {
+    rtl_set_OF(&eflag_OF);
+  }
+  else
+    rtl_unset_OF(&eflag_OF);
 
   print_asm_template2(cmp);
 }
