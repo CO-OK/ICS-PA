@@ -12,10 +12,8 @@ make_EHelper(push_reg) {
 
 
 make_EHelper(pop_reg) {
-  //TODO();
   rtl_pop(&t0);
   operand_write(id_dest,&t0);
-  //operand_write(id->dest)
   print_asm_template1(pop);
 }
 
