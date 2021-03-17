@@ -9,7 +9,3 @@ make_EHelper(operand_size) {
   decoding.is_operand_size_16 = false;
 }
 
-make_EHelper(xchg_b)
-{
-  
-}
