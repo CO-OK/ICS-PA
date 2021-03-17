@@ -24,6 +24,25 @@ make_EHelper(add) {
     rtl_set_OF(&eflag_OF);
   else
     rtl_unset_OF(&eflag_OF);
+  if(id_dest->width==1)
+  {
+    op1=INT8_MAX-t1;
+  }
+  else if(id_dest->width==2)
+  {
+    op1=INT16_MAX-t1;
+  }
+  else if(id_dest->width==4)
+  {
+    op1=INT32_MAX-t1;
+  }
+  op2=t0;
+  rtl_sltu(&res,&op1,&op2);
+  if(res)
+    rtl_set_CF(&eflag_CF);
+  else
+    rtl_unset_CF(&eflag_CF);
+  //rtl_sltu()
   print_asm_template2(add);
 }
 
