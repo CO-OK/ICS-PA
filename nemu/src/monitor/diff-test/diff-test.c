@@ -212,22 +212,22 @@ void difftest_step(uint32_t eip) {
     else if(ZF != e_ZF)
     {
       diff = true;
-      printf("detect diff at eflags_ZF,\tr.ZF=%d\tcpu.ZF=%d\n",CF,e_CF);
+      printf("detect diff at eflags_ZF,\tr.ZF=%d\tcpu.ZF=%d\n",ZF,e_ZF);
     }
     else if(SF != e_SF)
     {
       diff = true;
-      printf("detect diff at eflags_SF,\tr.SF=%d\tcpu.SF=%d\n",CF,e_CF);
+      printf("detect diff at eflags_SF,\tr.SF=%d\tcpu.SF=%d\n",SF,e_SF);
     }
     else if(IF != e_IF)
     {
       diff = true;
-      printf("detect diff at eflags_IF,\tr.IF=%d\tcpu.IF=%d\n",CF,e_CF);
+      printf("detect diff at eflags_IF,\tr.IF=%d\tcpu.IF=%d\n",IF,e_IF);
     }
     else if(OF != e_OF)
     {
       diff = true;
-      printf("detect diff at eflags_OF,\tr.OF=%d\tcpu.OF=%d\n",CF,e_CF);
+      printf("detect diff at eflags_OF,\tr.OF=%d\tcpu.OF=%d\n",OF,e_OF);
     }
     
   }
