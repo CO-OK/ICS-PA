@@ -13,7 +13,7 @@ make_EHelper(push_reg) {
 
 make_EHelper(push_Ev) {
   rtl_li(&t2, id_dest->imm);
-  printf("val=%08X,t2=%08X\n",id_dest->val,t2);
+  printf("reg=%08X,val=%08X,addr=%08X,imm=%08X\n",id_dest->reg,id_dest->val,id_dest->addr,id_dest->imm);
   rtl_push(&t2);
 }
 
