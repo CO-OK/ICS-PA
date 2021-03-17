@@ -9,7 +9,8 @@ make_EHelper(add) {
   /*
     OF, SF, ZF, AF\, CF, and PF\ as described in Appendix C
   */
-
+  get_mr_value(&t0,id_dest);
+  get_mr_value(&t1,id_src);
   print_asm_template2(add);
 }
 
