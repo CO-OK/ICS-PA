@@ -11,7 +11,9 @@ make_EHelper(add) {
   */
   get_mr_value(&t0,id_dest);
   get_mr_value(&t1,id_src);
-  printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->addr);
+  rtl_add(&t3,&t1,&t2);
+  operand_write(id_dest,&t3);
+  
   print_asm_template2(add);
 }
 
