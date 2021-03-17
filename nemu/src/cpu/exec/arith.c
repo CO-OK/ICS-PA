@@ -12,6 +12,7 @@ make_EHelper(add) {
   get_mr_value(&t0,id_dest);
   get_mr_value(&t1,id_src);
   rtl_add(&t3,&t1,&t2);
+  printf("t3=%08X\n",t3);
   operand_write(id_dest,&t3);
   
   print_asm_template2(add);
