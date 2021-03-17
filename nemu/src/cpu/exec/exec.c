@@ -63,7 +63,7 @@ make_group(gp4,
   /* 0xff */
 make_group(gp5,
     EMPTY, EMPTY, EMPTY, EMPTY,
-    EMPTY, EMPTY, IDEX(I2r,push_Ev), EMPTY)  // 第7个 PUSH Ev
+    EMPTY, EMPTY, IDEX(I,push_Ev), EMPTY)  // 第7个 PUSH Ev
 
   /* 0x0f 0x01*/
 make_group(gp7,
