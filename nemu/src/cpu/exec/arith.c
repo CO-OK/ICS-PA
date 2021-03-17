@@ -8,14 +8,22 @@ make_EHelper(add) {
   get_mr_value(&t0,id_dest);
   get_mr_value(&t1,id_src);
   rtl_add(&t2,&t1,&t0);
-  printf("t3=%08X\n",t3);
   operand_write(id_dest,&t2);
   /*
     OF, SF, ZF, AF\, CF, and PF\ as described in Appendix C
   */
-  //rtl_update_ZFSF(&t2);
-  
-  
+  rtl_update_ZFSF(&t2,id_dest->width);
+  /*
+    OF标志位根据操作数的符号及其变化情况来设置：若两个操作数的符号相同，而结果的符号与之相反时，OF=1，否则OF=0
+  */
+  rtlreg_t op1,op2,res;
+  rtl_msb(&op1,&t0,id_dest->width);
+  rtl_msb(&op2,&t1,id_src->width);
+  rtl_msb(&res,&t2,id_dest->width);
+  if(op1==op2&&res!=op1)
+    rtl_set_OF(&eflag_OF);
+  else
+    rtl_unset_OF(&eflag_OF);
   print_asm_template2(add);
 }
 
