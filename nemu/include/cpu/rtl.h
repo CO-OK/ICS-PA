@@ -127,6 +127,7 @@ static inline void rtl_sr(int r, int width, const rtlreg_t* src1) {
 #define make_rtl_unset_eflags(f) \
   static inline void concat(rtl_unset_, f) (const rtlreg_t* src) { \
   cpu.EFLAGS_ &= ~(*src);\
+  concat(e_,f) = false;\
 }
 
 make_rtl_setget_eflags(CF)
