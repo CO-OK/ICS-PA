@@ -11,6 +11,10 @@ make_EHelper(push_reg) {
   print_asm_template1(push);
 }
 
+make_EHelper(push_Ev) {
+  //printf("val=%08X\n")
+}
+
 make_EHelper(pop_reg) {
   //TODO();
   rtl_pop(&t0);
