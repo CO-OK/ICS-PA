@@ -119,8 +119,17 @@ make_EHelper(cmp) {
 }
 
 make_EHelper(inc) {
-  TODO();
-
+  //TODO();
+  rtl_addi(&t0,&id_dest->val,1);
+  rtl_sr(id_dest->reg,id_dest->width,&t0);
+  /*
+    OF, SF, ZF, AF, and PF as described in Appendix C
+  */
+  rtl_update_ZFSF(&t0,id_dest->width);  
+  if(id_dest->val!=MY_INT32_MAX)
+    rtl_unset_OF(&eflag_OF);
+  else 
+    rtl_set_OF(&eflag_OF);
   print_asm_template1(inc);
 }
 
