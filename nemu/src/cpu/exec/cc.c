@@ -24,11 +24,11 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
       printf("t01=%d\n",t0);
       if(t0==0)//等于0说明ZF=0
       {
-        *dest = (char)0;
+        *dest = 0;
       }
       else
       {
-        *dest = (char)1;
+        *dest = 1;
       }
       break;
     }
