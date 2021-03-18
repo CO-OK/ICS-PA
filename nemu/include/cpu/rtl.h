@@ -228,6 +228,7 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   {
     rtl_unset_SF(&eflag_SF);
   }
+  printf("after t0=%08X\n",t0);
 }
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {
