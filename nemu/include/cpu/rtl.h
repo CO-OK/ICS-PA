@@ -217,7 +217,7 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
   //TODO();
   printf("result=%08X\nwidth=%d\nfirst t0=%08X\n",*result,width,t0);
-  rtl_msb(&t0,result,width * 8 - 1);
+  rtl_msb(&t0,result,width);
   printf("t0=%08X\n",t0);
   if(t0==1)
   {
