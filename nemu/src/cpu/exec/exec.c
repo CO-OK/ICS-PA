@@ -89,8 +89,8 @@ opcode_entry opcode_table [512] = {
   /* 0x34 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x38 */	EMPTY, EMPTY, EMPTY, IDEXW(E2G,cmp,0),//0x3b cmp Gv,Ev
   /* 0x3c */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x40 */	EMPTY, EMPTY, EMPTY, IDEX(r,inc),//0x40---->0x47 inc general register
-  /* 0x44 */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0x40 */	IDEX(r,inc), IDEX(r,inc), IDEX(r,inc), IDEX(r,inc),//0x40---->0x47 inc general register
+  /* 0x44 */	IDEX(r,inc), IDEX(r,inc), IDEX(r,inc), IDEX(r,inc),
   /* 0x48 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x4c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x50 */	IDEX(r,push_reg), IDEX(r,push_reg), IDEX(r,push_reg), IDEX(r,push_reg),//50到57都是push IDEX(push_SI,push)
