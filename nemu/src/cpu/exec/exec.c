@@ -101,8 +101,8 @@ opcode_entry opcode_table [512] = {
   /* 0x64 */	EMPTY, EMPTY, EX(operand_size), EMPTY,
   /* 0x68 */	EMPTY, EMPTY, IDEXW(I,push_reg,1), EMPTY,//0x6a push Ib,就写成push_reg了懒得改
   /* 0x6c */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x70 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x74 */	IDEXW(J,jcc,1), IDEXW(J,jcc,1), EMPTY, EMPTY,//0x74 je/jz  //0x75 jnz
+  /* 0x70 */	IDEXW(J,jcc,1), IDEXW(J,jcc,1), IDEXW(J,jcc,1), IDEXW(J,jcc,1),
+  /* 0x74 */	IDEXW(J,jcc,1), IDEXW(J,jcc,1), IDEXW(J,jcc,1), IDEXW(J,jcc,1),//0x74 je/jz  //0x75 jnz
   /* 0x78 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x7c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x80 */	IDEXW(I2E, gp1, 1), IDEX(I2E, gp1), EMPTY, IDEX(SI2E, gp1),
