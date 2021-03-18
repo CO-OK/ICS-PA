@@ -267,7 +267,7 @@ make_DHelper(J) {
   printf("width=%d\n",id_dest->width);
   if(id_dest->width==1)//宽度为1时相对地址相加以后进位要丢弃
   {
-    char last_two_byte = (char)*eip;
+    char last_two_byte = (char)eip;
     printf("byte=%02X\n",last_two_byte);
     char byte_res = (char)(last_two_byte + (char)id_dest->simm);
     printf("final=%02X\n",byte_res);
