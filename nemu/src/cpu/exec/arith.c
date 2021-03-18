@@ -116,6 +116,7 @@ make_EHelper(cmp) {
   rtl_shli(&t0,&op1,id_dest->width * 8 - 1);
   rtl_shli(&t1,&op2,id_src->width * 8 -1);
   rtl_shli(&t3,&t2,id_src->width * 8 -1);
+  printf("t0=%08X,t1=%08X,t3=%08X\n",t0,t1,t3);
   if((t0 != t1)&&(t3 == t1))//两个数的符号相反，而结果的符号与减数的符号相同
   {
     rtl_set_OF(&eflag_OF);
