@@ -267,6 +267,10 @@ make_DHelper(J) {
   printf("width=%d\n",id_dest->width);
   if(id_dest->width==1)
   {
+    vaddr_t tmp1 = *eip;
+    tmp1 = tmp1 >> 4;
+    tmp1 = tmp1 << 4;
+    printf("tmp1=%08X\n",tmp1);
     char temp = id_dest->simm + *eip;
     printf("temp=%08X\n",temp);
     decoding.jmp_eip = *eip & (char)temp;
