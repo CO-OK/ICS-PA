@@ -203,7 +203,7 @@ void difftest_step(uint32_t eip) {
     rtlreg_t ZF = (r.eflags & eflag_ZF) >> 6;
     rtlreg_t SF = (r.eflags & eflag_SF) >> 7;
     rtlreg_t IF = (r.eflags & eflag_IF) >> 9;
-    rtlreg_t OF = (r.eflags & eflag_OF) >> 1;
+    rtlreg_t OF = (r.eflags & eflag_OF) >> 11;
     if(CF != e_CF)
     {
       diff = true;
