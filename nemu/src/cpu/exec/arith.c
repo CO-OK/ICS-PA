@@ -113,9 +113,9 @@ make_EHelper(cmp) {
     OF:
     减法的OF位的设置方法为：若两个数的符号相反，而结果的符号与减数的符号相同，则OF=1，除上述情况外OF=0。OF=1说明带符号数的减法运算结果是错误的。
   */
-  rtl_shli(&t0,&op1,id_dest->width * 8 - 1);
-  rtl_shli(&t1,&op2,id_dest->width * 8 -1);
-  rtl_shli(&t3,&t2,id_dest->width * 8 -1);
+  rtl_shri(&t0,&op1,id_dest->width * 8 - 1);
+  rtl_shri(&t1,&op2,id_dest->width * 8 -1);
+  rtl_shri(&t3,&t2,id_dest->width * 8 -1);
   printf("t0=%08X,t1=%08X,t3=%08X\n",t0,t1,t3);
   if((t0 != t1)&&(t3 == t1))//两个数的符号相反，而结果的符号与减数的符号相同
   {
