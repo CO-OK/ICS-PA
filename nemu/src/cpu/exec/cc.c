@@ -43,6 +43,7 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
   }
 
   if (invert) {
+    printf("incert\n");
     rtl_xori(dest, dest, 0x1);
   }
 }
