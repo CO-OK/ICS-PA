@@ -13,6 +13,9 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
 
   // TODO: Query EFLAGS to determine whether the condition code is satisfied.
   // dest <- ( cc is satisfied ? 1 : 0)
+  rtlreg_t temp0=t0;
+  rtlreg_t temp1=t1;
+  rtlreg_t temp2=t2;
   switch (subcode & 0xe) {
     case CC_O:{//Jump short if overflow (OF=1)
       rtl_get_OF(&t0);
@@ -93,4 +96,7 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
   if (invert) {
     rtl_xori(dest, dest, 0x1);
   }
+  t0=temp0;
+  t1=temp1;
+  t2=temp2;
 }
