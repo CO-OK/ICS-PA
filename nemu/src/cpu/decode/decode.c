@@ -268,7 +268,9 @@ make_DHelper(J) {
   if(id_dest->width==1)
   {
     vaddr_t tmp1 = *eip;
+     printf("tmp1=%08X\n",tmp1);
     tmp1 = tmp1 >> 4;
+     printf("tmp1=%08X\n",tmp1);
     tmp1 = tmp1 << 4;
     printf("tmp1=%08X\n",tmp1);
     char temp = id_dest->simm + *eip;
