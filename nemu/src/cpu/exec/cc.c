@@ -14,11 +14,31 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
   // TODO: Query EFLAGS to determine whether the condition code is satisfied.
   // dest <- ( cc is satisfied ? 1 : 0)
   switch (subcode & 0xe) {
-    case CC_O:
-    case CC_B:{
-      
+    case CC_O:{//Jump short if overflow (OF=1)
+      rtl_get_OF(&t0);
+      if(t0==0)//等于0说明ZF=0
+      {
+        *dest = (char)0;
+      }
+      else
+      {
+        *dest = (char)1;
+      }
+      break;
     }
-    case CC_E:{
+    case CC_B:{// Jump short if below (CF=1)
+      rtl_get_CF(&t0);
+      if(t0==0)//等于0说明ZF=0
+      {
+        *dest = (char)0;
+      }
+      else
+      {
+        *dest = (char)1;
+      }
+      break; 
+    }
+    case CC_E:{//Jump short if equal (ZF=1)
       rtl_get_ZF(&t0);
       if(t0==0)//等于0说明ZF=0
       {
@@ -30,11 +50,42 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
       }
       break;
     }
-    case CC_BE:
-    case CC_S:
-    case CC_L:
-    case CC_LE:
-      TODO();
+    case CC_BE:{// Jump short if not below or equal (CF=0 and ZF=0)
+      rtl_get_ZF(&t0);
+      rtl_get_CF(&t1);
+      if(t0==0&&t1==0)
+        *dest = (char)0;
+      else
+        *dest = (char)1;
+      break;
+    }
+    case CC_S:{//Jump short if sign (SF=1)
+      rtl_get_SF(&t0);
+      if(t0==0)
+        *dest = (char)0;
+      else 
+        *dest = (char)1;
+      break;
+    }
+    case CC_L:{//Jump short if less (SF≠OF)
+      rtl_get_SF(&t0);
+      rtl_get_OF(&t1);
+      if(t0!=t1)
+        *dest = (char)1;
+      else 
+        *dest = (char)0;
+      break;
+    }
+    case CC_LE:{//Jump short if less or equal (ZF=1 and SF≠OF)
+      rtl_get_SF(&t0);
+      rtl_get_OF(&t1);
+      rtl_get_ZF(&t2);
+      if(t0!=t1&&t2==1)
+        *dest = (char)1;
+      else
+        *dest = (char)0;
+    }
+      //TODO();
     default: panic("should not reach here");
     case CC_P: panic("n86 does not have PF");
   }

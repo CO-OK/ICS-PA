@@ -273,10 +273,19 @@ make_DHelper(J) {
     char temp = id_dest->simm + *eip;
     decoding.jmp_eip = tmp_eip + (char)temp;
   }
+  else if(id_dest->width==2)//宽度为2时同理
+  {
+    vaddr_t tmp_eip = *eip;
+    tmp_eip = tmp_eip >> 16;
+    tmp_eip = tmp_eip << 16;
+    short temp = id_dest->simm + *eip;
+    decoding.jmp_eip = tmp_eip + (short)temp;
+  }
   else if(id_dest->width==4)
   {
-    decoding.jmp_eip = (id_dest->simm + *eip)  ;
+    decoding.jmp_eip = (id_dest->simm + *eip);
   }
+  
   
 }
 
