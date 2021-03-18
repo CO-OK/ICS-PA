@@ -216,6 +216,7 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
   //TODO();
+  rtlreg_t temp = t0;//保存临时寄存器的值，防止在调用者中被修改
   rtl_msb(&t0,result,width);
   if(t0==1)
   {
@@ -225,6 +226,7 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   {
     rtl_unset_SF(&eflag_SF);
   }
+  t0 = temp;
 }
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {
