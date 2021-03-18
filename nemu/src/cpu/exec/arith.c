@@ -91,8 +91,11 @@ make_EHelper(cmp) {
     appropriate flags.
     The CF, OF, SF, ZF, AF, and PF flags are set according to the result
   */
-  rtl_sub(&t2, &id_dest->val, &id_src->val);//t2存结果
-  rtl_sltu(&t3, &id_dest->val, &id_src->val);//t3=1 ---> val<t2 other wise val>=t2  which mean cf=1
+  rtlreg_t op1,op2;
+  get_mr_value(&op1,id_dest);
+  get_mr_value(&op2,id_src);
+  rtl_sub(&t2, &op1, &op2);//t2存结果
+  rtl_sltu(&t3, &id_dest->val, &id_src->val);//t3 = 1 ---> val<t2 other wise val>=t2  which mean cf=1
   rtl_update_ZFSF(&t2, id_dest->width);
   if(t3)//cf==0
   {
