@@ -38,7 +38,7 @@ make_EHelper(add) {
   }
   op2=t0;
   rtl_sltu(&res,&op1,&op2);
-  if(res)
+  if(res==1)
     rtl_set_CF(&eflag_CF);
   else
     rtl_unset_CF(&eflag_CF);
