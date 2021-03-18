@@ -6,7 +6,29 @@ void cal_and()
 }
 make_EHelper(test) {
   //TODO();
-
+  /*
+    TEST computes the bit-wise logical AND of its two operands. Each bit
+    of the result is 1 if both of the corresponding bits of the operands are 1;
+    otherwise, each bit is 0. The result of the operation is discarded and only
+    the flags are modified.
+  */
+  //opcode 是 85时只有32位和16位两种情况
+  get_mr_value(&t1,id_dest);
+  get_mr_value(&t2,id_src);
+  if(id_dest->width==2)
+  {
+    t0 = (short)t1 & (short)t2;
+  }
+  else
+  {
+    t0 = t1 & t2;
+  }
+  /*
+    OF = 0, CF = 0; SF, ZF, and PF as described in Appendix C
+  */
+  rtl_unset_CF(&eflag_CF);
+  rtl_unset_OF(&eflag_OF);
+  rtl_update_ZFSF(&t0,id_dest->width);
   print_asm_template2(test);
 }
 
