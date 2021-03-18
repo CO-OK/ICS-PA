@@ -142,8 +142,14 @@ make_EHelper(inc) {
 }
 
 make_EHelper(dec) {
-  TODO();
-
+  //TODO();
+  rtl_subi(&t0,&id_dest->val,1);
+  rtl_sr(id_dest->reg,id_dest->width,&t0);
+  rtl_update_ZFSF(&t0,id_dest->width);  
+  if(id_dest->val!=0)
+    rtl_unset_OF(&eflag_OF);
+  else 
+    rtl_set_OF(&eflag_OF);
   print_asm_template1(dec);
 }
 
