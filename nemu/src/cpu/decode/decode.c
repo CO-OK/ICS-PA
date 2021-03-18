@@ -264,7 +264,7 @@ make_DHelper(J) {
   decode_op_SI(eip, id_dest, false);
   // the target address can be computed in the decode stage
   //printf("simm=%08X\neip=%08X\n",id_dest->simm,*eip);
-  //printf("width=%d\n",id_dest->width);
+  printf("width=%d\n",id_dest->width);
   if(id_dest->width==1)//宽度为1时相对地址相加以后进位要丢弃
   {
     vaddr_t tmp_eip = *eip;
