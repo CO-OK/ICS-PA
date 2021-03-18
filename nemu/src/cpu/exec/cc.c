@@ -16,17 +16,17 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
   switch (subcode & 0xe) {
     case CC_O:
     case CC_B:{
-      
+
     }
     case CC_E:{
       rtl_get_ZF(&t0);
       if(t0==0)//等于0说明ZF=0
       {
-        *dest = (char)0;
+        *dest = 0;
       }
       else
       {
-        *dest = (char)1;
+        *dest = 1;
       }
       break;
     }
