@@ -22,5 +22,6 @@ make_EHelper(movzx);
 make_EHelper(test);
 make_EHelper(jcc);
 make_EHelper(inc);
+make_EHelper(jmp);
 //make_EHelper(xchg_b);
 //make_EHelper(push_Ev);
