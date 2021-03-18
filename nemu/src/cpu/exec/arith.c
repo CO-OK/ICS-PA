@@ -7,9 +7,7 @@ make_EHelper(add) {
   
   get_mr_value(&t0,id_dest);
   get_mr_value(&t1,id_src);
-  printf("first=%08X,second=%08X\n",t0,t1);
   rtl_add(&t2,&t1,&t0);
-  printf("res=%08X\n",t2);
   operand_write(id_dest,&t2);
   /*
     OF, SF, ZF, AF\, CF, and PF\ as described in Appendix C
@@ -26,6 +24,10 @@ make_EHelper(add) {
     rtl_set_OF(&eflag_OF);
   else
     rtl_unset_OF(&eflag_OF);
+  /*
+    if a + b > max
+    then a > max - b
+  */
   if(id_dest->width==1)
   {
     op1=MY_INT8_MAX-t1;
@@ -38,7 +40,6 @@ make_EHelper(add) {
   {
     op1=MY_INT32_MAX-t1;
   }
-  printf("op1=%08X\nop2=%08X\n",op1,op2);
   op2=t0;
   res=0;
   rtl_sltu(&res,&op1,&op2);
