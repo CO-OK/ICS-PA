@@ -325,7 +325,7 @@ void get_mr_value(rtlreg_t* dest,Operand* op)//get mem reg imm value
   }
   else if(op->type==OP_TYPE_MEM)
   {
-    rtl_lm(dest,op->addr,op->width);
+    rtl_lm(dest,&op->addr,op->width);
   }
   else if(op->type==OP_TYPE_IMM)
   {
