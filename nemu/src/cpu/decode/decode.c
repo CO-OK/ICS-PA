@@ -278,6 +278,7 @@ make_DHelper(J) {
     printf("tmp_eip=%08X\n",tmp_eip);
     printf("simm=%08X\n",id_dest->simm);
     char temp = id_dest->simm + *eip;
+    printf("temp=%08X\n",temp);
     decoding.jmp_eip = tmp_eip + (char)temp;
   }
   else if(id_dest->width==2)//宽度为2时同理
