@@ -21,11 +21,11 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
       rtl_get_OF(&t0);
       if(t0==0)//等于0说明ZF=0
       {
-        *dest = (char)0;
+        *dest = (unsigned char)0;
       }
       else
       {
-        *dest = (char)1;
+        *dest = (unsigned char)1;
       }
       break;
     }
@@ -33,11 +33,11 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
       rtl_get_CF(&t0);
       if(t0==0)//等于0说明ZF=0
       {
-        *dest = (char)0;
+        *dest = (unsigned char)0;
       }
       else
       {
-        *dest = (char)1;
+        *dest = (unsigned char)1;
       }
       break; 
     }
@@ -45,11 +45,11 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
       rtl_get_ZF(&t0);
       if(t0==0)//等于0说明ZF=0
       {
-        *dest = (char)0;
+        *dest = (unsigned char)0;
       }
       else
       {
-        *dest = (char)1;
+        *dest = (unsigned char)1;
       }
       break;
     }
@@ -57,26 +57,26 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
       rtl_get_ZF(&t0);
       rtl_get_CF(&t1);
       if(t0==0&&t1==0)
-        *dest = (char)0;
+        *dest = (unsigned char)0;
       else
-        *dest = (char)1;
+        *dest = (unsigned char)1;
       break;
     }
     case CC_S:{//Jump short if sign (SF=1)
       rtl_get_SF(&t0);
       if(t0==0)
-        *dest = (char)0;
+        *dest = (unsigned char)0;
       else 
-        *dest = (char)1;
+        *dest = (unsigned char)1;
       break;
     }
     case CC_L:{//Jump short if less (SF≠OF)
       rtl_get_SF(&t0);
       rtl_get_OF(&t1);
       if(t0!=t1)
-        *dest = (char)1;
+        *dest = (unsigned char)1;
       else 
-        *dest = (char)0;
+        *dest = (unsigned char)0;
       break;
     }
     case CC_LE:{//Jump short if less or equal (ZF=1 and SF≠OF)
@@ -84,9 +84,10 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
       rtl_get_OF(&t1);
       rtl_get_ZF(&t2);
       if(t0!=t1&&t2==1)
-        *dest = (char)1;
+        *dest = (unsigned char)1;
       else
-        *dest = (char)0;
+        *dest = (unsigned char)0;
+      break;
     }
       //TODO();
     default: panic("should not reach here");
