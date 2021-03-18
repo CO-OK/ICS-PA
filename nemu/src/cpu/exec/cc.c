@@ -15,7 +15,9 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
   // dest <- ( cc is satisfied ? 1 : 0)
   switch (subcode & 0xe) {
     case CC_O:
-    case CC_B:
+    case CC_B:{
+      printf("666\n");
+    }
     case CC_E:{
       rtl_get_ZF(&t0);
       if(t0==0)//等于0说明ZF=0
