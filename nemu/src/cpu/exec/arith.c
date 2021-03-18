@@ -38,6 +38,7 @@ make_EHelper(add) {
   {
     op1=MY_INT32_MAX-t1;
   }
+  printf("op1=%08X\nop2=%08X\n",op1,op2);
   op2=t0;
   res=0;
   rtl_sltu(&res,&op1,&op2);
