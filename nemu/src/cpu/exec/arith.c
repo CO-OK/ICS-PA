@@ -116,7 +116,7 @@ make_EHelper(cmp) {
   rtl_shri(&t0,&op1,id_dest->width * 8 - 1);
   rtl_shri(&t1,&op2,id_dest->width * 8 -1);
   rtl_shri(&t3,&t2,id_dest->width * 8 -1);
-  printf("t0=%08X,t1=%08X,t3=%08X\n",t0,t1,t3);
+  //printf("t0=%08X,t1=%08X,t3=%08X\n",t0,t1,t3);
   if((t0 != t1)&&(t3 == t1))//两个数的符号相反，而结果的符号与减数的符号相同
   {
     rtl_set_OF(&eflag_OF);
@@ -264,7 +264,7 @@ make_EHelper(imul2) {
   rtl_imul(&t0, &t1, &id_dest->val, &id_src->val);
   operand_write(id_dest, &t1);
   /*
-    
+
   */
   print_asm_template2(imul);
 }
