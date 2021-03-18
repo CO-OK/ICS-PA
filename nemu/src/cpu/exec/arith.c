@@ -7,7 +7,9 @@ make_EHelper(add) {
   
   get_mr_value(&t0,id_dest);
   get_mr_value(&t1,id_src);
+  printf("first=%08X,second=%08X\n",t0,t1);
   rtl_add(&t2,&t1,&t0);
+  printf("res=%08X\n",t2);
   operand_write(id_dest,&t2);
   /*
     OF, SF, ZF, AF\, CF, and PF\ as described in Appendix C
