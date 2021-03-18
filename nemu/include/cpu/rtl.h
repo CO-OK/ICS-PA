@@ -151,11 +151,7 @@ static inline void rtl_not(rtlreg_t* dest) {
   TODO();
 }
 
-static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
-  // dest <- signext(src1[(width * 8 - 1) .. 0])
-  
-  TODO();
-}
+
 
 static inline void rtl_push(const rtlreg_t* src1,int size) {
   // esp <- esp - 4
@@ -194,6 +190,30 @@ static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
   //msb Most Significant Bit
   rtl_shri(dest, src1, width * 8 - 1);
+  //TODO();
+}
+
+static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
+  // dest <- signext(src1[(width * 8 - 1) .. 0])
+  rtlreg_t temp;
+  rtl_msb(&temp,src1,width);
+  if(temp==0)
+  {
+    /*
+      do nothing ?
+    */
+  }
+  else
+  {
+    if(width==1)
+    {
+      *dest=*src1+0b111111111111111111111111;
+    }
+    else if(width==2)
+    {
+      *dest=*src1+0b1111111111111111;
+    }
+  }
   //TODO();
 }
 
