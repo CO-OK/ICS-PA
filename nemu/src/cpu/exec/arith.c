@@ -16,7 +16,7 @@ make_EHelper(add) {
   /*
     OF标志位根据操作数的符号及其变化情况来设置：若两个操作数的符号相同，而结果的符号与之相反时，OF=1，否则OF=0
   */
-  rtlreg_t op1,op2,res;
+  rtlreg_t op1,op2,res;//操作数以及结果的符号
   rtl_msb(&op1,&t0,id_dest->width);
   rtl_msb(&op2,&t1,id_src->width);
   rtl_msb(&res,&t2,id_dest->width);
@@ -37,6 +37,7 @@ make_EHelper(add) {
     op1=MY_INT32_MAX-t1;
   }
   op2=t0;
+  res=0;
   rtl_sltu(&res,&op1,&op2);
   if(res==1)
     rtl_set_CF(&eflag_CF);
