@@ -24,5 +24,6 @@ make_EHelper(jcc);
 make_EHelper(inc);
 make_EHelper(jmp);
 make_EHelper(dec);
+make_EHelper(imul2);
 //make_EHelper(xchg_b);
 //make_EHelper(push_Ev);
