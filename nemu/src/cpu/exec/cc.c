@@ -19,7 +19,9 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
       
     }
     case CC_E:{
+      printf("t00=%d\n",t0);
       rtl_get_ZF(&t0);
+      printf("t01=%d\n",t0);
       if(t0==0)//等于0说明ZF=0
       {
         *dest = (char)0;
