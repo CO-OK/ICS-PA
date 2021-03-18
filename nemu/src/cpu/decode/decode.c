@@ -269,7 +269,7 @@ make_DHelper(J) {
   {
     char temp = id_dest->simm + *eip;
     printf("temp=%08X\n",temp);
-    decoding.jmp_eip = *eip + temp;
+    decoding.jmp_eip = *eip & temp;
   }
   else
   {
