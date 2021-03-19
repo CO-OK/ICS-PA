@@ -47,8 +47,8 @@ make_group(gp1,
 
   /* 0xc0, 0xc1, 0xd0, 0xd1, 0xd2, 0xd3 */
 make_group(gp2,
-    EMPTY, EMPTY, EMPTY, EMPTY,
-    EMPTY, EMPTY, EMPTY, EMPTY)
+    EMPTY, EMPTY, EMPTY, EMPTY,   
+    EMPTY, EMPTY, EMPTY, EX(sar)) // 111 sar Ev,Iv
 
   /* 0xf6, 0xf7 */
 make_group(gp3,
