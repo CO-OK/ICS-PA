@@ -188,7 +188,38 @@ make_EHelper(sar) {
 make_EHelper(shl) {
   //TODO();
   // unnecessary to update CF and OF in NEMU
-
+  /*
+    SAL (or its synonym, SHL) shifts the bits of the operand upward. The
+    high-order bit is shifted into the carry flag, and the low-order bit is set
+    to 0.
+  */
+  rtl_shl(&t0,&id_dest->val,&id_src->val-1);//留1位来给CF
+  //这种类型的指令只有16位和32位
+  if(id_dest->width==2)
+  {
+    t2 = t0 & 0x8000;
+    if(t2 == 0x8000)//说明最高位是1
+      rtl_set_CF(&eflag_CF);
+    else
+      rtl_unset_CF(&eflag_CF);
+  }
+  else
+  {
+    t2 = t0 & 0x80000000;
+    if(t2 == 0x80000000)//说明最高位是1
+      rtl_set_CF(&eflag_CF);
+    else
+      rtl_unset_CF(&eflag_CF);
+  }
+  rtl_shli(&t0,&t0,1);
+  operand_write(id_dest,&t0);
+  rtl_update_ZFSF(&t0,id_dest->width);
+  //OF: OF ← high-order bit of r/m ≠ (CF);
+  rtl_msb(&t1,&id_dest->val,id_dest->width);
+  if(t1!= e_CF)
+    rtl_set_OF(&eflag_OF);
+  else
+    rtl_unset_OF(&eflag_OF);
   print_asm_template2(shl);
 }
 
