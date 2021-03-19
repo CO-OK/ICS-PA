@@ -219,9 +219,7 @@ make_EHelper(shl) {
     else
       rtl_unset_CF(&eflag_CF);
   }
-  printf("before t0=%08X\n",t0);
   rtl_shl(&t0,&id_dest->val,&id_src->val);
-  printf("after t0=%08X\n",t0);
   operand_write(id_dest,&t0);
   rtl_update_ZFSF(&t0,id_dest->width);
   //OF: OF ← high-order bit of r/m ≠ (CF);
