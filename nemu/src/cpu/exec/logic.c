@@ -150,13 +150,14 @@ make_EHelper(sar) {
     unsigned divide; the high-order bit is set to 0.
   */
   rtl_msb(&t3,&id_dest->val,id_dest->width);
-  rtl_shri(&t1,&id_dest->val,id_src->val-1);//先右移n-1位，留最后一位填充CF
+  if(id_dest->val!=0)
+    rtl_shr(&t1,&id_dest->val,id_src->val-1);//先右移n-1位，留最后一位填充CF
   t2 = t1 & 0x00000001;
   if(t2 == 1)
     rtl_set_CF(&eflag_CF);
   else
     rtl_unset_CF(&eflag_CF);
-  rtl_shri(&t1,&id_dest->val,id_src->val);
+  rtl_shr(&t1,&id_dest->val,id_src->val);
   //补1
   if(t3 == 1)//需要补0
   {
@@ -193,7 +194,8 @@ make_EHelper(shl) {
     high-order bit is shifted into the carry flag, and the low-order bit is set
     to 0.
   */
-  rtl_shl(&t0,&id_dest->val,&id_src->val-1);//留1位来给CF
+  if(id_dest->val!=0)
+    rtl_shl(&t0,&id_dest->val,&id_src->val-1);//留1位来给CF
   //这种类型的指令只有16位和32位
   if(id_dest->width==2)
   {
@@ -211,7 +213,7 @@ make_EHelper(shl) {
     else
       rtl_unset_CF(&eflag_CF);
   }
-  rtl_shli(&t0,&t0,1);
+  rtl_shl(&t0,&t0,id_src->val);
   operand_write(id_dest,&t0);
   rtl_update_ZFSF(&t0,id_dest->width);
   //OF: OF ← high-order bit of r/m ≠ (CF);
