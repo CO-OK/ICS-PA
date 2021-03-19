@@ -153,10 +153,14 @@ make_EHelper(sar) {
   if(id_dest->val!=0)
     rtl_shri(&t1,&id_dest->val,id_src->val-1);//先右移n-1位，留最后一位填充CF
   t2 = t1 & 0x00000001;
-  if(t2 == 1)
-    rtl_set_CF(&eflag_CF);
-  else
-    rtl_unset_CF(&eflag_CF);
+  if(id_dest->val!=0)
+  {
+    if(t2 == 1)
+      rtl_set_CF(&eflag_CF);
+    else
+      rtl_unset_CF(&eflag_CF);
+  }
+  
   rtl_shr(&t1,&id_dest->val,&id_src->val);
   //补1
   if(t3 == 1)//需要补0
@@ -194,10 +198,12 @@ make_EHelper(shl) {
     high-order bit is shifted into the carry flag, and the low-order bit is set
     to 0.
   */
+  printf("val=%d\n",id_src->val);
   if(id_dest->val!=0)
     rtl_shli(&t0,&id_dest->val,id_src->val-1);//留1位来给CF
   //这种类型的指令只有16位和32位
-  if(id_dest->width==2)
+
+  if(id_dest->width==2&&id_src->val!=0)
   {
     t2 = t0 & 0x8000;
     if(t2 == 0x8000)//说明最高位是1
@@ -205,7 +211,7 @@ make_EHelper(shl) {
     else
       rtl_unset_CF(&eflag_CF);
   }
-  else
+  else if(id_dest->width==4&&id_src->val!=0)
   {
     t2 = t0 & 0x80000000;
     if(t2 == 0x80000000)//说明最高位是1
