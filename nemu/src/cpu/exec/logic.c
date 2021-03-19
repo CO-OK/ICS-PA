@@ -1,6 +1,6 @@
 #include "cpu/exec.h"
 
-int power(int base,int e)
+int my_power(int base,int e)
 {
   int res = 1;
   for(int i=0;i<e;i++)
@@ -161,7 +161,7 @@ make_EHelper(sar) {
   rtlreg_t digit = 0;//用这个数与t1相加来补1
   for(int i = 0;i<id_src->val;i++)
   {
-    digit += power(2,id_dest->width*8-1-i);
+    digit += my_power(2,id_dest->width*8-1-i);
   }
   if(id_dest->width==1)
   {
