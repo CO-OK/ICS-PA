@@ -149,7 +149,7 @@ make_EHelper(sar) {
     the same as IDIV); the high-order bit remains the same. SHR performs an
     unsigned divide; the high-order bit is set to 0.
   */
-
+  rtl_msb(&t3,&id_dest->val,id_dest->width);
   rtl_shri(&t1,&id_dest->val,id_src->val-1);//先右移n-1位，留最后一位填充CF
   t2 = t1 & 0x00000001;
   if(t2 == 1)
@@ -158,25 +158,29 @@ make_EHelper(sar) {
     rtl_unset_CF(&eflag_CF);
   rtl_shri(&t1,&id_dest->val,id_src->val);
   //补1
-  rtlreg_t digit = 0;//用这个数与t1相加来补1
-  for(int i = 0;i<id_src->val;i++)
+  if(t3 == 1)//需要补0
   {
-    digit += my_power(2,id_dest->width*8-1-i);
-  }
-  if(id_dest->width==1)
-  {
-    t1 += (unsigned char)digit;
-  } 
-  else if(id_dest->width==2)
-  {
-    t1 += (short)digit;
-  }
-  else
-  {
-    t1 += digit;
+    rtlreg_t digit = 0;//用这个数与t1相加来补1
+    for(int i = 0;i<id_src->val;i++)
+    {
+      digit += my_power(2,id_dest->width*8-1-i);
+    }
+    if(id_dest->width==1)
+    {
+      t1 += (unsigned char)digit;
+    } 
+    else if(id_dest->width==2)
+    {
+      t1 += (short)digit;
+    }
+    else
+    {
+      t1 += digit;
+    }
   }
   operand_write(id_dest,&t1);
   rtl_unset_OF(&eflag_OF);
+  rtl_update_ZFSF(&t1,id_dest->width);
   // unnecessary to update CF and OF in NEMU
   print_asm_template2(sar);
 }
