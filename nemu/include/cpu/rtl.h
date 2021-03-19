@@ -207,11 +207,11 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   {
     if(width==1)
     {
-      *dest=*src1+0b111111111111111111111111;
+      *dest=*src1+0b11111111111111111111111100000000;
     }
     else if(width==2)
     {
-      *dest=*src1+0b1111111111111111;
+      *dest=*src1+0b11111111111111110000000000000000;
     }
   }
   //TODO();

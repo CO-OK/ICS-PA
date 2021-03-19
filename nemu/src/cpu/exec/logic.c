@@ -139,6 +139,28 @@ make_EHelper(or) {
 
 make_EHelper(sar) {
   //TODO();
+  /*
+    SAR and SHR shift the bits of the operand downward. The low-order
+    bit is shifted into the carry flag. The effect is to divide the operand by
+    2. SAR performs a signed divide with rounding toward negative infinity (not
+    the same as IDIV); the high-order bit remains the same. SHR performs an
+    unsigned divide; the high-order bit is set to 0.
+  */
+  rtl_msb(&t0,&id_dest->val,id_dest->width);
+  if(t0==1)//需要补1
+  {
+    rtl_shri(&t1,&id_dest->val,id_src->val-1);//先右移n-1位，留最后一位填充CF
+    t2 = t1 & 0x00000001;
+    if(t2 == 1)
+      rtl_set_CF(&eflag_CF);
+    else
+      rtl_unset_CF(&eflag_CF);
+    rtl_shri(&t1,&id_dest->val,id_src->val);
+    //补1
+    
+  }
+  else 
+    rtl_shri(&t1,&id_dest->val,id_src->val);
   // unnecessary to update CF and OF in NEMU
 
   print_asm_template2(sar);
