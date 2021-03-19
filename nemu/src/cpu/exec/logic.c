@@ -22,9 +22,13 @@ make_EHelper(test) {
   {
     t0 = (short)t1 & (short)t2;
   }
-  else
+  else if(id_dest->width==4)
   {
     t0 = t1 & t2;
+  }
+  else
+  {
+    t0 = (unsigned char)t1 & (unsigned)t2;
   }
   /*
     OF = 0, CF = 0; SF, ZF, and PF as described in Appendix C
