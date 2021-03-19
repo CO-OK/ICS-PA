@@ -203,7 +203,7 @@ make_EHelper(shl) {
   if(id_src->val==0)
   {
     print_asm_template2(shl);
-    return 0;
+    return;
   }
   rtl_shli(&t0,&id_dest->val,id_src->val-1);//留1位来给CF
   //这种类型的指令只有16位和32位
