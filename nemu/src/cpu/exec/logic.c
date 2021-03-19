@@ -175,6 +175,7 @@ make_EHelper(sar) {
   {
     t1 += digit;
   }
+  operand_write(id_dest,&t1);
   rtl_unset_OF(&eflag_OF);
   // unnecessary to update CF and OF in NEMU
   print_asm_template2(sar);
