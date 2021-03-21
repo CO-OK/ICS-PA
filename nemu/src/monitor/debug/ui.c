@@ -234,8 +234,8 @@ static int cmd_watch(char*args)
       printf("bad expression\n");
       return 0;
     }
-    strcpy(new_wp_point->expr,expr_);
-    new_wp_point->old_value=value;
+    strcpy(new_wp_point->expr,expr_);//表达式存入监视点字符串
+    new_wp_point->old_value=value;//值也存储起来
     printf("setup watchpoint %d\n",new_wp_point->NO);
     printf("expr:%s\n",new_wp_point->expr);
 
@@ -244,7 +244,7 @@ static int cmd_watch(char*args)
   {
     if(is_digit(expr_)||is_digit_hex(expr_))//是数字编号
     {
-      free_wp(atoi(expr_));
+      free_wp(atoi(expr_));//删除监视点
     }
     else
     {
@@ -254,7 +254,7 @@ static int cmd_watch(char*args)
   }
   else if(option[1]=='l'&&strlen(option)==2)
   {
-    print_wp_info();
+    print_wp_info();//打印监视点信息
   }
   else
   {

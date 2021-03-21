@@ -21,12 +21,12 @@ void init_wp_pool() {
 }
 void wp_append(WP*wp)
 {
-  if(head==NULL)
+  if(head==NULL)//如果之前没有监视点
     head=wp;
   else
   {
     WP*tmp=head;
-    while(tmp->next!=NULL)
+    while(tmp->next!=NULL)//找到尾部
       tmp=tmp->next;
     tmp->next=wp;
   }
@@ -56,17 +56,19 @@ WP* finr_prev(WP* wp)
 }
 void _free_wp(WP* wp)
 {
-  if(wp==head)
+  if(wp==head)//头
   {
     head=wp->next;
     
   }
-  else if(wp->next==NULL)
+  else if(wp->next==NULL)//尾
   {
+    //找到前一个，把它的next置空
     finr_prev(wp)->next=NULL;
   }
   else
   {
+    //跨过这个节点
     WP*prev=finr_prev(wp);
     prev->next=wp->next;
   }

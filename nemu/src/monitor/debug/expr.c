@@ -38,7 +38,6 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-
   {" +", TK_NOTYPE},    // spaces
   {"\\+", TK_ADD_SUB},         // plus
   {"-",TK_ADD_SUB},            //minis
@@ -54,7 +53,6 @@ static struct rule {
   {"0x([0-9]|[A-F]|[a-f])+",TK_DIGIT_HEX},//十六进制数字
   {"[0-9]+",TK_DIGIT},//十进制数字
   {"\\$[a-z]+",TK_REG},//寄存器
-  
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -108,18 +106,22 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-        if(rules[i].token_type!=TK_NOTYPE)
+        if(rules[i].token_type!=TK_NOTYPE)//不是空格
         {
           int j=0;
           for(;j<substr_len;j++)
           {
+            //将这个token存入tokens[nr_token]
             tokens[nr_token].str[j]=*(substr_start+j);
           }
-          tokens[nr_token].str[j]='\0';
-          if(rules[i].token_type==TK_MUL_DIV&&rules[i].regex[0]=='\\')//是取地址运算
+          tokens[nr_token].str[j]='\0';//加上字符串的结尾
+          if(rules[i].token_type==TK_MUL_DIV&&rules[i].regex[0]=='\\')//如果识别出*
           {
-            if(nr_token==0||(tokens[nr_token-1].type!=TK_DIGIT_HEX&&tokens[nr_token-1].type!=TK_DIGIT&&tokens[nr_token-1].type!=TK_REG))
+            //判断是否是取地址运算，判断依据是*的前一个是否是数字或者寄存器，如果是，则是乘号
+            if(nr_token==0||(tokens[nr_token-1].type!=TK_DIGIT_HEX&&tokens[nr_token-1].type!=TK_DIGIT\
+                  &&tokens[nr_token-1].type!=TK_REG))
             {
+              //是取地址运算
               tokens[nr_token].type=TK_ADDR;
             }
             else
@@ -131,17 +133,11 @@ static bool make_token(char *e) {
           {
             tokens[nr_token].type=rules[i].token_type;
           }
-          //printf("%s\n",tokens[nr_token].str);
-          nr_token++;
+          nr_token++;//下一个token
           break;
         }
-        else{
-          //
-        }
-        
       }
     }
-
     if (i == NR_REGEX) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
@@ -170,11 +166,11 @@ uint32_t eval(int head,int tail)
   }
   else if(head==tail)
   {
+    //不同的类型返回不同的值
     if(tokens[head].type==TK_DIGIT)
       return atoi(tokens[head].str);
     if(tokens[head].type==TK_DIGIT_HEX)
     {
-      //int a=hex2dec(tokens[head].str);
       return hex2dec(tokens[head].str);
     }
     if(tokens[head].type==TK_REG)
@@ -187,8 +183,8 @@ uint32_t eval(int head,int tail)
   }
   else
   {
-    int op=find_domin(head, tail);
-    if(tokens[op].type!=TK_ADDR)
+    int op=find_domin(head, tail);//首先找到dominant operator
+    if(tokens[op].type!=TK_ADDR)//不是单目运算
     {
       int val1=eval(head,op-1);
       int val2=eval(op+1,tail);
@@ -228,7 +224,7 @@ uint32_t eval(int head,int tail)
           assert(0);
       }
     }
-    else
+    else//单目运算
     {
       int val;
       if(tokens[op+1].type==TK_DIGIT)
@@ -258,13 +254,18 @@ int find_domin(int head,int tail)
     tokens[i].type!=TK_GREAT_LESS&&tokens[i].type!=TK_EQ&&tokens[i].type!=TK_ADDR)//不是运算符，继续
       continue;
     if((tokens[i].type==TK_MUL_DIV||tokens[i].type==TK_ADD_SUB||tokens[i].type==TK_GREAT_LESS
-    ||tokens[i].type==TK_EQ||tokens[i].type==TK_ADDR)&&current_domin==-1)//第一次出现的运算符
+    ||tokens[i].type==TK_EQ||tokens[i].type==TK_ADDR)&&current_domin==-1)//第一次出现的运算符将其设为dominant operator
     {
       current_domin=i;
       continue;
     }
     switch(tokens[i].type)
     {
+      //对不同的优先级分别对待
+      /*
+        总体思路是：如果当前扫描到的符号的优先级比上一次低，则将current_domin设为这一次的
+        循环往复直至完成
+      */
       case TK_ADDR:{
         if(tokens[current_domin].type==TK_ADDR)
           current_domin=i;
