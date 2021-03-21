@@ -193,17 +193,15 @@ static int cmd_mem(char*args)
     printf("arg wrong!\n usage: mem [addr] [len]\n");
     return 0;
   }
-  //int addr_i; 
   bool p=true;
-  int addr_int=expr(addr,&p);
+  int addr_int=expr(addr,&p);//具体的地址
   if(p==false)  
     return 0;
-  int temp=expr(len,&p);
+  int temp=expr(len,&p);//地址长度具体的值
   if(p==false)  
     return 0;
   for(int i=1;i<=temp;i++)
   {
-    //addr_i=(unsigned int)strtol(addr,NULL,16)+i-1;
     printf("0x%X\t0x%X\n",addr_int+i-1,paddr_read(addr_int+i-1,1));
   }
   return 0;
