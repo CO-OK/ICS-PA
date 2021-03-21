@@ -85,20 +85,21 @@ static int cmd_q(char *args) {
 }
 static int cmd_si(char * args){
   char*arg=strtok(args," ");
-  if(arg==NULL)
+  if(arg==NULL)//如果没有参数则默认执行一步
   {
     cpu_exec(1);
     return 0;
   }
-  if(!is_digit(arg))
+  if(!is_digit(arg)) //参数是否是数字
   {
      printf("arg must be a digit\n");
      return 0;
   }
   cpu_exec(atoi(arg)); 
-
   return 0;
 }
+
+
 static int cmd_info(char * args){
   char*arg=strtok(args," ");
   if(arg==NULL)
