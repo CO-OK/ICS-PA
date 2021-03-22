@@ -268,7 +268,7 @@ make_DHelper(J) {
   //printf("eip=%08X\n",*eip);
   if(id_dest->width==1)//宽度为1时相对地址相加以后进位要丢弃
   {
-    printf("width=%d\n",1);
+    //printf("width=%d\n",1);
     vaddr_t tmp_eip = *eip;
     tmp_eip = tmp_eip >> 8;
     tmp_eip = tmp_eip << 8;
@@ -281,7 +281,7 @@ make_DHelper(J) {
   }
   else if(id_dest->width==2)//宽度为2时同理
   {
-    printf("width=%d\n",2);
+    //printf("width=%d\n",2);
     vaddr_t tmp_eip = *eip;
     tmp_eip = tmp_eip >> 16;
     tmp_eip = tmp_eip << 16;
@@ -290,7 +290,7 @@ make_DHelper(J) {
   }
   else if(id_dest->width==4)
   {
-    printf("width=%d\n",4);
+    //printf("width=%d\n",4);
     decoding.jmp_eip = (id_dest->simm + *eip);
   }
   
