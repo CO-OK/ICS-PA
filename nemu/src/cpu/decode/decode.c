@@ -268,22 +268,21 @@ make_DHelper(J) {
   //printf("eip=%08X\n",*eip);
   if(id_dest->width==1)//宽度为1时相对地址相加以后进位要丢弃
   {
-    //printf("eip=%08X\n",*eip);
+    printf("eip=%08X\n",*eip);
     vaddr_t tmp_eip = *eip;
     tmp_eip = tmp_eip >> 8;
     tmp_eip = tmp_eip << 8;
-    //printf("tmp_eip=%08X\n",tmp_eip);
-    //printf("simm=%08X\n",id_dest->simm);
-    //printf("imm=%08X\n",id_dest->imm);
-    //printf("val=%08X\n",id_dest->val);
-    rtlreg_t t;
-    rtl_sext(&t,&id_dest->val,id_dest->width);
-    //printf("t0=%08X\n",t0);
-    //printf("res=%08X\n",t0+*eip);
+    printf("tmp_eip=%08X\n",tmp_eip);
+    printf("simm=%08X\n",id_dest->simm);
+    printf("imm=%08X\n",id_dest->imm);
+    printf("val=%08X\n",id_dest->val);
+    rtl_sext(&t0,&id_dest->val,id_dest->width);
+    printf("t0=%08X\n",t0);
+    printf("res=%08X\n",t0+*eip);
     unsigned char temp = (unsigned char)(id_dest->simm) + (unsigned char)(*eip);
     //temp &= 0b11111011;//进位不光丢弃，进位上的值也得置0
-    //printf("temp=%08X\n",temp);
-    decoding.jmp_eip = t+*eip;
+    printf("temp=%08X\n",temp);
+    decoding.jmp_eip = tmp_eip + (unsigned char)temp;
   }
   else if(id_dest->width==2)//宽度为2时同理
   {
