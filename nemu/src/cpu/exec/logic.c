@@ -104,7 +104,10 @@ make_EHelper(xor_31) {
 make_EHelper(or) {
   //TODO();
   //80386 手册54
-
+  get_mr_value(&t1,id_dest);
+  get_mr_value(&t2,id_src);
+  rtl_or(&t0,&t1,&t2);
+  operand_write(id_dest,&t0);
   print_asm_template2(or);
 }
 
