@@ -275,6 +275,7 @@ make_DHelper(J) {
     //printf("tmp_eip=%08X\n",tmp_eip);
     //printf("simm=%08X\n",id_dest->simm);
     unsigned char temp = (unsigned char)(id_dest->simm) + (unsigned char)(*eip);
+    temp &= 0b11111011;//进位不光丢弃，进位上的值也得置0
     //printf("temp=%08X\n",temp);
     decoding.jmp_eip = tmp_eip + (unsigned char)temp;
   }
