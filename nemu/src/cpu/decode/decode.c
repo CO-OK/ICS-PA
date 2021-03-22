@@ -267,7 +267,7 @@ make_DHelper(J) {
   //printf("width=%d\n",id_dest->width);
   //printf("eip=%08X\n",*eip);
   rtlreg_t t=0;
-  printf("width=%d\nval=%08X\n",id_dest->val,id_dest->width);
+  printf("width=%d\nval=%08X\n",id_dest->simm,id_dest->width);
   rtl_sext(&t,&id_dest->val,id_dest->width);
   decoding.jmp_eip = t+*eip;
   printf("t=%08X\neip=%08X\nres=%08X\n",t,*eip,t+*eip);
