@@ -55,7 +55,7 @@ make_EHelper(cltd) {
   //printf("width=%d\n",id_dest->width);
   if (decoding.is_operand_size_16) {
     //TODO();
-    rtl_msb(&t0,cpu.eax,2);
+    rtl_msb(&t0,&cpu.eax,2);
     if(t0==1)//ax<0
     {
       cpu.edx |= 0x0000ffff;
