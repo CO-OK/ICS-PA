@@ -79,7 +79,7 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
         *dest = (unsigned char)0;
       break;
     }
-    case CC_LE:{//Jump short if less or equal (ZF=1 and SF≠OF)
+    case CC_LE:{//Jump short if less or equal (ZF=1 or SF≠OF)
       rtl_get_SF(&temp0);
       rtl_get_OF(&temp1);
       rtl_get_ZF(&temp2);
