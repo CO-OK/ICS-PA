@@ -84,7 +84,7 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
       rtl_get_OF(&temp1);
       rtl_get_ZF(&temp2);
       printf("temp0=%08Xtemp1=%08X\n",temp0,temp1);
-      if(((temp0==0&&temp1!=0)||(temp0!=0&&temp1==0))&&temp2!=0)
+      if(((temp0==0&&temp1!=0)||(temp0!=0&&temp1==0))/*&&temp2!=0*/)
         *dest = (unsigned char)1;
       else
         *dest = (unsigned char)0;
