@@ -75,7 +75,7 @@ make_group(gp7,
 opcode_entry opcode_table [512] = {
   /* 0x00 */	EMPTY, EMPTY, EMPTY, IDEXW(E2G,add,0),//03 add Gv,Ev
   /* 0x04 */	EMPTY, /*IDEX(mov_I2r,add)*/EMPTY, EMPTY, EMPTY,//05--> ADD EAX, Iv IDEX(mov_I2r,ADD)
-  /* 0x08 */	/*IDEX(G2E,or)*/EMPTY, EMPTY, IDEX(E2G,or), EMPTY,//08-->0D or
+  /* 0x08 */	/*IDEX(G2E,or)*/EMPTY, EMPTY, IDEXW(E2G,or,1), EMPTY,//08-->0D or
   /* 0x0c */	EMPTY, EMPTY, EMPTY, EX(2byte_esc),
   /* 0x10 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x14 */	EMPTY, EMPTY, EMPTY, EMPTY,
