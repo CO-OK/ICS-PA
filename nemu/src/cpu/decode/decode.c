@@ -269,6 +269,7 @@ make_DHelper(J) {
   rtlreg_t t=0;
   rtl_sext(&t,&id_dest->val,id_dest->width);
   decoding.jmp_eip = t+*eip;
+  printf("t=%08X\neip=%08X\nres=%08X\n",t,*eip,t+*eip);
   /*if(id_dest->width==1)//宽度为1时相对地址相加以后进位要丢弃
   {
     rtlreg_t t=0;
