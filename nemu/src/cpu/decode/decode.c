@@ -276,7 +276,7 @@ make_DHelper(J) {
     printf("simm=%08X\n",id_dest->simm);
     printf("imm=%08X\n",id_dest->imm);
     printf("val=%08X\n",id_dest->val);
-    rtlreg_t t;
+    rtlreg_t t=0;
     rtl_sext(&t,&id_dest->val,id_dest->width);
     printf("t=%08X\n",t);
     printf("res=%08X\n",t+*eip);
