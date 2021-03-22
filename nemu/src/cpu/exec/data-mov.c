@@ -52,8 +52,10 @@ make_EHelper(leave) {
 }
 
 make_EHelper(cltd) {
+  printf("width=%d\n",id_dest->width);
   if (decoding.is_operand_size_16) {
-    TODO();
+    //TODO();
+    
   }
   else {
     TODO();
