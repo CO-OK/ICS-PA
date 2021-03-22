@@ -66,7 +66,7 @@ make_EHelper(cltd) {
     }
   }
   else {
-    rtl_msb(&t0,cpu.eax,4);
+    rtl_msb(&t0,&cpu.eax,4);
     if(t0==1)//ax<0
     {
       cpu.edx |= 0xffffffff;
