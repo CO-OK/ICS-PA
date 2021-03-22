@@ -274,6 +274,8 @@ make_DHelper(J) {
     tmp_eip = tmp_eip << 8;
     printf("tmp_eip=%08X\n",tmp_eip);
     printf("simm=%08X\n",id_dest->simm);
+    printf("imm=%08X\n",id_dest->imm);
+    printf("val=%08X\n",id_dest->val);
     unsigned char temp = (unsigned char)(id_dest->simm) + (unsigned char)(*eip);
     //temp &= 0b11111011;//进位不光丢弃，进位上的值也得置0
     printf("temp=%08X\n",temp);
