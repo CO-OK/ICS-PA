@@ -223,7 +223,9 @@ make_EHelper(setcc) {
 }
 
 make_EHelper(not) {
-  TODO();
-
+  //TODO();
+  get_mr_value(&t0,id_dest);
+  t0=~t0;
+  operand_write(id_dest,&t0);
   print_asm_template1(not);
 }
