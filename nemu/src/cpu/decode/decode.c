@@ -268,15 +268,15 @@ make_DHelper(J) {
   //printf("eip=%08X\n",*eip);
   if(id_dest->width==1)//宽度为1时相对地址相加以后进位要丢弃
   {
-    //printf("width=%d\n",1);
+    printf("eip=%08X\n",*eip);
     vaddr_t tmp_eip = *eip;
     tmp_eip = tmp_eip >> 8;
     tmp_eip = tmp_eip << 8;
-    //printf("tmp_eip=%08X\n",tmp_eip);
-    //printf("simm=%08X\n",id_dest->simm);
+    printf("tmp_eip=%08X\n",tmp_eip);
+    printf("simm=%08X\n",id_dest->simm);
     unsigned char temp = (unsigned char)(id_dest->simm) + (unsigned char)(*eip);
-    temp &= 0b11111011;//进位不光丢弃，进位上的值也得置0
-    //printf("temp=%08X\n",temp);
+    //temp &= 0b11111011;//进位不光丢弃，进位上的值也得置0
+    printf("temp=%08X\n",temp);
     decoding.jmp_eip = tmp_eip + (unsigned char)temp;
   }
   else if(id_dest->width==2)//宽度为2时同理
