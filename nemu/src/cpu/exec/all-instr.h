@@ -27,5 +27,6 @@ make_EHelper(dec);
 make_EHelper(imul2);
 make_EHelper(sar);
 make_EHelper(shl);
+make_EHelper(or);
 //make_EHelper(xchg_b);
 //make_EHelper(push_Ev);
