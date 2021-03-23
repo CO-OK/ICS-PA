@@ -207,6 +207,9 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
     {
       *dest=*src1 & ~(0b11111111111111110000000000000000);
     }
+    {
+      *dest=0;
+    }
   }
   else
   {
@@ -217,6 +220,10 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
     else if(width==2)
     {
       *dest=*src1 | 0b11111111111111110000000000000000;
+    }
+    else
+    {
+      *dest=0;
     }
   }
   //TODO();
