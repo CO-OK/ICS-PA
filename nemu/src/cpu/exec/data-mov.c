@@ -100,6 +100,7 @@ make_EHelper(movsx) {
   {
     id_dest->width=2;
   }
+  printf("t22=%08X\n",t2);
   //id_dest->width=id_src->width;
   operand_write(id_dest, &t2);
   print_asm_template2(movsx);
