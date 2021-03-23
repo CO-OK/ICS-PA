@@ -95,6 +95,9 @@ make_EHelper(cmp) {
     destination operands. A subsequent Jcc or SETcc instruction can test the
     appropriate flags.
     The CF, OF, SF, ZF, AF, and PF flags are set according to the result
+    If an operand greater than one byte is compared to an
+    immediate byte, the byte value is first sign-extended.
+
   */
   rtlreg_t op1,op2;
   get_mr_value(&op1,id_dest);
