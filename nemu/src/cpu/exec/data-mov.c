@@ -100,6 +100,7 @@ make_EHelper(movsx) {
   {
     //mov word to dword
     rtl_sext(&t2, &id_src->val, 2);
+    id_dest->width=2;
   }
   else
   {
