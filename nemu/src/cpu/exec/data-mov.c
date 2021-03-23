@@ -96,7 +96,7 @@ make_EHelper(movsx) {
   printf("src_width=%d\ndest_width=%d\nval=%08X\n",id_src->width,id_dest->width,id_src->val);
   printf("t21=%08X\n",t2);
   rtl_sext(&t2, &id_src->val, id_src->width);
-  id_dest->width=id_src->width;
+  //id_dest->width=id_src->width;
   printf("t2=%08X\n",t2);
   operand_write(id_dest, &t2);
   print_asm_template2(movsx);
