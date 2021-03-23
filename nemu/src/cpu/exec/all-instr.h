@@ -31,5 +31,6 @@ make_EHelper(or);
 make_EHelper(leave);
 make_EHelper(not);
 make_EHelper(cltd);
+make_EHelper(idiv);
 //make_EHelper(xchg_b);
 //make_EHelper(push_Ev);

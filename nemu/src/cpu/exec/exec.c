@@ -53,7 +53,7 @@ make_group(gp2,
   /* 0xf6, 0xf7 */
 make_group(gp3,
     IDEXW(test_I,test,1), EMPTY, EX(not), EMPTY,//0xf7 test Ib,Iv
-    EMPTY, EMPTY, EMPTY, EMPTY)
+    EMPTY, EMPTY, EMPTY, IDEXW(E,idiv,1))
 
   /* 0xfe */
 make_group(gp4,
