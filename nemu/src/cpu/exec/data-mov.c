@@ -116,8 +116,8 @@ make_EHelper(movzx) {
   /*
     这里应该根据操作码来决定操作数的宽度？
   */
- if((decoding.opcode & 0x00000011)==0xb6)
-  printf("hit\n");
+
+  printf("op=%08X\n",decoding.ext_opcode);
 
   /*if(id_src->width==4)
     id_src->val &= 0x0000ffff;*/
