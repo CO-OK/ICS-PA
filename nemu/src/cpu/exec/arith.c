@@ -121,6 +121,7 @@ make_EHelper(cmp) {
   {
     rtl_sext(&op2,&op2,id_dest->width);
   }
+  printf("op2=%08X\n",op2);
   printf("src_width=%d\n",id_src->width);
   printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
   rtl_sub(&t2, &op1, &op2);//t2存结果
