@@ -271,16 +271,39 @@ make_EHelper(mul) {
 make_EHelper(imul1) {
   rtl_lr(&t0, R_EAX, id_dest->width);
   rtl_imul(&t0, &t1, &id_dest->val, &t0);
-
+  printf("777\n");
+  /*
+    Instruction Form Condition for Clearing CF and OF
+    r/m8
+    AL = sign-extend of AL to 16 bits
+    r/m16
+    AX = sign-extend of AX to 32 bits
+    r/m32
+    EDX:EAX = sign-extend of EAX to 32 bits
+    r16,r/m16
+    Result exactly fits within r16
+    r/32,r/m32
+    Result exactly fits within r32
+    r16,r/m16,imm16
+    Result exactly fits within r16
+    r32,r/m32,imm32
+    Result exactly fits within r32
+  */
   switch (id_dest->width) {
-    case 1:
+    case 1:{
       rtl_sr_w(R_AX, &t1);
+      //t1 &= 0x000000ff;
+      rtl_update_ZFSF(&t1,1);
       break;
+    }  
     case 2:
+    {
       rtl_sr_w(R_AX, &t1);
       rtl_shri(&t1, &t1, 16);
       rtl_sr_w(R_DX, &t1);
       break;
+    }
+      
     case 4:
       rtl_sr_l(R_EDX, &t0);
       rtl_sr_l(R_EAX, &t1);
