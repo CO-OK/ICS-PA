@@ -43,7 +43,7 @@ make_EHelper(add) {
   //res=0;
   rtl_sltu(&t3,&t2,&id_src->val);
   rtlreg_t temp;
-  rtl_sltu(&temp,t2,&id_dest->val);
+  rtl_sltu(&temp,&t2,&id_dest->val);
   t3 = temp | t3;
   if(t3==1)
     rtl_set_CF(&eflag_CF);
