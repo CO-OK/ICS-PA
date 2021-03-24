@@ -193,6 +193,7 @@ make_EHelper(adc) {
   rtl_update_ZFSF(&t2, id_dest->width);
 
   rtl_sltu(&t0, &t2, &id_dest->val);
+  printf("t3=%08X\n,t0=%08X\n",t3,t0);
   rtl_or(&t0, &t3, &t0);
   if(t0!=0)
     rtl_set_CF(&eflag_CF);
