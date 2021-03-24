@@ -112,15 +112,23 @@ make_EHelper(movsx) {
 
 make_EHelper(movzx) {
   id_dest->width = decoding.is_operand_size_16 ? 2 : 4;
-  printf("op=%X\n",decoding.opcode);
+  //printf("op=%X\n",decoding.opcode);
   /*
     这里应该根据操作码来决定操作数的宽度？
   */
- uint32_t t = decoding.opcode & 0x000000ff;
+  uint32_t t = decoding.opcode & 0x000000ff;
   printf("op=%X\n",t);
+  if(t==0xb6)
+  {
+    //Move byte to dword, zero-extend
+    id_src->val &= 0x000000ff;
+  }
+  else if(t==0xb7)
+  {
+    //Move word to dword, zero-extend
+    id_src->val &= 0x0000ffff;
+  }
 
-  /*if(id_src->width==4)
-    id_src->val &= 0x0000ffff;*/
   printf("dest_width=%d\n",id_dest->width);
   printf("src_width=%d\n",id_src->width);
   printf("val=%08X\n",id_src->val);
