@@ -116,6 +116,7 @@ make_EHelper(cmp) {
   rtlreg_t op1,op2;
   get_mr_value(&op1,id_dest);
   get_mr_value(&op2,id_src);
+  printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
   rtl_sub(&t2, &op1, &op2);//t2存结果
   rtl_sltu(&t3, &id_dest->val, &id_src->val);//t3 = 1 ---> val<t2 other wise val>=t2  which mean cf=1
   rtl_update_ZFSF(&t2, id_dest->width);
