@@ -18,6 +18,7 @@ make_EHelper(jcc) {
 
 make_EHelper(jmp_rm) {
   printf("val=%08X\n",id_dest->val);
+  printf("jmp_eip=%08X\n",decoding.jmp_eip);
   decoding.jmp_eip = id_dest->val;
   decoding.is_jmp = 1;
 
