@@ -198,7 +198,7 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   rtlreg_t temp;
   rtl_msb(&temp,src1,width);
   temp &= 1;
-  printf("temp=%08X\n",temp);
+  //printf("temp=%08X\n",temp);
   if(temp==0)
   {
     if(width==1)
