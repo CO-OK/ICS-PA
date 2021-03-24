@@ -112,7 +112,7 @@ make_EHelper(movsx) {
 
 make_EHelper(movzx) {
   id_dest->width = decoding.is_operand_size_16 ? 2 : 4;
-  printf("op=%08X\n",decoding.opcode);
+  printf("op=%X\n",decoding.opcode);
   /*
     这里应该根据操作码来决定操作数的宽度？
   */
