@@ -96,14 +96,6 @@ make_EHelper(movsx) {
   //printf("src_width=%d\ndest_width=%d\nval=%08X\n",id_src->width,id_dest->width,id_src->val);
   //printf("t21=%08X\n",t2);
   uint32_t t = decoding.opcode & 0x000000ff;
-  /*if(id_src->width==4)//此处可能有问题
-  {
-    rtl_sext(&t2, &id_src->val, id_src->width-2);
-  }
-  else
-  {
-    rtl_sext(&t2, &id_src->val, id_src->width);
-  }*/
   if(t==0xbe)
   {
     //Move byte to dword, sign-extend
