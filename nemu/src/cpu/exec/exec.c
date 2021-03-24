@@ -185,7 +185,7 @@ opcode_entry opcode_table [512] = {
   /* 0xa8 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xac */	EMPTY, EMPTY, EMPTY, IDEXW(E2G,imul2,0),//0xaf imul Gv,Ev
   /* 0xb0 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0xb4 */	EMPTY, EMPTY, IDEXW(mov_E2G,movzx,1), IDEXW(mov_E2G,movzx,1),//0xb6 movzx Gv,Eb
+  /* 0xb4 */	EMPTY, EMPTY, IDEXW(mov_E2G,movzx,1), IDEXW(mov_E2G,movzx,0),//0xb6 movzx Gv,Eb
   /* 0xb8 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xbc */	EMPTY, EMPTY, EMPTY, IDEXW(mov_E2G,movsx,0),// bf  MOVSX Gv,Ew 
   /* 0xc0 */	EMPTY, EMPTY, EMPTY, EMPTY,
