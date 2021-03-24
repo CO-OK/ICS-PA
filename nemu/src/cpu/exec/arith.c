@@ -191,8 +191,9 @@ make_EHelper(adc) {
   operand_write(id_dest, &t2);
   printf("res=%08X\n",t2);
   rtl_update_ZFSF(&t2, id_dest->width);
-
   rtl_sltu(&t0, &t2, &id_dest->val);
+  rtl_sltu(&temp,&t2,&id_src->val);
+  t0 = t0 | temp;
   printf("t3=%08X\n,t0=%08X\n",t3,t0);
   rtl_or(&t0, &t3, &t0);
   if(t0!=0)
