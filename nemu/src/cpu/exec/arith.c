@@ -287,6 +287,7 @@ make_EHelper(imul1) {
     r/m16
     AX = sign-extend of AX to 32 bits
     r/m32
+    EDX:EAX = sign-extend of EAX to 32 bits
   */
   switch (id_dest->width) {
     case 1:{
