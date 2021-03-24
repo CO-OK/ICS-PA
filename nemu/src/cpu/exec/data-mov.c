@@ -114,10 +114,10 @@ make_EHelper(movzx) {
   id_dest->width = decoding.is_operand_size_16 ? 2 : 4;
   if(id_src->width==4)
     id_src->val &= 0b00001111;
-  //printf("dest_width=%d\n",id_dest->width);
-  //printf("src_width=%d\n",id_src->width);
-  //printf("val=%08X\n",id_src->val);
-  //operand_write(id_dest, &id_src->val);
+  printf("dest_width=%d\n",id_dest->width);
+  printf("src_width=%d\n",id_src->width);
+  printf("val=%08X\n",id_src->val);
+  operand_write(id_dest, &id_src->val);
   print_asm_template2(movzx);
 }
 
