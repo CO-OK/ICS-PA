@@ -119,7 +119,7 @@ make_EHelper(cmp) {
   //printf("type=%d\n",id_src->type);
   if(id_src->type==OP_TYPE_IMM)
   {
-    rtl_sext(&op2,&op2,id_dest->width);
+    rtl_sext(&op2,&op2,id_src->width);
   }
   printf("op2=%08X\n",op2);
   printf("src_width=%d\n",id_src->width);
