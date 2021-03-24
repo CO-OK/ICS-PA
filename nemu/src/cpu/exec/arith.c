@@ -16,19 +16,19 @@ make_EHelper(add) {
   /*
     OF标志位根据操作数的符号及其变化情况来设置：若两个操作数的符号相同，而结果的符号与之相反时，OF=1，否则OF=0
   */
-  rtlreg_t op1,op2,res;//操作数以及结果的符号
+  /*rtlreg_t op1,op2,res;//操作数以及结果的符号
   rtl_msb(&op1,&t0,id_dest->width);
   rtl_msb(&op2,&t1,id_src->width);
   rtl_msb(&res,&t2,id_dest->width);
   if(op1==op2&&res!=op1)
     rtl_set_OF(&eflag_OF);
   else
-    rtl_unset_OF(&eflag_OF);
+    rtl_unset_OF(&eflag_OF);*/
   /*
     if a + b > max
     then a > max - b
   */
-  if(id_dest->width==1)
+  /*if(id_dest->width==1)
   {
     op1=MY_INT8_MAX-t1;
   }
@@ -39,15 +39,27 @@ make_EHelper(add) {
   else if(id_dest->width==4)
   {
     op1=MY_INT32_MAX-t1;
-  }
-  op2=t0;
-  res=0;
-  rtl_sltu(&res,&op1,&op2);
-  if(res==1)
+  }*/
+  //op2=t0;
+  //res=0;
+  rtl_sltu(&t3,&t2,&id_src->val);
+  if(t3==1)
     rtl_set_CF(&eflag_CF);
   else
     rtl_unset_CF(&eflag_CF);
   //rtl_sltu()
+  rtl_xor(&t0, &id_dest->val, &id_src->val);
+  rtl_not(&t0);
+  rtl_xor(&t1, &id_dest->val, &t2);
+  rtl_and(&t0, &t0, &t1);
+  rtl_msb(&t0, &t0, id_dest->width);
+  /*
+    t0=1说明若两个操作数的符号相同，而结果的符号与之相反
+  */
+  if(t0==1)
+    rtl_set_OF(&eflag_OF);
+  else
+    rtl_unset_OF(&eflag_OF);
   print_asm_template2(add);
 }
 
