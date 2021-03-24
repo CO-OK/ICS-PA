@@ -95,13 +95,24 @@ make_EHelper(movsx) {
   id_dest->width = decoding.is_operand_size_16 ? 2 : 4;
   //printf("src_width=%d\ndest_width=%d\nval=%08X\n",id_src->width,id_dest->width,id_src->val);
   //printf("t21=%08X\n",t2);
-  if(id_src->width==4)//此处可能有问题
+  uint32_t t = decoding.opcode & 0x000000ff;
+  /*if(id_src->width==4)//此处可能有问题
   {
     rtl_sext(&t2, &id_src->val, id_src->width-2);
   }
   else
   {
     rtl_sext(&t2, &id_src->val, id_src->width);
+  }*/
+  if(t==0xbe)
+  {
+    //Move byte to dword, sign-extend
+    rtl_sext(&t2, &id_src->val, 1);
+  }
+  else if(t==0xbf)
+  {
+    //Move word to dword, sign-extend
+    rtl_sext(&t2, &id_src->val, 2);
   }
   
   //printf("t22=%08X\n",t2);
@@ -117,7 +128,7 @@ make_EHelper(movzx) {
     这里应该根据操作码来决定操作数的宽度？
   */
   uint32_t t = decoding.opcode & 0x000000ff;
-  printf("op=%X\n",t);
+  //printf("op=%X\n",t);
   if(t==0xb6)
   {
     //Move byte to dword, zero-extend
@@ -129,9 +140,9 @@ make_EHelper(movzx) {
     id_src->val &= 0x0000ffff;
   }
 
-  printf("dest_width=%d\n",id_dest->width);
-  printf("src_width=%d\n",id_src->width);
-  printf("val=%08X\n",id_src->val);
+  //printf("dest_width=%d\n",id_dest->width);
+  //printf("src_width=%d\n",id_src->width);
+  //printf("val=%08X\n",id_src->val);
   operand_write(id_dest, &id_src->val);
   print_asm_template2(movzx);
 }
