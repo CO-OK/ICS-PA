@@ -271,7 +271,7 @@ make_EHelper(mul) {
 make_EHelper(imul1) {
   rtl_lr(&t0, R_EAX, id_dest->width);
   rtl_imul(&t0, &t1, &id_dest->val, &t0);
-  printf("777\n");
+  //printf("777\n");
   /*
     Instruction Form Condition for Clearing CF and OF
     r/m8
@@ -293,7 +293,7 @@ make_EHelper(imul1) {
     case 1:{
       rtl_sr_w(R_AX, &t1);
       //t1 &= 0x000000ff;
-      rtl_update_ZFSF(&t1,1);
+      //rtl_update_ZFSF(&t1,1);
       break;
     }  
     case 2:
@@ -322,8 +322,29 @@ make_EHelper(imul2) {
   rtl_imul(&t0, &t1, &id_dest->val, &id_src->val);
   operand_write(id_dest, &t1);
   /*
-
+    Clearing CF and OF when:
+    r16,r/m16   Result exactly fits within r16
+    r/32,r/m32  Result exactly fits within r32
   */
+  //rtl_update_ZFSF(&t1,id_dest->width);
+  rtlreg_t temp;
+  if(id_dest->width==2)
+  {
+    temp = t1 & 0xffff0000;
+    if(temp==0)
+    {
+      rtl_unset_OF(&eflag_OF);
+      rtl_unset_CF(&eflag_CF);
+    }
+  }
+  else if(id_dest->width==4)
+  {
+    if(t0==0)
+    {
+      rtl_unset_OF(&eflag_OF);
+      rtl_unset_CF(&eflag_CF);
+    }
+  }
   print_asm_template2(imul);
 }
 
