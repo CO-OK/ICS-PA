@@ -196,7 +196,7 @@ void difftest_step(uint32_t eip) {
   else if(r.eip != cpu.eip)
   {
     diff = true;
-    printf("detect diff at eip,\tr.eip=%08X\tcpu.ip=%08X\n",r.eip,cpu.eip);
+    printf("detect diff at eip,\tr.eip=%08X\tcpu.eip=%08X\n",r.eip,cpu.eip);
   }
   else if(r.eflags != cpu.EFLAGS_)
   {
