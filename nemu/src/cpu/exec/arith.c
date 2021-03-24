@@ -279,15 +279,6 @@ make_EHelper(imul1) {
     r/m16
     AX = sign-extend of AX to 32 bits
     r/m32
-    EDX:EAX = sign-extend of EAX to 32 bits
-    r16,r/m16
-    Result exactly fits within r16
-    r/32,r/m32
-    Result exactly fits within r32
-    r16,r/m16,imm16
-    Result exactly fits within r16
-    r32,r/m32,imm32
-    Result exactly fits within r32
   */
   switch (id_dest->width) {
     case 1:{
