@@ -99,7 +99,11 @@ make_EHelper(movsx) {
   {
     rtl_sext(&t2, &id_src->val, id_src->width-2);
   }
-  rtl_sext(&t2, &id_src->val, id_src->width);
+  else
+  {
+    rtl_sext(&t2, &id_src->val, id_src->width);
+  }
+  
   printf("t22=%08X\n",t2);
   //id_dest->width=id_src->width;
   operand_write(id_dest, &t2);
