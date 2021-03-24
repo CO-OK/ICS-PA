@@ -179,6 +179,7 @@ make_EHelper(neg) {
 }
 
 make_EHelper(adc) {
+  printf("dest-val=%08x\nsrc-val=%08X\n",id_dest->val,id_src->val);
   rtl_add(&t2, &id_dest->val, &id_src->val);
   rtl_sltu(&t3, &t2, &id_dest->val);
   rtlreg_t temp;
@@ -187,7 +188,7 @@ make_EHelper(adc) {
     temp=1;
   rtl_add(&t2, &t2, &temp);
   operand_write(id_dest, &t2);
-
+  printf("res=%08X\n",t2);
   rtl_update_ZFSF(&t2, id_dest->width);
 
   rtl_sltu(&t0, &t2, &id_dest->val);
