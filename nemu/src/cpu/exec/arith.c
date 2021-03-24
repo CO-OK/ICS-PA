@@ -170,22 +170,36 @@ make_EHelper(neg) {
 make_EHelper(adc) {
   rtl_add(&t2, &id_dest->val, &id_src->val);
   rtl_sltu(&t3, &t2, &id_dest->val);
-  rtl_get_CF(&t1);
-  rtl_add(&t2, &t2, &t1);
+  rtlreg_t temp;
+  rtl_get_CF(&temp);
+  if(temp!=0)
+    temp=1;
+  rtl_add(&t2, &t2, &temp);
   operand_write(id_dest, &t2);
 
   rtl_update_ZFSF(&t2, id_dest->width);
 
   rtl_sltu(&t0, &t2, &id_dest->val);
   rtl_or(&t0, &t3, &t0);
-  rtl_set_CF(&t0);
-
+  if(t0!=0)
+    rtl_set_CF(&eflag_CF);
+  else
+    rtl_unset_CF(&eflag_CF);
+  /*
+    OF标志位根据操作数的符号及其变化情况来设置：若两个操作数的符号相同，而结果的符号与之相反时，OF=1，否则OF=0
+  */
   rtl_xor(&t0, &id_dest->val, &id_src->val);
   rtl_not(&t0);
   rtl_xor(&t1, &id_dest->val, &t2);
   rtl_and(&t0, &t0, &t1);
   rtl_msb(&t0, &t0, id_dest->width);
-  rtl_set_OF(&t0);
+  /*
+    t0=1说明若两个操作数的符号相同，而结果的符号与之相反
+  */
+  if(t0==1)
+    rtl_set_OF(&eflag_OF);
+  else
+    rtl_unset_OF(&eflag_OF);
 
   print_asm_template2(adc);
 }
