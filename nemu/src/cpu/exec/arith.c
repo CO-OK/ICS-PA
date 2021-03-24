@@ -184,6 +184,7 @@ make_EHelper(adc) {
   rtl_sltu(&t3, &t2, &id_dest->val);
   rtlreg_t temp;
   rtl_get_CF(&temp);
+  printf("temp=%08X\n",temp);
   if(temp!=0)
     temp=1;
   rtl_add(&t2, &t2, &temp);
