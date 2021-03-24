@@ -347,6 +347,11 @@ make_EHelper(imul2) {
     }
   }
   rtl_unset_ZF(&eflag_ZF);
+  rtl_msb(&t3,&t1,id_dest->width);
+  if(t3==1)
+    rtl_set_SF(&eflag_SF);
+  else
+    rtl_unset_SF(&eflag_SF);
   print_asm_template2(imul);
 }
 
