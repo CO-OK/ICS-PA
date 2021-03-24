@@ -116,10 +116,10 @@ make_EHelper(cmp) {
   rtlreg_t op1,op2;
   get_mr_value(&op1,id_dest);
   get_mr_value(&op2,id_src);
-  printf("type=%d\n",id_src->type);
+  //printf("type=%d\n",id_src->type);
   if(id_src->type==OP_TYPE_IMM)
   {
-
+    rtl_sext(&op2,&op2,id_dest->width);
   }
   printf("src_width=%d\n",id_src->width);
   printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
