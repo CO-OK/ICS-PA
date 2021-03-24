@@ -112,6 +112,7 @@ make_EHelper(movsx) {
 
 make_EHelper(movzx) {
   id_dest->width = decoding.is_operand_size_16 ? 2 : 4;
+  printf("op=%08X\n",decoding.opcode);
   /*if(id_src->width==4)
     id_src->val &= 0x0000ffff;*/
   printf("dest_width=%d\n",id_dest->width);
