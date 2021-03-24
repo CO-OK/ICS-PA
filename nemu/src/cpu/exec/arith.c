@@ -346,6 +346,7 @@ make_EHelper(imul2) {
       rtl_unset_CF(&eflag_CF);
     }
   }
+  rtl_unset_ZF(&eflag_ZF);
   print_asm_template2(imul);
 }
 
