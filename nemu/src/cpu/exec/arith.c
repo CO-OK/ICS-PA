@@ -4,7 +4,6 @@ make_EHelper(add) {
 
   //TODO();
   //printf("dest_type=%d\nsrc_type=%d\n",id_dest->type,id_src->type);
-  
   get_mr_value(&t0,id_dest);
   get_mr_value(&t1,id_src);
   rtl_add(&t2,&t1,&t0);
