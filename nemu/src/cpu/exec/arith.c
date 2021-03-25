@@ -237,6 +237,7 @@ make_EHelper(sbb) {
   rtl_sub(&t2, &id_dest->val, &id_src->val);
   rtl_sltu(&t3, &id_dest->val, &t2);
   rtl_get_CF(&t1);
+  printf("t1=%08X\n",t1);
   if(t1!=0)//cf=1
   {
     rtl_subi(&t2, &t2, 1);
