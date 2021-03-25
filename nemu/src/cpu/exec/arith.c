@@ -268,7 +268,7 @@ make_EHelper(sbb) {
   */
 
   rtl_xor(&t0, &id_dest->val, &id_src->val);
-  rtl_xor(&t1, &id_dest->val, &t2);
+  rtl_xor(&t1, &id_dest->val, &temp);
   rtl_and(&t0, &t0, &t1);
   rtl_msb(&t0, &t0, id_dest->width);
   if(t0==0)
