@@ -294,7 +294,7 @@ make_EHelper(imul1) {
     high-order half of the result is the sign-extension of the low-order half.
   */
   rtlreg_t temp;
-  
+  printf("width=%d\n",id_dest->width);
   switch (id_dest->width) {
     case 1:{
       rtl_sr_w(R_AX, &t1);
