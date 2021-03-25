@@ -311,6 +311,13 @@ make_EHelper(imul1) {
         rtl_set_CF(&eflag_CF);
         rtl_set_OF(&eflag_OF);
       }
+      rtl_msb(&temp,&cpu.eax,2);
+      if(temp!=0)
+      {
+        rtl_set_SF(&eflag_SF);
+      }
+      else
+        rtl_unset_SF(&eflag_SF);
       break;
     }  
     case 2:
@@ -332,9 +339,15 @@ make_EHelper(imul1) {
         rtl_set_CF(&eflag_CF);
         rtl_set_OF(&eflag_OF);
       }
+      rtl_msb(&temp,&cpu.edx,2);
+      if(temp!=0)
+      {
+        rtl_set_SF(&eflag_SF);
+      }
+      else
+        rtl_unset_SF(&eflag_SF);
       break;
     }
-      
     case 4:
     {
       temp=cpu.edx;
@@ -350,6 +363,13 @@ make_EHelper(imul1) {
         rtl_set_CF(&eflag_CF);
         rtl_set_OF(&eflag_OF);
       }
+      rtl_msb(&temp,&cpu.edx,4);
+      if(temp!=0)
+      {
+        rtl_set_SF(&eflag_SF);
+      }
+      else
+        rtl_unset_SF(&eflag_SF);
       break;
     }
       
