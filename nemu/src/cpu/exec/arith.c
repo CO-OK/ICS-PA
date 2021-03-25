@@ -186,6 +186,8 @@ make_EHelper(inc) {
   rtl_update_ZFSF(&t0,id_dest->width);  
   rtl_msb(&t1,&t0,id_dest->width);
   rtl_msb(&t2,&id_dest->val,id_dest->width);
+  t1 &= 0x00000001;
+  t2 &= 0x00000001;
   //printf("val=%08X\n",id_dest->val);
   //The overflow flag is set when an operation would cause a sign change
   if(t1==t2)
@@ -203,6 +205,8 @@ make_EHelper(dec) {
   rtl_update_ZFSF(&t0,id_dest->width);  
   rtl_msb(&t1,&id_dest->val,id_dest->width);
   rtl_msb(&t2,&t0,id_dest->width);
+  t1 &= 0x00000001;
+  t2 &= 0x00000001;
   if(t1==t2)
     rtl_unset_OF(&eflag_OF);
   else 
