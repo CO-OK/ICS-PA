@@ -178,7 +178,7 @@ make_EHelper(inc) {
     OF, SF, ZF, AF, and PF as described in Appendix C
   */
   rtl_update_ZFSF(&t0,id_dest->width);  
-  printf("val=%08X\n",id_dest->val);
+  //printf("val=%08X\n",id_dest->val);
   if(id_dest->val!=MY_INT32_MAX)
     rtl_unset_CF(&eflag_OF);
   else 
