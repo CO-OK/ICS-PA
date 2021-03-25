@@ -205,6 +205,7 @@ make_EHelper(dec) {
   rtl_update_ZFSF(&t0,id_dest->width);  
   rtl_msb(&t1,&id_dest->val,id_dest->width);
   rtl_msb(&t2,&t0,id_dest->width);
+  printf("t1=%08X\nt2=%08X\n",t1,t2);
   t1 &= 0x00000001;
   t2 &= 0x00000001;
   if(t1==t2)
