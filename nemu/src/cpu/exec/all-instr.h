@@ -40,5 +40,6 @@ make_EHelper(call_rm);
 make_EHelper(shr);
 make_EHelper(mul);
 make_EHelper(sbb);
+make_EHelper(div);
 //make_EHelper(xchg_b);
 //make_EHelper(push_Ev);
