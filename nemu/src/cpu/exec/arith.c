@@ -292,6 +292,8 @@ make_EHelper(imul1) {
     The CF and OF flags are set when significant bits are carried into the
     high-order half of the result. CF and OF are cleared when the
     high-order half of the result is the sign-extension of the low-order half.
+
+    imul sets SF according to the sign bit of the truncated result
   */
   rtlreg_t temp;
   printf("width=%d\n",id_dest->width);
@@ -311,7 +313,7 @@ make_EHelper(imul1) {
         rtl_set_CF(&eflag_CF);
         rtl_set_OF(&eflag_OF);
       }
-      rtl_msb(&temp,&cpu.eax,2);
+      rtl_msb(&temp,&cpu.eax,1);
       if(temp!=0)
       {
         rtl_set_SF(&eflag_SF);
@@ -339,7 +341,7 @@ make_EHelper(imul1) {
         rtl_set_CF(&eflag_CF);
         rtl_set_OF(&eflag_OF);
       }
-      rtl_msb(&temp,&cpu.edx,2);
+      rtl_msb(&temp,&cpu.eax,2);
       if(temp!=0)
       {
         rtl_set_SF(&eflag_SF);
@@ -363,7 +365,7 @@ make_EHelper(imul1) {
         rtl_set_CF(&eflag_CF);
         rtl_set_OF(&eflag_OF);
       }
-      rtl_msb(&temp,&cpu.edx,4);
+      rtl_msb(&temp,&cpu.eax,4);
       if(temp!=0)
       {
         rtl_set_SF(&eflag_SF);
