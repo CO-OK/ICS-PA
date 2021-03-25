@@ -249,7 +249,7 @@ make_EHelper(sbb) {
   }
   operand_write(id_dest, &temp);
 
-  rtl_update_ZFSF(&t2, id_dest->width);
+  rtl_update_ZFSF(&temp, id_dest->width);
 
   rtl_sltu(&t0, &t2, &temp);
   printf("t3=%08X\n,t0=%08X\n",t3,t0);
