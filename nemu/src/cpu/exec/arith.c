@@ -125,7 +125,7 @@ make_EHelper(cmp) {
   //printf("src_width=%d\n",id_src->width);
   //printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
   rtl_sub(&t2, &op1, &op2);//t2存结果
-  printf("t2=%08X\nwidth=%d\n",t2,id_dest->width);
+  //printf("t2=%08X\nwidth=%d\n",t2,id_dest->width);
   rtl_sltu(&t3, &id_dest->val, &id_src->val);//t3 = 1 ---> val<t2 other wise val>=t2  which mean cf=1
   rtl_update_ZFSF(&t2, id_dest->width);
   if(t3)//cf==0
@@ -154,7 +154,7 @@ make_EHelper(cmp) {
   rtl_xor(&t1, &op1, &t2);
   rtl_and(&t0, &t0, &t1);
   rtl_msb(&t0, &t0, id_dest->width);
-  printf("t0=%08X\n",t0);
+  //printf("t0=%08X\n",t0);
   t0 = t0 & 0x00000001;
   if(t0==0)
   {
