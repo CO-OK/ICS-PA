@@ -208,8 +208,26 @@ make_EHelper(shl) {
 }
 
 make_EHelper(shr) {
-  TODO();
+  //TODO();
   // unnecessary to update CF and OF in NEMU
+  if(id_src->val==0)
+  {
+    print_asm_template2(sar);
+    return;
+  }
+  rtl_msb(&t3,&id_dest->val,id_dest->width);
+  rtl_shri(&t1,&id_dest->val,id_src->val-1);//先右移n-1位，留最后一位填充CF
+  t2 = t1 & 0x00000001;
+
+  if(t2 == 1)
+    rtl_set_CF(&eflag_CF);
+  else
+    rtl_unset_CF(&eflag_CF);  
+  rtl_shr(&t1,&id_dest->val,&id_src->val);
+
+  operand_write(id_dest,&t1);
+  rtl_unset_OF(&eflag_OF);
+  rtl_update_ZFSF(&t1,id_dest->width);
 
   print_asm_template2(shr);
 }

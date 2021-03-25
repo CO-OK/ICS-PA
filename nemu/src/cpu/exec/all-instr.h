@@ -37,5 +37,6 @@ make_EHelper(adc);
 make_EHelper(jmp_rm);
 make_EHelper(imul1);
 make_EHelper(call_rm);
+make_EHelper(shr);
 //make_EHelper(xchg_b);
 //make_EHelper(push_Ev);
