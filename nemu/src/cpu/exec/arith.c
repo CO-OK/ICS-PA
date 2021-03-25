@@ -180,9 +180,9 @@ make_EHelper(inc) {
   rtl_update_ZFSF(&t0,id_dest->width);  
   printf("val=%08X\n",id_dest->val);
   if(id_dest->val!=MY_INT32_MAX)
-    rtl_unset_OF(&eflag_OF);
+    rtl_unset_CF(&eflag_OF);
   else 
-    rtl_set_OF(&eflag_OF);
+    rtl_set_CF(&eflag_OF);
   print_asm_template1(inc);
 }
 
