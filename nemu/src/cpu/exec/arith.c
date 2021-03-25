@@ -233,6 +233,7 @@ make_EHelper(adc) {
 }
 
 make_EHelper(sbb) {
+  printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
   rtl_sub(&t2, &id_dest->val, &id_src->val);
   rtl_sltu(&t3, &id_dest->val, &t2);
   rtl_get_CF(&t1);
