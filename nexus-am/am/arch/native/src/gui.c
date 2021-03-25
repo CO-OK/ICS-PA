@@ -47,11 +47,11 @@ static inline int min(int x, int y) {
 }
 
 void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {
-  int cp_bytes = sizeof(uint32_t) * min(w, _screen.width - x);
+  /*int cp_bytes = sizeof(uint32_t) * min(w, _screen.width - x);
   for (int j = 0; j < h && y + j < _screen.height; j ++) {
     memcpy(&fb[(y + j) * W + x], pixels, cp_bytes);
     pixels += w;
-  }
+  }*/
 }
 
 void _draw_sync() {
