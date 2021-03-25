@@ -62,7 +62,7 @@ make_group(gp4,
 
   /* 0xff */
 make_group(gp5,
-    EMPTY, EMPTY, EX(call), EMPTY,
+    EMPTY, EMPTY, EX(call_rm), EMPTY,
     EMPTY, EMPTY, EX(push_reg), EMPTY)  // 第7个 PUSH Ev
 
   /* 0x0f 0x01*/
