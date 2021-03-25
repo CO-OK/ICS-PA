@@ -288,26 +288,71 @@ make_EHelper(imul1) {
     AX = sign-extend of AX to 32 bits
     r/m32
     EDX:EAX = sign-extend of EAX to 32 bits
+    
+    The CF and OF flags are set when significant bits are carried into the
+    high-order half of the result. CF and OF are cleared when the
+    high-order half of the result is the sign-extension of the low-order half.
   */
+  rtlreg_t temp;
+  
   switch (id_dest->width) {
     case 1:{
       rtl_sr_w(R_AX, &t1);
-      //t1 &= 0x000000ff;
-      //rtl_update_ZFSF(&t1,1);
+      rtl_sext(&temp,cpu.eax,1);
+      temp = temp & 0x0000ffff;
+      rtl_lr(&t2,R_EAX,id_dest->width);
+      if(temp==t2)
+      {
+        rtl_unset_CF(&eflag_CF);
+        rtl_unset_OF(&eflag_OF);
+      }
+      else
+      {
+        rtl_set_CF(&eflag_CF);
+        rtl_set_OF(&eflag_OF);
+      }
       break;
     }  
     case 2:
     {
+      
       rtl_sr_w(R_AX, &t1);
       rtl_shri(&t1, &t1, 16);
       rtl_sr_w(R_DX, &t1);
+      rtl_sext(&temp,cpu.eax,2);
+      //temp = temp & 0xffffffff;
+      rtl_lr(&t2,R_EAX,id_dest->width);
+      if(temp==t2)
+      {
+        rtl_unset_CF(&eflag_CF);
+        rtl_unset_OF(&eflag_OF);
+      }
+      else
+      {
+        rtl_set_CF(&eflag_CF);
+        rtl_set_OF(&eflag_OF);
+      }
       break;
     }
       
     case 4:
+    {
+      temp=cpu.edx;
       rtl_sr_l(R_EDX, &t0);
       rtl_sr_l(R_EAX, &t1);
+      if(cpu.edx==temp)
+      {
+        rtl_unset_CF(&eflag_CF);
+        rtl_unset_OF(&eflag_OF);
+      }
+      else
+      {
+        rtl_set_CF(&eflag_CF);
+        rtl_set_OF(&eflag_OF);
+      }
       break;
+    }
+      
     default: assert(0);
   }
 
