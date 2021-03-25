@@ -155,6 +155,7 @@ make_EHelper(cmp) {
   rtl_and(&t0, &t0, &t1);
   rtl_msb(&t0, &t0, id_dest->width);
   printf("t0=%08X\n",t0);
+  t0 = t0 & 0x00000001;
   if(t0==0)
   {
     rtl_unset_OF(&eflag_OF);
