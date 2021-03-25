@@ -238,15 +238,20 @@ make_EHelper(sbb) {
   rtl_sltu(&t3, &id_dest->val, &t2);
   rtl_get_CF(&t1);
   printf("t1=%08X\n",t1);
+  rtlreg_t temp;
   if(t1!=0)//cf=1
   {
-    rtl_subi(&t2, &t2, 1);
+    rtl_subi(&temp, &t2, 1);
   }
-  operand_write(id_dest, &t2);
+  else
+  {
+    rtl_subi(&temp,&t2,0);
+  }
+  operand_write(id_dest, &temp);
 
   rtl_update_ZFSF(&t2, id_dest->width);
 
-  rtl_sltu(&t0, &id_dest->val, &t2);
+  rtl_sltu(&t0, &t2, &temp);
   printf("t3=%08X\n,t0=%08X\n",t3,t0);
   rtl_or(&t0, &t3, &t0);
   if(t0==1)
