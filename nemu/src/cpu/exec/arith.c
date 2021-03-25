@@ -159,7 +159,8 @@ make_EHelper(cmp) {
 make_EHelper(inc) {
   //TODO();
   rtl_addi(&t0,&id_dest->val,1);
-  rtl_sr(id_dest->reg,id_dest->width,&t0);
+  //rtl_sr(id_dest->reg,id_dest->width,&t0);
+  operand_write(id_dest,&t0);
   /*
     OF, SF, ZF, AF, and PF as described in Appendix C
   */
