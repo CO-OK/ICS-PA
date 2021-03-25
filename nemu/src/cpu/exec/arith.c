@@ -298,7 +298,7 @@ make_EHelper(imul1) {
   switch (id_dest->width) {
     case 1:{
       rtl_sr_w(R_AX, &t1);
-      rtl_sext(&temp,cpu.eax,1);
+      rtl_sext(&temp,&cpu.eax,1);
       temp = temp & 0x0000ffff;
       rtl_lr(&t2,R_EAX,id_dest->width);
       if(temp==t2)
@@ -319,7 +319,7 @@ make_EHelper(imul1) {
       rtl_sr_w(R_AX, &t1);
       rtl_shri(&t1, &t1, 16);
       rtl_sr_w(R_DX, &t1);
-      rtl_sext(&temp,cpu.eax,2);
+      rtl_sext(&temp,&cpu.eax,2);
       //temp = temp & 0xffffffff;
       rtl_lr(&t2,R_EAX,id_dest->width);
       if(temp==t2)
