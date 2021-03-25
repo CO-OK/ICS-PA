@@ -55,6 +55,7 @@ make_EHelper(add) {
   rtl_xor(&t1, &id_dest->val, &t2);
   rtl_and(&t0, &t0, &t1);
   rtl_msb(&t0, &t0, id_dest->width);
+  t0 &= 0x00000001;
   /*
     t0=1说明若两个操作数的符号相同，而结果的符号与之相反
   */
@@ -251,6 +252,7 @@ make_EHelper(adc) {
   rtl_xor(&t1, &id_dest->val, &t2);
   rtl_and(&t0, &t0, &t1);
   rtl_msb(&t0, &t0, id_dest->width);
+  t0 &= 0x00000001;
   /*
     t0=1说明若两个操作数的符号相同，而结果的符号与之相反
   */
@@ -301,6 +303,7 @@ make_EHelper(sbb) {
   rtl_xor(&t1, &id_dest->val, &temp);
   rtl_and(&t0, &t0, &t1);
   rtl_msb(&t0, &t0, id_dest->width);
+  t0 &= 0x00000001;
   if(t0==0)
   {
     rtl_unset_OF(&eflag_OF);
@@ -419,6 +422,7 @@ make_EHelper(imul1) {
         rtl_set_OF(&eflag_OF);
       }
       rtl_msb(&temp,&cpu.eax,1);
+      temp &= 0x00000001;
       if(temp!=0)
       {
         rtl_set_SF(&eflag_SF);
@@ -447,6 +451,7 @@ make_EHelper(imul1) {
         rtl_set_OF(&eflag_OF);
       }
       rtl_msb(&temp,&cpu.eax,2);
+      temp &= 0x00000001;
       if(temp!=0)
       {
         rtl_set_SF(&eflag_SF);
@@ -471,6 +476,7 @@ make_EHelper(imul1) {
         rtl_set_OF(&eflag_OF);
       }
       rtl_msb(&temp,&cpu.eax,4);
+      temp &= 0x00000001;
       if(temp!=0)
       {
         rtl_set_SF(&eflag_SF);
@@ -531,6 +537,7 @@ make_EHelper(imul2) {
   }
   rtl_unset_ZF(&eflag_ZF);
   rtl_msb(&t3,&t1,id_dest->width);
+  t3 &= 0x00000001;
   if(t3==1)
     rtl_set_SF(&eflag_SF);
   else
