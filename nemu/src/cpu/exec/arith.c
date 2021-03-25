@@ -259,25 +259,63 @@ make_EHelper(mul) {
   rtl_mul(&t0, &t1, &id_dest->val, &t0);
   rtlreg_t temp;
   switch (id_dest->width) {
-    case 1:
-    {
+    case 1:{
       /*
         The carry and overflow flags are set to 0 if AH is 0; otherwise, they are set to 1.
       */  
       rtl_sr_w(R_AX, &t1);
       temp = cpu.eax & 0x0000ff00;
+      if(temp==0)
+      {
+        rtl_unset_CF(&eflag_CF);
+        rtl_unset_OF(&eflag_OF);
+      }
+      else
+      {
+        rtl_set_CF(&eflag_CF);
+        rtl_set_OF(&eflag_OF);
+      }
       break;
-    }
-      
-    case 2:
+    }  
+    case 2:{
+      /*
+        The carry and overflow flags are set to 0 if DX is 0; otherwise, they are set to 1.
+      */
       rtl_sr_w(R_AX, &t1);
       rtl_shri(&t1, &t1, 16);
       rtl_sr_w(R_DX, &t1);
+      temp = cpu.edx & 0x0000ffff;
+      if(temp==0)
+      {
+        rtl_unset_CF(&eflag_CF);
+        rtl_unset_OF(&eflag_OF);
+      }
+      else
+      {
+        rtl_set_CF(&eflag_CF);
+        rtl_set_OF(&eflag_OF);
+      }
       break;
-    case 4:
+    } 
+    case 4:{
       rtl_sr_l(R_EDX, &t0);
       rtl_sr_l(R_EAX, &t1);
+      /*
+        The carry and overflow flags are set to 0 if EDX is 0; otherwise, they are set to 1.
+      */
+     if(cpu.eax==0)
+     {
+        rtl_unset_CF(&eflag_CF);
+        rtl_unset_OF(&eflag_OF);
+     }
+     else
+     {
+        rtl_set_CF(&eflag_CF);
+        rtl_set_OF(&eflag_OF);
+     }
       break;
+    }
+      
     default: assert(0);
   }
 
