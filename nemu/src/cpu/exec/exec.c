@@ -130,9 +130,9 @@ opcode_entry opcode_table [512] = {
   /* 0xd8 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xdc */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xe0 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0xe4 */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0xe4 */	IDEXW(in_I2a,in,1), IDEXW(in_I2a,in,0), IDEXW(out_a2I,out,1), IDEXW(out_a2I,out,0),//0xe4 al,Ib
   /* 0xe8 */	IDEX(J,call), IDEX(J,call), EMPTY, IDEXW(J,jmp,1),//0xeb jmp rel18
-  /* 0xec */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0xec */	IDEXW(in_dx2a,in,0), IDEXW(in_dx2a,in,0), IDEXW(out_a2dx,out,0), IDEXW(out_a2dx,out,0),
   /* 0xf0 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xf4 */	EMPTY, EMPTY, IDEXW(E, gp3, 1), IDEX(E, gp3),//f7 grp3 Ev
   /* 0xf8 */	EMPTY, EMPTY, EMPTY, EMPTY,

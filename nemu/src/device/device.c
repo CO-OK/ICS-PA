@@ -74,10 +74,10 @@ void sdl_clear_event_queue() {
 }
 
 void init_device() {
-  init_serial();
-  init_timer();
-  init_vga();
-  init_i8042();
+  init_serial();//串口
+  init_timer();//时钟
+  init_vga();//VGA
+  init_i8042();//键盘
 
   struct sigaction s;
   memset(&s, 0, sizeof(s));
