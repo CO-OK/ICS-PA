@@ -257,11 +257,18 @@ make_EHelper(sbb) {
 make_EHelper(mul) {
   rtl_lr(&t0, R_EAX, id_dest->width);
   rtl_mul(&t0, &t1, &id_dest->val, &t0);
-
+  rtlreg_t temp;
   switch (id_dest->width) {
     case 1:
+    {
+      /*
+        The carry and overflow flags are set to 0 if AH is 0; otherwise, they are set to 1.
+      */  
       rtl_sr_w(R_AX, &t1);
+      temp = cpu.eax & 0x0000ff00;
       break;
+    }
+      
     case 2:
       rtl_sr_w(R_AX, &t1);
       rtl_shri(&t1, &t1, 16);
