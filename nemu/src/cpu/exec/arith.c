@@ -149,8 +149,8 @@ make_EHelper(cmp) {
   }
   else
     rtl_unset_OF(&eflag_OF);*/
-  rtl_xor(&t0, &id_dest->val, &id_src->val);
-  rtl_xor(&t1, &id_dest->val, &t2);
+  rtl_xor(&t0, &op1, &op2);
+  rtl_xor(&t1, &op1, &t2);
   rtl_and(&t0, &t0, &t1);
   rtl_msb(&t0, &t0, id_dest->width);
   if(t0==0)
