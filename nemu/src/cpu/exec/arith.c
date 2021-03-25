@@ -388,6 +388,7 @@ make_EHelper(imul2) {
   rtl_sext(&id_src->val, &id_src->val, id_src->width);
   rtl_sext(&id_dest->val, &id_dest->val, id_dest->width);
   //printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
+  t0=0;
   rtl_imul(&t0, &t1, &id_dest->val, &id_src->val);
   operand_write(id_dest, &t1);
   printf("t0=%08X\nt1=%08X\n",t0,t1);
