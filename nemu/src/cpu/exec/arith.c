@@ -171,6 +171,9 @@ make_EHelper(cmp) {
 
 make_EHelper(inc) {
   //TODO();
+  /*
+    可能有问题
+  */
   rtl_addi(&t0,&id_dest->val,1);
   //rtl_sr(id_dest->reg,id_dest->width,&t0);
   operand_write(id_dest,&t0);
@@ -178,11 +181,14 @@ make_EHelper(inc) {
     OF, SF, ZF, AF, and PF as described in Appendix C
   */
   rtl_update_ZFSF(&t0,id_dest->width);  
+  rtl_msb(&t1,&t0,id_dest->width);
+  rtl_msb(&t2,&id_dest->val,id_dest->width);
   //printf("val=%08X\n",id_dest->val);
-  if(id_dest->val!=MY_INT32_MAX)
-    ;//rtl_unset_CF(&eflag_OF);
+  //The overflow flag is set when an operation would cause a sign change
+  if(t1==t2)
+    rtl_unset_OF(&eflag_OF);
   else 
-    rtl_set_CF(&eflag_OF);
+    rtl_set_OF(&eflag_OF);
   print_asm_template1(inc);
 }
 
