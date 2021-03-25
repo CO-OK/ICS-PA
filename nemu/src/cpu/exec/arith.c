@@ -198,7 +198,9 @@ make_EHelper(dec) {
   rtl_subi(&t0,&id_dest->val,1);
   rtl_sr(id_dest->reg,id_dest->width,&t0);
   rtl_update_ZFSF(&t0,id_dest->width);  
-  if(id_dest->val!=0)
+  rtl_msb(&t1,&id_dest->val,id_dest->width);
+  rtl_msb(&t2,&t0,id_dest->width);
+  if(t1==t2)
     rtl_unset_OF(&eflag_OF);
   else 
     rtl_set_OF(&eflag_OF);
