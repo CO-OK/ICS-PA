@@ -254,7 +254,7 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   //TODO();
   rtlreg_t temp;
   rtl_msb(&temp,result,width);
-  if(temp==1)
+  if(temp!=0)
   {
     rtl_set_SF(&eflag_SF);
   }
