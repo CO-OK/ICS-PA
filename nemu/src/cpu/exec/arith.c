@@ -404,6 +404,11 @@ make_EHelper(imul2) {
       rtl_unset_OF(&eflag_OF);
       rtl_unset_CF(&eflag_CF);
     }
+    else
+    {
+      rtl_set_CF(&eflag_CF);
+      rtl_set_OF(&eflag_OF);
+    }
   }
   else if(id_dest->width==4)
   {
@@ -411,6 +416,11 @@ make_EHelper(imul2) {
     {
       rtl_unset_OF(&eflag_OF);
       rtl_unset_CF(&eflag_CF);
+    }
+    else
+    {
+      rtl_set_CF(&eflag_CF);
+      rtl_set_OF(&eflag_OF);
     }
   }
   rtl_unset_ZF(&eflag_ZF);
