@@ -191,6 +191,7 @@ static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
   //msb Most Significant Bit
   rtl_shri(dest, src1, width * 8 - 1);
+  
   //TODO();
 }
 
@@ -254,6 +255,7 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   //TODO();
   rtlreg_t temp;
   rtl_msb(&temp,result,width);
+  temp=temp&0x00000001;
   if(temp!=0)
   {
     rtl_set_SF(&eflag_SF);
