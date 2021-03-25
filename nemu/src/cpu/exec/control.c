@@ -47,7 +47,7 @@ make_EHelper(ret) {
 
 make_EHelper(call_rm) {
   //TODO();
-  printf("val=%08X\n",id_dest->val);
+  //printf("val=%08X\n",id_dest->val);
   decoding.is_jmp=1; 
   rtl_push(&decoding.seq_eip,4);
   decoding.jmp_eip=id_dest->val;
