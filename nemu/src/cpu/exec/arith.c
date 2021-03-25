@@ -174,7 +174,7 @@ make_EHelper(inc) {
 
 make_EHelper(dec) {
   //TODO();
-  printf("val=%08X\n",id_dest->val);
+  //printf("val=%08X\n",id_dest->val);
   rtl_subi(&t0,&id_dest->val,1);
   rtl_sr(id_dest->reg,id_dest->width,&t0);
   rtl_update_ZFSF(&t0,id_dest->width);  
