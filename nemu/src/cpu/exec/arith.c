@@ -233,11 +233,11 @@ make_EHelper(adc) {
 }
 
 make_EHelper(sbb) {
-  printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
+  //printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
   rtl_sub(&t2, &id_dest->val, &id_src->val);
   rtl_sltu(&t3, &id_dest->val, &t2);
   rtl_get_CF(&t1);
-  printf("t1=%08X\n",t1);
+  //printf("t1=%08X\n",t1);
   rtlreg_t temp;
   if(t1!=0)//cf=1
   {
@@ -252,7 +252,7 @@ make_EHelper(sbb) {
   rtl_update_ZFSF(&temp, id_dest->width);
 
   rtl_sltu(&t0, &t2, &temp);
-  printf("t3=%08X\n,t0=%08X\n",t3,t0);
+  //printf("t3=%08X\n,t0=%08X\n",t3,t0);
   rtl_or(&t0, &t3, &t0);
   if(t0==1)
   {
