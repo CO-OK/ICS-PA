@@ -296,7 +296,7 @@ make_EHelper(imul1) {
     imul sets SF according to the sign bit of the truncated result
   */
   rtlreg_t temp;
-  printf("width=%d\n",id_dest->width);
+  //printf("width=%d\n",id_dest->width);
   switch (id_dest->width) {
     case 1:{
       rtl_sr_w(R_AX, &t1);
