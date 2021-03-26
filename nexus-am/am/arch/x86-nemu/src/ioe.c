@@ -50,6 +50,8 @@ void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {
 
 void _draw_sync() {
   //return;
+  int a=9;
+  a++;
 }
 
 int _read_key() {
