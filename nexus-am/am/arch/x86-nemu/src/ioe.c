@@ -28,10 +28,10 @@ void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {
   /*
     用于将 pixels 指定的矩形像素绘制到屏幕中以(x, y)和(x+w, y+h)两点连线为对角线的矩形区域
   */
-  /*int i;
+  int i;
   for (i = 0; i < _screen.width * _screen.height; i++) {
     fb[i] = i;
-  }*/
+  }
   /*int cp_bytes = sizeof(uint32_t) * min(w, _screen.width - x);
   for (int j = 0; j < h && y + j < _screen.height; j ++) {
     memcpy(&fb[(y + j) * _screen.width + x], pixels, cp_bytes);
