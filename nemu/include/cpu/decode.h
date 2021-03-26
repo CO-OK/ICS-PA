@@ -28,6 +28,7 @@ typedef struct {
   bool is_operand_size_16;
   uint8_t ext_opcode;
   bool is_jmp;
+  bool is_call;
   vaddr_t jmp_eip;
   Operand src, dest, src2;
 #ifdef DEBUG
