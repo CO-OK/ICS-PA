@@ -43,5 +43,6 @@ make_EHelper(sbb);
 make_EHelper(div);
 make_EHelper(in);
 make_EHelper(out);
+make_EHelper(neg);
 //make_EHelper(xchg_b);
 //make_EHelper(push_Ev);

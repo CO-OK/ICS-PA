@@ -217,8 +217,16 @@ make_EHelper(dec) {
 }
 
 make_EHelper(neg) {
-  TODO();
-
+  //TODO();
+  if(id_dest->val==0)
+  {
+    rtl_unset_CF(&eflag_CF);
+  }
+  else
+    rtl_set_CF(&eflag_CF);
+  t0=-1*id_dest->val;
+  operand_write(id_dest,&t0);
+  rtl_update_ZFSF(&t0,id_dest->width);
   print_asm_template1(neg);
 }
 
