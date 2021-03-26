@@ -37,6 +37,13 @@ void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {
   for (i = 0; i < _screen.width * _screen.height; i++) {
     fb[i] = i;
   }
+  /*for(int i=0;i<w;i++)
+  {
+    for(int j=0;j<h;j++)
+    {
+
+    }
+  }*/
 }
 
 void _draw_sync() {
