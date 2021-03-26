@@ -158,7 +158,8 @@ static inline void rtl_push(const rtlreg_t* src1,int size) {
   // esp <- esp - 4
   // M[esp] <- src1
   cpu.esp-=4;
-  vaddr_write(cpu.esp,4,*src1);
+  rtl_sm(&cpu.esp,src1,4);
+  //vaddr_write(cpu.esp,4,*src1);
 }
 
 static inline void rtl_pop(rtlreg_t* dest) {
@@ -166,8 +167,8 @@ static inline void rtl_pop(rtlreg_t* dest) {
   // esp <- esp + 4
   //TODO();
   //operand_write(&id_dest->reg,)
-  *dest = vaddr_read(cpu.esp,4);
-  
+  //*dest = vaddr_read(cpu.esp,4);
+  rtl_lm(dest,&cpu.esp,4);
   //operand_write(dest,&temp);
   cpu.esp += 4;
 }
