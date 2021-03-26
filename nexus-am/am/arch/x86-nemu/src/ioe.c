@@ -59,9 +59,10 @@ int _read_key() {
     i8042 初始化时会注册 0x60 处的端口作为数据寄存器,注册 0x64 处的端口作为状态寄存器
   */
   uint32_t is_key_event = inb(0x64);
+  uint32_t data = inb(0x60);
   if(is_key_event)
   {
-    return inb(0x60);
+    return data;
   }
   else
     return _KEY_NONE;
