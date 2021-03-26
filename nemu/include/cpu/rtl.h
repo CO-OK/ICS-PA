@@ -157,8 +157,8 @@ static inline void rtl_not(rtlreg_t* dest) {
 static inline void rtl_push(const rtlreg_t* src1,int size) {
   // esp <- esp - 4
   // M[esp] <- src1
-  cpu.esp-=size;
-  vaddr_write(cpu.esp,size,*src1);
+  cpu.esp-=4;
+  vaddr_write(cpu.esp,4,*src1);
 }
 
 static inline void rtl_pop(rtlreg_t* dest) {
