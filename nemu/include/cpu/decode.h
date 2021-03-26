@@ -25,6 +25,7 @@ typedef struct {
 typedef struct {
   uint32_t opcode;
   vaddr_t seq_eip;  // sequential eip
+  vaddr_t tmp_eip;
   bool is_operand_size_16;
   uint8_t ext_opcode;
   bool is_jmp;
