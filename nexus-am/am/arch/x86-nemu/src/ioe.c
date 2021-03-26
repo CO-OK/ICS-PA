@@ -39,9 +39,9 @@ void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {
   }*/
   for(int i=0;i<w;i++)
   {
-    for(int j=0;j<h&&((y+j)*_screen.width+x+i<_screen.height*_screen.width);j++)
+    for(int j=0;j<h&&((y+j)*_screen.width+x+i-1<_screen.height*_screen.width);j++)
     {
-      fb[(y+j)*_screen.width+x+i]=*pixels;
+      fb[(y+j)*_screen.width+x+i-1]=*pixels;
       //pixels+=1;
     }
     //pixels++;
@@ -56,8 +56,6 @@ void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {
 
 void _draw_sync() {
   //return;
-  int a=9;
-  a++;
 }
 
 int _read_key() {
