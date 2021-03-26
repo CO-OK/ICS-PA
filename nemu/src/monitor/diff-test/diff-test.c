@@ -198,11 +198,11 @@ void difftest_step(uint32_t eip) {
     diff = true;
     printf("detect diff at eip,\tr.eip=%08X\tcpu.eip=%08X\n",r.eip,cpu.eip);
   }
-  else if(r.eflags != cpu.EFLAGS_)
+  /*else if(r.eflags != cpu.EFLAGS_)
   {
     /*
       只需要比特定的C,Z,S,I,O
-    */
+    
     //CF
     rtlreg_t CF = r.eflags & eflag_CF;
     rtlreg_t ZF = (r.eflags & eflag_ZF) >> 6;
@@ -235,7 +235,7 @@ void difftest_step(uint32_t eip) {
       printf("detect diff at eflags_OF,\tr.OF=%d\tcpu.OF=%d\n",OF,e_OF);
     }
     
-  }
+  }*/
   // Set `diff` as `true` if they are not the same.
   //TODO();
 
