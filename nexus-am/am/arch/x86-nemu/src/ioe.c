@@ -6,13 +6,13 @@ static unsigned long boot_time;
 
 void _ioe_init() {
   boot_time = inl(RTC_PORT);
-  printf("time=%d\n",boot_time);
+  //printf("time=%d\n",boot_time);
 }
 
 unsigned long _uptime() {
   unsigned long now_time=inl(RTC_PORT);
-  printf("nowtime=%d\n",now_time);
-  return now_time;
+  //printf("nowtime=%d\n",now_time);
+  return now_time-boot_time;
 }
 
 uint32_t* const fb = (uint32_t *)0x40000;
