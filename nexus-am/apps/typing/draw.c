@@ -73,7 +73,7 @@ void redraw_screen() {
   _draw_rect(&canvas[0][0], x, y, W, H);
 #endif
 
-  _draw_sync();
+  //_draw_sync();
   for (int y = 0; y < H; y ++)
     for (int x = 0; x < W; x ++)
       canvas[y][x] = 0x2a0a29;
