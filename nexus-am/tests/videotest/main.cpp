@@ -32,7 +32,7 @@ void redraw() {
     }
   }
 
-  _draw_sync();
+  //_draw_sync();
 }
 
 static uint32_t p(int tsc) {
