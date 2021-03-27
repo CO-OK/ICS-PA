@@ -14,7 +14,7 @@ int main(){
     {
       printf("%d seconds.\n", sec);
     }
-    printf("uptime=%ld\n",_uptime());
+    printf("uptime=%ud\n",_uptime());
     sec ++;
   }
   return 0;
