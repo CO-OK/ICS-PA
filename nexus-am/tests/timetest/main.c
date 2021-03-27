@@ -9,10 +9,10 @@ int main(){
     while(_uptime() < 1000 * sec) ;
     if (sec == 1) 
     {
-      //printf("%d second.\n", sec);
+      printf("%d second.\n", sec);
     } else 
     {
-      //printf("%d seconds.\n", sec);
+      printf("%d seconds.\n", sec);
     }
     printf("uptime=%ud\n",_uptime());
     sec ++;

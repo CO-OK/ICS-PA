@@ -1,0 +1,13 @@
+Building timetest [x86-nemu]
++ CC main.c
+make[1]: 进入目录“/home/v/program/ics2018.pa2/nexus-am”
+make[2]: 进入目录“/home/v/program/ics2018.pa2/nexus-am/am”
+Building am [x86-nemu]
+make[2]: 对“archive”无需做任何事。
+make[2]: 离开目录“/home/v/program/ics2018.pa2/nexus-am/am”
+make[1]: 离开目录“/home/v/program/ics2018.pa2/nexus-am”
+make[1]: 进入目录“/home/v/program/ics2018.pa2/nexus-am/libs/klib”
+make[1]: *** 无目标。 停止。
+make[1]: 离开目录“/home/v/program/ics2018.pa2/nexus-am/libs/klib”
+make: [/home/v/program/ics2018.pa2/nexus-am/Makefile.compile:86：klib] 错误 2 (已忽略）
+make[1]: 进入目录“/home/v/program/ics2018.pa2/nemu”
