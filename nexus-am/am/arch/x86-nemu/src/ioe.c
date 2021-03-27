@@ -14,11 +14,11 @@ unsigned long _uptime() {
   if(temp_time==255)
   {
     now_time+=temp_time;
-    return (now_time-boot_time)/10;
+    return now_time-boot_time;
   }
   else
   {
-    return (now_time+temp_time-boot_time)/10;
+    return now_time+temp_time-boot_time;
   }
   //printf("time=%ul\n",boot_time);
   //return (boot_time-now_time);
