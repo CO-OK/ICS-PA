@@ -2,7 +2,7 @@
 #include <klib.h>
 
 int main(){
-  _ioe_init();
+  /*_ioe_init();
   int sec = 1;
   while (1) 
   {
@@ -14,8 +14,7 @@ int main(){
     {
       printf("%d seconds.\n", sec);
     }
-    printf("uptime=%d\n",_uptime());
     sec ++;
-  }
+  }*/
   return 0;
 }
