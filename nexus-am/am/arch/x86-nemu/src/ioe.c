@@ -5,7 +5,7 @@
 static unsigned long boot_time;
 void _ioe_init() {
   boot_time = inl(RTC_PORT);
-  printf("time=%d\n",boot_time);
+  //printf("time=%d\n",boot_time);
 }
 unsigned long now_time;
 unsigned long _uptime() {
