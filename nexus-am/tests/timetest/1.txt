@@ -11,3 +11,13 @@ make[1]: *** 无目标。 停止。
 make[1]: 离开目录“/home/v/program/ics2018.pa2/nexus-am/libs/klib”
 make: [/home/v/program/ics2018.pa2/nexus-am/Makefile.compile:86：klib] 错误 2 (已忽略）
 make[1]: 进入目录“/home/v/program/ics2018.pa2/nemu”
+./build/nemu -l /home/v/program/ics2018.pa2/nexus-am/tests/timetest/build/nemu-log.txt /home/v/program/ics2018.pa2/nexus-am/tests/timetest/build/timetest-x86-nemu.bin
+[1;34m[src/monitor/monitor.c,65,load_img] The image is /home/v/program/ics2018.pa2/nexus-am/tests/timetest/build/timetest-x86-nemu.bin[0m
+Welcome to NEMU!
+[1;34m[src/monitor/monitor.c,30,welcome] Build time: 21:31:45, Mar 26 2021[0m
+For help, type "help"
+batch_mode_is:0
+[?2004h(nemu) ^C[?2004l[?2004h^C[?2004l[?2004h^C[?2004l[?2004hcc
+[?2004lUnknown command 'cc'
+[?2004h(nemu) ^C[?2004l[?2004h[?2004lmake: *** [/home/v/program/ics2018.pa2/nexus-am/Makefile.app:35: run] 挂起
+make[1]: *** [Makefile:47: run] 挂起
