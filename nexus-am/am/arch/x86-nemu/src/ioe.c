@@ -69,7 +69,7 @@ int _read_key() {
   */
   uint32_t is_key_event = inb(0x64);
   uint32_t data = inb(0x60);
-  if(is_key_event)
+  if(is_key_event!=0)
   {
     return data;
   }
