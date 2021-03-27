@@ -10,7 +10,7 @@ void _ioe_init() {
 unsigned long now_time;
 unsigned long _uptime() {
   unsigned long temp_time=inl(RTC_PORT);
-  printf("nowtime=%ul\n",now_time);
+  //printf("nowtime=%ul\n",now_time);
   if(temp_time==255)
   {
     now_time+=temp_time;
