@@ -20,7 +20,7 @@ int main() {
       down = true;
     }
     if (key != _KEY_NONE) {
-      printf("code=%X\n",key);
+      //printf("code=%X\n",key);
       printf("Get key: %d %s %s\n", key, names[key], down ? "down" : "up");
     }
   }

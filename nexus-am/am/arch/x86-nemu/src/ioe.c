@@ -71,6 +71,7 @@ int _read_key() {
   uint32_t data = inl(0x60);
   if(is_key_event!=0)
   {
+    printf("data=%08X\n",data);
     return data;
   }
   else
