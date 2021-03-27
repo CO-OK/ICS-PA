@@ -12,7 +12,7 @@ unsigned long _uptime() {
   unsigned long now_time=inl(RTC_PORT);
   //printf("nowtime=%d\n",now_time);
   //printf("time=%d\n",boot_time);
-  return (now_time-boot_time)/1000000000;
+  return (now_time-boot_time)/1000000;
 }
 
 uint32_t* const fb = (uint32_t *)0x40000;
