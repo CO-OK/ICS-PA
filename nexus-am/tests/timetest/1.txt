@@ -1,9 +1,9 @@
 Building timetest [x86-nemu]
-+ CC main.c
 make[1]: 进入目录“/home/v/program/ics2018.pa2/nexus-am”
 make[2]: 进入目录“/home/v/program/ics2018.pa2/nexus-am/am”
 Building am [x86-nemu]
-make[2]: 对“archive”无需做任何事。
++ CC arch/x86-nemu/src/ioe.c
++ AR /home/v/program/ics2018.pa2/nexus-am/am/build/am-x86-nemu.a
 make[2]: 离开目录“/home/v/program/ics2018.pa2/nexus-am/am”
 make[1]: 离开目录“/home/v/program/ics2018.pa2/nexus-am”
 make[1]: 进入目录“/home/v/program/ics2018.pa2/nexus-am/libs/klib”
