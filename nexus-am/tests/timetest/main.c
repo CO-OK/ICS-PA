@@ -6,8 +6,8 @@ int main(){
   int sec = 1;
   while (1) 
   {
-    printf("uptime=%ud\n",_uptime());
-    while(_uptime() < 10000000000 * sec) ;
+    //printf("uptime=%ud\n",_uptime());
+    while(_uptime() < 1000 * sec) ;
     if (sec == 1) 
     {
       printf("%d second.\n", sec);
