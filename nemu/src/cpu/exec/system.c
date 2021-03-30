@@ -59,7 +59,7 @@ make_EHelper(out) {
   //TODO();
   //printf("hit\n");
   //printf("width=%d\n",id_dest->width);
-  pio_write(id_dest->val,1,id_src->val);
+  pio_write(id_dest->val,id_dest->width,id_src->val);
   print_asm_template2(out);
 
 #ifdef DIFF_TEST
