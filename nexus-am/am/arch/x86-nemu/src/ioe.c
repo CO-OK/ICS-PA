@@ -9,7 +9,7 @@ void _ioe_init() {
 }
 unsigned long now_time;
 unsigned long _uptime() {
-  unsigned long temp_time=inl(RTC_PORT);
+  /*unsigned long temp_time=inl(RTC_PORT);
   //printf("nowtime=%ul\n",now_time);
   if(temp_time==255)
   {
@@ -19,9 +19,10 @@ unsigned long _uptime() {
   else
   {
     return now_time+temp_time-boot_time;
-  }
+  }*/
+  now_time = inl(RTC_PORT);
   //printf("time=%ul\n",boot_time);
-  //return (boot_time-now_time);
+  return (boot_time-now_time);
 }
 
 uint32_t* const fb = (uint32_t *)0x40000;
