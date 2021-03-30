@@ -7,7 +7,7 @@ int main(){
   while (1) 
   {
     printf("uptime=%ud\n",_uptime());
-    while(_uptime() < 1000 * sec) ;
+    while(_uptime() < 1000000 * sec) ;
     if (sec == 1) 
     {
       printf("%d second.\n", sec);
