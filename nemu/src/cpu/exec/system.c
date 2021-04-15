@@ -14,7 +14,10 @@ make_EHelper(lidt) {
   }
   else
   {
-    //uint16_t limt=vaddr_read(id_dest->val,)
+    uint16_t limt=vaddr_read(id_dest->val,2);
+    uint32_t base=vaddr_read(id_dest->val+2,4);
+    cpu.idtr_base=base;
+    cpu.idtr_limit=limt;
   }
   print_asm_template1(lidt);
 }
