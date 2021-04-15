@@ -6,6 +6,14 @@ void diff_test_skip_nemu();
 make_EHelper(lidt) {
   //TODO();
   printf("dest=%08X\n",id_dest->val);
+  if(id_dest->width==2)
+  {
+
+  }
+  else
+  {
+    
+  }
   print_asm_template1(lidt);
 }
 
