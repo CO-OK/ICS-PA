@@ -4,8 +4,8 @@ void diff_test_skip_qemu();
 void diff_test_skip_nemu();
 
 make_EHelper(lidt) {
-  TODO();
-
+  //TODO();
+  printf("dest=%08X\n",id_dest->val);
   print_asm_template1(lidt);
 }
 
