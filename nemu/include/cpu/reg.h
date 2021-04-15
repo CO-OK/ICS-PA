@@ -57,7 +57,8 @@ typedef struct {
     };
   };
   vaddr_t eip;
-  
+  uint32_t idtr_base;
+  uint16_t idtr_limit;
 } CPU_state;
 
 extern CPU_state cpu;

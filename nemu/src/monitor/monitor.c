@@ -89,7 +89,8 @@ static inline void restart() {
   e_SF=false;
   e_IF=false;
   e_OF=false;
-
+  cpu.idtr_base=0;
+  cpu.idtr_limit=0x03ff;
 #ifdef DIFF_TEST
   init_qemu_reg();
 #endif
