@@ -34,7 +34,8 @@ make_EHelper(lidt) {
     //printf("limt=%08X\n",limt);*/
     cpu.idtr_limit=vaddr_read(id_dest->addr,2);
     cpu.idtr_base=vaddr_read(id_dest->addr+2,4);
-
+    printf("limt=%08X\n",cpu.idtr_limit);
+    printf("base=%08X\n",cpu.idtr_base);
   }
   printf("hit lidt\n");
   print_asm_template1(lidt);
@@ -57,7 +58,7 @@ make_EHelper(mov_cr2r) {
 }
 
 make_EHelper(int) {
-  //TODO();
+  TODO();
   printf("hit int\n");
   raise_intr(id_dest->imm,cpu.eip);
   print_asm("int %s", id_dest->str);
