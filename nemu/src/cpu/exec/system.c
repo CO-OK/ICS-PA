@@ -12,6 +12,7 @@ make_EHelper(lidt) {
   printf("imm=%08X,val=%08X\n",id_dest->imm,id_dest->val);
   printf("type=%d\n",id_dest->type);
   printf("reg=%d\n",id_dest->reg);
+  printf("addr=%08X\n",id_dest->addr);
   if(id_dest->width==2)
   {
     uint32_t total=vaddr_read(reg_w(id_dest->reg),4);
