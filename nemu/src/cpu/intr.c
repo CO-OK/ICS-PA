@@ -15,6 +15,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
     跳转到目标地址
 
   */
+  printf("hit raise_intr\n");
   rtl_push(&cpu.EFLAGS_,4);
   rtl_push(&cpu.cs,2);
   rtl_push(&cpu.eip,4);
