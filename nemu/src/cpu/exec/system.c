@@ -26,7 +26,9 @@ make_EHelper(lidt) {
     uint16_t high_two_byte=vaddr_read(id_dest->addr+4,2);//读出来的6byte数据中的高2byte
     printf("high=%08X,low=%08X\n",high_two_byte,low_four_byte);
     uint32_t temp_base=(low_four_byte<<8)>>8;
+    printf("tempbase=%08X\n",temp_base);
     uint16_t temp_limt=low_four_byte>>24;
+    printf("templimt=%08X\n",temp_limt);
     cpu.idtr_base = temp_base + ((uint32_t)(high_two_byte>>8))<<24;
     cpu.idtr_limit=temp_limt+high_two_byte<<8;
     //printf("limt=%08X\n",limt);
