@@ -34,8 +34,8 @@ make_EHelper(lidt) {
     //printf("limt=%08X\n",limt);*/
     cpu.idtr_limit=vaddr_read(id_dest->addr,2);
     cpu.idtr_base=vaddr_read(id_dest->addr+2,4);
-    printf("limt=%08X\n",cpu.idtr_limit);
-    printf("base=%08X\n",cpu.idtr_base);
+    //printf("limt=%08X\n",cpu.idtr_limit);
+    //printf("base=%08X\n",cpu.idtr_base);
   }
   /*rtl_li(&t0,id_dest->addr);
   rtl_li(&cpu.idtr_limit, vaddr_read(t0,2));
