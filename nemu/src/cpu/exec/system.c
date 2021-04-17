@@ -7,6 +7,7 @@ make_EHelper(lidt) {
   //TODO();
   //printf("dest=%08X\n",id_dest->val);
   //printf("hit lidt\n");
+  printf("width=%d\n",id_dest->width);
   if(id_dest->width==2)
   {
     uint32_t total=vaddr_read(id_dest->val,4);
@@ -20,6 +21,7 @@ make_EHelper(lidt) {
     cpu.idtr_base=base;
     cpu.idtr_limit=limt;
   }
+  printf("hit lidt\n");
   print_asm_template1(lidt);
 }
 
