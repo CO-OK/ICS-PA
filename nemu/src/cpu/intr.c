@@ -32,5 +32,5 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 }
 
 void dev_raise_intr() {
-  printf("hit dev_raise_intr\n");
+  //printf("hit dev_raise_intr\n");
 }
