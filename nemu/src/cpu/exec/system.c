@@ -29,8 +29,8 @@ make_EHelper(lidt) {
     printf("tempbase=%08X\n",temp_base);
     uint16_t temp_limt=low_four_byte>>24;
     printf("templimt=%08X\n",temp_limt);
-    cpu.idtr_base = temp_base + ((uint32_t)(high_two_byte>>8))<<24;
-    cpu.idtr_limit=temp_limt+high_two_byte<<8;
+    cpu.idtr_base = temp_base + (((uint32_t)(high_two_byte>>8))<<24);
+    cpu.idtr_limit=temp_limt+(high_two_byte<<8);
     //printf("limt=%08X\n",limt);
 
   }
