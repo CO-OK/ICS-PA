@@ -20,9 +20,9 @@ make_EHelper(lidt) {
   }
   else
   {
-    printf("hhhhh\n");
     uint16_t limt=vaddr_read(reg_l(id_dest->reg),2);
     uint32_t base=vaddr_read(reg_l(id_dest->reg)+2,4);
+    printf("limt=%08X",limt);
     cpu.idtr_base=base;
     cpu.idtr_limit=limt;
   }
