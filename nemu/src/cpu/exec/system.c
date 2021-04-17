@@ -14,14 +14,14 @@ make_EHelper(lidt) {
   printf("reg=%d\n",id_dest->reg);
   if(id_dest->width==2)
   {
-    uint32_t total=vaddr_read(id_dest->val,4);
+    uint32_t total=vaddr_read(reg_w(id_dest->reg),4);
     cpu.idtr_limit = total>>24;
     cpu.idtr_base = (total<<16)>>16;
   }
   else
   {
-    uint16_t limt=vaddr_read(id_dest->val,2);
-    uint32_t base=vaddr_read(id_dest->val+2,4);
+    uint16_t limt=vaddr_read(reg_l(id_dest->reg),2);
+    uint32_t base=vaddr_read(reg_l(id_dest->reg)+2,4);
     cpu.idtr_base=base;
     cpu.idtr_limit=limt;
   }
