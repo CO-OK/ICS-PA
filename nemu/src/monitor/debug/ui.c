@@ -110,6 +110,7 @@ static int cmd_info(char * args){
     printf("eip:%08X\n",cpu.eip);
     printf("eflags:%08X\t\t",cpu.EFLAGS_);
     printf("CF:%d\tZF:%d\tSF:%d\tIF:%d\tOF:%d\n",e_CF,e_ZF,e_SF,e_IF,e_OF);
+    printf("IDTR_BASE:%08X,IDTR_LIMT:%08X\n",cpu.idtr_base,cpu.idtr_limit);
     return 0;
   }
   while(arg!=NULL)
