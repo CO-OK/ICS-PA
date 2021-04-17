@@ -67,7 +67,7 @@ make_group(gp5,
 
   /* 0x0f 0x01*/
 make_group(gp7,
-    EMPTY, EMPTY, EMPTY, IDEXW(G2E,lidt,1),
+    EMPTY, EMPTY, EMPTY, IDEXW(I,lidt,1),
     EMPTY, EMPTY, EMPTY, EMPTY)
 
 /* TODO: Add more instructions!!! */
