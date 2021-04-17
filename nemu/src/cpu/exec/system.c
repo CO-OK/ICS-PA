@@ -22,7 +22,7 @@ make_EHelper(lidt) {
   {
     uint16_t limt=vaddr_read(reg_l(id_dest->reg),2);
     uint32_t base=vaddr_read(reg_l(id_dest->reg)+2,4);
-    printf("limt=%08X",limt);
+    printf("limt=%08X\n",limt);
     cpu.idtr_base=base;
     cpu.idtr_limit=limt;
   }
