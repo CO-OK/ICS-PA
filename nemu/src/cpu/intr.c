@@ -13,7 +13,6 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
     根据异常(中断)号在 IDT 中进行索引,找到一个门描述符
     将门描述符中的 offset 域组合成目标地址
     跳转到目标地址
-
   */
   printf("hit raise_intr\n");
   rtl_push(&cpu.EFLAGS_,4);
