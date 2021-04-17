@@ -21,7 +21,7 @@ make_EHelper(lidt) {
   }
   else
   {
-    /*//printf("testaddr=%08X\n",vaddr_read(id_dest->addr,4));
+    //printf("testaddr=%08X\n",vaddr_read(id_dest->addr,4));
     uint32_t low_four_byte=vaddr_read(id_dest->addr,4);//读出来的6byte数据中的低4byte
     uint16_t high_two_byte=vaddr_read(id_dest->addr+4,2);//读出来的6byte数据中的高2byte
     //printf("high=%08X,low=%08X\n",high_two_byte,low_four_byte);
@@ -31,11 +31,11 @@ make_EHelper(lidt) {
     //printf("templimt=%08X\n",temp_limt);
     cpu.idtr_base = temp_base + (((uint32_t)(high_two_byte>>8))<<24);
     cpu.idtr_limit=temp_limt+(high_two_byte<<8);
-    //printf("limt=%08X\n",limt);*/
-    cpu.idtr_limit=vaddr_read(id_dest->addr,2);
+    //printf("limt=%08X\n",limt);
+    /*cpu.idtr_limit=vaddr_read(id_dest->addr,2);
     cpu.idtr_base=vaddr_read(id_dest->addr+2,4);
     printf("limt=%08X\n",cpu.idtr_limit);
-    printf("base=%08X\n",cpu.idtr_base);
+    printf("base=%08X\n",cpu.idtr_base);*/
   }
   printf("hit lidt\n");
   print_asm_template1(lidt);
