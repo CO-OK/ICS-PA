@@ -6,7 +6,7 @@ void diff_test_skip_nemu();
 make_EHelper(lidt) {
   //TODO();
   //printf("dest=%08X\n",id_dest->val);
-  printf("hit lidt\n");
+  //printf("hit lidt\n");
   if(id_dest->width==2)
   {
     uint32_t total=vaddr_read(id_dest->val,4);
