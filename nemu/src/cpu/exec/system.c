@@ -38,7 +38,8 @@ make_EHelper(lidt) {
     //printf("base=%08X\n",cpu.idtr_base);
   }
   rtl_li(&t0,id_dest->addr);
-  rtl_li(&cpu.idtr_limit, vaddr_read(t0,2));
+  cpu.idtr_limit=vaddr_read(t0,2);
+  cpu.idtr_base=vaddr_read(t0+2,4);
   rtl_li(&cpu.idtr_base, vaddr_read(t0+2,4));
   printf("hit lidt\n");
   print_asm_template1(lidt);
