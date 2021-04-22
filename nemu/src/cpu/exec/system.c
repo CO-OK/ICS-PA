@@ -19,6 +19,7 @@ make_EHelper(lidt) {
     printf("base=%08X\n",cpu.idtr_base);
   }
   printf("hit lidt\n");
+  printf("destaddr=%08X\n",id_dest->addr);
   print_asm_template1(lidt);
 }
 
