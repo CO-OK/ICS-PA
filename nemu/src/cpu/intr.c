@@ -16,12 +16,11 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   */
   printf("hit raise_intr\n");
   rtl_push(&cpu.EFLAGS_,4);
-  rtl_push(&cpu.cs,4);
+  rtl_push(&cpu.cs,2);
   rtl_push(&cpu.eip,4);
   vaddr_t idt_base_addr=cpu.idtr_base;
   vaddr_t gate_enrty= cpu.idtr_base + sizeof(GateDesc)*NO;
   GateDesc *point=gate_enrty;
-  TODO();
   //uint32_t off15to0 = vaddr_read(gate_enrty,4);
   //uint32_t off16to32 = vaddr_read(gate_enrty+64,4);
   uint16_t off15to0 = point->offset_15_0;
