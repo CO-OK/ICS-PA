@@ -31,6 +31,6 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   cpu.eip=temp_eip;*/
 }
 
-/*void dev_raise_intr() {
+void dev_raise_intr() {
   printf("hit dev_raise_intr\n");
-}*/
+}
