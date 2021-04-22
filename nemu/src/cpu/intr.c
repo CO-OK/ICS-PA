@@ -25,7 +25,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   uint32_t off16to32 = vaddr_read(gate_enrty+16,4);
   printf("15t0=%08X 16t32=%08X\n",off15to0,off16to32);
   printf("temp=%08X\n",off16to32>>16);
-  vaddr_t final=(off16to32>>16)+(0x0000ffff&off15to0);
+  vaddr_t final=(off16to32<<16)+(0x0000ffff&off15to0);
   cpu.eip=final;
   printf("eip=%08X\n",final);
   printf("1\n");
