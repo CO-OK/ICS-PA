@@ -21,7 +21,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   vaddr_t idt_base_addr=cpu.idtr_base;
   vaddr_t gate_enrty= cpu.idtr_base + sizeof(GateDesc)*NO;
   GateDesc *point=gate_enrty;
-  ///TODO();
+  TODO();
   //uint32_t off15to0 = vaddr_read(gate_enrty,4);
   //uint32_t off16to32 = vaddr_read(gate_enrty+64,4);
   uint16_t off15to0 = point->offset_15_0;
@@ -29,6 +29,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   rtlreg_t temp_eip=point->offset_31_16;
   temp_eip=temp_eip>>16;
   temp_eip+=point->offset_15_0;
+  TODO();
   cpu.eip=temp_eip;
 }
 
