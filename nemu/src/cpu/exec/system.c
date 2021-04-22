@@ -5,14 +5,6 @@ void diff_test_skip_nemu();
 
 make_EHelper(lidt) {
   //TODO();
-  //printf("dest=%08X\n",id_dest->val);
-  //printf("hit lidt\n");
-  /*printf("width=%d\n",id_dest->width);
-  printf("eip=%08X\n",cpu.eip);
-  printf("imm=%08X,val=%08X\n",id_dest->imm,id_dest->val);
-  printf("type=%d\n",id_dest->type);
-  printf("reg=%d\n",id_dest->reg);
-  printf("addr=%08X\n",id_dest->addr);*/
   if(id_dest->width==2)
   {
     uint32_t total=vaddr_read(id_dest->addr,4);
