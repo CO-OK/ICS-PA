@@ -20,6 +20,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   rtl_push(&ret_addr,4);
   printf("eip==%08X\n",cpu.eip);
   vaddr_t gate_enrty= cpu.idtr_base + sizeof(GateDesc)*NO;
+  printf("gate entry=%08X\n",gate_enrty);
   uint32_t off15to0 = vaddr_read(gate_enrty,4);
   uint32_t off16to32 = vaddr_read(gate_enrty+16,4);
   vaddr_t final=(off16to32>>16)+(0x0000ffff&off15to0);
