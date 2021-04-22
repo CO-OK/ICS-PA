@@ -21,8 +21,8 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   printf("eip==%08X\n",cpu.eip);
   vaddr_t gate_enrty= cpu.idtr_base + sizeof(GateDesc)*NO;
   printf("gate entry=%08X\n",gate_enrty);
-  uint32_t off15to0 = vaddr_read(gate_enrty,4);
-  uint32_t off16to32 = vaddr_read(gate_enrty+16,4);
+  uint32_t off15to0 = vaddr_read(gate_enrty,2);
+  uint32_t off16to32 = vaddr_read(gate_enrty+16,2);
   printf("15t0=%08X 16t32=%08X\n",off15to0,off16to32);
   printf("temp=%08X\n",off16to32>>16);
   vaddr_t final=(off16to32<<16)+(0x0000ffff&off15to0);
