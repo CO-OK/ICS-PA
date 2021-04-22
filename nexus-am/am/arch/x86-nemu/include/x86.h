@@ -72,15 +72,15 @@ typedef uint32_t PDE;
 
 // Gate descriptors for interrupts and traps
 typedef struct GateDesc {
-  uint32_t off_15_0 : 16;   // Low 16 bits of offset in segment
-  uint32_t cs : 16;     // Code segment selector
-  uint32_t args : 5;    // # args, 0 for interrupt/trap gates
-  uint32_t rsv1 : 3;    // Reserved(should be zero I guess)
-  uint32_t type : 4;    // Type(STS_{TG,IG32,TG32})
-  uint32_t s : 1;       // Must be 0 (system)
-  uint32_t dpl : 2;     // Descriptor(meaning new) privilege level
-  uint32_t p : 1;       // Present
-  uint32_t off_31_16 : 16;  // High bits of offset in segment
+  uint32_t off_15_0 : 16;   // Low 16 bits of offset in segment  0,4
+  uint32_t cs : 16;     // Code segment selector 4,4
+  uint32_t args : 5;    // # args, 0 for interrupt/trap gates8
+  uint32_t rsv1 : 3;    // Reserved(should be zero I guess)12
+  uint32_t type : 4;    // Type(STS_{TG,IG32,TG32})16
+  uint32_t s : 1;       // Must be 0 (system)20
+  uint32_t dpl : 2;     // Descriptor(meaning new) privilege level24
+  uint32_t p : 1;       // Present28
+  uint32_t off_31_16 : 16;  // High bits of offset in segment32
 } GateDesc;
 
 #define GATE(type, cs, entry, dpl) (GateDesc)         \
