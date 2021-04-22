@@ -9,5 +9,6 @@ uintptr_t loader(_Protect *as, const char *filename) {
     址作为程序的入口返回即可
   */
   ramdisk_read(DEFAULT_ENTRY,0,get_ramdisk_size());
+  printf("load end\n");
   return (uintptr_t)DEFAULT_ENTRY;
 }
