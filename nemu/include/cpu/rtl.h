@@ -158,8 +158,8 @@ static inline void rtl_push(const rtlreg_t* src1,int size) {
   // esp <- esp - 4
   // M[esp] <- src1
   ///cpu.esp-=4;
-  rtl_subi(&cpu.esp,&cpu.esp,4);
-  rtl_sm(&cpu.esp,4,src1);
+  rtl_subi(&cpu.esp,&cpu.esp,size);
+  rtl_sm(&cpu.esp,size,src1);
   //vaddr_write(cpu.esp,4,*src1);
 }
 
