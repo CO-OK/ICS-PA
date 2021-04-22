@@ -52,7 +52,7 @@ make_EHelper(int) {
   printf("hit int\n");
   printf("int num=%08X,eip=%08X\n",id_dest->imm,cpu.eip);
   raise_intr(id_dest->imm,cpu.eip);
-  print_asm("int %s", id_dest->str);
+  //print_asm("int %s", id_dest->str);
   
 
 #ifdef DIFF_TEST
