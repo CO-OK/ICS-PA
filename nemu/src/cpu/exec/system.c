@@ -13,13 +13,13 @@ make_EHelper(lidt) {
   }
   else
   {
-    /*cpu.idtr_limit=vaddr_read(id_dest->addr,4);
-    cpu.idtr_base=vaddr_read(id_dest->addr+2,4);*/
-    uint32_t low4=vaddr_read(id_dest->addr,4);
+    cpu.idtr_limit=vaddr_read(id_dest->addr,4);
+    cpu.idtr_base=vaddr_read(id_dest->addr+2,4);
+    /*uint32_t low4=vaddr_read(id_dest->addr,4);
     uint32_t high4=vaddr_read(id_dest->addr+2,4);
     printf("high=%08X,low=%08X\n",high4&0xff000000,low4&0x00ffffff);
     cpu.idtr_limit = (high4>>8)&0x0000ffff;
-    cpu.idtr_base=(low4&0x00ffffff)+(high4&0xff000000);
+    cpu.idtr_base=(low4&0x00ffffff)+(high4&0xff000000);*/
     printf("limt=%08X\n",cpu.idtr_limit);
     printf("base=%08X\n",cpu.idtr_base);
 
