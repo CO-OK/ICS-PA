@@ -70,11 +70,11 @@ typedef PTE (*PT) [NR_PTE];
 
 typedef union GateDescriptor {
   struct {
-    uint32_t offset_15_0      : 16;
-    uint32_t dont_care0       : 16;
-    uint32_t dont_care1       : 15;
-    uint32_t present          : 1;
-    uint32_t offset_31_16     : 16;
+    uint32_t offset_15_0      : 16;  //0,4
+    uint32_t dont_care0       : 16;  //4,4
+    uint32_t dont_care1       : 15;  //8,4
+    uint32_t present          : 1;   //12,4
+    uint32_t offset_31_16     : 16;  //16,4
   };
   uint32_t val;
 } GateDesc;
