@@ -20,7 +20,7 @@ unsigned long _uptime() {
   {
     return now_time+temp_time-boot_time;
   }*/
-  now_time = inb(RTC_PORT);
+  now_time = inl(RTC_PORT);
   //printf("time=%ul\n",boot_time);
   return (now_time-boot_time);
 }
