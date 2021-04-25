@@ -122,35 +122,19 @@ make_EHelper(cmp) {
   {
     rtl_sext(&op2,&op2,id_src->width);
   }
-  //printf("op2=%08X\n",op2);
-  //printf("src_width=%d\n",id_src->width);
-  //printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
   rtl_sub(&t2, &op1, &op2);//t2存结果
-  //printf("t2=%08X\nwidth=%d\n",t2,id_dest->width);
   rtl_sltu(&t3, &id_dest->val, &id_src->val);//t3 = 1 ---> val<t2 other wise val>=t2  which mean cf=1
   rtl_update_ZFSF(&t2, id_dest->width);
   if(t3)//cf==0
   {
     rtl_set_CF(&eflag_CF);
   } 
-    //rtl_unset_CF(&eflag_CF);
   else
     rtl_unset_CF(&eflag_CF);
   /*
     OF:
     减法的OF位的设置方法为：若两个数的符号相反，而结果的符号与减数的符号相同，则OF=1，除上述情况外OF=0。OF=1说明带符号数的减法运算结果是错误的。
   */
-  //printf("width=%d\nop1=%08X\nop2=%08X\nres=%08X\n",id_dest->width,op1,op2,t2);
-  /*rtl_shri(&t0,&op1,id_dest->width * 8 - 1);
-  rtl_shri(&t1,&op2,id_dest->width * 8 -1);
-  rtl_shri(&t3,&t2,id_dest->width * 8 -1);
-  //printf("t0=%08X,t1=%08X,t3=%08X\n",t0,t1,t3);
-  if((t0 != t1)&&(t3 == t1))//两个数的符号相反，而结果的符号与减数的符号相同
-  {
-    rtl_set_OF(&eflag_OF);
-  }
-  else
-    rtl_unset_OF(&eflag_OF);*/
   rtl_xor(&t0, &op1, &op2);
   rtl_xor(&t1, &op1, &t2);
   rtl_and(&t0, &t0, &t1);
@@ -165,11 +149,6 @@ make_EHelper(cmp) {
   {
     rtl_set_OF(&eflag_OF);
   }
-  /*if(op1<op2)
-    rtl_set_OF(&eflag_OF);
-  else 
-    rtl_unset_CF(&eflag_OF);*/
-
   print_asm_template2(cmp);
 }
 
