@@ -22,7 +22,7 @@ unsigned long _uptime() {
   }*/
   now_time = inb(RTC_PORT);
   //printf("time=%ul\n",boot_time);
-  return (boot_time-now_time);
+  return (now_time-boot_time);
 }
 
 uint32_t* const fb = (uint32_t *)0x40000;
