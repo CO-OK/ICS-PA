@@ -118,7 +118,7 @@ make_EHelper(cmp) {
   rtlreg_t op1,op2;
   get_mr_value(&op1,id_dest);
   get_mr_value(&op2,id_src);
-  printf("done");
+  printf("done\n");
   //printf("type=%d\n",id_src->type);
   if(id_src->type==OP_TYPE_IMM)
   {
@@ -151,7 +151,7 @@ make_EHelper(cmp) {
   {
     rtl_set_OF(&eflag_OF);
   }
-  printf("done1");
+  printf("done1\n");
   print_asm_template2(cmp);
 }
 
