@@ -173,7 +173,7 @@ opcode_entry opcode_table [512] = {
   /* 0x78 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x7c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x80 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x84 */	IDEXW(J,jcc,0), IDEXW(J,jcc,0), IDEXW(J,jcc,0), EMPTY,//85 jnz
+  /* 0x84 */	IDEXW(J,jcc,0), IDEXW(J,jcc,0), IDEXW(J,jcc,0), IDEXW(J,jcc,0),//85 jnz
   /* 0x88 */	IDEXW(J,jcc,0), IDEXW(J,jcc,0), EMPTY, EMPTY,
   /* 0x8c */	IDEXW(J,jcc,0), IDEXW(J,jcc,0), IDEXW(J,jcc,0), IDEXW(J,jcc,0),//0x8e jle //0x8d jnl
   /* 0x90 */	IDEXW(E,setcc,1), IDEXW(E,setcc,1), IDEXW(E,setcc,1), IDEXW(E,setcc,1),//90-->97 Byte Set on condition (Eb)
