@@ -114,7 +114,6 @@ make_EHelper(cmp) {
     immediate byte, the byte value is first sign-extended.
 
   */
- printf("1=%d\n2=%d\n",id_dest->reg,id_src->reg);
   rtlreg_t op1,op2;
   get_mr_value(&op1,id_dest);
   get_mr_value(&op2,id_src);
@@ -182,16 +181,10 @@ make_EHelper(dec) {
   //TODO();
   //printf("val=%08X\n",id_dest->val);
   rtl_subi(&t0,&id_dest->val,1);
-  rtl_sr(id_dest->reg,id_dest->width,&t0);
+  //rtl_sr(id_dest->reg,id_dest->width,&t0);
   rtl_update_ZFSF(&t0,id_dest->width);  
-  rtl_msb(&t1,&id_dest->val,id_dest->width);
-  rtl_msb(&t2,&t0,id_dest->width);
-  //printf("t1=%08X\nt2=%08X\n",t1,t2);
-  t1 &= 0x00000001;
-  t2 &= 0x00000001;
-  if(t1==t2)
-    rtl_unset_OF(&eflag_OF);
-  else 
+  rtl_eqi(&t2,&t0,0x7fffffff);
+  if(t2>0)
     rtl_set_OF(&eflag_OF);
   print_asm_template1(dec);
 }
