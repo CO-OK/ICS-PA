@@ -42,7 +42,7 @@ static make_EHelper(name) { \
 
 /* 0x80, 0x81, 0x83 */
 make_group(gp1,
-    EX(add), EMPTY, EMPTY, EX(sbb),
+    EX(add), EX(or), EMPTY, EX(sbb),
     EX(and), EX(sub), EX(xor_31), EX(cmp))
 
   /* 0xc0, 0xc1, 0xd0, 0xd1, 0xd2, 0xd3 */
@@ -174,7 +174,7 @@ opcode_entry opcode_table [512] = {
   /* 0x7c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x80 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x84 */	IDEXW(J,jcc,0), IDEXW(J,jcc,0), IDEXW(J,jcc,0), EMPTY,//85 jnz
-  /* 0x88 */	IDEXW(J,jcc,0), EMPTY, EMPTY, EMPTY,
+  /* 0x88 */	IDEXW(J,jcc,0), IDEXW(J,jcc,0), EMPTY, EMPTY,
   /* 0x8c */	IDEXW(J,jcc,0), IDEXW(J,jcc,0), IDEXW(J,jcc,0), IDEXW(J,jcc,0),//0x8e jle //0x8d jnl
   /* 0x90 */	IDEXW(E,setcc,1), IDEXW(E,setcc,1), IDEXW(E,setcc,1), IDEXW(E,setcc,1),//90-->97 Byte Set on condition (Eb)
   /* 0x94 */	IDEXW(E,setcc,1), IDEXW(E,setcc,1), IDEXW(E,setcc,1), IDEXW(E,setcc,1),//0x94 sete al
