@@ -9,19 +9,7 @@ void _ioe_init() {
 }
 unsigned long now_time;
 unsigned long _uptime() {
-  /*unsigned long temp_time=inl(RTC_PORT);
-  //printf("nowtime=%ul\n",now_time);
-  if(temp_time==255)
-  {
-    now_time+=temp_time;
-    return now_time-boot_time;
-  }
-  else
-  {
-    return now_time+temp_time-boot_time;
-  }*/
   now_time = inl(RTC_PORT);
-  //printf("time=%ul\n",boot_time);
   return (now_time-boot_time);
 }
 
