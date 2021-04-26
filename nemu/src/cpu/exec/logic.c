@@ -45,6 +45,7 @@ make_EHelper(and) {
     注:应该是与源操作数的宽度相同,在执行  and    $0xfffffff0,%esp（这个指令应该是不合理的）时
     解码后目的操作数是4位，原操作数是2位，应该需要扩展
   */
+  printf("destval=%08X\nsrcval=%08X\n",id_dest->val,id_src->val);
   rtl_and(&t0,&id_dest->val,&id_src->val);
   operand_write(id_dest,&t0);
   /*
