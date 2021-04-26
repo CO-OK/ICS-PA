@@ -114,6 +114,7 @@ make_EHelper(cmp) {
     immediate byte, the byte value is first sign-extended.
 
   */
+ printf("1=%d\n2=%d\n",id_dest->reg,id_src->reg);
   rtlreg_t op1,op2;
   get_mr_value(&op1,id_dest);
   get_mr_value(&op2,id_src);
