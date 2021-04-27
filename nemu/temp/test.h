@@ -1,4 +1,0 @@
-static  void foo()
-{
-        return ;
-}
