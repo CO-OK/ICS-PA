@@ -1,5 +1,6 @@
 #include "cpu/exec.h"
 
+void rtl_mul(rtlreg_t* dest_hi, rtlreg_t* dest_lo, const rtlreg_t* src1, const rtlreg_t* src2);
 make_EHelper(add) {
 
   //TODO();
