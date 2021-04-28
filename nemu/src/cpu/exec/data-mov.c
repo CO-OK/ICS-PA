@@ -6,7 +6,10 @@ make_EHelper(mov) {
 }
 
 make_EHelper(push_reg) {
-  printf("val=%08X\n",id_dest->val);
+  //printf("val=%08X\n",id_dest->val);
+  /*
+    push imm8 指令需要对立即数进行符号扩展
+  */
   rtl_push(&id_dest->val,id_dest->width);
   print_asm_template1(push);
 }
