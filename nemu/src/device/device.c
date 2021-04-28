@@ -34,7 +34,7 @@ static void timer_sig_handler(int signum) {
   }
 
   int ret = setitimer(ITIMER_VIRTUAL, &it, NULL);
-  Assert(ret == 0, "Can not set timer");
+  //Assert(ret == 0, "Can not set timer");
 }
 
 void device_update() {
