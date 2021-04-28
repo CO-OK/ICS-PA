@@ -20,12 +20,12 @@ make_EHelper(lidt) {
     printf("high=%08X,low=%08X\n",high4&0xff000000,low4&0x00ffffff);
     cpu.idtr_limit = (high4>>8)&0x0000ffff;
     cpu.idtr_base=(low4&0x00ffffff)+(high4&0xff000000);*/
-    printf("limt=%08X\n",cpu.idtr_limit);
-    printf("base=%08X\n",cpu.idtr_base);
+    //printf("limt=%08X\n",cpu.idtr_limit);
+    //printf("base=%08X\n",cpu.idtr_base);
 
   }
-  printf("hit lidt\n");
-  printf("destaddr=%08X\n",id_dest->addr);
+  //printf("hit lidt\n");
+  //printf("destaddr=%08X\n",id_dest->addr);
   print_asm_template1(lidt);
 }
 
@@ -47,8 +47,8 @@ make_EHelper(mov_cr2r) {
 
 make_EHelper(int) {
   //TODO();
-  printf("hit int\n");
-  printf("int num=%08X,eip=%08X\n",id_dest->imm,cpu.eip);
+  //printf("hit int\n");
+  //printf("int num=%08X,eip=%08X\n",id_dest->imm,cpu.eip);
   raise_intr(id_dest->imm,decoding.seq_eip);
   print_asm("int %s", id_dest->str);
   
