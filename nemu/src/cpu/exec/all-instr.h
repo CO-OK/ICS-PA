@@ -46,5 +46,6 @@ make_EHelper(out);
 make_EHelper(neg);
 make_EHelper(lidt);
 make_EHelper(int);
+make_EHelper(pusha);
 //make_EHelper(xchg_b);
 //make_EHelper(push_Ev);

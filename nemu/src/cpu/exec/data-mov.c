@@ -22,8 +22,16 @@ make_EHelper(pop_reg) {
 }
 
 make_EHelper(pusha) {
-  TODO();
-
+  //TODO();
+  rtlreg_t temp=cpu.esp;
+  rtl_push(&cpu.eax,4);
+  rtl_push(&cpu.ecx,4);
+  rtl_push(&cpu.edx,4);
+  rtl_push(&cpu.ebx,4);
+  rtl_push(&temp,4);
+  rtl_push(&cpu.ebp,4);
+  rtl_push(&cpu.esi,4);
+  rtl_push(&cpu.edi,4);
   print_asm("pusha");
 }
 
