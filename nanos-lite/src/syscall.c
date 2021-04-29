@@ -23,5 +23,5 @@ _RegSet* do_syscall(_RegSet *r) {
 
 int sys_none()
 {
-  return 1;
+  return 5;
 }
