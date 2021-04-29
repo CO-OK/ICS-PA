@@ -9,7 +9,7 @@ _RegSet* do_syscall(_RegSet *r) {
   //printf("call num=%d\n",a[0]);
   switch (a[0]) {
     case 0:{
-      a[7]=sys_none();
+      r->eax=sys_none();
       break;
     }
     case 4:{
@@ -23,5 +23,5 @@ _RegSet* do_syscall(_RegSet *r) {
 
 int sys_none()
 {
-  return 5;
+  return 1;
 }
