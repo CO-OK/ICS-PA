@@ -21,9 +21,6 @@ struct _RegSet {
   uintptr_t ebp;
   uintptr_t esi;
   uintptr_t edi;
-  uintptr_t esp;
-  
-  
 };
 
 #define SYSCALL_ARG1(r) 0
