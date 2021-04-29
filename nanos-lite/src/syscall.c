@@ -13,7 +13,7 @@ _RegSet* do_syscall(_RegSet *r) {
     case 4:{
       sys_exit(SYSCALL_ARG3(r));
       break;
-      printf("hit 4");
+     // printf("hit 4");
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
