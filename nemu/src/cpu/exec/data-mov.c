@@ -50,7 +50,7 @@ make_EHelper(popa) {
   rtl_pop(&cpu.edi);
   rtl_pop(&cpu.esi);
   rtl_pop(&cpu.ebp);
-  rtl_pop(&temp);
+  rtl_pop(&cpu.esp);
   rtl_pop(&cpu.ebx);
   rtl_pop(&cpu.edx);
   rtl_pop(&cpu.ecx);
