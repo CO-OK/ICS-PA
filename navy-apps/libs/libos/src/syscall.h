@@ -24,4 +24,5 @@ enum {
   SYS_gettimeofday
 };
 int sys_none();
+int sys_exit(int arg);
 #endif

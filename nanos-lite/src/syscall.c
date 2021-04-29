@@ -11,6 +11,8 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case 4:{
+      sys_exit(SYSCALL_ARG3(r));
+      break;
       printf("hit 4");
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
@@ -22,4 +24,9 @@ _RegSet* do_syscall(_RegSet *r) {
 int sys_none()
 {
   return 1;
+}
+
+int sys_exit(int arg)
+{
+  _halt(arg);
 }
