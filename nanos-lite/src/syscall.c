@@ -7,6 +7,7 @@ _RegSet* do_syscall(_RegSet *r) {
   //printf("call num=%d\n",a[0]);
   switch (a[0]) {
     case 0:{
+      printf("hit 0\n");
       a[7]=sys_none();
       break;
     }
