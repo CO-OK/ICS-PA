@@ -18,7 +18,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   //printf("hit raise_intr\n");
   rtl_push(&cpu.EFLAGS_,4);
   rtl_push(&cpu.cs,4);
-  rtl_push(&cpu.eip,4);
+  rtl_push(&ret_addr,4);
   //printf("eip==%08X\n",cpu.eip);
   vaddr_t gate_enrty= cpu.idtr_base + sizeof(GateDesc)*NO;
   //printf("gate entry=%08X\n",gate_enrty);
