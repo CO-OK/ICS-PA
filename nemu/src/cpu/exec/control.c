@@ -37,22 +37,10 @@ make_EHelper(call) {
 }
 
 make_EHelper(ret) {
-  //TODO();
-  /*if(decoding.is_call==true)
-  {
-    rtl_pop(&decoding.jmp_eip);
-    decoding.is_call=false;
-    decoding.is_jmp=1; 
-  }
-  else
-  {
-    decoding.jmp_eip=decoding.tmp_eip;
-    decoding.is_jmp=1;
-  }*/
-  
+  //TODO(); 
   //printf("%08X\n",decoding.jmp_eip);
    rtl_pop(&decoding.jmp_eip);
-   printf("ret return addr=%08X\n",decoding.jmp_eip);
+   printf("ret return addr=%08X,esp=%08X\n",decoding.jmp_eip,cpu.esp);
    decoding.is_jmp=1; 
 
   //rtl_j(decoding.jmp_eip);
