@@ -32,13 +32,13 @@ make_EHelper(pusha) {
   rtl_push(&cpu.ebp,4);
   rtl_push(&cpu.esi,4);
   rtl_push(&cpu.edi,4);
-  printf("pusha %08X\n",cpu.esp);
+  //printf("pusha %08X\n",cpu.esp);
   print_asm("pusha");
 }
 
 make_EHelper(popa) {
   //TODO();
-  printf("before popa %08X\n",cpu.esp);
+  //printf("before popa %08X\n",cpu.esp);
   rtlreg_t temp;
   rtl_pop(&cpu.edi);
   rtl_pop(&cpu.esi);
@@ -48,7 +48,7 @@ make_EHelper(popa) {
   rtl_pop(&cpu.edx);
   rtl_pop(&cpu.ecx);
   rtl_pop(&cpu.eax);
-  printf("popa %08X\n",cpu.esp);
+  //printf("popa %08X\n",cpu.esp);
   print_asm("popa");
 }
 

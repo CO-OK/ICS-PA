@@ -62,6 +62,7 @@ make_EHelper(int) {
 make_EHelper(iret) {
   //TODO();
   decoding.is_jmp=1;
+  printf("before iret esp %08X\n",cpu.esp);
   rtl_pop(&decoding.jmp_eip);
   printf("$eip=%08X\n",decoding.jmp_eip);
   rtl_pop(&cpu.cs);
