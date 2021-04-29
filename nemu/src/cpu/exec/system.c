@@ -49,7 +49,7 @@ make_EHelper(int) {
   //TODO();
   //printf("hit int\n");
   //printf("int num=%08X,eip=%08X\n",id_dest->imm,cpu.eip);
-  printf("eip=%08X\nseq_eip=%08X\n",cpu.eip,decoding.seq_eip);
+  //printf("eip=%08X\nseq_eip=%08X\n",cpu.eip,decoding.seq_eip);
   raise_intr(id_dest->imm,decoding.seq_eip);
   print_asm("int %s", id_dest->str);
   
