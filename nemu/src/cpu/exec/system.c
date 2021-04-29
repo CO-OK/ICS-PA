@@ -52,7 +52,7 @@ make_EHelper(int) {
   //printf("eip=%08X\nseq_eip=%08X\n",cpu.eip,decoding.seq_eip);
   raise_intr(id_dest->imm,decoding.seq_eip);
   print_asm("int %s", id_dest->str);
-  printf("seqeip=%08X\n",decoding.seq_eip);
+  //printf("seqeip=%08X\n",decoding.seq_eip);
 
 #ifdef DIFF_TEST
   diff_test_skip_nemu();
@@ -62,12 +62,12 @@ make_EHelper(int) {
 make_EHelper(iret) {
   //TODO();
   decoding.is_jmp=1;
-  printf("before iret esp %08X\n",cpu.esp);
+  //printf("before iret esp %08X\n",cpu.esp);
   rtl_pop(&decoding.jmp_eip);
-  printf("$eip=%08X\n",decoding.jmp_eip);
+  //printf("$eip=%08X\n",decoding.jmp_eip);
   rtl_pop(&cpu.cs);
   rtl_pop(&cpu.EFLAGS_);
-  printf("iret esp %08X\n",cpu.esp);
+  //printf("iret esp %08X\n",cpu.esp);
   print_asm("iret");
 }
 
