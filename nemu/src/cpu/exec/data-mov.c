@@ -50,11 +50,12 @@ make_EHelper(popa) {
   rtl_pop(&cpu.edi);
   rtl_pop(&cpu.esi);
   rtl_pop(&cpu.ebp);
-  rtl_pop(&cpu.esp);
+  rtl_pop(&temp);
   rtl_pop(&cpu.ebx);
   rtl_pop(&cpu.edx);
   rtl_pop(&cpu.ecx);
   rtl_pop(&cpu.eax);
+  cpu.esp=temp;
   //printf("popa %08X\n",cpu.esp);
   print_asm("popa");
 }
