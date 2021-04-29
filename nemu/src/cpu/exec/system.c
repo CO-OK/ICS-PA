@@ -61,8 +61,7 @@ make_EHelper(int) {
 
 make_EHelper(iret) {
   //TODO();
-  printf("hit iret\n");
-  rtl_pop(&cpu.eip);
+  rtl_pop(&decoding.seq_eip);
   rtl_pop(&cpu.cs);
   rtl_pop(&cpu.EFLAGS_);
   print_asm("iret");
