@@ -12,7 +12,7 @@ struct _RegSet {
   uintptr_t ecx;
   uintptr_t edx;
   uintptr_t ebx;
-  uintptr_t esp;
+  uintptr_t temp;
   uintptr_t ebp;
   uintptr_t esi;
   uintptr_t edi;
