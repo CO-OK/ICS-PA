@@ -31,7 +31,6 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   decoding.is_jmp=1;
   decoding.jmp_eip=final;
   printf("jmp eip=%08X\n",final);
-  //printf("1\n");
 }
 
 void dev_raise_intr() {
