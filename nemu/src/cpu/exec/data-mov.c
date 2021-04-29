@@ -21,7 +21,7 @@ make_EHelper(push_reg) {
   {
     rtl_sext(&t0,&id_dest->val,id_dest->width);
     id_dest->val=t0;
-    rtl_subi(&cpu.esp,&cpu.esp,2);
+    rtl_subi(&cpu.esp,&cpu.esp,4);
     rtl_sm(&cpu.esp,4,&id_dest->val);
   }
   else
