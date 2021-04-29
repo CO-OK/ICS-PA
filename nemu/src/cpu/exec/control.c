@@ -48,9 +48,12 @@ make_EHelper(ret) {
     decoding.jmp_eip=decoding.tmp_eip;
     decoding.is_jmp=1;
   }*/
+  
   //printf("%08X\n",decoding.jmp_eip);
    rtl_pop(&decoding.jmp_eip);
+   printf("ret return addr=%08X\n",decoding.jmp_eip);
    decoding.is_jmp=1; 
+
   //rtl_j(decoding.jmp_eip);
   print_asm("ret");
 }
