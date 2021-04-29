@@ -97,7 +97,7 @@ opcode_entry opcode_table [512] = {
   /* 0x54 */	IDEX(r,push_reg), IDEX(r,push_reg), IDEX(r,push_reg), IDEX(r,push_reg),
   /* 0x58 */	IDEX(r,pop_reg), IDEX(r,pop_reg), IDEX(r,pop_reg), IDEX(r,pop_reg),
   /* 0x5c */	IDEX(r,pop_reg), IDEX(r,pop_reg), IDEX(r,pop_reg), IDEX(r,pop_reg),
-  /* 0x60 */	EX(pusha), EMPTY, EMPTY, EMPTY,
+  /* 0x60 */	EX(pusha), EX(popa), EMPTY, EMPTY,
   /* 0x64 */	EMPTY, EMPTY, EX(operand_size), EMPTY,
   /* 0x68 */	IDEXW(I,push_reg,0), EMPTY, IDEXW(I,push_reg,1), EMPTY,//0x6a push Ib,就写成push_reg了懒得改//0x68 push Ib
   /* 0x6c */	EMPTY, EMPTY, EMPTY, EMPTY,
