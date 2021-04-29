@@ -23,5 +23,5 @@ enum {
   SYS_times,
   SYS_gettimeofday
 };
-
+int sys_none();
 #endif
