@@ -32,7 +32,7 @@ make_EHelper(call) {
   decoding.is_call=true;
   rtl_push(&decoding.seq_eip,4);
   //printf("ret addr")
-  printf("call eip=%08X,seq_eip=%08X\n",cpu.eip,decoding.seq_eip);
+  //printf("call eip=%08X,seq_eip=%08X\n",cpu.eip,decoding.seq_eip);
   print_asm("call %x", decoding.jmp_eip);
 }
 
@@ -40,7 +40,7 @@ make_EHelper(ret) {
   //TODO(); 
   //printf("%08X\n",decoding.jmp_eip);
    rtl_pop(&decoding.jmp_eip);
-   printf("ret return addr=%08X,esp=%08X\n",decoding.jmp_eip,cpu.esp);
+   //printf("ret return addr=%08X,esp=%08X\n",decoding.jmp_eip,cpu.esp);
    decoding.is_jmp=1; 
 
   //rtl_j(decoding.jmp_eip);
@@ -54,6 +54,6 @@ make_EHelper(call_rm) {
   decoding.is_call=true;
   rtl_push(&decoding.seq_eip,4);
   decoding.jmp_eip=id_dest->val;
-  printf("call rm jmmp eip=%08X,seq_eip=%08X\n",decoding.jmp_eip,decoding.seq_eip);
+  //printf("call rm jmmp eip=%08X,seq_eip=%08X\n",decoding.jmp_eip,decoding.seq_eip);
   print_asm("call *%s", id_dest->str);
 }
