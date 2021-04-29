@@ -61,11 +61,12 @@ make_EHelper(int) {
 
 make_EHelper(iret) {
   //TODO();
-  rtl_pop(&decoding.seq_eip);
+  decoding.is_jmp=1;
+  rtl_pop(&decoding.jmp_eip);
   printf("$eip=%08X\n",decoding.jmp_eip);
   rtl_pop(&cpu.cs);
   rtl_pop(&cpu.EFLAGS_);
-  decoding.is_jmp=1;
+  
   print_asm("iret");
 }
 
