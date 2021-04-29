@@ -38,6 +38,7 @@ make_EHelper(pusha) {
 
 make_EHelper(popa) {
   //TODO();
+  printf("before popa %08X\n",cpu.esp);
   rtlreg_t temp;
   rtl_pop(&cpu.edi);
   rtl_pop(&cpu.esi);
