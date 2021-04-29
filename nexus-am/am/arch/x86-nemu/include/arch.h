@@ -8,6 +8,11 @@
 
 struct _RegSet {
   //uintptr_t esi, ebx, eax, eip, edx, error_code, eflags, ecx, cs, esp, edi, ebp;
+  uintptr_t eflags;
+  uintptr_t cs;
+  uintptr_t eip;
+  uintptr_t error_code;
+  int       irq;
   uintptr_t eax;
   uintptr_t ecx;
   uintptr_t edx;
@@ -16,11 +21,8 @@ struct _RegSet {
   uintptr_t ebp;
   uintptr_t esi;
   uintptr_t edi;
-  uintptr_t error_code;
-  int       irq;
-  uintptr_t eflags;
-  uintptr_t cs;
-  uintptr_t eip;
+  
+  
 };
 
 #define SYSCALL_ARG1(r) 0
