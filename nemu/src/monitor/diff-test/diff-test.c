@@ -153,7 +153,12 @@ void difftest_step(uint32_t eip) {
   gdb_getregs(&r);
 
   // TODO: Check the registers state with QEMU.
-  if(r.eax != cpu.eax)
+  if(r.eip != cpu.eip)
+  {
+    diff = true;
+    printf("detect diff at eip,\tr.eip=%08X\tcpu.eip=%08X\n",r.eip,cpu.eip);
+  }
+  else if(r.eax != cpu.eax)
   {
     diff = true;
     printf("detect diff at eax,\tr.eax=%08X\tcpu.eax=%08X\n",r.eax,cpu.eax);
@@ -193,11 +198,7 @@ void difftest_step(uint32_t eip) {
     diff = true;
     printf("detect diff at edi,\tr.edi=%08X\tcpu.edi=%08X\n",r.edi,cpu.edi);
   }
-  else if(r.eip != cpu.eip)
-  {
-    diff = true;
-    printf("detect diff at eip,\tr.eip=%08X\tcpu.eip=%08X\n",r.eip,cpu.eip);
-  }
+  
   /*else if(r.eflags != cpu.EFLAGS_)
   {
     /*
