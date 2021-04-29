@@ -23,7 +23,7 @@ make_EHelper(pop_reg) {
 
 make_EHelper(pusha) {
   //TODO();
-  rtlreg_t temp=cpu.esp;
+  rtlreg_t temp=decoding.seq_eip;
   rtl_push(&cpu.eax,4);
   rtl_push(&cpu.ecx,4);
   rtl_push(&cpu.edx,4);
