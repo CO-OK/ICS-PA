@@ -16,7 +16,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   */
   //printf("size=%ld\n",sizeof(GateDesc));
   //printf("hit raise_intr\n");
-  printf("in raise eip=%08X\n",cpu.eip);
+  //printf("in raise eip=%08X\n",cpu.eip);
   rtl_push(&cpu.EFLAGS_,4);
   rtl_push(&cpu.cs,4);
   rtl_push(&ret_addr,4);
@@ -28,11 +28,11 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   //printf("15t0=%08X 16t32=%08X\n",off15to0,off16to32);
   //printf("temp=%08X\n",off16to32>>16);
   vaddr_t final=(off16to32<<16)+(0x0000ffff&off15to0);
-  printf("final=%08X\n",final);
+  //printf("final=%08X\n",final);
   //decoding.seq_eip=final;
   decoding.is_jmp=1;
   decoding.jmp_eip=final;
-  printf("cpu.jmpeip=%08X\n",decoding.jmp_eip);
+  //printf("cpu.jmpeip=%08X\n",decoding.jmp_eip);
   //printf("raise esp %08X\n",cpu.esp);
   //printf("jmp eip=%08X\n",final);
 }
