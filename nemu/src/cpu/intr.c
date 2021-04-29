@@ -16,6 +16,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   */
   //printf("size=%ld\n",sizeof(GateDesc));
   //printf("hit raise_intr\n");
+  printf("in raise eip=%08X\n",cpu.eip);
   rtl_push(&cpu.EFLAGS_,4);
   rtl_push(&cpu.cs,4);
   rtl_push(&ret_addr,4);
