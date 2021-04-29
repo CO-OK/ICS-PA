@@ -64,8 +64,8 @@ make_EHelper(iret) {
   decoding.is_jmp=1;
   rtl_pop(&decoding.jmp_eip);
   printf("$eip=%08X\n",decoding.jmp_eip);
-  //rtl_pop(&cpu.cs);
-  //rtl_pop(&cpu.EFLAGS_);
+  rtl_pop(&cpu.cs);
+  rtl_pop(&cpu.EFLAGS_);
   
   print_asm("iret");
 }
