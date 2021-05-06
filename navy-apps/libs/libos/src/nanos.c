@@ -29,7 +29,7 @@ int _write(int fd, void *buf, size_t count){
   //_exit(SYS_write);
   //return write(fd,buf,count);
   printf("fd=%d\ncount=%d\n",fd,count);
-  return _syscall_(SYS_write,fd,buf,count);
+  //return _syscall_(SYS_write,fd,buf,count);
 }
 
 void *_sbrk(intptr_t increment){
