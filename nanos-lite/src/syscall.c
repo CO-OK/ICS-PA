@@ -6,14 +6,18 @@ _RegSet* do_syscall(_RegSet *r) {
   a[0] = SYSCALL_ARG1(r);
   //printf("call num=%d\n",a[0]);
   switch (a[0]) {
-    case 0:{
+    case SYS_none:{
       SYSCALL_ARG1(r)=sys_none();
       break;
     }
-    case 4:{
+    case SYS_exit:{
       sys_exit(SYSCALL_ARG3(r));
       break;
      // printf("hit 4");
+    }
+    case SYS_write:{
+
+      break;
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
@@ -26,7 +30,19 @@ int sys_none()
   return 1;
 }
 
-int sys_exit(int arg)
+void sys_exit(int arg)
 {
   _halt(arg);
+}
+
+int sys_write(int fd, char *buf, size_t count)
+{
+  if(fd==1||fd==2)
+  {
+    for(int i=0;i<count;i++)
+    {
+      _putc(buf[i]);
+    }
+  }
+  return count;
 }
