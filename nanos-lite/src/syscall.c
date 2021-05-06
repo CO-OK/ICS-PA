@@ -11,12 +11,13 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case SYS_exit:{
-      sys_exit(SYSCALL_ARG3(r));
+      return sys_exit(SYSCALL_ARG3(r));
       break;
      // printf("hit 4");
     }
     case SYS_write:{
-      printf("hit write\n");
+      //printf("hit write\n");
+      return sys_write(SYSCALL_ARG2(r),SYSCALL_ARG3(r),SYSCALL_ARG4(r));
       break;
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
