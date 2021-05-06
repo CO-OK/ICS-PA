@@ -49,6 +49,7 @@ int sys_write(int fd, char *buf, size_t count)
     {
       _putc(buf[i]);
     }
+    return count;
   }
-  return count;
+  return -1;
 }
