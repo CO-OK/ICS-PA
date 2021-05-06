@@ -21,7 +21,7 @@ _RegSet* do_syscall(_RegSet *r) {
       printf("arg2=%08X\n",SYSCALL_ARG2(r));
       printf("arg3=%08X\n",SYSCALL_ARG3(r));
       printf("arg4=%08X\n",SYSCALL_ARG4(r));*/
-      return sys_write(SYSCALL_ARG3(r),SYSCALL_ARG2(r),SYSCALL_ARG4(r));
+      return sys_write(SYSCALL_ARG4(r),SYSCALL_ARG2(r),SYSCALL_ARG3(r));
       break;
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
