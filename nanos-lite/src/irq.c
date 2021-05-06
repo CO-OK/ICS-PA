@@ -1,7 +1,7 @@
 #include "common.h"
 
 static _RegSet* do_event(_Event e, _RegSet* r) {
-  //printf("event ID = %d\n",e.event);
+  printf("event ID = %d\n",e.event);
   switch (e.event) {
     //
     case _EVENT_SYSCALL:{
