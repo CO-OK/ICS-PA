@@ -16,7 +16,7 @@ _RegSet* do_syscall(_RegSet *r) {
      // printf("hit 4");
     }
     case SYS_write:{
-      //printf("hit write\n");
+      printf("hit write\n");
       return sys_write(SYSCALL_ARG2(r),SYSCALL_ARG3(r),SYSCALL_ARG4(r));
       break;
     }
