@@ -16,7 +16,7 @@ _RegSet* do_syscall(_RegSet *r) {
      // printf("hit 4");
     }
     case SYS_write:{
-
+      printf("hit write");
       break;
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
