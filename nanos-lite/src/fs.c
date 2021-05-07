@@ -36,6 +36,8 @@ int fs_open(char*path)
 }
 int fs_read(int fd, void *buf, size_t count)
 {
+  if(file_table[fd].open_offset == fs_filesz(fd))
+		return 0;
   if (file_table[fd].open_offset + count > fs_filesz(fd))
 		count = file_table[fd].size - file_table[fd].open_offset;
   ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
@@ -80,13 +82,13 @@ int sys_write(int fd, char *buf, size_t count)
   //printf("fd=%d\ncount=%d\n",fd,count);
   if(fd==1||fd==2)
   {
-    /*for(int i=0;i<count;i++)
+    for(int i=0;i<count;i++)
     {
       _putc(buf[i]);
       //printf("char=%c\n",buf[i]);
     }
     
-    return count;*/
+    return count;
   }
   else
   {
