@@ -36,15 +36,15 @@ int _write(int fd, void *buf, size_t count){
 
 void *_sbrk(intptr_t increment){
   //void*a=sbrk(0);
-  printf("777\n");
+  //printf("777\n");
   intptr_t old_pb = program_break;
 	if (_syscall_(SYS_brk, old_pb + increment, 0, 0) == 0) {
-		printf("hit if\n");
+		//printf("hit if\n");
 		program_break += increment;	
 		return 0;
 	}
 	else {
-    printf("else\n");
+    //printf("else\n");
 		return (void *)-1;
 	}
 }
