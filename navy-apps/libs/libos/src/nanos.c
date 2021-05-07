@@ -5,13 +5,13 @@
 #include <assert.h>
 #include <time.h>
 #include "syscall.h"
-
+extern char _end;
+intptr_t program_break = (intptr_t)&_end;
 // TODO: discuss with syscall interface
 #ifndef __ISA_NATIVE__
 
 // FIXME: this is temporary
-extern char _end;
-intptr_t program_break = (intptr_t)&_end;
+
 int _syscall_(int type, uintptr_t a0, uintptr_t a1, uintptr_t a2){
   int ret = -1;
   asm volatile("int $0x80": "=a"(ret): "a"(type), "b"(a0), "c"(a1), "d"(a2));
