@@ -4,6 +4,7 @@ typedef struct {
   char *name;
   size_t size;
   off_t disk_offset;
+  off_t open_offset;
 } Finfo;
 
 enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB, FD_EVENTS, FD_DISPINFO, FD_NORMAL};
@@ -35,7 +36,10 @@ int fs_open(char*path)
 }
 int fs_read(int fd, void *buf, size_t count)
 {
-  ramdisk_read(buf, file_table[fd].disk_offset, count);
+  if (file_table[fd].open_offset + count > fs_filesz(fd))
+		count = file_table[fd].size - file_table[fd].open_offset;
+  ramdisk_read(buf, file_table[fd].open_offset, count);
+  file_table[fd].open_offset+=count;
 }
 
 ssize_t fs_filesz(int fd)
@@ -45,4 +49,43 @@ ssize_t fs_filesz(int fd)
 int fs_close(int fd)
 {
   return 0;
+}
+off_t lseek(int fd, off_t offset, int whence)
+{
+  if(whence==SEEK_CUR)
+  {
+
+  }
+  else if(whence==SEEK_SET)
+  {
+
+  }
+  else if(whence==SEEK_END)
+  {
+
+  }
+}
+
+int sys_write(int fd, char *buf, size_t count)
+{
+  //printf("fd=%d\ncount=%d\n",fd,count);
+  if(fd==1||fd==2)
+  {
+    for(int i=0;i<count;i++)
+    {
+      _putc(buf[i]);
+      //printf("char=%c\n",buf[i]);
+    }
+    
+    return count;
+  }
+  else
+  {
+    if (file_table[fd].open_offset + count > fs_filesz(fd))
+		  count = file_table[fd].size - file_table[fd].open_offset;
+    ramdisk_write(buf, file_table[fd].open_offset, count);
+    file_table[fd].open_offset+=count;
+    return count;
+  }
+  return -1;
 }

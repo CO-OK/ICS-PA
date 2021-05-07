@@ -31,4 +31,5 @@ int fs_open(char*path);
 int fs_read(int fd, void *buf, size_t count);
 int fs_close(int fd);
 ssize_t fs_filesz(int fd);
+off_t lseek(int fd, off_t offset, int whence);
 #endif
