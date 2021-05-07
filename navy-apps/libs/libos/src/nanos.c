@@ -38,7 +38,7 @@ void *_sbrk(intptr_t increment){
   //void*a=sbrk(0);
   intptr_t old_pb = program_break;
 	if (_syscall_(SYS_brk, old_pb + increment, 0, 0) == 0) {
-		// panic("222");
+		printf("hit if\n");
 		program_break += increment;	
 		return 0;
 	}
