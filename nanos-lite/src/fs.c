@@ -80,13 +80,13 @@ int sys_write(int fd, char *buf, size_t count)
   //printf("fd=%d\ncount=%d\n",fd,count);
   if(fd==1||fd==2)
   {
-    for(int i=0;i<count;i++)
+    /*for(int i=0;i<count;i++)
     {
       _putc(buf[i]);
       //printf("char=%c\n",buf[i]);
     }
     
-    return count;
+    return count;*/
   }
   else
   {
