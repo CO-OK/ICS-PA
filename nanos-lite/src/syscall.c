@@ -68,5 +68,10 @@ int sys_write(int fd, char *buf, size_t count)
 
 int sys_sbrk(intptr_t increment)
 {
+  intptr_t old_pb = program_break;
+	
+	// panic("222");
+	program_break += increment;	
+	return (void *)old_pb;
   return 0;
 }
