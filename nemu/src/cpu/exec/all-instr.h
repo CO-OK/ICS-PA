@@ -49,6 +49,6 @@ make_EHelper(int);
 make_EHelper(pusha);
 make_EHelper(popa);
 make_EHelper(iret);
-//make_EHelper(das);
+make_EHelper(das);
 //make_EHelper(xchg_b);
 //make_EHelper(push_Ev);
