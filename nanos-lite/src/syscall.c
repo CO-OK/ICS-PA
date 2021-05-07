@@ -66,10 +66,5 @@ int sys_write(int fd, char *buf, size_t count)
 
 int sys_sbrk(intptr_t increment)
 {
-  intptr_t program_break = (intptr_t)&_end;
-  intptr_t old_pb = program_break;
-  program_break += increment;	
-  printf("break is %08X\n",program_break);
-	return (void *)old_pb;
-  //return 0;
+  return 0;
 }
