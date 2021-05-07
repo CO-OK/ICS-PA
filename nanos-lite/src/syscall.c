@@ -35,8 +35,8 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case SYS_read:{
-      fs_read(SYSCALL_ARG2(r),SYSCALL_ARG3(r),SYSCALL_ARG4(r));
-      SYSCALL_ARG1(r)=SYSCALL_ARG4(r);
+      
+      SYSCALL_ARG1(r)=fs_read(SYSCALL_ARG2(r),SYSCALL_ARG3(r),SYSCALL_ARG4(r));
       break;
     }
     case SYS_close:{
