@@ -22,7 +22,7 @@ _RegSet* do_syscall(_RegSet *r) {
       printf("arg3=%08X\n",SYSCALL_ARG3(r));
       printf("arg4=%08X\n",SYSCALL_ARG4(r));*/
       //return 0;
-      printf("hit write\n");
+      //printf("hit write\n");
       SYSCALL_ARG1(r)=sys_write(SYSCALL_ARG4(r),SYSCALL_ARG2(r),SYSCALL_ARG3(r));
       break;
     }
