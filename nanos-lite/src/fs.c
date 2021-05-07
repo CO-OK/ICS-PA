@@ -36,8 +36,8 @@ int fs_open(char*path)
 }
 int fs_read(int fd, void *buf, size_t count)
 {
-  /*if (file_table[fd].open_offset + count > fs_filesz(fd))
-		count = file_table[fd].size - file_table[fd].open_offset;*/
+  if (file_table[fd].open_offset + count > fs_filesz(fd))
+		count = file_table[fd].size - file_table[fd].open_offset;
   ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
   file_table[fd].open_offset+=count;
 }
@@ -54,15 +54,24 @@ off_t lseek(int fd, off_t offset, int whence)
 {
   if(whence==SEEK_CUR)
   {
-
+    if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
+    {
+				file_table[fd].open_offset += offset;
+				return file_table[fd].open_offset;
+			}
   }
   else if(whence==SEEK_SET)
   {
-
+    if (offset >= 0 && offset <= fs_filesz(fd)) 
+    {
+			file_table[fd].open_offset = offset;
+			return offset;
+		}
   }
   else if(whence==SEEK_END)
   {
-
+    file_table[fd].open_offset = fs_filesz(fd) + offset;
+		return file_table[fd].open_offset;
   }
 }
 
@@ -81,9 +90,9 @@ int sys_write(int fd, char *buf, size_t count)
   }
   else
   {
-    /*if (file_table[fd].open_offset + count > fs_filesz(fd))
-		  count = file_table[fd].size - file_table[fd].open_offset;*/
-    ramdisk_write(buf, file_table[fd].open_offset, count);
+    if (file_table[fd].open_offset + count > fs_filesz(fd))
+		  count = file_table[fd].size - file_table[fd].open_offset;
+    ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
     file_table[fd].open_offset+=count;
     return count;
   }
