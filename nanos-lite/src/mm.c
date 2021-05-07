@@ -16,7 +16,7 @@ void free_page(void *p) {
 
 /* The brk() system call handler. */
 int mm_brk(uint32_t new_brk) {
-  pf=new_brk;
+  pf+=new_brk;
   return 0;
 }
 

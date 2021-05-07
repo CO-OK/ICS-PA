@@ -25,6 +25,7 @@ _RegSet* do_syscall(_RegSet *r) {
     }
     case SYS_brk:{
       //printf("hit brk\n");
+      printf("arg4=%08X\n",SYSCALL_ARG4(r));
       return mm_brk(SYSCALL_ARG4(r));
       break;
     }
