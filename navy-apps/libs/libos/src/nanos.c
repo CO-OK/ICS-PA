@@ -40,7 +40,7 @@ void *_sbrk(intptr_t increment){
 	if (_syscall_(SYS_brk, old_pb + increment, 0, 0) == 0) {
 		// panic("222");
 		program_break += increment;	
-		return (void *)old_pb;
+		return 0;
 	}
 	else {
     printf("else\n");
