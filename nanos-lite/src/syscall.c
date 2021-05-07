@@ -24,7 +24,7 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case SYS_brk:{
-      printf("hit brk\n");
+      //printf("hit brk\n");
       return mm_brk(SYSCALL_ARG4(r));
       break;
     }
