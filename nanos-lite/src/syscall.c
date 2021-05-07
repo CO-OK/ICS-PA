@@ -44,7 +44,7 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case SYS_lseek:{
-
+      
       break;
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
@@ -63,13 +63,6 @@ int sys_exit(int arg)
   _halt(arg);
 }
 
-
-int sys_sbrk(intptr_t increment)
-{
-  
-  return 0;
-}
-
 int sys_write(int fd, char *buf, size_t count)
 {
   //printf("fd=%d\ncount=%d\n",fd,count);
@@ -80,16 +73,13 @@ int sys_write(int fd, char *buf, size_t count)
       _putc(buf[i]);
       //printf("char=%c\n",buf[i]);
     }
-    
     return count;
   }
-  /*else
-  {
-    /*if (file_table[fd].open_offset + count > fs_filesz(fd))
-		  count = file_table[fd].size - file_table[fd].open_offset;
-    ramdisk_write(buf, file_table[fd].open_offset, count);
-    file_table[fd].open_offset+=count;
-    return count;
-  }*/
   return -1;
+}
+
+int sys_sbrk(intptr_t increment)
+{
+  
+  return 0;
 }
