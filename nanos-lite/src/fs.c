@@ -24,7 +24,7 @@ static Finfo file_table[] __attribute__((used)) = {
 void init_fs() {
   // TODO: initialize the size of /dev/fb
 }
-int sys_open(char*path)
+int fs_open(char*path)
 {
   for(int i=0;i<NR_FILES;i++)
   {
@@ -32,4 +32,17 @@ int sys_open(char*path)
       return i;
   }
   return -1;
+}
+int fs_read(int fd, void *buf, size_t count)
+{
+  ramdisk_read(buf, file_table[fd].disk_offset, count);
+}
+
+ssize_t fs_filesz(int fd)
+{
+  return file_table[fd].size;
+}
+int fs_close(int fd)
+{
+  return 0;
 }
