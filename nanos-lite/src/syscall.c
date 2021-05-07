@@ -58,6 +58,7 @@ int sys_write(int fd, char *buf, size_t count)
     for(int i=0;i<count;i++)
     {
       _putc(buf[i]);
+      printf("char=%c\n",buf[i]);
     }
     return count;
   }
