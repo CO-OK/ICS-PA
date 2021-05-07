@@ -21,13 +21,13 @@ _RegSet* do_syscall(_RegSet *r) {
       printf("arg3=%08X\n",SYSCALL_ARG3(r));
       printf("arg4=%08X\n",SYSCALL_ARG4(r));*/
       printf("hit write\n");
-      return sys_write(SYSCALL_ARG4(r),SYSCALL_ARG2(r),SYSCALL_ARG3(r));
+      sys_write(SYSCALL_ARG4(r),SYSCALL_ARG2(r),SYSCALL_ARG3(r));
       break;
     }
     case SYS_brk:{
       //printf("hit brk\n");
       printf("arg4=%08X\n",SYSCALL_ARG4(r));
-      return sys_sbrk(SYSCALL_ARG4(r));
+      sys_sbrk(SYSCALL_ARG4(r));
       printf("end\n");
       break;
     }
