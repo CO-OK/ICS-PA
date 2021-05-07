@@ -1,6 +1,7 @@
 #include "common.h"
 #include "syscall.h"
 extern char _end;
+intptr_t program_break = (intptr_t)&_end;
 
 _RegSet* do_syscall(_RegSet *r) {
   uintptr_t a[4];
@@ -58,7 +59,7 @@ int sys_write(int fd, char *buf, size_t count)
     for(int i=0;i<count;i++)
     {
       _putc(buf[i]);
-      printf("char=%c\n",buf[i]);
+      //printf("char=%c\n",buf[i]);
     }
     return count;
   }
