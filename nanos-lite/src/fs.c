@@ -24,3 +24,12 @@ static Finfo file_table[] __attribute__((used)) = {
 void init_fs() {
   // TODO: initialize the size of /dev/fb
 }
+int sys_open(char*path)
+{
+  for(int i=0;i<NR_FILES;i++)
+  {
+    if(strcmp(file_table[i].name,path)==0)
+      return i;
+  }
+  return -1;
+}

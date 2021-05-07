@@ -26,6 +26,10 @@ _RegSet* do_syscall(_RegSet *r) {
       SYSCALL_ARG1(r)=sys_write(SYSCALL_ARG4(r),SYSCALL_ARG2(r),SYSCALL_ARG3(r));
       break;
     }
+    case SYS_open:{
+      SYSCALL_ARG1(r)=sys_open(SYSCALL_ARG2(r));
+      break;
+    }
     case SYS_brk:{
       SYSCALL_ARG1(r)=0;
       break;

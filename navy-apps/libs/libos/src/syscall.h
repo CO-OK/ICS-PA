@@ -27,4 +27,5 @@ int sys_none();
 int sys_exit(int arg);
 int sys_write(int fd, char *buf, size_t count);
 int sys_sbrk(intptr_t increment);
+int sys_open(char*path);
 #endif
