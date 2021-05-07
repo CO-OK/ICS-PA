@@ -31,8 +31,9 @@ int fs_open(char*path)
   {
     if(strcmp(file_table[i].name,path)==0)
       return i;
+    printf("%s\n",file_table[i].name);
   }
-  //assert(0);
+  assert(0);
   return -1;
 }
 int fs_read(int fd, void *buf, size_t count)
