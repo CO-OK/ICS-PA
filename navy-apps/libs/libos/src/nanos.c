@@ -43,6 +43,7 @@ void *_sbrk(intptr_t increment){
 		return (void *)old_pb;
 	}
 	else {
+    printf("else\n");
 		  return (void *)-1;
 	}
 }
