@@ -29,7 +29,7 @@ int _write(int fd, void *buf, size_t count){
   //_exit(SYS_write);
   //return write(fd,buf,count);
   //printf("_write fd=%d\n_writer count=%d\n",fd,count);
-  Log("666");
+  //Log("666");
   return _syscall_(SYS_write,fd,buf,count);
 }
 
