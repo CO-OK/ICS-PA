@@ -69,3 +69,27 @@ int sys_sbrk(intptr_t increment)
   
   return 0;
 }
+
+int sys_write(int fd, char *buf, size_t count)
+{
+  //printf("fd=%d\ncount=%d\n",fd,count);
+  if(fd==1||fd==2)
+  {
+    for(int i=0;i<count;i++)
+    {
+      _putc(buf[i]);
+      //printf("char=%c\n",buf[i]);
+    }
+    
+    return count;
+  }
+  /*else
+  {
+    /*if (file_table[fd].open_offset + count > fs_filesz(fd))
+		  count = file_table[fd].size - file_table[fd].open_offset;
+    ramdisk_write(buf, file_table[fd].open_offset, count);
+    file_table[fd].open_offset+=count;
+    return count;
+  }*/
+  return -1;
+}
