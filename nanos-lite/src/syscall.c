@@ -1,5 +1,6 @@
 #include "common.h"
 #include "syscall.h"
+extern char _end;
 
 _RegSet* do_syscall(_RegSet *r) {
   uintptr_t a[4];
@@ -28,7 +29,7 @@ _RegSet* do_syscall(_RegSet *r) {
     case SYS_brk:{
       //printf("hit brk\n");
       printf("arg4=%08X\n",SYSCALL_ARG4(r));
-      sys_sbrk(SYSCALL_ARG4(r));
+      return sys_sbrk(SYSCALL_ARG4(r));
       printf("end\n");
       return 0;
       break;
@@ -65,5 +66,9 @@ int sys_write(int fd, char *buf, size_t count)
 
 int sys_sbrk(intptr_t increment)
 {
-  return 0;
+  intptr_t program_break = (intptr_t)&_end;
+  intptr_t old_pb = program_break;
+  program_break += increment;	
+	return (void *)old_pb;
+  //return 0;
 }

@@ -5,8 +5,7 @@
 #include <assert.h>
 #include <time.h>
 #include "syscall.h"
-extern char _end;
-intptr_t program_break = (intptr_t)&_end;
+
 // TODO: discuss with syscall interface
 #ifndef __ISA_NATIVE__
 
@@ -30,23 +29,11 @@ int _write(int fd, void *buf, size_t count){
   //_exit(SYS_write);
   //return write(fd,buf,count);
   //printf("_write fd=%d\n_writer count=%d\n",fd,count);
-  //Log("666");
   return _syscall_(SYS_write,fd,buf,count);
 }
 
 void *_sbrk(intptr_t increment){
-  //void*a=sbrk(0);
-  //printf("777\n");
-  intptr_t old_pb = program_break;
-	if (_syscall_(SYS_brk, old_pb + increment, 0, 0) == 0) {
-		//printf("hit if\n");
-		program_break += increment;	
-		return (void *)old_pb;
-	}
-	else {
-    //printf("else\n");
-		return (void *)-1;
-	}
+  return _syscall_(SYS_brk,increment,0,0);
 }
 
 int _read(int fd, void *buf, size_t count) {
