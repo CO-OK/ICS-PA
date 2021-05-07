@@ -5,7 +5,7 @@
 uintptr_t loader(_Protect *as, const char *filename) {
   //TODO();
   //printf("before load\n");
-  int fd = fs_open("/bin/dummy", 0, 0);
+  int fd = fs_open("/bin/hello", 0, 0);
 	fs_read(fd, (void *)DEFAULT_ENTRY, fs_filesz(fd));
 	fs_close(fd);
 	
