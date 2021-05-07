@@ -13,7 +13,6 @@ _RegSet* do_syscall(_RegSet *r) {
     case SYS_exit:{
       return sys_exit(SYSCALL_ARG3(r));
       break;
-     // printf("hit 4");
     }
     case SYS_write:{
       /*printf("hit write\n");
@@ -23,6 +22,9 @@ _RegSet* do_syscall(_RegSet *r) {
       printf("arg4=%08X\n",SYSCALL_ARG4(r));*/
       return sys_write(SYSCALL_ARG4(r),SYSCALL_ARG2(r),SYSCALL_ARG3(r));
       break;
+    }
+    case SYS_brk:{
+
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
@@ -52,4 +54,9 @@ int sys_write(int fd, char *buf, size_t count)
     return count;
   }
   return -1;
+}
+
+int sys_sbrk(intptr_t increment)
+{
+  
 }
