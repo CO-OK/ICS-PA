@@ -30,6 +30,7 @@ _RegSet* do_syscall(_RegSet *r) {
       //printf("hit brk\n");
       printf("return 0\n");
       return 0;
+      printf("iii\n");
       break;
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
