@@ -98,6 +98,7 @@ ssize_t fs_write(int fd, void *buf, size_t count)
 {
   //printf("write %d count=%d\n",fd,count);
   //printf("fd=%d\ncount=%d\n",fd,count);
+  printf("hit write\n");
   if(fd==1||fd==2)
   {
     return sys_write(fd,buf,count);
