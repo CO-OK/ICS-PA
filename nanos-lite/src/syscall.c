@@ -27,6 +27,10 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case SYS_open:{
+      printf("arg1=%08X\n",SYSCALL_ARG1(r));
+      printf("arg2=%08X\n",SYSCALL_ARG2(r));
+      printf("arg3=%08X\n",SYSCALL_ARG3(r));
+      printf("arg4=%08X\n",SYSCALL_ARG4(r));
       SYSCALL_ARG1(r)=fs_open(SYSCALL_ARG2(r));
       break;
     }
