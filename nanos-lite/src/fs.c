@@ -31,7 +31,7 @@ int fs_open(char*path)
   {
     if(strcmp(file_table[i].name,path)==0)
       return i;
-    printf("str1=%s\n",file_table[i].name);
+    //printf("str1=%s\n",file_table[i].name);
   }
   assert(0);
   return -1;
