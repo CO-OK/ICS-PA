@@ -73,28 +73,29 @@ int fs_close(int fd)
 off_t lseek(int fd, off_t offset, int whence)
 {
   printf("lseek %d offset=%d,whence=%d,filesize=%d\n",fd,offset,whence,file_table[fd].size);
-  if(whence==SEEK_CUR)
-  {
-    if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
-    {
-				file_table[fd].open_offset += offset;
-				return file_table[fd].open_offset;
+  size_t result = -1;
+
+	switch(whence) {
+		case SEEK_SET:
+			if (offset >= 0 && offset <= fs_filesz(fd)) {
+				file_table[fd].open_offset = offset;
+				result = file_table[fd].open_offset = offset;
 			}
-  }
-  else if(whence==SEEK_SET)
-  {
-    if (offset >= 0 && offset <= fs_filesz(fd)) 
-    {
-			file_table[fd].open_offset =  offset;
-			return offset;
-		}
-  }
-  else if(whence==SEEK_END)
-  {
-    file_table[fd].open_offset = fs_filesz(fd) + offset;
-		return file_table[fd].open_offset;
-  }
-  return -1;
+			break;
+		case SEEK_CUR:
+			if ((offset + file_table[fd].open_offset >= 0) && 
+					(offset + file_table[fd].open_offset <= fs_filesz(fd))) {
+				file_table[fd].open_offset += offset;
+				result = file_table[fd].open_offset;
+			}
+			break;
+		case SEEK_END:
+			file_table[fd].open_offset = fs_filesz(fd) + offset;
+			result = file_table[fd].open_offset;
+			break;
+	}
+	
+	return result;
   //printf("hit out");
 }
 
