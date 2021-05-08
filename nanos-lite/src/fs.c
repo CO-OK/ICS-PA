@@ -63,7 +63,7 @@ ssize_t fs_filesz(int fd)
 int fs_close(int fd)
 {
   printf("close %d\n",fd);
-  file_table[fd].open_offset=0;
+  //file_table[fd].open_offset=0;
   return 0;
 }
 off_t lseek(int fd, off_t offset, int whence)
