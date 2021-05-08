@@ -56,7 +56,7 @@ int fs_read(int fd, void *buf, size_t count)
 
 ssize_t fs_filesz(int fd)
 {
-  printf("hit size\n");
+  //printf("hit size\n");
   return file_table[fd].size;
 }
 int fs_close(int fd)
