@@ -25,7 +25,7 @@ void _exit(int status) {
 
 int _open(const char *path, int flags, mode_t mode) {
   printf("path=%s\n",path);
-  return _syscall_(SYS_open, path, flags, mode);
+  return _syscall_(SYS_open, (uintptr_t)path, flags, mode);
 }
 
 int _write(int fd, void *buf, size_t count){
