@@ -30,8 +30,12 @@ int fs_open(char*path)
   for(int i=0;i<NR_FILES;i++)
   {
     if(strcmp(file_table[i].name,path)==0)
+    {
+      printf("hit\n");
       return i;
-    //printf("str1=%s\n",file_table[i].name);
+    }
+      
+
   }
   assert(0);
   return -1;
