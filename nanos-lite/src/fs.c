@@ -35,10 +35,11 @@ int fs_open(char*path)
     {
       printf("hit %s\n",path);
       return i;
+      printf("out\n");
     }
     //printf("str=%s\n",file_table[i].name);
   }
-  printf("out\n");
+  
   assert(0);
   return -1;
 }
