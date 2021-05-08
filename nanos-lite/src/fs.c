@@ -37,7 +37,7 @@ int fs_open(char*path)
       
 
   }
-  assert(0);
+  //assert(0);
   return -1;
 }
 int fs_read(int fd, void *buf, size_t count)
