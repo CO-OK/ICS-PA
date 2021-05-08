@@ -45,7 +45,7 @@ int fs_open(char*path)
 }
 int fs_read(int fd, void *buf, size_t count)
 {
-  printf("read %d size=%d\n,open_offset=%d",fd,count,file_table[fd].open_offset);
+  printf("read %d size=%d,open_offset=%d\n",fd,count,file_table[fd].open_offset);
   if(file_table[fd].open_offset == fs_filesz(fd))
 		return 0;
   if (file_table[fd].open_offset + count > fs_filesz(fd))
