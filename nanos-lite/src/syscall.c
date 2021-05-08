@@ -23,7 +23,7 @@ _RegSet* do_syscall(_RegSet *r) {
       printf("arg4=%08X\n",SYSCALL_ARG4(r));*/
       //return 0;
       //printf("hit write\n");
-      SYSCALL_ARG1(r)=fs_write((int)SYSCALL_ARG4(r),SYSCALL_ARG2(r),SYSCALL_ARG3(r));
+      SYSCALL_ARG1(r)=fs_write((int)SYSCALL_ARG4(r),(void*)SYSCALL_ARG2(r),SYSCALL_ARG3(r));
       break;
     }
     case SYS_open:{
@@ -42,7 +42,7 @@ _RegSet* do_syscall(_RegSet *r) {
     }
     case SYS_read:{
       
-      SYSCALL_ARG1(r)=fs_read(SYSCALL_ARG4(r),SYSCALL_ARG2(r),SYSCALL_ARG3(r));
+      SYSCALL_ARG1(r)=fs_read(SYSCALL_ARG4(r),(void*)SYSCALL_ARG2(r),SYSCALL_ARG3(r));
       break;
     }
     case SYS_close:{
@@ -87,7 +87,6 @@ ssize_t sys_write(int fd, void *buf, size_t count)
       _putc(p[i]);
       //printf("char=%c\n",buf[i]);
     }
-    
     return count;
   }
   return -1;
