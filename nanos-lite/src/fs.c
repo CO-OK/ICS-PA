@@ -34,7 +34,7 @@ int fs_open(char*path)
   {
     if(strcmp(file_table[i].name,path)==0)
     {
-      //printf("hit %s\n",path);
+      printf("hit %s\n",path);
       return i;
       //printf("out\n");
     }
