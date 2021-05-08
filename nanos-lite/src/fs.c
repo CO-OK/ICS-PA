@@ -28,7 +28,8 @@ void init_fs() {
 int fs_open(char*path)
 {
   printf("name=%s\n",path);
-  for(int i=0;i<NR_FILES;i++)
+  int i;
+  for(i=0;i<NR_FILES;i++)
   {
     if(strcmp(file_table[i].name,path)==0)
     {
