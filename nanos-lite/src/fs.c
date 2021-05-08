@@ -79,7 +79,7 @@ off_t lseek(int fd, off_t offset, int whence)
   {
     if (offset >= 0 && offset <= fs_filesz(fd)) 
     {
-			file_table[fd].open_offset = offset;
+			file_table[fd].open_offset = file_table[fd].disk_offset + offset;
 			return offset;
 		}
   }
