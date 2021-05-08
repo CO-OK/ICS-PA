@@ -45,12 +45,12 @@ int fs_open(char*path)
 }
 int fs_read(int fd, void *buf, size_t count)
 {
-  printf("read %d\n",fd);
+  printf("read %d size=%d\n",fd,count);
   if(file_table[fd].open_offset == fs_filesz(fd))
 		return 0;
   if (file_table[fd].open_offset + count > fs_filesz(fd))
 		count = file_table[fd].size - file_table[fd].open_offset;
-  ramdisk_read(buf, file_table[fd].disk_offset , count);
+  ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
   file_table[fd].open_offset+=count;
 }
 
@@ -66,7 +66,7 @@ int fs_close(int fd)
 }
 off_t lseek(int fd, off_t offset, int whence)
 {
-  printf("lseek %d\n",fd);
+  printf("lseek %d offset=%d\n",fd,offset);
   if(whence==SEEK_CUR)
   {
     if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
@@ -92,7 +92,7 @@ off_t lseek(int fd, off_t offset, int whence)
 
 int sys_write(int fd, char *buf, size_t count)
 {
-  //printf("write %d\n",fd);
+  printf("write %d count=%d\n",fd,count);
   //printf("fd=%d\ncount=%d\n",fd,count);
   if(fd==1||fd==2)
   {
