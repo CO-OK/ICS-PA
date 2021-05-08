@@ -92,7 +92,7 @@ off_t lseek(int fd, off_t offset, int whence)
 
 int sys_write(int fd, char *buf, size_t count)
 {
-  printf("write %d count=%d\n",fd,count);
+  //printf("write %d count=%d\n",fd,count);
   //printf("fd=%d\ncount=%d\n",fd,count);
   if(fd==1||fd==2)
   {
