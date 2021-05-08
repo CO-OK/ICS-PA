@@ -80,6 +80,7 @@ off_t lseek(int fd, off_t offset, int whence)
   {
     if (offset >= 0 && offset <= fs_filesz(fd)) 
     {
+      printf("666\n");
 			file_table[fd].open_offset =  offset;
 			return offset;
 		}
