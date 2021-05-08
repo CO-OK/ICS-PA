@@ -27,12 +27,12 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case SYS_open:{
-      printf("arg1=%08X\n",SYSCALL_ARG1(r));
+      /*printf("arg1=%08X\n",SYSCALL_ARG1(r));
       printf("arg2=%08X\n",SYSCALL_ARG2(r));
       printf("arg3=%08X\n",SYSCALL_ARG3(r));
       printf("arg4=%08X\n",SYSCALL_ARG4(r));
       char * temp=SYSCALL_ARG4(r);
-      printf("temp=%s\n",temp);
+      printf("temp=%s\n",temp);*/
       SYSCALL_ARG1(r)=fs_open((char*)SYSCALL_ARG4(r));
       break;
     }
@@ -42,7 +42,7 @@ _RegSet* do_syscall(_RegSet *r) {
     }
     case SYS_read:{
       
-      SYSCALL_ARG1(r)=fs_read(SYSCALL_ARG2(r),SYSCALL_ARG3(r),SYSCALL_ARG4(r));
+      SYSCALL_ARG1(r)=fs_read(SYSCALL_ARG4(r),SYSCALL_ARG2(r),SYSCALL_ARG3(r));
       break;
     }
     case SYS_close:{
