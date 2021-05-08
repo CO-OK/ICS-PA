@@ -16,7 +16,7 @@ make_EHelper(test) {
     the flags are modified.
   */
   //opcode 是 85时只有32位和16位两种情况
-  get_mr_value(&t1,id_dest);
+  /*get_mr_value(&t1,id_dest);
   get_mr_value(&t2,id_src);
   if(id_dest->width==2)
   {
@@ -29,10 +29,11 @@ make_EHelper(test) {
   else
   {
     t0 = (unsigned char)t1 & (unsigned)t2;
-  }
+  }*/
   /*
     OF = 0, CF = 0; SF, ZF, and PF as described in Appendix C
   */
+  rtl_and(&t0,&id_dest->val,&id_src->val);
   rtl_unset_CF(&eflag_CF);
   rtl_unset_OF(&eflag_OF);
   rtl_update_ZFSF(&t0,id_dest->width);
