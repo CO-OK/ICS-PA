@@ -74,3 +74,20 @@ int sys_sbrk(intptr_t increment)
   
   return 0;
 }
+
+ssize_t sys_write(int fd, char *buf, size_t count)
+{
+  //printf("write %d count=%d\n",fd,count);
+  //printf("fd=%d\ncount=%d\n",fd,count);
+  if(fd==1||fd==2)
+  {
+    for(int i=0;i<count;i++)
+    {
+      _putc(buf[i]);
+      //printf("char=%c\n",buf[i]);
+    }
+    
+    return count;
+  }
+  return -1;
+}

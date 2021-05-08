@@ -43,7 +43,7 @@ int fs_open(char*path)
   assert(0);
   return -1;
 }
-int fs_read(int fd, void *buf, size_t count)
+ssize_t fs_read(int fd, void *buf, size_t count)
 {
   printf("read %d size=%d,open_offset=%d\n",fd,count,file_table[fd].open_offset);
   if(file_table[fd].open_offset >= fs_filesz(fd))
@@ -94,19 +94,13 @@ off_t lseek(int fd, off_t offset, int whence)
   //printf("hit out");
 }
 
-int sys_write(int fd, char *buf, size_t count)
+ssize_t fs_write(int fd, char *buf, size_t count)
 {
   //printf("write %d count=%d\n",fd,count);
   //printf("fd=%d\ncount=%d\n",fd,count);
   if(fd==1||fd==2)
   {
-    for(int i=0;i<count;i++)
-    {
-      _putc(buf[i]);
-      //printf("char=%c\n",buf[i]);
-    }
-    
-    return count;
+    return sys_write(fd,buf,count);
   }
   else
   {
