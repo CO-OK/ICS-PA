@@ -10,7 +10,7 @@ int main() {
   assert(size == 5000);
   //printf("1\n");
   //fseek(fp, 500 * 5, SEEK_SET);
-  int i, n;
+  /*int i, n;
   //for (i = 500; i < 1000; i ++) {
     //fscanf(fp, "%d", &n);
     //assert(n == i + 1);
@@ -30,7 +30,7 @@ int main() {
   for (i = 0; i < 500; i ++) {
     fscanf(fp, "%d", &n);
     assert(n == i + 1 + 1000);
-  }
+  }*/
 
   fclose(fp);
 
