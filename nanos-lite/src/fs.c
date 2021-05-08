@@ -34,8 +34,6 @@ int fs_open(char*path)
     {
       return i;
     }
-      
-
   }
   assert(0);
   return -1;
