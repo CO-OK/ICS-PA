@@ -35,6 +35,7 @@ int fs_open(char*path)
       printf("hit %s\n",path);
       return i;
     }
+    printf("str=%s\n",file_table[i].name);
   }
   assert(0);
   return -1;
