@@ -66,7 +66,7 @@ int fs_close(int fd)
 }
 off_t lseek(int fd, off_t offset, int whence)
 {
-  printf("lseek %d offset=%d\n",fd,offset);
+  printf("lseek %d offset=%d,whence=%d\n",fd,offset,whence);
   if(whence==SEEK_CUR)
   {
     if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
