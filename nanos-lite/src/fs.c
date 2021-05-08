@@ -50,7 +50,7 @@ int fs_read(int fd, void *buf, size_t count)
 		return 0;
   if (file_table[fd].open_offset + count > fs_filesz(fd))
 		count = file_table[fd].size - file_table[fd].open_offset;
-  ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
+  ramdisk_read(buf, file_table[fd].disk_offset , count);
   file_table[fd].open_offset+=count;
 }
 
