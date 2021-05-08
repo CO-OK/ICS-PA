@@ -27,24 +27,25 @@ void init_fs() {
 }
 int fs_open(char*path)
 {
-  printf("name=%s\n",path);
+  //printf("name=%s\n",path);
+  printf("open %s\n",path);
   int i;
   for(i=0;i<NR_FILES;i++)
   {
     if(strcmp(file_table[i].name,path)==0)
     {
-      printf("hit %s\n",path);
+      //printf("hit %s\n",path);
       return i;
-      printf("out\n");
+      //printf("out\n");
     }
     //printf("str=%s\n",file_table[i].name);
   }
-  
   assert(0);
   return -1;
 }
 int fs_read(int fd, void *buf, size_t count)
 {
+  printf("read %d\n",fd);
   if(file_table[fd].open_offset == fs_filesz(fd))
 		return 0;
   if (file_table[fd].open_offset + count > fs_filesz(fd))
@@ -59,10 +60,12 @@ ssize_t fs_filesz(int fd)
 }
 int fs_close(int fd)
 {
+  printf("close %d\n",fd);
   return 0;
 }
 off_t lseek(int fd, off_t offset, int whence)
 {
+  printf("lseek %d\n",fd);
   if(whence==SEEK_CUR)
   {
     if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
@@ -88,6 +91,7 @@ off_t lseek(int fd, off_t offset, int whence)
 
 int sys_write(int fd, char *buf, size_t count)
 {
+  printf("write %d\n",fd);
   //printf("fd=%d\ncount=%d\n",fd,count);
   if(fd==1||fd==2)
   {
