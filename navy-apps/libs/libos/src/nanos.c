@@ -55,6 +55,7 @@ int _read(int fd, void *buf, size_t count) {
 }
 
 int _close(int fd) {
+  printf("hit nano close\n");
    return _syscall_(SYS_close,fd,0,0);
 }
 
