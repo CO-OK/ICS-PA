@@ -28,13 +28,13 @@ void init_fs() {
 int fs_open(char*path)
 {
   //printf("name=%s\n",path);
-  printf("open %s\n",path);
+  
   int i;
   for(i=0;i<NR_FILES;i++)
   {
     if(strcmp(file_table[i].name,path)==0)
     {
-      printf("hit %s\n",path);
+      printf("open %s,fd=%d\n",path,i);
       return i;
       //printf("out\n");
     }
