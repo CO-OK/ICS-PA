@@ -45,14 +45,13 @@ int fs_open(char*path)
 }
 int fs_read(int fd, void *buf, size_t count)
 {
-  printf("read %d size=%d\n",fd,count);
+  printf("read %d size=%d\n,open_offset=%d",fd,count,file_table[fd].open_offset);
   if(file_table[fd].open_offset == fs_filesz(fd))
 		return 0;
   if (file_table[fd].open_offset + count > fs_filesz(fd))
 		count = file_table[fd].size - file_table[fd].open_offset;
   ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
   file_table[fd].open_offset+=count;
-  printf("read out\n");
   return count;
 }
 
