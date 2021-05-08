@@ -46,7 +46,7 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case SYS_close:{
-      SYSCALL_ARG1(r)=0;
+      SYSCALL_ARG1(r)=fs_close(SYSCALL_ARG4(r));
       break;
     }
     case SYS_lseek:{
