@@ -50,7 +50,7 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case SYS_lseek:{
-      
+      SYSCALL_ARG1(r)=lseek(SYSCALL_ARG4(r),SYSCALL_ARG2(r),SYSCALL_ARG3(r));
       break;
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
