@@ -33,7 +33,7 @@ _RegSet* do_syscall(_RegSet *r) {
       printf("arg4=%08X\n",SYSCALL_ARG4(r));
       char * temp=SYSCALL_ARG4(r);
       printf("temp=%s\n",temp);
-      SYSCALL_ARG1(r)=fs_open(SYSCALL_ARG3(r));
+      SYSCALL_ARG1(r)=fs_open((char*)SYSCALL_ARG4(r));
       break;
     }
     case SYS_brk:{
