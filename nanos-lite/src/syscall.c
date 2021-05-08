@@ -46,6 +46,7 @@ _RegSet* do_syscall(_RegSet *r) {
       printf("arg3=%08X\n",SYSCALL_ARG3(r));
       printf("arg4=%08X\n",SYSCALL_ARG4(r));
       SYSCALL_ARG1(r)=fs_read((int)SYSCALL_ARG4(r),(void*)SYSCALL_ARG2(r),(ssize_t)SYSCALL_ARG3(r));
+      printf("arg1=%08X\n",SYSCALL_ARG1(r));
       break;
     }
     case SYS_close:{
