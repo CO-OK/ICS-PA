@@ -23,7 +23,7 @@ _RegSet* do_syscall(_RegSet *r) {
       printf("arg4=%08X\n",SYSCALL_ARG4(r));*/
       //return 0;
       //printf("hit write\n");
-      SYSCALL_ARG1(r)=fs_write(SYSCALL_ARG4(r),SYSCALL_ARG2(r),SYSCALL_ARG3(r));
+      SYSCALL_ARG1(r)=fs_write((int)SYSCALL_ARG4(r),SYSCALL_ARG2(r),SYSCALL_ARG3(r));
       break;
     }
     case SYS_open:{
@@ -75,15 +75,16 @@ int sys_sbrk(intptr_t increment)
   return 0;
 }
 
-ssize_t sys_write(int fd, char *buf, size_t count)
+ssize_t sys_write(int fd, void *buf, size_t count)
 {
   //printf("write %d count=%d\n",fd,count);
   //printf("fd=%d\ncount=%d\n",fd,count);
+  char*p=buf;
   if(fd==1||fd==2)
   {
     for(int i=0;i<count;i++)
     {
-      _putc(buf[i]);
+      _putc(p[i]);
       //printf("char=%c\n",buf[i]);
     }
     

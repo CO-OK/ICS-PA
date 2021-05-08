@@ -94,7 +94,7 @@ off_t lseek(int fd, off_t offset, int whence)
   //printf("hit out");
 }
 
-ssize_t fs_write(int fd, char *buf, size_t count)
+ssize_t fs_write(int fd, void *buf, size_t count)
 {
   //printf("write %d count=%d\n",fd,count);
   //printf("fd=%d\ncount=%d\n",fd,count);
