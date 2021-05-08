@@ -27,7 +27,7 @@ void init_fs() {
 }
 int fs_open(char*path)
 {
-  //printf("%s\n",path);
+  printf("name=%s\n",path);
   for(int i=0;i<NR_FILES;i++)
   {
     if(strcmp(file_table[i].name,path)==0)
@@ -35,7 +35,7 @@ int fs_open(char*path)
       printf("hit %s\n",path);
       return i;
     }
-    printf("str=%s\n",file_table[i].name);
+    //printf("str=%s\n",file_table[i].name);
   }
   assert(0);
   return -1;
