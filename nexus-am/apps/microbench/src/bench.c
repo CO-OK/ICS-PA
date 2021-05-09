@@ -94,7 +94,7 @@ int main() {
       bench_score += cur;
     }
   }*/
-  int i=7;
+  int i=6;
   Benchmark *bench = &benchmarks[i];
     current = bench;
     setting = &bench->settings[SETTING];
