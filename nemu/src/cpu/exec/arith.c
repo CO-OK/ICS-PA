@@ -248,8 +248,33 @@ make_EHelper(adc) {
 }
 
 make_EHelper(sbb) {
-  //printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
   rtl_sub(&t2, &id_dest->val, &id_src->val);
+  rtl_sltu(&t3, &id_dest->val, &t2);
+  rtl_get_CF(&t1);
+  if(t1!=0)
+    t1=1;
+  rtl_sub(&t2, &t2, &t1);
+  operand_write(id_dest, &t2);
+
+  rtl_update_ZFSF(&t2, id_dest->width);
+
+  rtl_sltu(&t0, &id_dest->val, &t2);
+  rtl_or(&t0, &t3, &t0);
+  if(t0!=0)
+    rtl_set_CF(&eflag_CF);
+  else
+    rtl_unset_CF(&eflag_CF);
+
+  rtl_xor(&t0, &id_dest->val, &id_src->val);
+  rtl_xor(&t1, &id_dest->val, &t2);
+  rtl_and(&t0, &t0, &t1);
+  rtl_msb(&t0, &t0, id_dest->width);
+  if(t0!=0)
+    rtl_set_OF(&eflag_OF);
+  else
+    rtl_unset_OF(&eflag_OF);
+  //printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
+  /*rtl_sub(&t2, &id_dest->val, &id_src->val);
   rtl_sltu(&t3, &id_dest->val, &t2);
   rtl_get_CF(&t1);
   //printf("t1=%08X\n",t1);
@@ -277,10 +302,6 @@ make_EHelper(sbb) {
   {
     rtl_unset_CF(&eflag_CF);
   }
-  /*
-    OF:
-    减法的OF位的设置方法为：若两个数的符号相反，而结果的符号与减数的符号相同，则OF=1，除上述情况外OF=0。OF=1说明带符号数的减法运算结果是错误的。
-  */
 
   rtl_xor(&t0, &id_dest->val, &id_src->val);
   rtl_xor(&t1, &id_dest->val, &temp);
@@ -294,7 +315,7 @@ make_EHelper(sbb) {
   else
   {
     rtl_set_OF(&eflag_OF);
-  }
+  }*/
   print_asm_template2(sbb);
 }
 
