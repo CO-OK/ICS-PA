@@ -6,9 +6,9 @@ void diff_test_skip_nemu();
 make_EHelper(lidt) {
   //TODO();
   
-  cpu.idtr_limit=vaddr_read(id_dest->addr,4);
+  cpu.idtr_limit=vaddr_read(id_dest->addr,2);
   cpu.idtr_base=vaddr_read(id_dest->addr+2,4);
-  Log("load lidt limit=%08X,base=%08X\n",cpu.idtr_limit,cpu.idtr_base);
+  Log("load lidt limit=%08X,base=%08X",cpu.idtr_limit,cpu.idtr_base);
   //printf("hit lidt\n");
   //printf("destaddr=%08X\n",id_dest->addr);
   print_asm_template1(lidt);
