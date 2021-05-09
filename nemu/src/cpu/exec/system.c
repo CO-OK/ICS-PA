@@ -35,6 +35,7 @@ make_EHelper(int) {
   //printf("hit int\n");
   //printf("int num=%08X,eip=%08X\n",id_dest->imm,cpu.eip);
   //printf("in int : eip=%08X,seq_eip=%08X\n",cpu.eip,decoding.seq_eip);
+  Log("touch int %d",id_dest->imm);
   raise_intr(id_dest->imm,decoding.seq_eip);
   print_asm("int %s", id_dest->str);
   //printf("seqeip=%08X\n",decoding.seq_eip);
