@@ -29,8 +29,7 @@ int fs_open(char*path)
 {
   //printf("name=%s\n",path);
   
-  int i;
-  for(i=0;i<NR_FILES;i++)
+  for(int i=0;i<NR_FILES;i++)
   {
     if(strcmp(file_table[i].name,path)==0)
     {
