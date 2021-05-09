@@ -60,7 +60,7 @@ int main() {
   unsigned long bench_score = 0;
   int pass = 1;
 
-  for (int i = 0; i < ARR_SIZE(benchmarks); i ++) {
+  /*for (int i = 0; i < ARR_SIZE(benchmarks); i ++) {
     Benchmark *bench = &benchmarks[i];
     current = bench;
     setting = &bench->settings[SETTING];
@@ -93,8 +93,40 @@ int main() {
 
       bench_score += cur;
     }
-  }
+  }*/
+  int i=7;
+  Benchmark *bench = &benchmarks[i];
+    current = bench;
+    setting = &bench->settings[SETTING];
+    const char *msg = bench_check(bench);
+    printk("[%s] %s: ", bench->name, bench->desc);
+    if (msg != NULL) {
+      printk("Ignored %s\n", msg);
+    } else {
+      unsigned long msec = ULONG_MAX;
+      int succ = 1;
+      for (int i = 0; i < REPEAT; i ++) {
+        Result res;
+        run_once(bench, &res);
+        printk(res.pass ? "*" : "X");
+        succ &= res.pass;
+        if (res.msec < msec) msec = res.msec;
+      }
 
+      if (succ) printk(" Passed.");
+      else printk(" Failed.");
+
+      pass &= succ;
+
+      unsigned long cur = score(bench, 0, msec);
+
+      printk("\n");
+      if (SETTING != 0) {
+        printk("  min time: %d ms [%d]\n", (unsigned int)msec, (unsigned int)cur);
+      }
+
+      bench_score += cur;
+    }
   bench_score /= sizeof(benchmarks) / sizeof(benchmarks[0]);
   
   printk("==================================================\n");
