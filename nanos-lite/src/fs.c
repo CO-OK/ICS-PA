@@ -98,6 +98,7 @@ off_t lseek(int fd, off_t offset, int whence)
     file_table[fd].open_offset = fs_filesz(fd) + offset;
 		return file_table[fd].open_offset;
   }
+  printf("hit out");
   return -1;
   //printf("hit out");
 }
