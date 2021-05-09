@@ -72,7 +72,7 @@ int fs_close(int fd)
 }
 off_t lseek(int fd, off_t offset, int whence)
 {
-  //Log("lseek %d offset=%d,whence=%d,filesize=%d\n",fd,offset,whence,file_table[fd].size);
+  Log("lseek %d offset=%d,whence=%d,filesize=%d\n",fd,offset,whence,file_table[fd].size);
   if(whence==SEEK_CUR)
   {
     if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
