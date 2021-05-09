@@ -2,22 +2,23 @@
 
 //void rtl_mul(rtlreg_t* dest_hi, rtlreg_t* dest_lo, const rtlreg_t* src1, const rtlreg_t* src2);
 make_EHelper(add) {
-  rtl_add(&t2, &id_dest->val, &id_src->val);
-  operand_write(id_dest,&t2);
-  rtl_update_ZFSF(&t2,id_dest->width);
-  rtl_sltu(&t0,&t2,&id_dest->val);
-  if(t0!=0)
+  rtl_sext(&t1, &id_dest->val, id_dest->width);
+	rtl_sext(&t2, &id_src->val, id_src->width);
+	// t1 + t2
+	// OF针对无符号 CF针对有符号
+	rtl_add(&t0, &t1, &t2);
+	t3 = (t0 < t1);
+	if(t3!=0)
     rtl_set_CF(&eflag_CF);
   else
     rtl_unset_CF(&eflag_CF);
-  rtl_xor(&t0,&id_src->val,&t2);
-  rtl_xor(&t1,&id_dest->val,&t2);
-  rtl_and(&t0,&t0,&t1);
-  rtl_msb(&t0,&t0,id_dest->width);
-  if(t0!=0)
+	t3 = ((((int32_t)(t1) >= 0) ^ (((int32_t)(t2) >= 0 ))) && (((int32_t)(t0) < 0) ^ (((int32_t)(t2) >= 0 )) )); //正正得负 负负得正
+	if(t3!=0)
     rtl_set_OF(&eflag_OF);
   else
     rtl_unset_OF(&eflag_OF);
+	rtl_update_ZFSF(&t0, 4);
+	operand_write(id_dest, &t0);
   
   print_asm_template2(add);
 }
