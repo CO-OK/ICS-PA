@@ -242,7 +242,7 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
-  rtlreg_t temp,temp1;
+  /*rtlreg_t temp,temp1;
   rtl_shli(&temp,result,32-width*8);
   rtl_shri(&temp1,&temp,32-width*8);
   if(temp1==0)
@@ -252,18 +252,18 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   else
   {
     rtl_unset_ZF(&eflag_ZF);
-  }
+  }*/
   //TODO();
-  /*rtlreg_t t;
+  rtlreg_t t;
   rtl_andi(&t,result,(0xffffffffu>>(4-width)*8));
   if(t==0)
   {
-    rtl_unset_ZF(&eflag_ZF);
+    rtl_set_ZF(&eflag_ZF);
   }
   else
   {
-    rtl_set_ZF(&eflag_ZF);
-  }*/
+    rtl_unset_ZF(&eflag_ZF);
+  }
 
 }
 
