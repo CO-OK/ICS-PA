@@ -44,7 +44,8 @@ void *_sbrk(intptr_t increment){
 		program_break += increment;	
 		return (void*)prev;
 	}
-	else {
+	else 
+  {
 		  return (void *)-1;
 	}
 }
