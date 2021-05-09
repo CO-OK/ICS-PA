@@ -62,7 +62,8 @@ make_EHelper(iret) {
   //printf("iret esp %08X\n",cpu.esp);
   rtl_pop(&cpu.eip);
   rtl_pop(&cpu.cs);
-  rtl_pop(&cpu.EFLAGS_);
+  rtl_pop(&t0);
+  memcpy(&cpu.EFLAGS_,&t0,sizeof(cpu.EFLAGS_));
   decoding.jmp_eip=1;
   decoding.seq_eip=cpu.eip;
   print_asm("iret");
