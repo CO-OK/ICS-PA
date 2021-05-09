@@ -176,24 +176,28 @@ static inline void rtl_pop(rtlreg_t* dest) {
 
 static inline void rtl_eq0(rtlreg_t* dest, const rtlreg_t* src1) {
   // dest <- (src1 == 0 ? 1 : 0)
-  TODO();
+  //TODO();
+  rtl_sltui(dest,src1,1);
 }
 
 static inline void rtl_eqi(rtlreg_t* dest, const rtlreg_t* src1, int imm) {
   // dest <- (src1 == imm ? 1 : 0)
-  *dest=(*src1==imm);
+  rtl_xori(dest,src1,imm);
+  rtl_eq0(dest,dest);
 }
 
 static inline void rtl_neq0(rtlreg_t* dest, const rtlreg_t* src1) {
   // dest <- (src1 != 0 ? 1 : 0)
-  TODO();
+  //TODO();
+  rtl_eq0(dest,src1);
+  rtl_eq0(dest,dest);
 }
 
 static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
   //msb Most Significant Bit
   rtl_shri(dest, src1, width * 8 - 1);
-  
+  rtl_andi(dest,dest,0x1);
   //TODO();
 }
 
@@ -238,7 +242,7 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
-  rtlreg_t temp,temp1;
+  /*rtlreg_t temp,temp1;
   rtl_shli(&temp,result,32-width*8);
   rtl_shri(&temp1,&temp,32-width*8);
   if(temp1==0)
@@ -248,8 +252,19 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   else
   {
     rtl_unset_ZF(&eflag_ZF);
-  }
+  }*/
   //TODO();
+  rtlreg_t t;
+  rtl_andi(&t,result,(0xffffffffu>>(4-width)*8));
+  if(t==0)
+  {
+    rtl_unset_ZF(&eflag_ZF);
+  }
+  else
+  {
+    rtl_set_ZF(&eflag_ZF);
+  }
+
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {

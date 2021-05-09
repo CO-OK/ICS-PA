@@ -11,13 +11,8 @@ make_EHelper(push_reg) {
     push imm8 指令需要对立即数进行符号扩展
   */
   //printf("opcode=%08X\n",decoding.opcode);
-  if(decoding.opcode==0x68||decoding.opcode==0x6a)
-  {
-    rtl_sext(&t0,&id_dest->val,id_dest->width);
-    id_dest->val=t0;
-  }
   //if(decoding.opcode)
-  rtl_push(&id_dest->val,id_dest->width);
+  rtl_push(&id_dest->val,4);
   print_asm_template1(push);
 }
 
