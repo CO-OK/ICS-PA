@@ -33,7 +33,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   //decoding.seq_eip=final;
   decoding.is_jmp=1;
   decoding.jmp_eip=final;
-  Log("finish raise_intr with NO=%d",NO);
+  Log("finish raise_intr with NO=%d target addr = %08X",NO,final);
   //printf("cpu.jmpeip=%08X\n",decoding.jmp_eip);
   //printf("raise esp %08X\n",cpu.esp);
   //printf("jmp eip=%08X\n",final);
