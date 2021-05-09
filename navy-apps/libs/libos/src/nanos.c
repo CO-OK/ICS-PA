@@ -7,7 +7,7 @@
 #include "syscall.h"
 
 extern char _end;
-intptr_t program_break = (intptr_t)&_end;
+static intptr_t program_break = (intptr_t)&_end;
 // TODO: discuss with syscall interface
 #ifndef __ISA_NATIVE__
 
@@ -32,7 +32,7 @@ int _write(int fd, void *buf, size_t count){
   //_exit(SYS_write);
   //return write(fd,buf,count);
   //printf("_write fd=%d\n_writer count=%d\n",fd,count);
-  return _syscall_(SYS_write,fd,buf,count);
+  return _syscall_(SYS_write,fd,(uintptr_t)buf,count);
 }
 
 void *_sbrk(intptr_t increment){
