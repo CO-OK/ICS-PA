@@ -6,8 +6,7 @@
 #include <time.h>
 #include "syscall.h"
 
-extern char _end;
-static intptr_t program_break = (intptr_t)&_end;
+
 // TODO: discuss with syscall interface
 #ifndef __ISA_NATIVE__
 
@@ -36,13 +35,16 @@ int _write(int fd, void *buf, size_t count){
 }
 
 void *_sbrk(intptr_t increment){
-  
+  extern char _end;
+  static intptr_t program_break = (intptr_t)&_end;
+  uintptr_t break_new = program_break + increment;
+  int r =_syscall_(SYS_brk, prev + increment, 0, 0);
 	intptr_t prev = program_break;
-	if (_syscall_(SYS_brk, prev + increment, 0, 0) == 0) {
+	if ( r== 0) {
 		// panic("222");
     
-		program_break += increment;	
-		return prev;
+		program_break = break_new;	
+		return (void*)prev;
 	}
 	else {
 		  return (void *)-1;
