@@ -5,7 +5,7 @@ make_EHelper(add) {
   rtl_add(&t2, &id_dest->val, &id_src->val);
   operand_write(id_dest,&t2);
   rtl_update_ZFSF(&t2,id_dest->width);
-  rtl_stlu(&t0,&t2,&id_dest->val);
+  rtl_sltu(&t0,&t2,&id_dest->val);
   if(t0!=0)
     rtl_set_CF(&eflag_CF);
   else
