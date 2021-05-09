@@ -62,7 +62,7 @@ make_EHelper(and) {
 }
 
 make_EHelper(xor_31) {
-  printf("hit\n");
+  //printf("hit\n");
   rtl_xor(&t1, &id_dest->val, &id_src->val);
 	rtl_unset_OF(&eflag_OF);
 	rtl_set_CF(&eflag_CF);
