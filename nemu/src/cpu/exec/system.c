@@ -13,7 +13,7 @@ make_EHelper(lidt) {
   }
   else
   {
-    cpu.idtr_limit=vaddr_read(id_dest->addr,2);
+    cpu.idtr_limit=vaddr_read(id_dest->addr,4);
     cpu.idtr_base=vaddr_read(id_dest->addr+2,4);
   }
   //printf("hit lidt\n");
