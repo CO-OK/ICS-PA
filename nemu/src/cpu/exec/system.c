@@ -5,17 +5,10 @@ void diff_test_skip_nemu();
 
 make_EHelper(lidt) {
   //TODO();
-  if(id_dest->width==2)
-  {
-    uint32_t total=vaddr_read(id_dest->addr,4);
-    cpu.idtr_limit = total>>24;
-    cpu.idtr_base = (total<<16)>>16;
-  }
-  else
-  {
-    cpu.idtr_limit=vaddr_read(id_dest->addr,4);
-    cpu.idtr_base=vaddr_read(id_dest->addr+2,4);
-  }
+  printf("lidt\n");
+  cpu.idtr_limit=vaddr_read(id_dest->addr,4);
+  cpu.idtr_base=vaddr_read(id_dest->addr+2,4);
+  
   //printf("hit lidt\n");
   //printf("destaddr=%08X\n",id_dest->addr);
   print_asm_template1(lidt);
