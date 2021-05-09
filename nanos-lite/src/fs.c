@@ -88,6 +88,10 @@ off_t lseek(int fd, off_t offset, int whence)
 			file_table[fd].open_offset =  offset;
 			return offset;
 		}
+    else if(offset > fs_filesz(fd))
+    {
+      file_table[fd].open_offset=offset;
+    }
   }
   else if(whence==SEEK_END)
   {
