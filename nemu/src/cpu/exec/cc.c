@@ -21,11 +21,11 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
       rtl_get_OF(&temp0);
       if(temp0==0)//等于0说明ZF=0
       {
-        *dest = (unsigned char)0;
+        *dest = 0;
       }
       else
       {
-        *dest = (unsigned char)1;
+        *dest = 1;
       }
       break;
     }
@@ -33,11 +33,11 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
       rtl_get_CF(&temp0);
       if(temp0==0)//等于0说明ZF=0
       {
-        *dest = (unsigned char)0;
+        *dest = 0;
       }
       else
       {
-        *dest = (unsigned char)1;
+        *dest = 1;
       }
       break; 
     }
@@ -56,38 +56,51 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {//94
     case CC_BE:{// Jump short if not below or equal (CF=0 and ZF=0)
       rtl_get_ZF(&temp0);
       rtl_get_CF(&temp1);
-      if(temp0==0&&temp1==0)
-        *dest = (unsigned char)0;
+      if(temp0!=0)
+        temp0=1;
+      if(temp1!=0)
+        temp1=1;
+      if(temp1==1||temp0==1)
+        *dest=1;
       else
-        *dest = (unsigned char)1;
+        *dest=0;
       break;
     }
     case CC_S:{//Jump short if sign (SF=1)
       rtl_get_SF(&temp0);
       if(temp0==0)
-        *dest = (unsigned char)0;
+        *dest = 0;
       else 
-        *dest = (unsigned char)1;
+        *dest = 1;
       break;
     }
     case CC_L:{//Jump short if less (SF≠OF)
       rtl_get_SF(&temp0);
       rtl_get_OF(&temp1);
-      if((temp0==0&&temp1!=0)||(temp0!=0&&temp1==0))
-        *dest = (unsigned char)1;
+      if(temp0!=0)
+        temp0=1;
+      if(temp1!=0)
+        temp1=1;
+      if(temp1!=temp0)
+        *dest = 1;
       else 
-        *dest = (unsigned char)0;
+        *dest = 0;
       break;
     }
     case CC_LE:{//Jump short if less or equal (ZF=1 or SF≠OF)
       rtl_get_SF(&temp0);
       rtl_get_OF(&temp1);
       rtl_get_ZF(&temp2);
-      //printf("temp0=%08Xtemp1=%08X\n",temp0,temp1);
-      if(((temp0==0&&temp1!=0)||(temp0!=0&&temp1==0))||temp2!=0)
-        *dest = (unsigned char)1;
+      if(temp0!=0)
+        temp0=1;
+      if(temp1!=0)
+        temp1=1;
+      if(temp2!=0)
+        temp2=1;
+      if(temp2==1||temp0!=temp1)
+        *dest = 1;
       else
-        *dest = (unsigned char)0;
+        *dest = 0;
       break;
     }
       //TODO();

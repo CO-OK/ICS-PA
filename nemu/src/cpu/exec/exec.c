@@ -42,7 +42,7 @@ static make_EHelper(name) { \
 
 /* 0x80, 0x81, 0x83 */
 make_group(gp1,
-    EX(add), EX(or), EMPTY, EX(sbb),
+    EX(add), EX(or), EX(adc), EX(sbb),
     EX(and), EX(sub), EX(xor_31), EX(cmp))
 
   /* 0xc0, 0xc1, 0xd0, 0xd1, 0xd2, 0xd3 */
@@ -75,17 +75,17 @@ make_group(gp7,
 opcode_entry opcode_table [512] = {
   /* 0x00 */	IDEXW(G2E,add,0), IDEXW(G2E,add,0), EMPTY, IDEXW(E2G,add,0),//03 add Gv,Ev  //01 add Ev,GV
   /* 0x04 */	EMPTY, IDEXW(I2a,add,0), EMPTY, EMPTY,//05--> ADD EAX, Iv IDEX(mov_I2r,ADD)
-  /* 0x08 */	EMPTY, IDEXW(G2E,or,0), IDEXW(E2G,or,1), IDEXW(E2G,or,0),//08-->0D or //09 Ev,Gv //0b or  Gv,Ev
-  /* 0x0c */	EMPTY, IDEXW(I2r,or,0), EMPTY, EX(2byte_esc),
-  /* 0x10 */	EMPTY, EMPTY, EMPTY, IDEXW(E2G,adc,0),// 13 adc Gv,Ev
-  /* 0x14 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x18 */	EMPTY, IDEXW(G2E,sbb,0), EMPTY, IDEXW(E2G,sbb,0),//0x1b  sbb Gv,Ev 
-  /* 0x1c */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0x08 */	IDEXW(G2E,or,1), IDEXW(G2E,or,0), IDEXW(E2G,or,1), IDEXW(E2G,or,0),//08-->0D or //09 Ev,Gv //0b or  Gv,Ev
+  /* 0x0c */	IDEXW(I2r,or,1), IDEXW(I2r,or,0), EMPTY, EX(2byte_esc),
+  /* 0x10 */	IDEXW(G2E,adc,1), IDEXW(G2E,adc,0), IDEXW(E2G,adc,1), IDEXW(E2G,adc,0),// 13 adc Gv,Ev
+  /* 0x14 */	IDEXW(I2a,adc,1), IDEXW(I2a,adc,0), EMPTY, EMPTY,
+  /* 0x18 */	IDEXW(G2E,sbb,1), IDEXW(G2E,sbb,0), IDEXW(E2G,sbb,1), IDEXW(E2G,sbb,0),//0x1b  sbb Gv,Ev 
+  /* 0x1c */	IDEXW(I2a,sbb,1), IDEXW(I2a,sbb,0), EMPTY, EMPTY,
   /* 0x20 */	IDEXW(E2G,and,1), IDEXW(G2E,and,0), IDEXW(E2G,and,1), IDEXW(E2G,and,0),// 20---->25 and
   /* 0x24 */	IDEXW(I2a,and,1), IDEXW(I2a,and,0), EMPTY, EMPTY,
   /* 0x28 */	EMPTY, IDEXW(G2E,sub,0), EMPTY, IDEXW(E2G,sub,0),//29 sub EV,Gv //0x2b sub  Gv,Ev
   /* 0x2c */	EMPTY, IDEXW(I2a,sub,0), EMPTY, EX(das),//2d sub EaX,Iv
-  /* 0x30 */	IDEXW(G2E,xor_31,1), IDEX(G2E,xor_31), EMPTY, EMPTY,
+  /* 0x30 */	IDEXW(G2E,xor_31,1), IDEX(G2E,xor_31), IDEXW(G2E,xor_31,1), IDEXW(G2E,xor_31,0),
   /* 0x34 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x38 */	IDEXW(G2E,cmp,1), IDEXW(G2E,cmp,0), IDEXW(E2G,cmp,1), IDEXW(E2G,cmp,0),//0x3b cmp Gv,Ev //0x39 cmp Ev,Gv
   /* 0x3c */	IDEXW(I2a,cmp,1), IDEXW(I2a,cmp,0), EMPTY, EMPTY,//0x3c cmp Al,Ib
@@ -99,7 +99,7 @@ opcode_entry opcode_table [512] = {
   /* 0x5c */	EMPTY, IDEX(r,pop_reg), IDEX(r,pop_reg), IDEX(r,pop_reg),
   /* 0x60 */	EX(pusha), EX(popa), EMPTY, EMPTY,
   /* 0x64 */	EMPTY, EMPTY, EX(operand_size), EMPTY,
-  /* 0x68 */	IDEXW(I,push_reg,0), EMPTY, IDEXW(I,push_reg,1), EMPTY,//0x6a push Ib,就写成push_reg了懒得改//0x68 push Ib
+  /* 0x68 */	IDEXW(I,push_reg,0), EMPTY, IDEXW(I,push_reg,1), IDEX(I_E2G,imul3),//0x6a push Ib,就写成push_reg了懒得改//0x68 push Ib
   /* 0x6c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x70 */	IDEXW(J,jcc,1), IDEXW(J,jcc,1), IDEXW(J,jcc,1), IDEXW(J,jcc,1),
   /* 0x74 */	IDEXW(J,jcc,1), IDEXW(J,jcc,1), IDEXW(J,jcc,1), IDEXW(J,jcc,1),//0x74 je/jz  //0x75 jnz
@@ -129,7 +129,7 @@ opcode_entry opcode_table [512] = {
   /* 0xd4 */	EMPTY, EMPTY, EX(nemu_trap), EMPTY,
   /* 0xd8 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xdc */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0xe0 */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0xe0 */	EMPTY, EMPTY, EMPTY, IDEXW(J,jcc,1),
   /* 0xe4 */	IDEXW(in_I2a,in,1), IDEXW(in_I2a,in,0), IDEXW(out_a2I,out,1), IDEXW(out_a2I,out,0),//0xe4 al,Ib
   /* 0xe8 */	IDEX(J,call), IDEXW(J,jmp,0), EMPTY, IDEXW(J,jmp,1),//0xeb jmp rel18
   /* 0xec */	IDEXW(in_dx2a,in,1), IDEXW(in_dx2a,in,0), IDEXW(out_a2dx,out,1), IDEXW(out_a2dx,out,0),
@@ -179,7 +179,7 @@ opcode_entry opcode_table [512] = {
   /* 0x90 */	IDEXW(E,setcc,1), IDEXW(E,setcc,1), IDEXW(E,setcc,1), IDEXW(E,setcc,1),//90-->97 Byte Set on condition (Eb)
   /* 0x94 */	IDEXW(E,setcc,1), IDEXW(E,setcc,1), IDEXW(E,setcc,1), IDEXW(E,setcc,1),//0x94 sete al
   /* 0x98 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x9c */	EMPTY, EMPTY, EMPTY, IDEXW(E,setcc,0),
+  /* 0x9c */	EMPTY, EMPTY, EMPTY, IDEXW(E,setcc,1),
   /* 0xa0 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xa4 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xa8 */	EMPTY, EMPTY, EMPTY, EMPTY,

@@ -62,42 +62,22 @@ make_EHelper(and) {
 }
 
 make_EHelper(xor_31) {
-  //TODO();
-  if(id_dest->type==OP_TYPE_REG)
-  {
-    rtl_xor(&t0,&id_dest->val,&id_src->val);
-    operand_write(id_dest,&t0);
-  }
-  else if(id_dest->type==OP_TYPE_MEM)
-  {
-    t1 = paddr_read(id_dest->addr,id_dest->width);
-    rtl_xor(&t0,&t1,&id_src->val);
-    operand_write(id_dest,&t0);
-  }
-  /*
-    设置eflags
-    CF = 0, OF = 0; SF, ZF, and PF as described in Appendix C; AF is undefined
-    SF Sign Flag ── Set equal to high-order bit of result (0 is positive, 1 if negative).
-    ZF Zero Flag ── Set if result is zero; cleared otherwise.
-    PF Parity Flag ── Set if low-order eight bits of result contain an even number of 1 bits; cleared otherwise.
-  */
-  //ZF SF
-  rtl_update_ZFSF(&t0,id_dest->width);
-  //PF 不管
-  //CF
+  rtl_xor(&t2,&id_dest->val,&id_src->val);
+  operand_write(id_dest,&t2);
+  rtl_update_ZFSF(&t2,id_dest->width);
   rtl_unset_CF(&eflag_CF);
-  //OF
-  rtl_unset_OF(&eflag_OF);
+  rtl_unset_CF(&eflag_OF);
   print_asm_template2(xor);
 }
 
 make_EHelper(or) {
   //TODO();
   //80386 手册54
-  get_mr_value(&t1,id_dest);
-  get_mr_value(&t2,id_src);
-  rtl_or(&t0,&t1,&t2);
-  operand_write(id_dest,&t0);
+  rtl_or(&t2,&id_dest->val,&id_src->val);
+  operand_write(id_dest,&t2);
+  rtl_update_ZFSF(&t2,id_dest->width);
+  rtl_unset_OF(&eflag_OF);
+  rtl_unset_CF(&eflag_CF);
   print_asm_template2(or);
 }
 
@@ -110,45 +90,10 @@ make_EHelper(sar) {
     the same as IDIV); the high-order bit remains the same. SHR performs an
     unsigned divide; the high-order bit is set to 0.
   */
-  if(id_src->val==0)
-  {
-    print_asm_template2(sar);
-    return;
-  }
-  rtl_msb(&t3,&id_dest->val,id_dest->width);
-  rtl_shri(&t1,&id_dest->val,id_src->val-1);//先右移n-1位，留最后一位填充CF
-  t2 = t1 & 0x00000001;
-
-  if(t2 == 1)
-    rtl_set_CF(&eflag_CF);
-  else
-    rtl_unset_CF(&eflag_CF);  
-  rtl_shr(&t1,&id_dest->val,&id_src->val);
-  //补1
-  if(t3 == 1)//需要补0
-  {
-    rtlreg_t digit = 0;//用这个数与t1相加来补1
-    for(int i = 0;i<id_src->val;i++)
-    {
-      digit += my_power(2,id_dest->width*8-1-i);
-    }
-    if(id_dest->width==1)
-    {
-      t1 += (unsigned char)digit;
-    } 
-    else if(id_dest->width==2)
-    {
-      t1 += (short)digit;
-    }
-    else
-    {
-      t1 += digit;
-    }
-  }
-  operand_write(id_dest,&t1);
-  rtl_unset_OF(&eflag_OF);
-  rtl_update_ZFSF(&t1,id_dest->width);
-  // unnecessary to update CF and OF in NEMU
+  rtl_sext(&t2,&id_dest->val,id_dest->width);
+  rtl_sar(&t2,&t2,&id_src->val);
+  operand_write(id_dest,t2);
+  rtl_update_ZFSF(&t2,id_dest->width);
   print_asm_template2(sar);
 }
 
@@ -161,63 +106,14 @@ make_EHelper(shl) {
     to 0.
   */
 
-  if(id_src->val==0)
-  {
-    print_asm_template2(shl);
-    return;
-  }
-  rtl_shli(&t0,&id_dest->val,id_src->val-1);//留1位来给CF
-  //这种类型的指令只有16位和32位
-
-  if(id_dest->width==2)
-  {
-    t2 = t0 & 0x8000;
-    if(t2 == 0x8000)//说明最高位是1
-      rtl_set_CF(&eflag_CF);
-    else
-      rtl_unset_CF(&eflag_CF);
-  }
-  else if(id_dest->width==4)
-  {
-    t2 = t0 & 0x80000000;
-    if(t2 == 0x80000000)//说明最高位是1
-      rtl_set_CF(&eflag_CF);
-    else
-      rtl_unset_CF(&eflag_CF);
-  }
-  rtl_shl(&t0,&id_dest->val,&id_src->val);
-  operand_write(id_dest,&t0);
-  rtl_update_ZFSF(&t0,id_dest->width);
-  //OF: OF ← high-order bit of r/m ≠ (CF);
-  rtl_msb(&t1,&id_dest->val,id_dest->width);
-  if(t1!= e_CF)
-    rtl_set_OF(&eflag_OF);
-  else
-    rtl_unset_OF(&eflag_OF);
+  rtl_shl(&t2,&id_dest->val,&id_src->val);
+  operand_write(id_dest,&t2);
+  rtl_update_ZFSF(&t2,id_dest->width);
   print_asm_template2(shl);
 }
 
 make_EHelper(shr) {
   //TODO();
-  // unnecessary to update CF and OF in NEMU
-  /*if(id_src->val==0)
-  {
-    print_asm_template2(sar);
-    return;
-  }
-  rtl_msb(&t3,&id_dest->val,id_dest->width);
-  rtl_shri(&t1,&id_dest->val,id_src->val-1);//先右移n-1位，留最后一位填充CF
-  t2 = t1 & 0x00000001;
-
-  if(t2 == 1)
-    rtl_set_CF(&eflag_CF);
-  else
-    rtl_unset_CF(&eflag_CF);  
-  rtl_shr(&t1,&id_dest->val,&id_src->val);
-
-  operand_write(id_dest,&t1);
-  rtl_unset_OF(&eflag_OF);
-  rtl_update_ZFSF(&t1,id_dest->width);*/
   rtl_shr(&t0,&id_dest->val,&id_src->val);
   operand_write(id_dest,&t0);
   rtl_update_ZFSF(&t0,id_dest->width);
@@ -234,8 +130,8 @@ make_EHelper(setcc) {
 
 make_EHelper(not) {
   //TODO();
-  get_mr_value(&t0,id_dest);
-  t0=~t0;
-  operand_write(id_dest,&t0);
+  rtl_not(&id_dest->val);
+  operand_write(id_dest,&id_dest->val);
+  
   print_asm_template1(not);
 }

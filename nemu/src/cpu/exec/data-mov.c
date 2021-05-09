@@ -56,50 +56,25 @@ make_EHelper(popa) {
 
 make_EHelper(leave) {
   //TODO();
-  /*
-    IF StackAddrSize = 16
-    THEN
-    SP ← BP;
-    ELSE (* StackAddrSize = 32 *)
-    ESP ← EBP;
-    FI;
-    IF OperandSize = 16
-    THEN
-    BP ← Pop();
-    ELSE (* OperandSize = 32 *)
-    EBP ← Pop();
-    FI;
-  */
-
-  cpu.esp=cpu.ebp;
+  rtl_mv(&cpu.esp,&cpu.ebp);
   rtl_pop(&cpu.ebp);
+  
   print_asm("leave");
 }
 
 make_EHelper(cltd) {
   //printf("width=%d\n",id_dest->width);
-  if (decoding.is_operand_size_16) {
-    //TODO();
-    rtl_msb(&t0,&cpu.eax,2);
-    if(t0==1)//ax<0
-    {
-      cpu.edx |= 0x0000ffff;
-    }
-    else
-    {
-      cpu.edx &= 0x11110000;
-    }
+  if(decoding.is_operand_size_16)
+  {
+    rtl_lr_w(&t0,R_AX);
+    rtl_sext(&t0,&t0,2);
+    rtl_sari(&t0,&t0,31);
+    rtl_sr_w(R_DX,&t0);
   }
-  else {
-    rtl_msb(&t0,&cpu.eax,4);
-    if(t0==1)//ax<0
-    {
-      cpu.edx |= 0xffffffff;
-    }
-    else
-    {
-      cpu.edx = 0;
-    }
+  else
+  {
+    rtl_sari(&cpu.edx,&cpu.eax,31);
+
   }
 
   print_asm(decoding.is_operand_size_16 ? "cwtl" : "cltd");

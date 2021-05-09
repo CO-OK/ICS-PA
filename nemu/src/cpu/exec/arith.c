@@ -2,68 +2,23 @@
 
 //void rtl_mul(rtlreg_t* dest_hi, rtlreg_t* dest_lo, const rtlreg_t* src1, const rtlreg_t* src2);
 make_EHelper(add) {
-
-  //TODO();
-  //printf("dest_type=%d\nsrc_type=%d\n",id_dest->type,id_src->type);
-  get_mr_value(&t0,id_dest);
-  get_mr_value(&t1,id_src);
-  rtl_add(&t2,&t1,&t0);
+  rtl_add(&t2, &id_dest->val, &id_src->val);
   operand_write(id_dest,&t2);
-  /*
-    OF, SF, ZF, AF\, CF, and PF\ as described in Appendix C
-  */
   rtl_update_ZFSF(&t2,id_dest->width);
-  /*
-    OF标志位根据操作数的符号及其变化情况来设置：若两个操作数的符号相同，而结果的符号与之相反时，OF=1，否则OF=0
-  */
-  /*rtlreg_t op1,op2,res;//操作数以及结果的符号
-  rtl_msb(&op1,&t0,id_dest->width);
-  rtl_msb(&op2,&t1,id_src->width);
-  rtl_msb(&res,&t2,id_dest->width);
-  if(op1==op2&&res!=op1)
-    rtl_set_OF(&eflag_OF);
-  else
-    rtl_unset_OF(&eflag_OF);*/
-  /*
-    if a + b > max
-    then a > max - b
-  */
-  /*if(id_dest->width==1)
-  {
-    op1=MY_INT8_MAX-t1;
-  }
-  else if(id_dest->width==2)
-  {
-    op1=MY_INT16_MAX-t1;
-  }
-  else if(id_dest->width==4)
-  {
-    op1=MY_INT32_MAX-t1;
-  }*/
-  //op2=t0;
-  //res=0;
-  rtl_sltu(&t3,&t2,&id_src->val);
-  rtlreg_t temp;
-  rtl_sltu(&temp,&t2,&id_dest->val);
-  t3 = temp | t3;
-  if(t3==1)
+  rtl_stlu(&t0,&t2,&id_dest->val);
+  if(t0!=0)
     rtl_set_CF(&eflag_CF);
   else
     rtl_unset_CF(&eflag_CF);
-  //rtl_sltu()
-  rtl_xor(&t0, &id_dest->val, &id_src->val);
-  rtl_not(&t0);
-  rtl_xor(&t1, &id_dest->val, &t2);
-  rtl_and(&t0, &t0, &t1);
-  rtl_msb(&t0, &t0, id_dest->width);
-  t0 &= 0x00000001;
-  /*
-    t0=1说明若两个操作数的符号相同，而结果的符号与之相反
-  */
-  if(t0==1)
+  rtl_xor(&t0,&id_src->val,&t2);
+  rtl_xor(&t1,&id_dest->val,&t2);
+  rtl_and(&t0,&t0,&t1);
+  rtl_msb(&t0,&t0,id_dest->width);
+  if(t0!=0)
     rtl_set_OF(&eflag_OF);
   else
     rtl_unset_OF(&eflag_OF);
+  
   print_asm_template2(add);
 }
 
@@ -140,41 +95,31 @@ make_EHelper(cmp) {
     immediate byte, the byte value is first sign-extended.
 
   */
-  rtlreg_t op1,op2;
-  get_mr_value(&op1,id_dest);
-  get_mr_value(&op2,id_src);
-  //printf("type=%d\n",id_src->type);
-  if(id_src->type==OP_TYPE_IMM)
-  {
-    rtl_sext(&op2,&op2,id_src->width);
-  }
-  rtl_sub(&t2, &op1, &op2);//t2存结果
-  rtl_sltu(&t3, &id_dest->val, &id_src->val);//t3 = 1 ---> val<t2 other wise val>=t2  which mean cf=1
+  rtl_sub(&t2, &id_dest->val, &id_src->val);
+  rtl_sltu(&t3, &id_dest->val, &t2);
+  rtl_get_CF(&t1);
+  if(t1!=0)
+    t1=1;
+  rtl_sub(&t2, &t2, &t1);
+  operand_write(id_dest, &t2);
+
   rtl_update_ZFSF(&t2, id_dest->width);
-  if(t3)//cf==0
-  {
+
+  rtl_sltu(&t0, &id_dest->val, &t2);
+  rtl_or(&t0, &t3, &t0);
+  if(t0!=0)
     rtl_set_CF(&eflag_CF);
-  } 
   else
     rtl_unset_CF(&eflag_CF);
-  /*
-    OF:
-    减法的OF位的设置方法为：若两个数的符号相反，而结果的符号与减数的符号相同，则OF=1，除上述情况外OF=0。OF=1说明带符号数的减法运算结果是错误的。
-  */
-  rtl_xor(&t0, &op1, &op2);
-  rtl_xor(&t1, &op1, &t2);
+
+  rtl_xor(&t0, &id_dest->val, &id_src->val);
+  rtl_xor(&t1, &id_dest->val, &t2);
   rtl_and(&t0, &t0, &t1);
   rtl_msb(&t0, &t0, id_dest->width);
-  //printf("t0=%08X\n",t0);
-  t0 = t0 & 0x00000001;
-  if(t0==0)
-  {
-    rtl_unset_OF(&eflag_OF);
-  }
-  else
-  {
+  if(t0!=0)
     rtl_set_OF(&eflag_OF);
-  }
+  else
+    rtl_unset_OF(&eflag_OF);
   print_asm_template2(cmp);
 }
 
@@ -183,23 +128,14 @@ make_EHelper(inc) {
   /*
     可能有问题
   */
-  rtl_addi(&t0,&id_dest->val,1);
-  //rtl_sr(id_dest->reg,id_dest->width,&t0);
-  operand_write(id_dest,&t0);
-  /*
-    OF, SF, ZF, AF, and PF as described in Appendix C
-  */
-  rtl_update_ZFSF(&t0,id_dest->width);  
-  rtl_msb(&t1,&t0,id_dest->width);
-  rtl_msb(&t2,&id_dest->val,id_dest->width);
-  t1 &= 0x00000001;
-  t2 &= 0x00000001;
-  //printf("val=%08X\n",id_dest->val);
-  //The overflow flag is set when an operation would cause a sign change
-  if(t1==t2)
-    rtl_unset_OF(&eflag_OF);
-  else 
+  rtl_addi(&t2,&id_dest->val,1);
+  operand_write(id_dest,&t2);
+  rtl_update_ZFSF(&t2,id_dest->width);
+  rtl_eqi(&t0,&t2,0x80000000);
+  if(t0!=0)
     rtl_set_OF(&eflag_OF);
+  else
+    rtl_unset_OF(&eflag_OF);
   print_asm_template1(inc);
 }
 
@@ -211,60 +147,55 @@ make_EHelper(dec) {
   //rtl_sr(id_dest->reg,id_dest->width,&t0);
   rtl_update_ZFSF(&t0,id_dest->width);  
   rtl_eqi(&t2,&t0,0x7fffffff);
-  if(t2>0)
+  if(t2!=0)
     rtl_set_OF(&eflag_OF);
+  else
+    rtl_unset_OF(&eflag_OF);
   print_asm_template1(dec);
 }
 
 make_EHelper(neg) {
   //TODO();
-  if(id_dest->val==0)
-  {
-    rtl_unset_CF(&eflag_CF);
-  }
-  else
+  rtlreg_t t =0;
+  rtl_sub(&t2,&t,&id_dest->val);
+  rtl_update_ZFSF(&t2,id_dest->width);
+  rtl_neq0(&t0,&id_dest->val);
+  if(t0!=0)
     rtl_set_CF(&eflag_CF);
-  t0=-1*id_dest->val;
-  operand_write(id_dest,&t0);
-  rtl_update_ZFSF(&t0,id_dest->width);
+  else
+    rtl_unset_CF(&eflag_CF);
+  rtl_eqi(&t0,&id_dest->val,0x80000000);
+  if(t0!=0)
+    rtl_set_OF(&eflag_OF);
+  else
+    rtl_unset_OF(&eflag_OF);
+  operand_write(id_dest,&t2);
   print_asm_template1(neg);
 }
 
 make_EHelper(adc) {
-  //printf("dest-val=%08x\nsrc-val=%08X\n",id_dest->val,id_src->val);
   rtl_add(&t2, &id_dest->val, &id_src->val);
   rtl_sltu(&t3, &t2, &id_dest->val);
-  rtlreg_t temp;
-  rtl_get_CF(&temp);
-  //printf("temp=%08X\n",temp);
-  if(temp!=0)
-    temp=1;
-  rtl_add(&t2, &t2, &temp);
+  rtl_get_CF(&t1);
+  if(t1!=0)
+    t1=1;
+  rtl_add(&t2, &t2, &t1);
   operand_write(id_dest, &t2);
-  //printf("res=%08X\n",t2);
+
   rtl_update_ZFSF(&t2, id_dest->width);
+
   rtl_sltu(&t0, &t2, &id_dest->val);
-  rtl_sltu(&temp,&t2,&id_src->val);//CF应该考虑 (res < src) | (res < dest)
-  t0 = t0 | temp;
-  //printf("t3=%08X\n,t0=%08X\n",t3,t0);
   rtl_or(&t0, &t3, &t0);
   if(t0!=0)
     rtl_set_CF(&eflag_CF);
   else
     rtl_unset_CF(&eflag_CF);
-  /*
-    OF标志位根据操作数的符号及其变化情况来设置：若两个操作数的符号相同，而结果的符号与之相反时，OF=1，否则OF=0
-  */
   rtl_xor(&t0, &id_dest->val, &id_src->val);
   rtl_not(&t0);
   rtl_xor(&t1, &id_dest->val, &t2);
   rtl_and(&t0, &t0, &t1);
   rtl_msb(&t0, &t0, id_dest->width);
-  t0 &= 0x00000001;
-  /*
-    t0=1说明若两个操作数的符号相同，而结果的符号与之相反
-  */
-  if(t0==1)
+  if(t0!=0)
     rtl_set_OF(&eflag_OF);
   else
     rtl_unset_OF(&eflag_OF);
