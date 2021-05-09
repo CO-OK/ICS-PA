@@ -34,7 +34,7 @@ int fs_open(char*path)
   {
     if(strcmp(file_table[i].name,path)==0)
     {
-      //printf("open %s,fd=%d\n",path,i);
+      Log("open %s,fd=%d\n",path,i);
       return i;
       //printf("out\n");
     }
@@ -45,7 +45,7 @@ int fs_open(char*path)
 }
 ssize_t fs_read(int fd, void *buf, size_t count)
 {
-  //printf("read %d size=%d,open_offset=%d\n",fd,count,file_table[fd].open_offset,((uint32_t*)(buf)));
+  Log("read %d size=%d,open_offset=%d\n",fd,count,file_table[fd].open_offset,((uint32_t*)(buf)));
   if(file_table[fd].open_offset >= fs_filesz(fd))
 		return 0;
   if (file_table[fd].open_offset + count > fs_filesz(fd))
@@ -66,13 +66,13 @@ ssize_t fs_filesz(int fd)
 }
 int fs_close(int fd)
 {
-  //printf("close %d\n",fd);
+  Log("close %d\n",fd);
   //file_table[fd].open_offset=0;
   return 0;
 }
 off_t lseek(int fd, off_t offset, int whence)
 {
-  //printf("lseek %d offset=%d,whence=%d,filesize=%d\n",fd,offset,whence,file_table[fd].size);
+  Log("lseek %d offset=%d,whence=%d,filesize=%d\n",fd,offset,whence,file_table[fd].size);
   if(whence==SEEK_CUR)
   {
     if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
@@ -105,7 +105,7 @@ off_t lseek(int fd, off_t offset, int whence)
 
 ssize_t fs_write(int fd, void *buf, size_t count)
 {
-  //printf("write %d count=%d\n",fd,count);
+  Log("write %d count=%d\n",fd,count);
   //printf("fd=%d\ncount=%d\n",fd,count);
   if(fd==1||fd==2)
   {
