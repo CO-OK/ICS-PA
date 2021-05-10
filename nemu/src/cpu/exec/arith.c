@@ -569,23 +569,6 @@ make_EHelper(idiv) {
   print_asm_template1(idiv);
 }
 make_EHelper(das){
-  rtlreg_t a=cpu.eax;
-  a=a&0x000000ff;
-  if(a&0xf>9)
-  {
-    a=a-6;
-    cpu.eax=cpu.eax&0xffffff00+a;
-  }
-  a=cpu.eax&0x000000ff;
-  if(a>0x9f||eflag_CF==true)
-  {
-    a=a-0x60;
-    cpu.eax=cpu.eax&0xffffff00+a;
-    rtl_set_CF(&eflag_CF);
-  }
-  else
-  {
-    rtl_unset_CF(&eflag_CF);
-  }
+
 }
 
