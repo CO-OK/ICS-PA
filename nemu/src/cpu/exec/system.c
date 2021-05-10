@@ -61,7 +61,7 @@ make_EHelper(iret) {
   memcpy(&cpu.EFLAGS_,&t0,sizeof(cpu.EFLAGS_));
   decoding.jmp_eip=1;
   decoding.seq_eip=cpu.eip;
-  Log("finish iret ");
+  Log("finish iret eip=%08X",cpu.eip);
   print_asm("iret");
 }
 
