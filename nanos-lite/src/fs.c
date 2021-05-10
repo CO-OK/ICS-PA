@@ -44,7 +44,7 @@ int fs_open(char*path)
 }
 ssize_t fs_read(int fd, void *buf, size_t count)
 {
-  Log("read %s count=%d,open_offset=%d\n",file_table[fd].name,count,file_table[fd].open_offset,((uint32_t*)(buf)));
+  Log("read %s fileSize=%d count=%d,open_offset=%d\n",file_table[fd].name,file_table[fd].size,count,file_table[fd].open_offset,((uint32_t*)(buf)));
   if(file_table[fd].open_offset >= fs_filesz(fd))
 		return 0;
   if (file_table[fd].open_offset + count > fs_filesz(fd))
