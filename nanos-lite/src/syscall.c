@@ -79,7 +79,7 @@ int sys_sbrk(intptr_t increment)
   return 0;
 }
 
-ssize_t sys_write(int fd, void *buf, size_t count)
+int sys_write(int fd, void *buf, size_t count)
 {
   //printf("write %d count=%d\n",fd,count);
   //printf("fd=%d\ncount=%d\n",fd,count);
