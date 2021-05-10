@@ -44,8 +44,20 @@ int fs_open(char*path)
 }
 ssize_t fs_read(int fd, void *buf, size_t count)
 {
-  Log("read %s fileSize=%d count=%d,open_offset=%d\n",file_table[fd].name,file_table[fd].size,count,file_table[fd].open_offset,((uint32_t*)(buf)));
-  if(file_table[fd].open_offset >= fs_filesz(fd))
+  //Log("read %s fileSize=%d count=%d,open_offset=%d\n",file_table[fd].name,file_table[fd].size,count,file_table[fd].open_offset,((uint32_t*)(buf)));
+  assert(fd>=0&&fd<NR_FILES);
+  if(fd<3)
+  {
+    Log("wrong fd");
+    return 0;
+  }
+  int n= fs_filesz(fd)-file_table[fd].open_offset;
+  if(n>count)
+    n=count;
+  ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, n);
+  file_table[fd].open_offset+=n;
+  return n;
+  /*if(file_table[fd].open_offset >= fs_filesz(fd))
 		return 0;
   if (file_table[fd].open_offset + count > fs_filesz(fd))
 		count = file_table[fd].size - file_table[fd].open_offset;
@@ -54,7 +66,7 @@ ssize_t fs_read(int fd, void *buf, size_t count)
 
   file_table[fd].open_offset+=count;
   Log("fs_read return ,open_offset=%d",file_table[fd].open_offset);
-  return count;
+  return count;*/
 }
 
 ssize_t fs_filesz(int fd)
