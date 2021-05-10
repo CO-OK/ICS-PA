@@ -240,7 +240,7 @@ void difftest_step(uint32_t eip) {
   // Set `diff` as `true` if they are not the same.
   //TODO();
 //CF
-    rtlreg_t CF = r.eflags & eflag_CF;
+    /*rtlreg_t CF = r.eflags & eflag_CF;
     rtlreg_t ZF = (r.eflags & eflag_ZF) >> 6;
     rtlreg_t SF = (r.eflags & eflag_SF) >> 7;
     rtlreg_t IF = (r.eflags & eflag_IF) >> 9;
@@ -264,7 +264,7 @@ void difftest_step(uint32_t eip) {
     {
       diff = true;
       printf("detect diff at eflags_OF,\tr.OF=%d\tcpu.OF=%d\n",OF,e_OF);
-    }
+    }*/
   if (diff) {
     nemu_state = NEMU_STOP;
   }
