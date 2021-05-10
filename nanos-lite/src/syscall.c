@@ -100,7 +100,7 @@ int sys_write(int fd, void *buf, size_t count)
     if(fd<3)
     {
       Log("write wrong file");
-      return 0;
+      return -1;
     }
     return fs_write(fd,buf,count);
   }

@@ -76,6 +76,7 @@ ssize_t fs_filesz(int fd)
 }
 int fs_close(int fd)
 {
+  assert(fd>=0&&fd<NR_FILES);
   Log("close %d\n",fd);
   //file_table[fd].open_offset=0;
   return 0;
@@ -85,15 +86,18 @@ off_t lseek(int fd, off_t offset, int whence)
   Log("lseek %d offset=%d,whence=%d,filesize=%d\n",fd,offset,whence,file_table[fd].size);
   if(whence==SEEK_CUR)
   {
-    if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
+    /*if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
     {
 				file_table[fd].open_offset += offset;
 				return file_table[fd].open_offset;
-			}
+			}*/
+
+    file_table[fd].open_offset+=offset;
+    return file_table[fd].open_offset;
   }
   else if(whence==SEEK_SET)
   {
-    if (offset >= 0 && offset <= fs_filesz(fd)) 
+    /*if (offset >= 0 && offset <= fs_filesz(fd)) 
     {
 			file_table[fd].open_offset =  offset;
 			return offset;
@@ -101,7 +105,9 @@ off_t lseek(int fd, off_t offset, int whence)
     else if(offset > fs_filesz(fd))
     {
       file_table[fd].open_offset=offset;
-    }
+    }*/
+    file_table[fd].open_offset=offset;
+    return file_table[fd].open_offset;
   }
   else if(whence==SEEK_END)
   {
@@ -117,7 +123,19 @@ ssize_t fs_write(int fd, void *buf, size_t count)
 {
   //Log("write %d count=%d\n",fd,count);
   //printf("fd=%d\ncount=%d\n",fd,count);
-  if(fd==1||fd==2)
+  assert(fd>=0&&fd<NR_FILES);
+  if(fd<3)
+  {
+    Log("wrong fd");
+    return 0;
+  }
+  int n= fs_filesz(fd)-file_table[fd].open_offset;
+  if(n>count)
+    n=count;
+  ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, n);
+  file_table[fd].open_offset+=n;
+  return n;
+  /*if(fd==1||fd==2)
   {
     return sys_write(fd,buf,count);
   }
@@ -131,5 +149,5 @@ ssize_t fs_write(int fd, void *buf, size_t count)
     return count;
   }
   panic("panic an write\n");
-  return -1;
+  return -1;*/
 }
