@@ -117,7 +117,7 @@ make_EHelper(shr) {
   //TODO();
   if(id_src->val==0)
     panic("shr count=0");
-  rtl_shr(&t0,&id_dest->val,&id_src->val-1);
+  rtl_shri(&t0,&id_dest->val,id_src->val-1);
   rtlreg_t temp = t0&0x00000001;
   if(temp!=0)
     rtl_set_CF(&eflag_CF);
