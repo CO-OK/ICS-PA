@@ -24,13 +24,9 @@ enum {
   SYS_gettimeofday
 };
 int sys_none();
-void sys_exit(int arg);
 int sys_write(int fd, void *buf, size_t count);
-ssize_t fs_write(int fd, void *buf, size_t count);
 int sys_sbrk(intptr_t increment);
-int fs_open(char*path);
-ssize_t fs_read(int fd, void *buf, size_t count);
-int fs_close(int fd);
-ssize_t fs_filesz(int fd);
-off_t lseek(int fd, off_t offset, int whence);
+void sys_exit(int arg);
+
+
 #endif

@@ -25,7 +25,7 @@ static Finfo file_table[] __attribute__((used)) = {
 void init_fs() {
   // TODO: initialize the size of /dev/fb
 }
-int fs_open(char*path)
+int fs_open(char*path,int flags,int mode)
 {
   //printf("name=%s\n",path);
   
@@ -55,7 +55,7 @@ ssize_t fs_read(int fd, void *buf, size_t count)
   if(n>count)
     n=count;
   ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, n);
-  file_table[fd].open_offset+=n;
+  set_open_offset(fd,get_open_offset(fd)+n);
   return n;
   /*if(file_table[fd].open_offset >= fs_filesz(fd))
 		return 0;
@@ -92,7 +92,7 @@ off_t lseek(int fd, off_t offset, int whence)
 				return file_table[fd].open_offset;
 			}*/
 
-    file_table[fd].open_offset+=offset;
+    set_open_offset(fd,get_open_offset(fd)+offset);
     return file_table[fd].open_offset;
   }
   else if(whence==SEEK_SET)
@@ -106,12 +106,12 @@ off_t lseek(int fd, off_t offset, int whence)
     {
       file_table[fd].open_offset=offset;
     }*/
-    file_table[fd].open_offset=offset;
+    set_open_offset(fd,offset);
     return file_table[fd].open_offset;
   }
   else if(whence==SEEK_END)
   {
-    file_table[fd].open_offset = fs_filesz(fd) + offset;
+    set_open_offset(fd,fs_filesz(fd)+offset);
 		return file_table[fd].open_offset;
   }
   panic("lseek panic\n");
@@ -133,7 +133,7 @@ ssize_t fs_write(int fd, void *buf, size_t count)
   if(n>count)
     n=count;
   ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, n);
-  file_table[fd].open_offset+=n;
+  set_open_offset(fd,get_open_offset(fd)+n);
   return n;
   /*if(fd==1||fd==2)
   {
@@ -150,4 +150,17 @@ ssize_t fs_write(int fd, void *buf, size_t count)
   }
   panic("panic an write\n");
   return -1;*/
+}
+void set_open_offset(int fd , off_t n)
+{
+  assert(fd>=0&&fd<NR_FILES);
+  assert(n>=0);
+  if(n>file_table[fd].size)
+    n=file_table[fd].size;
+  file_table[fd].open_offset=n;
+}
+off_t get_open_offset(int fd)
+{
+  assert(fd>=0&&fd<NR_FILES);
+  return file_table[fd].open_offset;
 }
