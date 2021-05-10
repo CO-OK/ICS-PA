@@ -12,8 +12,7 @@ make_EHelper(push_reg) {
   */
   //printf("opcode=%08X\n",decoding.opcode);
   //if(decoding.opcode)
-  if(!(decoding.opcode==0x6a&&id_dest->val==0))
-    rtl_push(&id_dest->val,4);
+  rtl_push(&id_dest->val,4);
   print_asm_template1(push);
 }
 
