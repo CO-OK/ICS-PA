@@ -24,7 +24,7 @@ enum {
   SYS_gettimeofday
 };
 int sys_none();
-int sys_exit(int arg);
+void sys_exit(int arg);
 ssize_t sys_write(int fd, void *buf, size_t count);
 ssize_t fs_write(int fd, void *buf, size_t count);
 int sys_sbrk(intptr_t increment);

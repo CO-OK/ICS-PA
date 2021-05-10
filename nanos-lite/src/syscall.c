@@ -68,7 +68,7 @@ int sys_none()
   return 1;
 }
 
-int sys_exit(int arg)
+void sys_exit(int arg)
 {
   _halt(arg);
 }
