@@ -35,8 +35,8 @@ int _write(int fd, void *buf, size_t count){
 }
 
 void *_sbrk(intptr_t increment){
-  extern char end;
-  intptr_t program_break = (intptr_t)&end;
+  extern char _end;
+  intptr_t program_break = (intptr_t)&_end;
 	intptr_t prev = program_break;
 	if (_syscall_(SYS_brk, prev + increment, 0, 0) == 0) {
 		// panic("222");
@@ -52,7 +52,7 @@ void *_sbrk(intptr_t increment){
 
 int _read(int fd, void *buf, size_t count) {
   //printf("hit nano read\n");
-  return _syscall_(SYS_read,fd,buf,count);
+  return _syscall_(SYS_read,fd,(uintptr_t)buf,count);
 }
 
 int _close(int fd) {

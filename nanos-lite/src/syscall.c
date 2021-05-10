@@ -23,7 +23,7 @@ _RegSet* do_syscall(_RegSet *r) {
       printf("arg4=%08X\n",SYSCALL_ARG4(r));*/
       //return 0;
       //printf("hit write\n");
-      SYSCALL_ARG1(r)=fs_write(SYSCALL_ARG4(r),(void*)SYSCALL_ARG2(r),SYSCALL_ARG3(r));
+      SYSCALL_ARG1(r)=sys_write(SYSCALL_ARG4(r),(void*)SYSCALL_ARG2(r),SYSCALL_ARG3(r));
       break;
     }
     case SYS_open:{
@@ -94,6 +94,15 @@ int sys_write(int fd, void *buf, size_t count)
       //printf("char=%c\n",buf[i]);
     }
     return count;
+  }
+  else
+  {
+    if(fd<3)
+    {
+      Log("write wrong file");
+      return 0;
+    }
+    return fs_write(fd,buf,count);
   }
   panic("panic at sys_write\n");
   return -1;
