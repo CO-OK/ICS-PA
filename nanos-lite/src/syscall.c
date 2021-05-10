@@ -86,12 +86,15 @@ ssize_t sys_write(int fd, void *buf, size_t count)
   char*p=buf;
   if(fd==1||fd==2)
   {
+    char c;
     for(int i=0;i<count;i++)
     {
-      _putc(p[i]);
+      memcpy(&c,buf+i,1);
+      _putc(c);
       //printf("char=%c\n",buf[i]);
     }
     return count;
   }
+  panic("panic at sys_write\n");
   return -1;
 }
