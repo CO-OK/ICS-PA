@@ -39,7 +39,7 @@ int fs_open(char*path)
     }
     //printf("str=%s\n",file_table[i].name);
   }
-  assert(0);
+  panic("panic at fs_open\n");
   return -1;
 }
 ssize_t fs_read(int fd, void *buf, size_t count)
@@ -112,11 +112,13 @@ ssize_t fs_write(int fd, void *buf, size_t count)
   }
   else
   {
+    Log("write %d count=%d\n",fd,count);
     if (file_table[fd].open_offset + count > fs_filesz(fd))
 		  count = file_table[fd].size - file_table[fd].open_offset;
     ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
     file_table[fd].open_offset+=count;
     return count;
   }
+  panic("panic an write\n");
   return -1;
 }

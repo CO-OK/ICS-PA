@@ -12,7 +12,7 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case SYS_exit:{
-      SYSCALL_ARG1(r)=sys_exit(SYSCALL_ARG4(r));
+      sys_exit(SYSCALL_ARG4(r));
       break;
     }
     case SYS_write:{
