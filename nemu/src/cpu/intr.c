@@ -40,9 +40,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   //printf("cpu.jmpeip=%08X\n",decoding.jmp_eip);
   //printf("raise esp %08X\n",cpu.esp);
   //printf("jmp eip=%08X\n",final);
-#ifdef DIFF_TEST
-  diff_test_skip_nemu();
-#endif
+
 }
 
 void dev_raise_intr() {
