@@ -51,6 +51,6 @@ make_EHelper(popa);
 make_EHelper(iret);
 make_EHelper(das);
 make_EHelper(imul3);
-
+make_EHelper(rol);
 //make_EHelper(xchg_b);
 //make_EHelper(push_Ev);
