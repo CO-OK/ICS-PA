@@ -65,7 +65,7 @@ make_EHelper(xor_31) {
   //printf("hit\n");
   rtl_xor(&t1, &id_dest->val, &id_src->val);
 	rtl_unset_OF(&eflag_OF);
-	rtl_set_CF(&eflag_CF);
+	rtl_unset_CF(&eflag_CF);
 	rtl_update_ZFSF(&t1, id_dest->width);
 	operand_write(id_dest, &t1);
   print_asm_template2(xor);
