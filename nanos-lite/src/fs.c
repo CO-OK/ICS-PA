@@ -45,7 +45,7 @@ int fs_open(char*path,int flags,int mode)
 ssize_t fs_read(int fd, void *buf, size_t count)
 {
   //Log("read %s fileSize=%d count=%d,open_offset=%d\n",file_table[fd].name,file_table[fd].size,count,file_table[fd].open_offset,((uint32_t*)(buf)));
-  assert(fd>=0&&fd<NR_FILES);
+  /*assert(fd>=0&&fd<NR_FILES);
   if(fd<3)
   {
     Log("wrong fd");
@@ -56,8 +56,8 @@ ssize_t fs_read(int fd, void *buf, size_t count)
     n=count;
   ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, n);
   set_open_offset(fd,get_open_offset(fd)+n);
-  return n;
-  /*if(file_table[fd].open_offset >= fs_filesz(fd))
+  return n;*/
+  if(file_table[fd].open_offset >= fs_filesz(fd))
 		return 0;
   if (file_table[fd].open_offset + count > fs_filesz(fd))
 		count = file_table[fd].size - file_table[fd].open_offset;
@@ -66,7 +66,7 @@ ssize_t fs_read(int fd, void *buf, size_t count)
 
   file_table[fd].open_offset+=count;
   Log("fs_read return ,open_offset=%d",file_table[fd].open_offset);
-  return count;*/
+  return count;
 }
 
 ssize_t fs_filesz(int fd)
@@ -111,7 +111,7 @@ off_t fs_lseek(int fd, off_t offset, int whence)
   }
   else if(whence==SEEK_END)
   {
-    set_open_offset(fd,fs_filesz(fd)+offset);
+    file_table[fd].open_offset = fs_filesz(fd) + offset;
 		return file_table[fd].open_offset;
   }
   panic("lseek panic\n");
