@@ -51,7 +51,9 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 	
 	t1 = (item.gd.offset_15_0 & 0xFFFF)
 	| ((item.gd.offset_31_16 & 0xFFFF) << 16);
-	rtl_j(t1);
+
+	cpu.eip=t1;
+  decoding.is_jmp=1;
 	
 	// 保存eflags cs 返回地址
 	rtl_push(&cpu.EFLAGS_,4);
