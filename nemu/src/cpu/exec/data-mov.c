@@ -12,14 +12,26 @@ make_EHelper(push_reg) {
   */
   //printf("opcode=%08X\n",decoding.opcode);
   //if(decoding.opcode)
-  rtl_push(&id_dest->val,4);
+  if(id_dest->width == 1){
+	  	uint8_t utmp = id_dest->val;
+		int8_t temp = utmp;
+		id_dest->val = temp;
+	}
+  rtl_push(&id_dest->val,4);  
+
   print_asm_template1(push);
 }
 
 
 make_EHelper(pop_reg) {
   rtl_pop(&t0);
-  operand_write(id_dest,&t0);
+	if(id_dest->width == 1){
+		uint8_t utemp = t0;
+		int8_t temp = utemp; 
+		id_dest->val = temp;
+	}
+	else 
+	  id_dest->val = t0;
   print_asm_template1(pop);
 }
 
