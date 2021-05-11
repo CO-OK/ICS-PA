@@ -60,7 +60,7 @@ int main() {
   unsigned long bench_score = 0;
   int pass = 1;
 
-  /*for (int i = 0; i < ARR_SIZE(benchmarks); i ++) {
+  for (int i = 0; i < ARR_SIZE(benchmarks); i ++) {
     Benchmark *bench = &benchmarks[i];
     current = bench;
     setting = &bench->settings[SETTING];
@@ -93,8 +93,8 @@ int main() {
 
       bench_score += cur;
     }
-  }*/
-  int i=7;
+  }
+  /*int i=7;
   Benchmark *bench = &benchmarks[i];
     current = bench;
     setting = &bench->settings[SETTING];
@@ -126,7 +126,7 @@ int main() {
       }
 
       bench_score += cur;
-    }
+    }*/
   bench_score /= sizeof(benchmarks) / sizeof(benchmarks[0]);
   
   printk("==================================================\n");
