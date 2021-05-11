@@ -5,7 +5,7 @@ make_EHelper(mov) {
   print_asm_template2(mov);
 }
 
-make_EHelper(push_reg) {
+make_EHelper(push) {
   //printf("val=%08X\n",id_dest->val);
   /*
     push imm8 指令需要对立即数进行符号扩展
@@ -23,7 +23,7 @@ make_EHelper(push_reg) {
 }
 
 
-make_EHelper(pop_reg) {
+make_EHelper(pop) {
   rtl_pop(&t0);
 	if(id_dest->width == 1){
 		uint8_t utemp = t0;

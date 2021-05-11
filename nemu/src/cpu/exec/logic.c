@@ -61,7 +61,7 @@ make_EHelper(and) {
   print_asm_template2(and);
 }
 
-make_EHelper(xor_31) {
+make_EHelper(xor) {
   //printf("hit\n");
   rtl_xor(&t1, &id_dest->val, &id_src->val);
 	rtl_unset_OF(&eflag_OF);
