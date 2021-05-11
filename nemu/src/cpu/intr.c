@@ -30,6 +30,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   decoding.seq_eip=final;
   decoding.is_jmp=1;
   decoding.jmp_eip=final;
+  cpu.eip=final;
   Log("in raise_intr eax=%08X,ebx=%08X,ecx=%08X,edx=%08X",cpu.eax,cpu.ebx,cpu.ecx,cpu.edx);
   Log("in raise_intr esp=%08X ebp=%08X",cpu.esp,cpu.ebp);
   Log("finish raise_intr with NO=%X target addr = %08X",NO,final);
