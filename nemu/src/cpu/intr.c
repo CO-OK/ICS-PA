@@ -17,7 +17,8 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   //printf("size=%ld\n",sizeof(GateDesc));
   //printf("hit raise_intr\n");
   //printf("in raise eip=%08X\n",cpu.eip);
-  Log("hit raise_intr with NO=%X",NO);
+
+  /*Log("hit raise_intr with NO=%X",NO);
   rtl_push(&cpu.EFLAGS_,4);
   rtl_push(&cpu.cs,4);
   rtl_push(&ret_addr,4);
@@ -35,7 +36,30 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   decoding.jmp_eip=final;
   Log("in raise_intr eax=%08X,ebx=%08X,ecx=%08X,edx=%08X",cpu.eax,cpu.ebx,cpu.ecx,cpu.edx);
   Log("in raise_intr esp=%08X ebp=%08X",cpu.esp,cpu.ebx);
-  Log("finish raise_intr with NO=%X target addr = %08X",NO,final);
+  Log("finish raise_intr with NO=%X target addr = %08X",NO,final);*/
+
+  union {
+		GateDesc gd;
+		struct { uint32_t lo, hi; };
+	} item;
+	vaddr_t addr;
+	
+	addr = 8 * NO + cpu.idtr_base;
+	item.lo = vaddr_read(addr, 4);
+	item.hi = vaddr_read(addr + 4, 4);
+
+	
+	t1 = (item.gd.offset_15_0 & 0xFFFF)
+	| ((item.gd.offset_31_16 & 0xFFFF) << 16);
+	rtl_j(t1);
+	
+	// 保存eflags cs 返回地址
+	rtl_push(&cpu.EFLAGS_,4);
+	t0 = cpu.cs;
+	rtl_push(&t0,4);
+	rtl_push(&ret_addr,4);
+	
+	//cpu.eflags.IF = 0;
 
   //printf("cpu.jmpeip=%08X\n",decoding.jmp_eip);
   //printf("raise esp %08X\n",cpu.esp);
