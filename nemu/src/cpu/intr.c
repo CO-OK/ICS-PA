@@ -14,7 +14,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
     将门描述符中的 offset 域组合成目标地址
     跳转到目标地址
   */
-  //Log("hit raise_intr with NO=%X",NO);
+  Log("hit raise_intr with NO=%X",NO);
   rtl_push(&cpu.EFLAGS_,4);
   rtl_push(&cpu.cs,4);
   rtl_push(&ret_addr,4);
@@ -30,10 +30,10 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   //decoding.seq_eip=final;
   decoding.is_jmp=1;
   decoding.jmp_eip=final;
-  //cpu.eip=final;
-  //Log("in raise_intr eax=%08X,ebx=%08X,ecx=%08X,edx=%08X",cpu.eax,cpu.ebx,cpu.ecx,cpu.edx);
-  //Log("in raise_intr esp=%08X ebp=%08X",cpu.esp,cpu.ebp);
-  //Log("finish raise_intr with NO=%X target addr = %08X",NO,final);
+  cpu.eip=final;
+  Log("in raise_intr eax=%08X,ebx=%08X,ecx=%08X,edx=%08X",cpu.eax,cpu.ebx,cpu.ecx,cpu.edx);
+  Log("in raise_intr esp=%08X ebp=%08X",cpu.esp,cpu.ebp);
+  Log("finish raise_intr with NO=%X target addr = %08X",NO,final);
 
 }
 
