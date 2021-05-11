@@ -38,6 +38,7 @@ make_EHelper(pop) {
 
 make_EHelper(pusha) {
   //TODO();
+  Log("begin pusha esp=%08X",cpu.esp);
   rtlreg_t temp=cpu.esp;
   rtl_push(&cpu.eax,4);
   rtl_push(&cpu.ecx,4);
