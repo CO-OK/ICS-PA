@@ -37,7 +37,7 @@ make_EHelper(int) {
   //printf("in int : eip=%08X,seq_eip=%08X\n",cpu.eip,decoding.seq_eip);
   Log("touch int %X",id_dest->imm);
   raise_intr(id_dest->val,decoding.seq_eip);
-  Log("int %X finished",id_dest->imm);
+  Log("int %X finished , retAddr=%08X",id_dest->imm,decoding.seq_eip);
   print_asm("int %s", id_dest->str);
   //printf("seqeip=%08X\n",decoding.seq_eip);
 
