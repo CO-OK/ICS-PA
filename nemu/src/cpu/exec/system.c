@@ -5,14 +5,9 @@ void diff_test_skip_nemu();
 
 make_EHelper(lidt) {
   //TODO();
-  t1 = id_dest->val;
-  rtl_lm(&t0,&t1,2);
-  cpu.idtr_limit=t0;
-  t1=id_dest->val+2;
-  rtl_lm(&t0,&t1,4);
-  cpu.idtr_base=t0;
-  /*cpu.idtr_limit=vaddr_read(id_dest->addr,2);
-  cpu.idtr_base=vaddr_read(id_dest->addr+2,4);*/
+  
+  cpu.idtr_limit=vaddr_read(id_dest->addr,2);
+  cpu.idtr_base=vaddr_read(id_dest->addr+2,4);
   Log("load lidt limit=%08X,base=%08X",cpu.idtr_limit,cpu.idtr_base);
   //printf("hit lidt\n");
   //printf("destaddr=%08X\n",id_dest->addr);
