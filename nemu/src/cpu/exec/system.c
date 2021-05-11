@@ -41,9 +41,7 @@ make_EHelper(int) {
   print_asm("int %s", id_dest->str);
   //printf("seqeip=%08X\n",decoding.seq_eip);
 
-#ifdef DIFF_TEST
-  diff_test_skip_nemu();
-#endif
+
 }
 
 make_EHelper(iret) {
