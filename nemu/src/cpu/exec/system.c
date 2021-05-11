@@ -36,7 +36,7 @@ make_EHelper(int) {
   //printf("int num=%08X,eip=%08X\n",id_dest->imm,cpu.eip);
   //printf("in int : eip=%08X,seq_eip=%08X\n",cpu.eip,decoding.seq_eip);
   Log("touch int %X",id_dest->imm);
-  raise_intr(id_dest->imm&0xff,decoding.seq_eip);
+  raise_intr(id_dest->val,decoding.seq_eip);
   Log("int %X finished",id_dest->imm);
   print_asm("int %s", id_dest->str);
   //printf("seqeip=%08X\n",decoding.seq_eip);
@@ -55,12 +55,21 @@ make_EHelper(iret) {
   rtl_pop(&cpu.cs);
   rtl_pop(&cpu.EFLAGS_);*/
   //printf("iret esp %08X\n",cpu.esp);
-  rtl_pop(&cpu.eip);
+  rtl_pop(&decoding.jmp_eip);
+	rtl_j(decoding.jmp_eip);
+	
+	rtl_pop(&t0);
+	cpu.cs = t0 & 0xffff;
+	rtl_pop(&cpu.EFLAGS_);
+
+
+
+  /*rtl_pop(&cpu.eip);
   rtl_pop(&cpu.cs);
   rtl_pop(&t0);
   memcpy(&cpu.EFLAGS_,&t0,sizeof(cpu.EFLAGS_));
   decoding.jmp_eip=1;
-  decoding.seq_eip=cpu.eip;
+  decoding.seq_eip=cpu.eip;*/
   Log("finish iret eip=%08X",cpu.eip);
   print_asm("iret");
 }
