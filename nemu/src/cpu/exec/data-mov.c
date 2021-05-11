@@ -38,6 +38,7 @@ make_EHelper(pop) {
 
 make_EHelper(pusha) {
   //TODO();
+  Log("begin puhsa esp=%08X",cpu.esp);
   rtlreg_t temp=cpu.esp;
   rtl_push(&cpu.eax,4);
   rtl_push(&cpu.ecx,4);
@@ -47,7 +48,7 @@ make_EHelper(pusha) {
   rtl_push(&cpu.ebp,4);
   rtl_push(&cpu.esi,4);
   rtl_push(&cpu.edi,4);
-  Log("finish pusha");
+  Log("finish pusha esp=%08X",cpu.esp);
   //printf("pusha %08X\n",cpu.esp);
   print_asm("pusha");
 }
@@ -55,6 +56,7 @@ make_EHelper(pusha) {
 make_EHelper(popa) {
   //TODO();
   //printf("before popa %08X\n",cpu.esp);
+  Log("begin popa esp=%08X",cpu.esp);
   rtlreg_t temp;
   rtl_pop(&cpu.edi);
   rtl_pop(&cpu.esi);
@@ -64,7 +66,7 @@ make_EHelper(popa) {
   rtl_pop(&cpu.edx);
   rtl_pop(&cpu.ecx);
   rtl_pop(&cpu.eax);
-  Log("finish popa");
+  Log("finish popa esp=%08X",cpu.esp);
   //printf("popa %08X\n",cpu.esp);
   print_asm("popa");
 }
