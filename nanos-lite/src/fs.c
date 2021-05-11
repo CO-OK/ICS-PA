@@ -121,35 +121,12 @@ off_t fs_lseek(int fd, off_t offset, int whence)
 
 ssize_t fs_write(int fd, void *buf, size_t count)
 {
-  //Log("write %d count=%d\n",fd,count);
-  //printf("fd=%d\ncount=%d\n",fd,count);
-  assert(fd>=0&&fd<NR_FILES);
-  if(fd<3)
-  {
-    Log("wrong fd");
-    return 0;
-  }
-  int n= fs_filesz(fd)-file_table[fd].open_offset;
-  if(n>count)
-    n=count;
-  ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, n);
-  set_open_offset(fd,get_open_offset(fd)+n);
-  return n;
-  /*if(fd==1||fd==2)
-  {
-    return sys_write(fd,buf,count);
-  }
-  else
-  {
-    Log("write %d count=%d\n",fd,count);
-    if (file_table[fd].open_offset + count > fs_filesz(fd))
-		  count = file_table[fd].size - file_table[fd].open_offset;
-    ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
-    file_table[fd].open_offset+=count;
-    return count;
-  }
-  panic("panic an write\n");
-  return -1;*/
+  Log("write %d name=%s count=%d\n",fd,file_table[fd].name,count);
+  if (file_table[fd].open_offset + count > fs_filesz(fd))
+		count = file_table[fd].size - file_table[fd].open_offset;
+  ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
+  file_table[fd].open_offset+=count;
+  return count;
 }
 void set_open_offset(int fd , off_t n)
 {

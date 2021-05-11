@@ -96,11 +96,6 @@ int sys_write(int fd, void *buf, size_t count)
   }
   else
   {
-    if(fd<3)
-    {
-      Log("write wrong file");
-      return -1;
-    }
     return fs_write(fd,buf,count);
   }
   panic("panic at sys_write\n");
