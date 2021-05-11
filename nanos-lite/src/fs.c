@@ -86,18 +86,18 @@ off_t fs_lseek(int fd, off_t offset, int whence)
   Log("lseek %d offset=%d,whence=%d,filesize=%d\n",fd,offset,whence,file_table[fd].size);
   if(whence==SEEK_CUR)
   {
-    /*if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
+    if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
     {
 				file_table[fd].open_offset += offset;
 				return file_table[fd].open_offset;
-			}*/
+		}
 
-    set_open_offset(fd,get_open_offset(fd)+offset);
+    //set_open_offset(fd,get_open_offset(fd)+offset);
     return file_table[fd].open_offset;
   }
   else if(whence==SEEK_SET)
   {
-    /*if (offset >= 0 && offset <= fs_filesz(fd)) 
+    if (offset >= 0 && offset <= fs_filesz(fd)) 
     {
 			file_table[fd].open_offset =  offset;
 			return offset;
@@ -105,8 +105,8 @@ off_t fs_lseek(int fd, off_t offset, int whence)
     else if(offset > fs_filesz(fd))
     {
       file_table[fd].open_offset=offset;
-    }*/
-    set_open_offset(fd,offset);
+    }
+    //set_open_offset(fd,offset);
     return file_table[fd].open_offset;
   }
   else if(whence==SEEK_END)
