@@ -32,6 +32,7 @@ make_EHelper(pop_reg) {
 	}
 	else 
 	  id_dest->val = t0;
+  operand_write(id_dest, &id_dest->val);
   print_asm_template1(pop);
 }
 
