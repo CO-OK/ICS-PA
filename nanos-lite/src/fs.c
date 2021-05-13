@@ -42,9 +42,9 @@ int fs_open(char*path,int flags,int mode)
   panic("panic at fs_open\n");
   return -1;
 }
-int fs_read(int fd, void *buf, size_t count)
+ssize_t fs_read(int fd, void *buf, size_t count)
 {
-  Log("read %s fileSize=%d count=%d,open_offset=%d\n",file_table[fd].name,file_table[fd].size,count,file_table[fd].open_offset,((uint32_t*)(buf)));
+  //Log("read %s fileSize=%d count=%d,open_offset=%d\n",file_table[fd].name,file_table[fd].size,count,file_table[fd].open_offset,((uint32_t*)(buf)));
   if(file_table[fd].open_offset >= fs_filesz(fd))
 		return 0;
   if (file_table[fd].open_offset + count > fs_filesz(fd))
@@ -53,7 +53,7 @@ int fs_read(int fd, void *buf, size_t count)
   ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
 
   file_table[fd].open_offset+=count;
-  Log("fs_read return ,open_offset=%d",file_table[fd].open_offset);
+  //Log("fs_read return ,open_offset=%d",file_table[fd].open_offset);
   return count;
 }
 
@@ -65,13 +65,13 @@ ssize_t fs_filesz(int fd)
 int fs_close(int fd)
 {
   assert(fd>=0&&fd<NR_FILES);
-  Log("close %s\n",file_table[fd].name);
+  //Log("close %s\n",file_table[fd].name);
   //file_table[fd].open_offset=0;
   return 0;
 }
 off_t fs_lseek(int fd, off_t offset, int whence)
 {
-  Log("lseek %d offset=%d,whence=%d,filesize=%d\n",fd,offset,whence,file_table[fd].size);
+  //Log("lseek %d offset=%d,whence=%d,filesize=%d\n",fd,offset,whence,file_table[fd].size);
   if(whence==SEEK_CUR)
   {
     if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
@@ -107,9 +107,9 @@ off_t fs_lseek(int fd, off_t offset, int whence)
   //printf("hit out");
 }
 
-int fs_write(int fd, void *buf, size_t count)
+ssize_t fs_write(int fd, void *buf, size_t count)
 {
-  Log("write %d name=%s count=%d\n",fd,file_table[fd].name,count);
+  //Log("write %d name=%s count=%d\n",fd,file_table[fd].name,count);
   if (file_table[fd].open_offset + count > fs_filesz(fd))
 		count = file_table[fd].size - file_table[fd].open_offset;
   ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
