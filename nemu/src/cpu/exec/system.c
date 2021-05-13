@@ -31,9 +31,9 @@ make_EHelper(mov_cr2r) {
 }
 
 make_EHelper(int) {
-  //Log("touch int %X",id_dest->imm);
+  Log("touch int %X",id_dest->imm);
   raise_intr(id_dest->val,decoding.seq_eip);
-  //Log("int %X finished , retAddr=%08X",id_dest->imm,decoding.seq_eip);
+  Log("int %X finished , retAddr=%08X",id_dest->imm,decoding.seq_eip);
   print_asm("int %s", id_dest->str);
 
 }
