@@ -46,7 +46,8 @@ void *_sbrk(intptr_t increment){
 	}
 	else 
   {
-		  return (void *)-1;
+    panic("222");
+		return (void *)-1;
 	}
 }
 
