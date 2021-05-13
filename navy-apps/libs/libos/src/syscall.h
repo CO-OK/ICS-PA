@@ -24,11 +24,11 @@ enum {
   SYS_gettimeofday
 };
 int sys_none();
-int sys_write(int fd, void *buf, size_t count);
+ssize_t sys_write(int fd, void *buf, size_t count);
 int sys_sbrk(intptr_t increment);
 void sys_exit(int arg);
 int sys_open(const char* file);
-int sys_read(int fd , void*buf,size_t len);
+ssize_t sys_read(int fd , void*buf,size_t len);
 int sys_close(int fd);
 int sys_lseek(int fd , off_t offset,int whence);
 

@@ -79,7 +79,7 @@ int sys_sbrk(intptr_t increment)
   return 0;
 }
 
-int sys_write(int fd, void *buf, size_t count)
+ssize_t sys_write(int fd, void *buf, size_t count)
 {
   //printf("write %d count=%d\n",fd,count);
   //printf("fd=%d\ncount=%d\n",fd,count);
@@ -106,7 +106,7 @@ int sys_open(const char* file)
 {
   return fs_open(file,0,0);
 }
-int sys_read(int fd , void*buf,size_t len)
+ssize_t sys_read(int fd , void*buf,size_t len)
 {
   return fs_read(fd,buf,len);
 }

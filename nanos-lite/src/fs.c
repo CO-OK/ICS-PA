@@ -66,7 +66,7 @@ int fs_close(int fd)
 {
   
   Log("close %s",file_table[fd].name);
-  file_table[fd].open_offset=0;
+  //file_table[fd].open_offset=0;
   return 0;
 }
 off_t fs_lseek(int fd, off_t offset, int whence)
@@ -118,14 +118,14 @@ ssize_t fs_write(int fd, void *buf, size_t count)
 }
 void set_open_offset(int fd , off_t n)
 {
-  assert(fd>=0&&fd<NR_FILES);
-  assert(n>=0);
+  //assert(fd>=0&&fd<NR_FILES);
+  //assert(n>=0);
   if(n>file_table[fd].size)
     n=file_table[fd].size;
   file_table[fd].open_offset=n;
 }
 off_t get_open_offset(int fd)
 {
-  assert(fd>=0&&fd<NR_FILES);
+  //assert(fd>=0&&fd<NR_FILES);
   return file_table[fd].open_offset;
 }
