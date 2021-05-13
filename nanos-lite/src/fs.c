@@ -33,7 +33,7 @@ int fs_open(char*path,int flags,int mode)
   {
     if(strcmp(file_table[i].name,path)==0)
     {
-      Log("open %s,fd=%d\n",path,i);
+      //Log("open %s,fd=%d\n",path,i);
       return i;
       //printf("out\n");
     }
