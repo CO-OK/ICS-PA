@@ -15,24 +15,6 @@ make_EHelper(test) {
     otherwise, each bit is 0. The result of the operation is discarded and only
     the flags are modified.
   */
-  //opcode 是 85时只有32位和16位两种情况
-  /*get_mr_value(&t1,id_dest);
-  get_mr_value(&t2,id_src);
-  if(id_dest->width==2)
-  {
-    t0 = (short)t1 & (short)t2;
-  }
-  else if(id_dest->width==4)
-  {
-    t0 = t1 & t2;
-  }
-  else
-  {
-    t0 = (unsigned char)t1 & (unsigned)t2;
-  }*/
-  /*
-    OF = 0, CF = 0; SF, ZF, and PF as described in Appendix C
-  */
   rtl_and(&t0,&id_dest->val,&id_src->val);
   rtl_unset_CF(&eflag_CF);
   rtl_unset_OF(&eflag_OF);
@@ -42,10 +24,6 @@ make_EHelper(test) {
 
 make_EHelper(and) {
   //TODO();
-  /*
-    注:应该是与源操作数的宽度相同,在执行  and    $0xfffffff0,%esp（这个指令应该是不合理的）时
-    解码后目的操作数是4位，原操作数是2位，应该需要扩展
-  */
   //printf("destval=%08X\nsrcval=%08X\n",id_dest->val,id_src->val);
   rtl_and(&t0,&id_dest->val,&id_src->val);
   operand_write(id_dest,&t0);
