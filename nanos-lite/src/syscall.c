@@ -85,12 +85,10 @@ int sys_write(int fd, void *buf, size_t count)
   //printf("fd=%d\ncount=%d\n",fd,count);
   if(fd==1||fd==2)
   {
-    char c;
     for(int i=0;i<count;i++)
     {
-      //memcpy(&c,buf+i,1);
       _putc(((char*)buf)[i]);
-      //printf("char=%c\n",buf[i]);
+      printf("char=%c\n",((char*)buf)[i]);
     }
     return count;
   }
