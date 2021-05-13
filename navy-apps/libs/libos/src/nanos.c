@@ -36,21 +36,17 @@ int _write(int fd, void *buf, size_t count){
 }
 
 void *_sbrk(intptr_t increment){
-  
+  Assert(0);
 	intptr_t prev = program_break;
-	if (_syscall_(SYS_brk, prev + increment, 0, 0) == 0) {
-		//panic("222");
-    
+	if (_syscall_(SYS_brk, prev + increment, 0, 0) == 0) { 
 		program_break += increment;	
 		return (void*)prev;
 	}
 	else 
   {
-    //panic("222");
     assert(0);
 		return (void *)-1;
 	}
-  //panic("222");
 }
 
 int _read(int fd, void *buf, size_t count) {
