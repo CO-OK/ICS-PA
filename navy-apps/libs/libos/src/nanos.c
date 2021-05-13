@@ -49,6 +49,7 @@ void *_sbrk(intptr_t increment){
     panic("222");
 		return (void *)-1;
 	}
+  panic("222");
 }
 
 int _read(int fd, void *buf, size_t count) {
