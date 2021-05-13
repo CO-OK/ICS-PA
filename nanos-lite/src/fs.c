@@ -79,8 +79,6 @@ off_t fs_lseek(int fd, off_t offset, int whence)
 				file_table[fd].open_offset += offset;
 				return file_table[fd].open_offset;
 		}
-
-    //set_open_offset(fd,get_open_offset(fd)+offset);
     return file_table[fd].open_offset;
   }
   else if(whence==SEEK_SET)
@@ -94,7 +92,7 @@ off_t fs_lseek(int fd, off_t offset, int whence)
     {
       file_table[fd].open_offset=offset;
     }
-    //set_open_offset(fd,offset);
+
     return file_table[fd].open_offset;
   }
   else if(whence==SEEK_END)
@@ -118,14 +116,12 @@ ssize_t fs_write(int fd, void *buf, size_t count)
 }
 void set_open_offset(int fd , off_t n)
 {
-  //assert(fd>=0&&fd<NR_FILES);
-  //assert(n>=0);
   if(n>file_table[fd].size)
     n=file_table[fd].size;
   file_table[fd].open_offset=n;
 }
 off_t get_open_offset(int fd)
 {
-  //assert(fd>=0&&fd<NR_FILES);
+ 
   return file_table[fd].open_offset;
 }
