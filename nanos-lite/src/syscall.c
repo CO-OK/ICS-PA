@@ -79,7 +79,7 @@ int sys_sbrk(intptr_t increment)
   return 0;
 }
 
-ssize_t sys_write(int fd, void *buf, size_t count)
+int sys_write(int fd, void *buf, size_t count)
 {
   //printf("write %d count=%d\n",fd,count);
   //printf("fd=%d\ncount=%d\n",fd,count);
@@ -88,8 +88,8 @@ ssize_t sys_write(int fd, void *buf, size_t count)
     char c;
     for(int i=0;i<count;i++)
     {
-      memcpy(&c,buf+i,1);
-      _putc(c);
+      //memcpy(&c,buf+i,1);
+      _putc(((char*)buf)[i]);
       //printf("char=%c\n",buf[i]);
     }
     return count;
@@ -106,7 +106,7 @@ int sys_open(const char* file)
 {
   return fs_open(file,0,0);
 }
-ssize_t sys_read(int fd , void*buf,size_t len)
+int sys_read(int fd , void*buf,size_t len)
 {
   return fs_read(fd,buf,len);
 }
