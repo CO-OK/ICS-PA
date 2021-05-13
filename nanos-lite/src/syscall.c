@@ -16,11 +16,11 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case SYS_write:{
-      /*printf("hit write\n");
+      printf("hit write\n");
       printf("arg1=%08X\n",SYSCALL_ARG1(r));
       printf("arg2=%08X\n",SYSCALL_ARG2(r));
       printf("arg3=%08X\n",SYSCALL_ARG3(r));
-      printf("arg4=%08X\n",SYSCALL_ARG4(r));*/
+      printf("arg4=%08X\n",SYSCALL_ARG4(r));
       //return 0;
       //printf("hit write\n");
       SYSCALL_ARG1(r)=sys_write(SYSCALL_ARG4(r),(void*)SYSCALL_ARG2(r),SYSCALL_ARG3(r));

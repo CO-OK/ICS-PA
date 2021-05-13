@@ -40,12 +40,12 @@ void *_sbrk(intptr_t increment){
 	if (_syscall_(SYS_brk, prev + increment, 0, 0) == 0) 
   { 
 		program_break += increment;	
-		return prev;
+		return (void*)prev;
 	}
 	else 
   {
     assert(0);
-		return -1;
+		return (void*)-1;
 	}
 }
 
