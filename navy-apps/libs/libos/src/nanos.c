@@ -9,7 +9,8 @@
 
 // TODO: discuss with syscall interface
 #ifndef __ISA_NATIVE__
-
+extern char _end;
+intptr_t program_break = (intptr_t)&_end;
 // FIXME: this is temporary
 
 int _syscall_(int type, uintptr_t a0, uintptr_t a1, uintptr_t a2){
@@ -35,8 +36,7 @@ int _write(int fd, void *buf, size_t count){
 }
 
 void *_sbrk(intptr_t increment){
-  extern char _end;
-  intptr_t program_break = (intptr_t)&_end;
+  
 	intptr_t prev = program_break;
 	if (_syscall_(SYS_brk, prev + increment, 0, 0) == 0) {
 		// panic("222");
