@@ -16,11 +16,11 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case SYS_write:{
-      printf("hit write\n");
+      /*printf("hit write\n");
       printf("arg1=%08X\n",SYSCALL_ARG1(r));
       printf("arg2=%08X\n",SYSCALL_ARG2(r));
       printf("arg3=%08X\n",SYSCALL_ARG3(r));
-      printf("arg4=%08X\n",SYSCALL_ARG4(r));
+      printf("arg4=%08X\n",SYSCALL_ARG4(r));*/
       //return 0;
       //printf("hit write\n");
       SYSCALL_ARG1(r)=sys_write(SYSCALL_ARG4(r),(void*)SYSCALL_ARG2(r),SYSCALL_ARG3(r));
@@ -81,7 +81,7 @@ int sys_sbrk(intptr_t increment)
 int sys_write(int fd, void *buf, size_t count)
 {
   //printf("write %d count=%d\n",fd,count);
-  //printf("fd=%d\ncount=%d\n",fd,count);
+  printf("fd=%d\ncount=%d\n",fd,count);
   if(fd==1||fd==2)
   {
     for(int i=0;i<count;i++)
