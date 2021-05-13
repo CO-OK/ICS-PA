@@ -64,9 +64,9 @@ ssize_t fs_filesz(int fd)
 }
 int fs_close(int fd)
 {
-  assert(fd>=0&&fd<NR_FILES);
-  Log("close %s\n",file_table[fd].name);
-  //file_table[fd].open_offset=0;
+  
+  Log("close %s",file_table[fd].name);
+  file_table[fd].open_offset=0;
   return 0;
 }
 off_t fs_lseek(int fd, off_t offset, int whence)
