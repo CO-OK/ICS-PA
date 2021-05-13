@@ -75,7 +75,6 @@ void sys_exit(int arg)
 
 int sys_sbrk(intptr_t increment)
 {
-  
   return 0;
 }
 
@@ -88,7 +87,7 @@ int sys_write(int fd, void *buf, size_t count)
     for(int i=0;i<count;i++)
     {
       _putc(((char*)buf)[i]);
-      printf("char=%c\n",((char*)buf)[i]);
+      printf("line\n");
     }
     return count;
   }
