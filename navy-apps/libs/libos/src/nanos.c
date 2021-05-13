@@ -39,17 +39,17 @@ void *_sbrk(intptr_t increment){
   
 	intptr_t prev = program_break;
 	if (_syscall_(SYS_brk, prev + increment, 0, 0) == 0) {
-		panic("222");
+		//panic("222");
     
 		program_break += increment;	
 		return (void*)prev;
 	}
 	else 
   {
-    panic("222");
+    //panic("222");
 		return (void *)-1;
 	}
-  panic("222");
+  //panic("222");
 }
 
 int _read(int fd, void *buf, size_t count) {
