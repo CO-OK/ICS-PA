@@ -39,7 +39,7 @@ void *_sbrk(intptr_t increment){
   
 	intptr_t prev = program_break;
 	if (_syscall_(SYS_brk, prev + increment, 0, 0) == 0) {
-		// panic("222");
+		panic("222");
     
 		program_break += increment;	
 		return (void*)prev;
