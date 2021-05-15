@@ -65,6 +65,7 @@ ssize_t fs_read(int fd, void *buf, size_t count)
     }
     case FD_EVENTS:{
       count=events_read(buf, count);
+      break;
     }
     default :{
       if(file_table[fd].open_offset >= fs_filesz(fd))
