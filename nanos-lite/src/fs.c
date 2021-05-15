@@ -100,7 +100,7 @@ off_t fs_lseek(int fd, off_t offset, int whence)
 				file_table[fd].open_offset += offset;
 				return file_table[fd].open_offset;
 		}
-    return file_table[fd].open_offset;
+  
   }
   else if(whence==SEEK_SET)
   {
@@ -109,19 +109,19 @@ off_t fs_lseek(int fd, off_t offset, int whence)
 			file_table[fd].open_offset =  offset;
 			return offset;
 		}
-    else if(offset > fs_filesz(fd))
+    /*else if(offset > fs_filesz(fd))
     {
       file_table[fd].open_offset=offset;
-    }
+    }*/
 
-    return file_table[fd].open_offset;
+    //return file_table[fd].open_offset;
   }
   else if(whence==SEEK_END)
   {
     file_table[fd].open_offset = fs_filesz(fd) + offset;
 		return file_table[fd].open_offset;
   }
-  panic("lseek panic\n");
+  //panic("lseek panic\n");
   return -1;
   //printf("hit out");
 }
