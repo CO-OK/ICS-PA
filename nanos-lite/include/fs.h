@@ -6,7 +6,7 @@
 enum {SEEK_SET, SEEK_CUR, SEEK_END};
 
 ssize_t fs_write(int fd, void *buf, size_t count);
-int fs_open(char*path,int flags,int mode);
+int fs_open(const char*path,int flags,int mode);
 ssize_t fs_read(int fd, void *buf, size_t count);
 int fs_close(int fd);
 ssize_t fs_filesz(int fd);

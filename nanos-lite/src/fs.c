@@ -25,7 +25,7 @@ static Finfo file_table[] __attribute__((used)) = {
 void init_fs() {
   // TODO: initialize the size of /dev/fb
 }
-int fs_open(char*path,int flags,int mode)
+int fs_open(const char*path,int flags,int mode)
 {
   //printf("name=%s\n",path);
   
