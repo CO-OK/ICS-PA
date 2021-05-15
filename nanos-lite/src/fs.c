@@ -123,7 +123,6 @@ off_t fs_lseek(int fd, off_t offset, int whence)
   }
   //panic("lseek panic\n");
   return -1;
-  //printf("hit out");
 }
 
 ssize_t fs_write(int fd, void *buf, size_t count)
