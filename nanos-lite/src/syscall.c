@@ -88,7 +88,7 @@ int sys_write(int fd, void *buf, size_t count)
     for(int i=0;i<count;i++)
     {
       _putc(((char*)buf)[i]);
-      //Log("write ch");
+      Log("write ch");
     }
     return count;
   }
