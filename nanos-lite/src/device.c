@@ -7,9 +7,27 @@ static const char *keyname[256] __attribute__((used)) = {
   [_KEY_NONE] = "NONE",
   _KEYS(NAME)
 };
-
+extern int _read_key();
+unsigned long _uptime();
 size_t events_read(void *buf, size_t len) {
-  return 0;
+  int key = _read_key();
+  unsigned long time =  _uptime();
+  if(key!=_KEY_NONE)//优先处理按键
+  {
+    //通码的值为断码+0x8000
+    //下面的代码摘自 keytest
+    bool down = false;
+    if ((key & 0x8000)!=0) {
+      key ^= 0x8000;
+      down = true;
+    }
+    sprintf(buf,"Get key: %d %s %s\n", key, keyname[key], down ? "down" : "up");
+  }
+  else
+  {
+    sprintf(buf,"time=%ld\n",time);
+  }
+  return strlen(buf);
 }
 
 static char dispinfo[128] __attribute__((used));

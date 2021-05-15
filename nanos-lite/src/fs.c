@@ -10,6 +10,7 @@ typedef struct {
 enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB, FD_EVENTS, FD_DISPINFO, FD_NORMAL};
 extern void fb_write(const void *buf, off_t offset, size_t count);
 void dispinfo_read(void *buf, off_t offset, size_t len);
+size_t events_read(void *buf, size_t len);
 extern int screen_width();
 
 extern int screen_height();
@@ -61,6 +62,9 @@ ssize_t fs_read(int fd, void *buf, size_t count)
 			dispinfo_read(buf, file_table[fd].open_offset, count);
 			file_table[fd].open_offset += count;	
 			break;
+    }
+    case FD_EVENTS:{
+      count=events_read(buf, count);
     }
     default :{
       if(file_table[fd].open_offset >= fs_filesz(fd))
