@@ -109,6 +109,7 @@ off_t fs_lseek(int fd, off_t offset, int whence)
     {
       Log("lseek in SET");
 			file_table[fd].open_offset =  offset;
+      Log("open offset=%d",offset);
 			return offset;
 		}
     /*else if(offset > fs_filesz(fd))
