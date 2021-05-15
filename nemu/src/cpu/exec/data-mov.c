@@ -124,3 +124,8 @@ make_EHelper(lea) {
   operand_write(id_dest, &t2);
   print_asm_template2(lea);
 }
+make_EHelper(movsb)
+{
+  printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
+  
+}
