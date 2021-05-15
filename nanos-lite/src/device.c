@@ -29,7 +29,7 @@ void fb_write(const void *buf, off_t offset, size_t count) {
       row = offset / screen_width();
       int total = count/4;
       Log("int fb_write col=%d,row=%d,total=%d",col,row,total);
-      if(screen_width()-col>=total)//不止1行
+      if(screen_width()-col<total)//不止1行
       {
         Log("more than one line");
         //先写第一行
