@@ -24,6 +24,7 @@ void fb_write(const void *buf, off_t offset, size_t count) {
       offset /= 4;
       col = offset % screen_width();
       row = offset / screen_width();
+      Log("int fb_write col=%d,row=%d",col,row);
       int total = count/4;
       if(screen_width()-col>=total)//不止1行
       {
