@@ -266,6 +266,7 @@ void difftest_step(uint32_t eip) {
       printf("detect diff at eflags_OF,\tr.OF=%d\tcpu.OF=%d\n",OF,e_OF);
     }*/
   if (diff) {
+    printf("r.ds=%04X\n",r.ds);
     nemu_state = NEMU_STOP;
   }
 }
