@@ -147,7 +147,7 @@ ssize_t fs_write(int fd, void *buf, size_t count)
       //每一个元素占 4 个字节
       if (file_table[fd].open_offset + count > fs_filesz(fd))
 		    count = file_table[fd].size - file_table[fd].open_offset;
-      /*int row, col;
+      int row, col;
       int offset = file_table[FD_FB].open_offset;
       offset /= 4;
       col = offset % _screen.width;
@@ -168,8 +168,8 @@ ssize_t fs_write(int fd, void *buf, size_t count)
       else
       {
         _draw_rect((uint32_t *)buf, col, row, total, 1);
-      }*/
-      fb_write(buf,file_table[fd].open_offset,count);
+      }
+      //fb_write(buf,file_table[fd].open_offset,count);
       file_table[fd].open_offset+=count;
       Log("break");
       break;
