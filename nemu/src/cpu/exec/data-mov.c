@@ -127,7 +127,7 @@ make_EHelper(lea) {
 make_EHelper(movsb)
 {
   //movsb  %ds:(%esi),%es:(%edi)
-  printf("dest=%08X\nsrc=%08X\n",id_dest->val,id_src->val);
-  uint32_t data = vaddr_read(cpu.esi,4);
-  vaddr_write(cpu.edi,4,data);
+  cpu.edi++;
+  cpu.esi++;
+  //print_asm(movsb);
 }
