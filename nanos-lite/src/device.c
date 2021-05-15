@@ -12,7 +12,7 @@ unsigned long _uptime();
 size_t events_read(void *buf, size_t len) {
   int key = _read_key();
 	bool down = false;
-	//Log("key = %d\n", key);
+	Log("key = %d\n", key);
 	if (key & 0x8000) {
 		key ^= 0x8000;
 		down = true;
