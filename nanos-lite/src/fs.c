@@ -109,7 +109,7 @@ off_t fs_lseek(int fd, off_t offset, int whence)
     {
       Log("lseek in SET");
 			file_table[fd].open_offset =  offset;
-      Log("open offset=%d",offset);
+      //Log("open offset=%d",offset);
 			return offset;
 		}
     /*else if(offset > fs_filesz(fd))
@@ -131,7 +131,7 @@ off_t fs_lseek(int fd, off_t offset, int whence)
 
 ssize_t fs_write(int fd, void *buf, size_t count)
 {
-  
+  Log("write %d name=%s count=%d",fd,file_table[fd].name,count);
   switch(fd){
     case FD_STDOUT:
     case FD_STDERR:{
@@ -180,7 +180,7 @@ ssize_t fs_write(int fd, void *buf, size_t count)
       file_table[fd].open_offset+=count;
     }
   }
-  Log("write %d name=%s count=%d",fd,file_table[fd].name,count);
+  
   
   return count;
 }
