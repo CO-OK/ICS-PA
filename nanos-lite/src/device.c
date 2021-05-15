@@ -30,6 +30,7 @@ void fb_write(const void *buf, off_t offset, size_t count) {
       Log("int fb_write col=%d,row=%d,total=%d",col,row,total);
       if(screen_width()-col>=total)//不止1行
       {
+        Log("more than one line");
         //先写第一行
         _draw_rect((uint32_t *)buf, col, row, screen_width()-col, 1);
         total=total-(screen_width()-col);
