@@ -18,7 +18,8 @@ void dispinfo_read(void *buf, off_t offset, size_t len) {
   strncpy(buf, dispinfo + offset, len);
 	return len;
 }
-
+extern int screen_width();
+extern int screen_height();
 void fb_write(const void *buf, off_t offset, size_t count) {
       Log("in  fb_write offset=%d,count=%d",offset,count);
       Log("width=%d,height=%d",screen_width(),screen_height());
