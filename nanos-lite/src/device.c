@@ -21,17 +21,17 @@ void dispinfo_read(void *buf, off_t offset, size_t len) {
 extern int screen_width();
 extern int screen_height();
 void fb_write(const void *buf, off_t offset, size_t count) {
-      Log("in  fb_write offset=%d,count=%d",offset,count);
-      Log("width=%d,height=%d",screen_width(),screen_height());
+      //Log("in  fb_write offset=%d,count=%d",offset,count);
+      //Log("width=%d,height=%d",screen_width(),screen_height());
       int row, col;
       offset /= 4;
       col = offset % screen_width();
       row = offset / screen_width();
       int total = count/4;
-      Log("int fb_write col=%d,row=%d,total=%d",col,row,total);
+      //Log("int fb_write col=%d,row=%d,total=%d",col,row,total);
       if(screen_width()-col<total)//不止1行
       {
-        Log("more than one line");
+        //Log("more than one line");
         //先写第一行
         _draw_rect((uint32_t *)buf, col, row, screen_width()-col, 1);
         total=total-(screen_width()-col);
