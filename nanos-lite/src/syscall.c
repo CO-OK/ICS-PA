@@ -85,7 +85,7 @@ int sys_write(int fd, void *buf, size_t count)
   //printf("fd=%d\ncount=%d\n",fd,count);
   if(fd==1||fd==2)
   {
-    Log("write ch");
+    //Log("write ch");
     for(int i=0;i<count;i++)
     {
       _putc(((char*)buf)[i]);
