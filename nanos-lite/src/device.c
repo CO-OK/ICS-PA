@@ -20,12 +20,13 @@ void dispinfo_read(void *buf, off_t offset, size_t len) {
 }
 
 void fb_write(const void *buf, off_t offset, size_t count) {
+      Log("in  fb_write offset=%d,count=%d",offset,count);
       int row, col;
       offset /= 4;
       col = offset % screen_width();
       row = offset / screen_width();
-      Log("int fb_write col=%d,row=%d",col,row);
       int total = count/4;
+      Log("int fb_write col=%d,row=%d,total=%d",col,row,total);
       if(screen_width()-col>=total)//不止1行
       {
         //先写第一行
