@@ -9,6 +9,7 @@ typedef struct {
 
 enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB, FD_EVENTS, FD_DISPINFO, FD_NORMAL};
 extern void fb_write(const void *buf, off_t offset, size_t count);
+void dispinfo_read(void *buf, off_t offset, size_t len);
 extern int screen_width();
 
 extern int screen_height();
@@ -51,15 +52,29 @@ int fs_open(const char*path,int flags,int mode)
 ssize_t fs_read(int fd, void *buf, size_t count)
 {
   Log("read %s fileSize=%d count=%d,open_offset=%d",file_table[fd].name,file_table[fd].size,count,file_table[fd].open_offset,((uint32_t*)(buf)));
-  if(file_table[fd].open_offset >= fs_filesz(fd))
-		return 0;
-  if (file_table[fd].open_offset + count > fs_filesz(fd))
-		count = file_table[fd].size - file_table[fd].open_offset;
+  switch(fd){
+    case FD_DISPINFO:{
+      if(file_table[fd].open_offset >= fs_filesz(fd))
+        return 0;
+      if (file_table[fd].open_offset + count > fs_filesz(fd))
+        count = file_table[fd].size - file_table[fd].open_offset;
+			dispinfo_read(buf, file_table[fd].open_offset, count);
+			file_table[fd].open_offset += count;	
+			break;
+    }
+    default :{
+      if(file_table[fd].open_offset >= fs_filesz(fd))
+        return 0;
+      if (file_table[fd].open_offset + count > fs_filesz(fd))
+        count = file_table[fd].size - file_table[fd].open_offset;
 
-  ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
+      ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
 
-  file_table[fd].open_offset+=count;
-  Log("fs_read return ,open_offset=%d",file_table[fd].open_offset);
+      file_table[fd].open_offset+=count;
+    }
+  }
+  
+  //Log("fs_read return ,open_offset=%d",file_table[fd].open_offset);
   return count;
 }
 
