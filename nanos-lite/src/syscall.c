@@ -37,7 +37,7 @@ _RegSet* do_syscall(_RegSet *r) {
       break;
     }
     case SYS_brk:{
-      Log("brk");
+      //Log("brk");
       SYSCALL_ARG1(r)=sys_sbrk(SYSCALL_ARG4(r));
       break;
     }
