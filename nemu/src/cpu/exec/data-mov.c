@@ -127,8 +127,8 @@ make_EHelper(lea) {
 make_EHelper(movsb)
 {
   //movsb  %ds:(%esi),%es:(%edi)
-  t0=cpu.edi&0x0000ffff;
-  t1=cpu.esi&0x0000ffff;
+  t0=cpu.edi;
+  t1=cpu.esi;
   uint32_t data = vaddr_read(t1,1);
   vaddr_write(t0,1,data);
   cpu.edi++;
