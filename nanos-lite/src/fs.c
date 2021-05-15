@@ -97,8 +97,9 @@ off_t fs_lseek(int fd, off_t offset, int whence)
   {
     if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
     {
-				file_table[fd].open_offset += offset;
-				return file_table[fd].open_offset;
+      Log("lseek in CUR");
+			file_table[fd].open_offset += offset;
+			return file_table[fd].open_offset;
 		}
   
   }
@@ -106,6 +107,7 @@ off_t fs_lseek(int fd, off_t offset, int whence)
   {
     if (offset >= 0 && offset <= fs_filesz(fd)) 
     {
+      Log("lseek in SET");
 			file_table[fd].open_offset =  offset;
 			return offset;
 		}
@@ -118,6 +120,7 @@ off_t fs_lseek(int fd, off_t offset, int whence)
   }
   else if(whence==SEEK_END)
   {
+    Log("lseek in END");
     file_table[fd].open_offset = fs_filesz(fd) + offset;
 		return file_table[fd].open_offset;
   }
