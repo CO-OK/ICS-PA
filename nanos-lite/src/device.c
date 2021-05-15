@@ -10,6 +10,7 @@ static const char *keyname[256] __attribute__((used)) = {
 extern int _read_key();
 unsigned long _uptime();
 size_t events_read(void *buf, size_t len) {
+  Log("in events_read");
   int key = _read_key();
   unsigned long time =  _uptime();
   if(key!=_KEY_NONE)//优先处理按键
