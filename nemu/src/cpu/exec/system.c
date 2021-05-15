@@ -31,22 +31,16 @@ make_EHelper(mov_cr2r) {
 }
 
 make_EHelper(int) {
-  Log("touch int %X",id_dest->imm);
+  //Log("touch int %X",id_dest->imm);
   raise_intr(id_dest->val,decoding.seq_eip);
-  Log("int %X finished , retAddr=%08X",id_dest->imm,decoding.seq_eip);
+  //Log("int %X finished , retAddr=%08X",id_dest->imm,decoding.seq_eip);
   print_asm("int %s", id_dest->str);
 
 }
 
 make_EHelper(iret) {
   //TODO();
-  /*decoding.is_jmp=1;
-  //printf("before iret esp %08X\n",cpu.esp);
-  rtl_pop(&decoding.jmp_eip);
-  //printf("$eip=%08X\n",decoding.jmp_eip);
-  rtl_pop(&cpu.cs);
-  rtl_pop(&cpu.EFLAGS_);*/
-  //printf("iret esp %08X\n",cpu.esp);
+
   rtl_pop(&decoding.jmp_eip);
 	//cpu.eip=decoding.jmp_eip;
 	decoding.is_jmp=1;
@@ -54,13 +48,7 @@ make_EHelper(iret) {
 	cpu.cs = t0 & 0xffff;
 	rtl_pop(&cpu.EFLAGS_);
 
-  /*rtl_pop(&cpu.eip);
-  rtl_pop(&cpu.cs);
-  rtl_pop(&t0);
-  memcpy(&cpu.EFLAGS_,&t0,sizeof(cpu.EFLAGS_));
-  decoding.jmp_eip=1;
-  decoding.seq_eip=cpu.eip;*/
-  Log("finish iret eip=%08X",cpu.eip);
+  //Log("finish iret eip=%08X",cpu.eip);
   print_asm("iret");
 }
 
