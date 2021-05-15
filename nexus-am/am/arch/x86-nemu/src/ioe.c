@@ -20,6 +20,15 @@ _Screen _screen = {
   .height = 300,
 };
 
+int screen_width()
+{
+  return _screen.width;
+}
+int screen_height()
+{
+  return _screen.height;
+}
+
 extern void* memcpy(void *, const void *, int);
 
 void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {

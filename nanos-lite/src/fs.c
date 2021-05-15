@@ -9,6 +9,10 @@ typedef struct {
 
 enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB, FD_EVENTS, FD_DISPINFO, FD_NORMAL};
 extern void fb_write(const void *buf, off_t offset, size_t count);
+extern int screen_width();
+
+extern int screen_height();
+
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
   {"stdin (note that this is not the actual stdin)", 0, 0},
@@ -24,8 +28,8 @@ static Finfo file_table[] __attribute__((used)) = {
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb
-  file_table[FD_FB].size=_screen.width*_screen.height*4;
-  Log("init_fs with size=%d",_screen.height*_screen.width*4);
+  file_table[FD_FB].size=screen_width()*screen_height()*4;
+  Log("init_fs with size=%d",screen_height()*screen_width()*4);
 }
 int fs_open(const char*path,int flags,int mode)
 {
