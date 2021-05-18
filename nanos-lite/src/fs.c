@@ -41,7 +41,7 @@ int fs_open(const char*path,int flags,int mode)
   {
     if(strcmp(file_table[i].name,path)==0)
     {
-      Log("open %s,fd=%d",path,i);
+      //Log("open %s,fd=%d",path,i);
       return i;
       //printf("out\n");
     }
@@ -97,7 +97,7 @@ int fs_close(int fd)
 }
 off_t fs_lseek(int fd, off_t offset, int whence)
 {
-  Log("lseek %d offset=%d,whence=%d,filesize=%d",fd,offset,whence,file_table[fd].size);
+  //Log("lseek %d offset=%d,whence=%d,filesize=%d",fd,offset,whence,file_table[fd].size);
   if(whence==SEEK_CUR)
   {
     if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
@@ -136,7 +136,7 @@ off_t fs_lseek(int fd, off_t offset, int whence)
 
 ssize_t fs_write(int fd, void *buf, size_t count)
 {
-  Log("write %d name=%s count=%d",fd,file_table[fd].name,count);
+  //Log("write %d name=%s count=%d",fd,file_table[fd].name,count);
   switch(fd){
     case FD_STDOUT:
     case FD_STDERR:{
