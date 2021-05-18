@@ -28,7 +28,7 @@ size_t events_read(void *buf, size_t len) {
   {
     sprintf(buf,"time=%u\n",mytime);
   }
-  Log("return buf len=%d",strlen(buf));
+  //Log("return buf len=%d",strlen(buf));
   return strlen(buf);
 }
 
