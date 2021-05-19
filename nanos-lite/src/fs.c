@@ -52,7 +52,7 @@ int fs_open(const char*path,int flags,int mode)
 }
 ssize_t fs_read(int fd, void *buf, size_t count)
 {
-  Log("read %s fd=%d fileSize=%d count=%d,open_offset=%d",file_table[fd].name,fd,file_table[fd].size,count,file_table[fd].open_offset,((uint32_t*)(buf)));
+  //Log("read %s fd=%d fileSize=%d count=%d,open_offset=%d",file_table[fd].name,fd,file_table[fd].size,count,file_table[fd].open_offset,((uint32_t*)(buf)));
   switch(fd){
     case FD_DISPINFO:{
       if(file_table[fd].open_offset >= fs_filesz(fd))
@@ -79,7 +79,7 @@ ssize_t fs_read(int fd, void *buf, size_t count)
     }
   }
   
-  Log("fs_read return ,open_offset=%d",file_table[fd].open_offset);
+  //Log("fs_read return ,open_offset=%d",file_table[fd].open_offset);
   return count;
 }
 
