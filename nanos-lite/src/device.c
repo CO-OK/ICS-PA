@@ -22,11 +22,12 @@ size_t events_read(void *buf, size_t len) {
       key ^= 0x8000;
       down = true;
     }
-    sprintf(buf,"Get key: %d %s %s\n", key, keyname[key], down ? "down" : "up");
+    sprintf(buf, "%s %s\n", down ? "kd" : "ku", keyname[key]);
+    //sprintf(buf,"Get key: %d %s %s\n", key, keyname[key], down ? "down" : "up");
   }
   else
   {
-    sprintf(buf,"time=%u\n",mytime);
+    sprintf(buf,"t %d\n",mytime);
   }
   //Log("return buf len=%d",strlen(buf));
   return strlen(buf);
