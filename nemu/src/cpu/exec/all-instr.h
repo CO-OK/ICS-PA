@@ -53,5 +53,6 @@ make_EHelper(das);
 make_EHelper(imul3);
 make_EHelper(rol);
 make_EHelper(movsb);
+make_EHelper(cwtl);
 //make_EHelper(xchg_b);
 //make_EHelper(push_Ev);
