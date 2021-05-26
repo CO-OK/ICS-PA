@@ -8,7 +8,6 @@
 
 struct _RegSet {
   //uintptr_t esi, ebx, eax, eip, edx, error_code, eflags, ecx, cs, esp, edi, ebp;
-
   uintptr_t edi;
   uintptr_t esi;
   uintptr_t ebp;

@@ -18,14 +18,10 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   rtl_push(&cpu.EFLAGS_,4);
   rtl_push(&cpu.cs,4);
   rtl_push(&ret_addr,4);
-
   vaddr_t gate_enrty= cpu.idtr_base + sizeof(GateDesc)*NO;
-
   uint32_t off15to0 = vaddr_read(gate_enrty,2);
   uint32_t off16to32 = vaddr_read(gate_enrty+6,8);
-
   vaddr_t final=(off16to32<<16)+(0x0000ffff&off15to0);
-
   decoding.seq_eip=final;
   decoding.is_jmp=1;
   decoding.jmp_eip=final;

@@ -81,15 +81,12 @@ int sys_sbrk(intptr_t increment)
 
 int sys_write(int fd, void *buf, size_t count)
 {
-  //printf("write %d count=%d\n",fd,count);
-  //printf("fd=%d\ncount=%d\n",fd,count);
   if(fd==1||fd==2)
   {
     //Log("write ch");
     for(int i=0;i<count;i++)
     {
       _putc(((char*)buf)[i]);
-      //
     }
     return count;
   }

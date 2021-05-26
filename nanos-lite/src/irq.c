@@ -10,7 +10,6 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
     }
     default: panic("Unhandled event ID = %d", e.event);
   }
-
   return NULL;
 }
 

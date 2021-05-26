@@ -35,19 +35,14 @@ make_EHelper(int) {
   raise_intr(id_dest->val,decoding.seq_eip);
   //Log("int %X finished , retAddr=%08X",id_dest->imm,decoding.seq_eip);
   print_asm("int %s", id_dest->str);
-
 }
 
 make_EHelper(iret) {
-  //TODO();
-
   rtl_pop(&decoding.jmp_eip);
-	//cpu.eip=decoding.jmp_eip;
 	decoding.is_jmp=1;
 	rtl_pop(&t0);
 	cpu.cs = t0 & 0xffff;
 	rtl_pop(&cpu.EFLAGS_);
-
   //Log("finish iret eip=%08X",cpu.eip);
   print_asm("iret");
 }
