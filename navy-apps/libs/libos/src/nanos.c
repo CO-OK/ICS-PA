@@ -33,7 +33,7 @@ int _write(int fd, void *buf, size_t count){
 }
 
 void *_sbrk(intptr_t increment){
-	intptr_t prev = program_break;
+	/*intptr_t prev = program_break;
 	if (_syscall_(SYS_brk,prev+increment,0,0)==0) 
   { 
 		program_break += increment;	
@@ -43,7 +43,8 @@ void *_sbrk(intptr_t increment){
   {
     assert(0);
 		return (void*)-1;
-	}
+	}*/
+  return -1;
 }
 
 int _read(int fd, void *buf, size_t count) {
