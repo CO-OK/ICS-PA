@@ -36,7 +36,6 @@ void *_sbrk(intptr_t increment){
 	intptr_t prev = program_break;
 	if (_syscall_(SYS_brk,prev+increment,0,0)==0) 
   { 
-    Log("666");
 		program_break += increment;	
 		return (void*)prev;
 	}
@@ -45,7 +44,6 @@ void *_sbrk(intptr_t increment){
     assert(0);
 		return (void*)-1;
 	}
-  return -1;
 }
 
 int _read(int fd, void *buf, size_t count) {
