@@ -72,13 +72,10 @@ ssize_t fs_read(int fd, void *buf, size_t count)
         return 0;
       if (file_table[fd].open_offset + count > fs_filesz(fd))
         count = file_table[fd].size - file_table[fd].open_offset;
-
       ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, count);
-
       file_table[fd].open_offset+=count;
     }
   }
-  
   //Log("fs_read return ,open_offset=%d",file_table[fd].open_offset);
   return count;
 }
@@ -90,9 +87,7 @@ ssize_t fs_filesz(int fd)
 }
 int fs_close(int fd)
 {
-  
   //Log("close %s",file_table[fd].name);
-  //file_table[fd].open_offset=0;
   return 0;
 }
 off_t fs_lseek(int fd, off_t offset, int whence)
@@ -102,35 +97,24 @@ off_t fs_lseek(int fd, off_t offset, int whence)
   {
     if ((offset + file_table[fd].open_offset >= 0) && (offset + file_table[fd].open_offset <= fs_filesz(fd))) 
     {
-      //Log("lseek in CUR");
 			file_table[fd].open_offset += offset;
 			return file_table[fd].open_offset;
 		}
-  
   }
   else if(whence==SEEK_SET)
   {
     if (offset >= 0 && offset <= fs_filesz(fd)) 
     {
-      //Log("lseek in SET");
 			file_table[fd].open_offset =  offset;
-      //Log("open offset=%d",offset);
 			return offset;
 		}
-    /*else if(offset > fs_filesz(fd))
-    {
-      file_table[fd].open_offset=offset;
-    }*/
-
-    //return file_table[fd].open_offset;
   }
   else if(whence==SEEK_END)
   {
-    //Log("lseek in END");
     file_table[fd].open_offset = fs_filesz(fd) + offset;
 		return file_table[fd].open_offset;
   }
-  //panic("lseek panic\n");
+  panic("lseek panic\n");
   return -1;
 }
 
