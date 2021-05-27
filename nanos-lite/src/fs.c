@@ -12,7 +12,6 @@ extern void fb_write(const void *buf, off_t offset, size_t count);
 void dispinfo_read(void *buf, off_t offset, size_t len);
 size_t events_read(void *buf, size_t len);
 extern int screen_width();
-
 extern int screen_height();
 
 /* This is the information about all files in disk. */
@@ -127,7 +126,6 @@ ssize_t fs_write(int fd, void *buf, size_t count)
       for(int i=0;i<count;i++)
       {
         _putc(((char*)buf)[i]);
-        //
       }
       break;
     }
