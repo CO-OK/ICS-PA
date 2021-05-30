@@ -53,11 +53,13 @@ void vaddr_write(vaddr_t addr, int len, uint32_t data) {
   
   if((addr & 0xfff) + len > 0x1000)//cross boundary
   {
-    Log("corss boundary write");
+    Log("corss boundary write addr=%08X,len=%d",addr,len);
     int first_total = 0x1000-(addr&0xfff);//第一个页中写的字节数
     int second_total = len - first_total;//第二个页中写的字节数
+    //Log("fisrt_total=%d,second_total=%d",first_total,second_total);
     uint32_t first_paddr = page_translate(addr);
     uint32_t second_paddr = page_translate(addr+first_total);
+    //Log("fisrt addr=%08X,second addr=%08X",first_paddr,second_paddr);
     uint32_t first = paddr_read(first_paddr,first_total);
     uint32_t second = paddr_read(second_paddr,second_total);
     paddr_write(first_paddr,first_total,data&(~0u>>((4-first_total)<<3)));
