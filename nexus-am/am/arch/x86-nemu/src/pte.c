@@ -73,6 +73,7 @@ void _map(_Protect *p, void *va, void *pa) {
   uintptr_t page_table_base = *(page_dir_base+page_dir_index);
   if(!(page_table_base&PTE_P))//不存在二级页表
   {
+    printf("not exist\n");
     *(page_dir_base+page_dir_index) = (uintptr_t)palloc_f() | PTE_P;
   }
   page_table_base = *(page_dir_base+page_dir_index);
