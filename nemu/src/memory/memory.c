@@ -60,8 +60,6 @@ void vaddr_write(vaddr_t addr, int len, uint32_t data) {
     uint32_t first_paddr = page_translate(addr);
     uint32_t second_paddr = page_translate(addr+first_total);
     //Log("fisrt addr=%08X,second addr=%08X",first_paddr,second_paddr);
-    uint32_t first = paddr_read(first_paddr,first_total);
-    uint32_t second = paddr_read(second_paddr,second_total);
     paddr_write(first_paddr,first_total,data&(~0u>>((4-first_total)*8)));
     paddr_write(second_paddr,second_total,data>>((4-second_total)*8));
     return;
