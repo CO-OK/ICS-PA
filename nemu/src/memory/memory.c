@@ -26,7 +26,7 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 }
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
-  if(0)//cross boundary
+  /*if(0)
   {
     assert(0);
   }
@@ -34,11 +34,13 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
   {
     paddr_t paddr = page_translate(addr) ;
     return paddr_read(paddr, len);
-  }
+  }*/
+  return paddr_read(addr,len);
   
 }
 
 void vaddr_write(vaddr_t addr, int len, uint32_t data) {
+  /*
   if(0)//cross boundary
   {
     assert(0);
@@ -48,5 +50,6 @@ void vaddr_write(vaddr_t addr, int len, uint32_t data) {
     paddr_t paddr = page_translate(addr) ;
     paddr_write(paddr, len, data);
   }
-  
+  */
+  paddr_write(addr, len, data);
 }
