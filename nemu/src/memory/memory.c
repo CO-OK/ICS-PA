@@ -67,14 +67,14 @@ paddr_t page_translate(vaddr_t addr){
     Log("page_dir_entry=%08X",page_dir_entry);
     assert(page_dir_entry & 1);
 
-    uint32_t page_table_entry = paddr_read(page_dir_entry + (page_index<<2), 4);
+    uint32_t page_table_entry = paddr_read((page_dir_entry& 0xfffff000) + (page_index<<2), 4);
     Log("page_table_enrty=%08X",page_table_entry);
     if(!(page_table_entry & 1)){
       printf("%x\n", cpu.eip);
     }
     assert(page_table_entry & 1);
     Log("final addr=%08X",page_table_entry + offset);
-    return page_table_entry + offset;
+    return (page_table_entry& 0xfffff000) + offset;
   }
   return addr;
 }
