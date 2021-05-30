@@ -67,20 +67,8 @@ void _switch(_Protect *p) {
 
 void _map(_Protect *p, void *va, void *pa) {
   //功能是将虚拟地址空间 p 中的虚拟地址 va 映射到物理地址 pa
-  uint32_t* ptr = (uint32_t*)p->ptr;
-  uint32_t shift = (uintptr_t)va >> 22;
-  uintptr_t tr = ptr[shift];
-  if (tr == kpdirs[shift]) 
-  {
-      PTE *uptable = (PTE*)(palloc_f());
-      ptr[shift] = (uintptr_t)uptable | PTE_P;
-  }
-  tr = ptr[shift];
-  shift = (((uintptr_t)va) & 0x003ff000) >> 12;
-  uint32_t* pgr = (uint32_t*)(tr & 0xfffff000);
-  pgr[shift] = (uintptr_t)pa | PTE_P;
-  //return 0;
-  /*uint32_t* page_dir_base = (uint32_t*)p->ptr;
+  
+  uint32_t* page_dir_base = (uint32_t*)p->ptr;
   uint32_t page_dir_index = (uintptr_t)va >> 22;
   uintptr_t page_table_base = *(page_dir_base+page_dir_index);
   if(!(page_table_base&PTE_P))//不存在二级页表
@@ -90,7 +78,6 @@ void _map(_Protect *p, void *va, void *pa) {
   page_table_base = *(page_dir_base+page_dir_index);
   uint32_t page_table_index = (((uintptr_t)va) & 0x003ff000) >> 12;
   *((uint32_t*)(page_table_base & 0xfffff000)+page_table_index)=(uintptr_t)pa | PTE_P;
-  return 0;*/
 }
 
 void _unmap(_Protect *p, void *va) {
