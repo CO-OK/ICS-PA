@@ -63,16 +63,16 @@ paddr_t page_translate(vaddr_t addr){
     Log("CR0 PG has set with 1");
     uint32_t page_dir_base = cpu.CR3>>12;
     Log("CR3=%08X,CR3t=%08X",cpu.CR3,cpu.CR3>>12);
-    uint32_t page_dir_entry = paddr_read((page_dir_base << 12) + dir_index , 4);
+    uint32_t page_dir_entry = paddr_read((page_dir_base << 12) + (dir_index<<2) , 4);
     Log("page_dir_entry=%08X",page_dir_entry);
     assert(page_dir_entry & 1);
 
-    uint32_t page_table_entry = paddr_read(page_dir_entry + page_index, 4);
+    uint32_t page_table_entry = paddr_read(page_dir_entry + (page_index<<2), 4);
     Log("page_table_enrty=%08X",page_table_entry);
     if(!(page_table_entry & 1)){
       printf("%x\n", cpu.eip);
     }
-    //assert(page_table_entry & 1);
+    assert(page_table_entry & 1);
     Log("final addr=%08X",page_table_entry + offset);
     return page_table_entry + offset;
   }
