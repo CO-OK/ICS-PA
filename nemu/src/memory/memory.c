@@ -26,9 +26,15 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 }
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
-  if(0)
+  if((addr & 0xfff) + len > 0x1000)//超过了一个页
   {
-    assert(0);
+    int first_total = 0x1000-(addr&0xfff);//第一个页中读取的字节数
+    int second_total = len - first_total;//第二个页中读取的字节数
+    uint32_t first_paddr = page_translate(addr);
+    uint32_t second_paddr = page_translate(addr+first_total);
+    uint32_t first = paddr_read(first_paddr,first_total);
+    uint32_t second = paddr_read(second_paddr,second_total);
+    return (second<<(second_total*8))| first;
   }
   else
   {
@@ -41,9 +47,17 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
 
 void vaddr_write(vaddr_t addr, int len, uint32_t data) {
   
-  if(0)//cross boundary
+  if((addr & 0xfff) + len > 0x1000)//cross boundary
   {
-    assert(0);
+    int first_total = 0x1000-(addr&0xfff);//第一个页中写的字节数
+    int second_total = len - first_total;//第二个页中写的字节数
+    uint32_t first_paddr = page_translate(addr);
+    uint32_t second_paddr = page_translate(addr+first_total);
+    uint32_t first = paddr_read(first_paddr,first_total);
+    uint32_t second = paddr_read(second_paddr,second_total);
+    paddr_write(first_paddr,first_total,data&(~0u>>((4-first_total)<<3)));
+    paddr_write(second_paddr,second_total,data>>((4-second_total)<<3));
+    return;
   }
   else
   {
