@@ -1,5 +1,5 @@
 #include "common.h"
-
+#include "proc.h"
 /* Uncomment these macros to enable corresponding functionality. */
 #define HAS_ASYE
 #define HAS_PTE
