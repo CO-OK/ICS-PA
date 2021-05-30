@@ -88,7 +88,7 @@ uint32_t get_page_index(uint32_t vaddr)
 }
 uint32_t get_page_offset(uint32_t vaddr)
 {
-  return vaddr&&0xfff;
+  return vaddr&0xfff;
 }
 int get_CR0_PG(uint32_t CR0)
 {
