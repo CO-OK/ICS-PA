@@ -9,6 +9,7 @@ uintptr_t loader(_Protect *as, const char *filename) {
   size_t page_num = file_size / PGSIZE;
   if(file_size%PGSIZE!=0)
     page_num++;
+  Log("file_size=%d,num of page=%d",file_size,page_num);
   void* pa;
   void* va = (void*)DEFAULT_ENTRY;
   for(int i = 0; i < page_num; i ++)
