@@ -37,6 +37,7 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
     Log("fisrt addr=%08X,second addr=%08X",first_paddr,second_paddr);
     uint32_t first = paddr_read(first_paddr,first_total);
     uint32_t second = paddr_read(second_paddr,second_total);
+    Log("final addr=%08X",(second<<(second_total*8))| first);
     return (second<<(second_total*8))| first;
   }
   else
