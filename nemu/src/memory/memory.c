@@ -28,6 +28,7 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 uint32_t vaddr_read(vaddr_t addr, int len) {
   if((addr & 0xfff) + len > 0x1000)//超过了一个页
   {
+    Log("corss boundary");
     int first_total = 0x1000-(addr&0xfff);//第一个页中读取的字节数
     int second_total = len - first_total;//第二个页中读取的字节数
     uint32_t first_paddr = page_translate(addr);
@@ -49,6 +50,7 @@ void vaddr_write(vaddr_t addr, int len, uint32_t data) {
   
   if((addr & 0xfff) + len > 0x1000)//cross boundary
   {
+    Log("corss boundary");
     int first_total = 0x1000-(addr&0xfff);//第一个页中写的字节数
     int second_total = len - first_total;//第二个页中写的字节数
     uint32_t first_paddr = page_translate(addr);
