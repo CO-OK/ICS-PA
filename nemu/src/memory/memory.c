@@ -57,23 +57,23 @@ paddr_t page_translate(vaddr_t addr){
   paddr_t dir_index = get_dir_index(addr) ;
   paddr_t page_index = get_page_index(addr);
   paddr_t offset = get_page_offset(addr);
-  Log("vaddr=%08X,dir_index=%08X,page_index=%08X,offset=%08X",addr,dir_index,page_index,offset);
+  //Log("vaddr=%08X,dir_index=%08X,page_index=%08X,offset=%08X",addr,dir_index,page_index,offset);
   if(get_CR0_PG(cpu.CR0)==1)
   {
-    Log("CR0 PG has set with 1");
+    //Log("CR0 PG has set with 1");
     uint32_t page_dir_base = cpu.CR3>>12;
-    Log("CR3=%08X,CR3t=%08X",cpu.CR3,cpu.CR3>>12);
+    //Log("CR3=%08X,CR3t=%08X",cpu.CR3,cpu.CR3>>12);
     uint32_t page_dir_entry = paddr_read((page_dir_base << 12) + (dir_index<<2) , 4);
-    Log("page_dir_entry=%08X",page_dir_entry);
+    //Log("page_dir_entry=%08X",page_dir_entry);
     assert(page_dir_entry & 1);
 
     uint32_t page_table_entry = paddr_read((page_dir_entry& 0xfffff000) + (page_index<<2), 4);
-    Log("page_table_enrty=%08X",page_table_entry);
+    //Log("page_table_enrty=%08X",page_table_entry);
     if(!(page_table_entry & 1)){
       printf("%x\n", cpu.eip);
     }
     assert(page_table_entry & 1);
-    Log("final addr=%08X",page_table_entry + offset);
+    //Log("final addr=%08X",page_table_entry + offset);
     return (page_table_entry& 0xfffff000) + offset;
   }
   return addr;
