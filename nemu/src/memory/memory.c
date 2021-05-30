@@ -26,7 +26,7 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 }
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
-  /*if(0)
+  if(0)
   {
     assert(0);
   }
@@ -34,13 +34,13 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
   {
     paddr_t paddr = page_translate(addr) ;
     return paddr_read(paddr, len);
-  }*/
-  return paddr_read(addr,len);
+  }
+  //return paddr_read(addr,len);
   
 }
 
 void vaddr_write(vaddr_t addr, int len, uint32_t data) {
-  /*
+  
   if(0)//cross boundary
   {
     assert(0);
@@ -50,6 +50,46 @@ void vaddr_write(vaddr_t addr, int len, uint32_t data) {
     paddr_t paddr = page_translate(addr) ;
     paddr_write(paddr, len, data);
   }
-  */
-  paddr_write(addr, len, data);
+  //paddr_write(addr, len, data);
+}
+
+paddr_t page_translate(vaddr_t addr){
+  paddr_t dir_index = get_dir_index(addr) ;
+  paddr_t page_index = get_page_index(addr);
+  paddr_t offset = get_page_offset(addr);
+  if(get_CR0_PG(cpu.CR0)==1)
+  {
+    Log("CR0 PG has set with 1");
+    uint32_t page_dir_base = cpu.CR3>>12;
+    uint32_t page_dir_entry = paddr_read((page_dir_base << 12) + dir_index , 4);
+    Log("page_dir_entry=%08X",page_dir_entry);
+    assert(page_dir_entry & 1);
+
+    uint32_t page_table_entry = paddr_read(page_dir_entry + page_index, 4);
+    Log("page_table_enrty=%08X",page_table_entry);
+    if(!(page_table_entry & 1)){
+      printf("%x\n", cpu.eip);
+    }
+    assert(page_table_entry & 1);
+    Log("final addr=%08X",page_table_entry + offset);
+    return page_table_entry + offset;
+  }
+  return addr;
+}
+uint32_t get_dir_index(uint32_t vaddr)
+{
+  return (vaddr>>22)&0x3ff;
+}
+uint32_t get_page_index(uint32_t vaddr)
+{
+  return (vaddr>>12)&0x3ff;
+}
+uint32_t get_page_offset(uint32_t vaddr)
+{
+  return vaddr&&0xfff;
+}
+int get_CR0_PG(uint32_t CR0)
+{
+  //CR0的第一位是PG
+  return CR0>>31;
 }

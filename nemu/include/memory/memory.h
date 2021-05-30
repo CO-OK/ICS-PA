@@ -14,5 +14,9 @@ uint32_t vaddr_read(vaddr_t, int);
 uint32_t paddr_read(paddr_t, int);
 void vaddr_write(vaddr_t, int, uint32_t);
 void paddr_write(paddr_t, int, uint32_t);
-
+paddr_t page_translate(paddr_t addr);
+uint32_t get_dir_index(uint32_t vaddr);
+uint32_t get_page_index(uint32_t vaddr);
+uint32_t get_page_offset(uint32_t vaddr);
+int get_CR0_PG(uint32_t CR0);
 #endif
