@@ -3,6 +3,7 @@
 //#define DEFAULT_ENTRY ((void *)0x4000000)
 #define DEFAULT_ENTRY ((void *)0x8048000)
 uintptr_t loader(_Protect *as, const char *filename) {
+  Log("open file");
   int fd = fs_open(filename,0,0);
   size_t file_size = fs_filesz(fd);
   size_t page_num = file_size / PGSIZE;
