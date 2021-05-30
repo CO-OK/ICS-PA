@@ -57,6 +57,7 @@ paddr_t page_translate(vaddr_t addr){
   paddr_t dir_index = get_dir_index(addr) ;
   paddr_t page_index = get_page_index(addr);
   paddr_t offset = get_page_offset(addr);
+  Log("vaddr=%08X,dir_index=%08X,page_index=%08X,offset=%08X",addr,dir_index,page_index,offset);
   if(get_CR0_PG(cpu.CR0)==1)
   {
     Log("CR0 PG has set with 1");
