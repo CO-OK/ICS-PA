@@ -1,6 +1,7 @@
 #include "common.h"
 #include "syscall.h"
 #include "fs.h"
+#include "memory.h"
 
 _RegSet* do_syscall(_RegSet *r) {
   uintptr_t a[4];
@@ -62,7 +63,7 @@ void sys_exit(int arg)
 
 int sys_sbrk(intptr_t increment)
 {
-  return 0;
+  return mm_brk(increment);
 }
 
 int sys_write(int fd, void *buf, size_t count)
