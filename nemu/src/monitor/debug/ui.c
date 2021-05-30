@@ -111,6 +111,7 @@ static int cmd_info(char * args){
     printf("eflags:%08X\t\t",cpu.EFLAGS_);
     printf("CF:%d\tZF:%d\tSF:%d\tIF:%d\tOF:%d\n",e_CF,e_ZF,e_SF,e_IF,e_OF);
     printf("IDTR_BASE:%08X,IDTR_LIMT:%08X\n",cpu.idtr_base,cpu.idtr_limit);
+    printf("CR0=%08X CR3=%08X\n",cpu.CR0,cpu.CR3);
     return 0;
   }
   while(arg!=NULL)
