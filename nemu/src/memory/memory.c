@@ -72,7 +72,7 @@ paddr_t page_translate(vaddr_t addr){
     if(!(page_table_entry & 1)){
       printf("%x\n", cpu.eip);
     }
-    assert(page_table_entry & 1);
+    //assert(page_table_entry & 1);
     Log("final addr=%08X",page_table_entry + offset);
     return page_table_entry + offset;
   }
