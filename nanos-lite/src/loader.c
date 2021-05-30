@@ -11,12 +11,14 @@ uintptr_t loader(_Protect *as, const char *filename) {
     page_num++;
   void* pa;
   void* va = (void*)DEFAULT_ENTRY;
-  for(int i = 0; i < page_num; i ++){
+  for(int i = 0; i < page_num; i ++)
+  {
     pa = new_page();
     _map(as, va, pa);
     fs_read(as,va,pa);
     va += PGSIZE;
   }
   fs_close(fd);
+  Log("loader finished");
   return DEFAULT_ENTRY;
 }
