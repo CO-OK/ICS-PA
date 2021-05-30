@@ -18,7 +18,7 @@ uintptr_t loader(_Protect *as, const char *filename) {
     Log("before map");
     _map(as, va, pa);
     Log("after map");
-    fs_read(as,va,pa);
+    fs_read(fd,pa,PGSIZE);
     Log("fin fs_read");
     va += PGSIZE;
   }
