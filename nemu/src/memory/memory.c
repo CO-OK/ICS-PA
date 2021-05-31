@@ -32,8 +32,8 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
     int first_total = 0x1000-(addr&0xfff);//第一个页中读取的字节数
     int second_total = len - first_total;//第二个页中读取的字节数
     //Log("fisrt_total=%d,second_total=%d",first_total,second_total);
-    uint32_t first_paddr = page_translate(addr);
-    uint32_t second_paddr = page_translate(addr+first_total);
+    uint32_t first_paddr = page_translate(addr,false);
+    uint32_t second_paddr = page_translate(addr+first_total,false);
     //Log("fisrt addr=%08X,second addr=%08X",first_paddr,second_paddr);
     uint32_t first = paddr_read(first_paddr,first_total);
     uint32_t second = paddr_read(second_paddr,second_total);
@@ -42,7 +42,7 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
   }
   else
   {
-    paddr_t paddr = page_translate(addr) ;
+    paddr_t paddr = page_translate(addr,false) ;
     return paddr_read(paddr, len);
   }
   //return paddr_read(addr,len);
@@ -57,8 +57,8 @@ void vaddr_write(vaddr_t addr, int len, uint32_t data) {
     int first_total = 0x1000-(addr&0xfff);//第一个页中写的字节数
     int second_total = len - first_total;//第二个页中写的字节数
     //Log("fisrt_total=%d,second_total=%d",first_total,second_total);
-    uint32_t first_paddr = page_translate(addr);
-    uint32_t second_paddr = page_translate(addr+first_total);
+    uint32_t first_paddr = page_translate(addr,true);
+    uint32_t second_paddr = page_translate(addr+first_total,true);
     //Log("fisrt addr=%08X,second addr=%08X",first_paddr,second_paddr);
     paddr_write(first_paddr,first_total,data&(~0u>>((4-first_total)*8)));
     paddr_write(second_paddr,second_total,data>>((4-second_total)*8));
@@ -66,13 +66,13 @@ void vaddr_write(vaddr_t addr, int len, uint32_t data) {
   }
   else
   {
-    paddr_t paddr = page_translate(addr) ;
+    paddr_t paddr = page_translate(addr,true) ;
     paddr_write(paddr, len, data);
   }
   //paddr_write(addr, len, data);
 }
 
-paddr_t page_translate(vaddr_t addr){
+paddr_t page_translate(vaddr_t addr,bool write){
   paddr_t dir_index = get_dir_index(addr) ;
   paddr_t page_index = get_page_index(addr);
   paddr_t offset = get_page_offset(addr);
@@ -92,6 +92,8 @@ paddr_t page_translate(vaddr_t addr){
     //Log("page_table_enrty=%08X",page_table_entry);
     assert(page_table_entry & 1);
     page_table_entry |= 0x2f;//修改page_table_entry的access位
+    if(write)//修改dirty位
+      page_table_entry |= 0x4f;
     paddr_write(page_dir_entry+ page_index*4,4,page_table_entry);
     page_table_entry&=0xfffff000;//同上
     //Log("final addr=%08X",page_table_entry + offset);
