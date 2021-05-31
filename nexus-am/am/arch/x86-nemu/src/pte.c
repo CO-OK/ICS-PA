@@ -67,7 +67,6 @@ void _switch(_Protect *p) {
 
 void _map(_Protect *p, void *va, void *pa) {
   //功能是将虚拟地址空间 p 中的虚拟地址 va 映射到物理地址 pa
-  
   uint32_t* page_dir_base = (uint32_t*)p->ptr;
   uint32_t page_dir_index = (uintptr_t)va >> 22;
   uintptr_t page_table_base = *(page_dir_base+page_dir_index);
