@@ -85,10 +85,14 @@ paddr_t page_translate(vaddr_t addr){
     uint32_t page_dir_entry = paddr_read((page_dir_base << 12) + dir_index*4 , 4);//4byte一个条目，
     //Log("page_dir_entry=%08X",page_dir_entry);
     assert(page_dir_entry & 1);
+    page_dir_entry |= 0x2f;//修改page_dir_entry的access位
+    paddr_write((page_dir_base << 12) + dir_index*4,4,page_dir_entry);
     page_dir_entry&=0xfffff000;//后12位不用来寻址
     uint32_t page_table_entry = paddr_read(page_dir_entry+ page_index*4, 4);
     //Log("page_table_enrty=%08X",page_table_entry);
     assert(page_table_entry & 1);
+    page_table_entry |= 0x2f;//修改page_table_entry的access位
+    paddr_write(page_dir_entry+ page_index*4,4,page_table_entry);
     page_table_entry&=0xfffff000;//同上
     //Log("final addr=%08X",page_table_entry + offset);
     return page_table_entry + offset;
