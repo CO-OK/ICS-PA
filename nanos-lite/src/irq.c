@@ -1,7 +1,7 @@
 #include "common.h"
 
 static _RegSet* do_event(_Event e, _RegSet* r) {
-  printf("event ID = %d\n",e.event);
+  //printf("event ID = %d\n",e.event);
   switch (e.event) {
     //
     case _EVENT_SYSCALL:{
@@ -9,7 +9,7 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
       break;
     }
     case _EVENT_TRAP:{
-      printf("6666666\n");
+      Log("hit event trap");
       break;
     }
     default: panic("Unhandled event ID = %d", e.event);

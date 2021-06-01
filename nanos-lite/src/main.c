@@ -35,5 +35,5 @@ int main() {
   load_prog("/bin/pal");
 
   _trap();
-  panic("Should not reach here 666");
+  panic("Should not reach here");
 }
