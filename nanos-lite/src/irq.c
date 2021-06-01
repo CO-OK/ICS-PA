@@ -9,7 +9,7 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
       break;
     }
     case _EVENT_TRAP:{
-      Log("hit trap");
+      printf("6666666\n");
       break;
     }
     default: panic("Unhandled event ID = %d", e.event);
