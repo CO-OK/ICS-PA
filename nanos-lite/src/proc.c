@@ -5,7 +5,7 @@
 static PCB pcb[MAX_NR_PROC];
 static int nr_proc = 0;
 PCB *current = NULL;
-int count=0;
+
 uintptr_t loader(_Protect *as, const char *filename);
 
 void load_prog(const char *filename) {
@@ -24,7 +24,7 @@ void load_prog(const char *filename) {
 
   pcb[i].tf = _umake(&pcb[i].as, stack, stack, (void *)entry, NULL, NULL);
 }
-
+int count=0;
 _RegSet* schedule(_RegSet *prev) {
   /*if(prev!=NULL)
     current->tf=prev;
