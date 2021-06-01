@@ -5,7 +5,7 @@ static _RegSet* (*H)(_Event, _RegSet*) = NULL;
 
 void vecsys();
 void vecnull();
-
+void selftrap();
 _RegSet* irq_handle(_RegSet *tf) {
   _RegSet *next = tf;
   if (H) {
