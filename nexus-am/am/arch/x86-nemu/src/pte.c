@@ -88,7 +88,7 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
 	tf->eip  = (uintptr_t)entry; //设置返回值
   tf->cs = 8;
   tf->irq = 0x81;
-  tf->eflags=0x2;
+  //tf->eflags=0x2;
   //之后来设置start函数
   void * start = ustack.end;
   //不管start的参数，全设置成0
