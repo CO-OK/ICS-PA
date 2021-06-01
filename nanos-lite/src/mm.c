@@ -27,7 +27,10 @@ int mm_brk(uint32_t new_brk) {
     {
       uint32_t up = PGROUNDUP(current->max_brk);
       uint32_t down = PGROUNDDOWN(new_brk);
-      
+      /*if((new_brk&0xfff)==0)//end按页对齐了，不需要新增
+      {
+        down-=PGSIZE;
+      }*/
       for(uint32_t va=up;va<=down;va+=PGSIZE)
       {
         void* pa=new_page();
