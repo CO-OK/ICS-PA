@@ -84,5 +84,17 @@ void _unmap(_Protect *p, void *va) {
 }
 
 _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *const argv[], char *const envp[]) {
+  _RegSet* tf = (ustack.end - sizeof(_RegSet) - 4*sizeof(int)); 
+	
+	// printf("ct = %X  end = %X\n", (uintptr_t)ct, (uintptr_t)stack.end);
+  /*
+	memset(ct, 0, sizeof(_Context) + 4*sizeof(uintptr_t));
+	ct->prot = p; //设置地址空间
+	ct->eip  = (uintptr_t)entry; //设置返回值
+	ct->cs = 8;
+	ct->eflags = 0x2 | (1 << 9);  /* pre-set value | eflags.IF */
+	//*(uintptr_t *)(ustack.end - sizeof(sizeof(uintptr_t))) = 0; //main的参数
+	// ct->irq = 0x81; //yeild
+	//return ct;*/
   return NULL;
 }
