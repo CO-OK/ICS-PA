@@ -6,7 +6,7 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
     //
     case _EVENT_SYSCALL:{
       do_syscall(r);
-      printf("return schdelu\n");
+      //printf("return schdelu\n");
       return schedule(r);
       break;
     }
