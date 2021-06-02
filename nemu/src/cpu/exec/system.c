@@ -51,7 +51,7 @@ make_EHelper(iret) {
 	rtl_pop(&t0);
 	cpu.cs = t0 & 0xffff;
 	rtl_pop(&cpu.EFLAGS_);
-  //e_IF=true;
+  e_IF=true;
   //Log("finish iret eip=%08X",cpu.eip);
   print_asm("iret");
 }
