@@ -25,6 +25,7 @@ void load_prog(const char *filename) {
   pcb[i].tf = _umake(&pcb[i].as, stack, stack, (void *)entry, NULL, NULL);
 }
 int count=0;
+int current_game=0;//在0和2之间切换
 _RegSet* schedule(_RegSet *prev) {
   /*if(prev!=NULL)
     current->tf=prev;
@@ -34,8 +35,8 @@ _RegSet* schedule(_RegSet *prev) {
   if(prev!=NULL)
     current->tf=prev;
   else
-    current=&pcb[0];
-  if(current==&pcb[0])
+    current=&pcb[current_game];
+  if(current==&pcb[current_game])
   {
     count++;
     if(count==100)
@@ -52,7 +53,7 @@ _RegSet* schedule(_RegSet *prev) {
   else
   {
     //直接切换
-    current=&pcb[0];
+    current=&pcb[current_game];
     _switch(&current->as);
     return current->tf;
   }
