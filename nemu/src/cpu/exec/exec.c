@@ -256,6 +256,7 @@ void exec_wrapper(bool print_flag) {
   
   if(cpu.INTR&e_IF)
   {
+    printf("666\n");
     cpu.INTR=false;
     raise_intr(TIMER_IRQ,cpu.eip);
     update_eip();
