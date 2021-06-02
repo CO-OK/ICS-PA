@@ -16,6 +16,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   */
   //Log("hit raise_intr with NO=%X",NO);
   rtl_push(&cpu.EFLAGS_,4);
+  e_IF=false;
   rtl_push(&cpu.cs,4);
   rtl_push(&ret_addr,4);
   vaddr_t gate_enrty= cpu.idtr_base + sizeof(GateDesc)*NO;
@@ -33,4 +34,5 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 }
 
 void dev_raise_intr() {
+  cpu.INTR=true;
 }

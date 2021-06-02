@@ -87,7 +87,7 @@ static inline void restart() {
   e_CF=false;
   e_ZF=false;
   e_SF=false;
-  e_IF=false;
+  e_IF=true;
   e_OF=false;
   cpu.idtr_base=0;
   cpu.idtr_limit=0x03ff;

@@ -2,6 +2,7 @@
 .globl vecsys;    vecsys:  pushl $0;  pushl $0x80; jmp asm_trap
 .globl vecnull;  vecnull:  pushl $0;  pushl   $-1; jmp asm_trap
 .globl selftrap;  selftrap:  pushl $0;  pushl $0x81; jmp asm_trap
+.globl timertrap;  timertrap:  pushl $0;  pushl $32; jmp asm_trap
 
 asm_trap:
   pushal
