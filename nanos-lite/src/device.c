@@ -9,6 +9,7 @@ static const char *keyname[256] __attribute__((used)) = {
 };
 extern int _read_key();
 unsigned long _uptime();
+extern int current_game;
 size_t events_read(void *buf, size_t len) {
   //Log("in events_read,len=%d",len);
   int key = _read_key();
@@ -22,7 +23,11 @@ size_t events_read(void *buf, size_t len) {
       key ^= 0x8000;
       down = true;
     }
-    Log("keyvalue=%x",key);
+    //Log("keyvalue=%x",key);
+    if(down&&key==0xd)
+    {
+      current_game=(current_game==0?2:0);
+    }
     sprintf(buf, "%s %s\n", down ? "kd" : "ku", keyname[key]);
     //sprintf(buf,"Get key: %d %s %s\n", key, keyname[key], down ? "down" : "up");
   }
